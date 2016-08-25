@@ -1,7 +1,5 @@
-var React = require('react');
-var DefaultLayout = require('./layout');
-var Header = require('./Header');
-var GoogleMap = require('./GoogleMap');
+import React from 'react';
+
 var skill1 = "Android";
 var skill2 = "Java";
 var skill3 = "React";
@@ -15,8 +13,8 @@ var SkillsForm = React.createClass({
 		    	Show us your skills
 		  	</p>
 			<p className="panel-block control has-addons">
-				<input className="input is-expanded is-medium orange" type="text" placeholder="Ex. JavaScript" />
-				<a className="button is-medium orange">
+				<input className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
+				<a className="button is-medium is-orange">
 					Add
 				</a>
 			</p>
@@ -55,4 +53,4 @@ var SkillsForm = React.createClass({
   }
 });
 
-module.exports = SkillsForm;
+export default SkillsForm;
