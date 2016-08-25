@@ -62,7 +62,11 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _Account = __webpack_require__(238);
+	var _Login = __webpack_require__(238);
+	
+	var _Login2 = _interopRequireDefault(_Login);
+	
+	var _Account = __webpack_require__(239);
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
@@ -74,11 +78,11 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _SkillsForm = __webpack_require__(239);
+	var _SkillsForm = __webpack_require__(240);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
-	var _productService = __webpack_require__(240);
+	var _productService = __webpack_require__(241);
 	
 	var productService = _interopRequireWildcard(_productService);
 	
@@ -104,11 +108,7 @@
 	    _createClass(App, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_SkillsForm2.default, null)
-	            );
+	            return _react2.default.createElement('div', null);
 	        }
 	    }]);
 	
@@ -120,7 +120,7 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Login2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/main', component: _Main2.default })
 	), document.getElementById("content"));
@@ -27636,6 +27636,71 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+					value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Login = function (_React$Component) {
+					_inherits(Login, _React$Component);
+	
+					function Login() {
+									_classCallCheck(this, Login);
+	
+									return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
+					}
+	
+					_createClass(Login, [{
+									key: "render",
+									value: function render() {
+													return _react2.default.createElement(
+																	"div",
+																	null,
+																	_react2.default.createElement("script", { type: "in/Login" }),
+																	_react2.default.createElement(
+																					"a",
+																					{ href: "/account", className: "button is-blue", id: "linked-button" },
+																					_react2.default.createElement(
+																									"span",
+																									{ className: "icon linked-icon" },
+																									_react2.default.createElement("i", { className: "fa fa-linkedin" })
+																					),
+																					_react2.default.createElement(
+																									"span",
+																									null,
+																									"Sign in with LinkedIn"
+																					)
+																	)
+													);
+									}
+					}]);
+	
+					return Login;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = Login;
+
+/***/ },
+/* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -27648,7 +27713,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(239);
+	var _SkillsForm = __webpack_require__(240);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27688,7 +27753,7 @@
 	exports.default = Account;
 
 /***/ },
-/* 239 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27774,8 +27839,8 @@
 					"div",
 					{ className: "panel-block" },
 					_react2.default.createElement(
-						"button",
-						{ className: "button is-primary is-fullwidth" },
+						"a",
+						{ href: "/main", className: "button is-primary is-fullwidth" },
 						"Submit"
 					)
 				)
@@ -27786,7 +27851,7 @@
 	exports.default = SkillsForm;
 
 /***/ },
-/* 240 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27796,7 +27861,7 @@
 	});
 	exports.findById = exports.findAll = undefined;
 	
-	var _request = __webpack_require__(241);
+	var _request = __webpack_require__(242);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
@@ -27824,7 +27889,7 @@
 	};
 
 /***/ },
-/* 241 */
+/* 242 */
 /***/ function(module, exports) {
 
 	"use strict";
