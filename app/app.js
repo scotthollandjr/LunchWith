@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
-import Header from './components/Header';
+import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import Paginator from './components/Paginator';
 import SearchBar from './components/SearchBar';
@@ -60,7 +61,6 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Header text="Belgian Beer Explorer"/>
                 <div className="slds-grid slds-p-top--small slds-grid--align-center">
                     <div className="slds-col">
                         <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)}/>
@@ -69,9 +69,15 @@ class App extends React.Component {
                 </div>
                 <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)}/>
                 <ProductList products={this.state.products} total={this.state.total} onSearchKeyChange={this.searchKeyChangeHandler.bind(this)}/>
+                <Footer text="Belgian Beer Explorer"/>
             </div>
         );
     }
 };
 
-ReactDOM.render(<App/>, document.getElementById("main"));
+ReactDOM.render((
+<Router history={browserHistory}>
+  <Route path="/" component={App}/>
+  <Route path="/footer" component={App}/>
+</Router>
+), document.getElementById("main"));

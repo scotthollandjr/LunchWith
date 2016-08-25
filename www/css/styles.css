@@ -5,11 +5,15 @@ a:hover {
 }
 
 .footer {
-    margin-top: 50px;
-    padding-top: 12px;
-    padding-bottom: 8px;
-    border-top: solid 1px #EEE;
-    color: #4F6A92;
+  height:24px !important; // Replace with the height your footer should be
+  width: 100% !important; // Don't change
+  background-image: none;
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-position: 0% 0%;
+  position: fixed;
+  bottom: 0pt;
+  left: 0pt;
 }
 
 .level {
