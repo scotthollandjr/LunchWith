@@ -153,12 +153,14 @@ input[type="search"]:focus {
 /*** GLOBAL COLOR ****************************************/
 
 :root {
-  --main-accent: #e66400;
-  --main-accent-dark: #cd5900;
+  --main-orange: #e66400;
+  --main-orange-dark: #cd5900;
   --main-light: #ffffff;
   --main-grey: #e66400;
   --main-light-grey: #e66400;
   --main-dark-grey: #222222;
+  --main-blue: #286099;
+  --main-blue-dark: #1f4d7a;
 }
 
 /*** COLOR CLASSES ****************************************/
@@ -168,19 +170,32 @@ input[type="search"]:focus {
 }
 
 .input.is-orange:active, .input.is-orange:focus {
-  border-color: var(--main-accent);
+  border-color: var(--main-orange);
   outline: none;
 }
 
 .button.is-orange {
-  background-color: var(--main-accent);
+  background-color: var(--main-orange);
   border-color: transparent;
   color: white;
   text-decoration: none;
 }
 
 .button.is-orange:active {
-  background-color: var(--main-accent-dark);
+  background-color: var(--main-orange-dark);
+  border-color: transparent;
+  color: white;
+}
+
+.button.is-blue {
+  background-color: var(--main-blue);
+  border-color: transparent;
+  color: white;
+  text-decoration: none;
+}
+
+.button.is-blue:active {
+  background: var(--main-blue-dark);
   border-color: transparent;
   color: white;
 }
@@ -211,6 +226,20 @@ html {
     margin: 20px;
 }
 
+/*** LOGIN PAGE ****************************************/
+
+#linked-button, #linked-button:hover {
+    border-radius: 0;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+}
+
+#linked-button span.icon {
+    /* figure out transparent margin separating icon from span
+    border-right: 1px solid var(--main-light);*/
+}
+
 /*** SKILLSFORM ****************************************/
 
 #skillsForm {
@@ -227,7 +256,7 @@ html {
 }
 
 .starIcon:active {
-    color: var(--main-accent);
+    color: var(--main-orange);
 }
 
 #skillsPanel p.panel-heading {
