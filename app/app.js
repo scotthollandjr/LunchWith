@@ -4,9 +4,9 @@ import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
 import Footer from './components/Footer';
 import ProductList from './components/ProductList';
-import Paginator from './components/Paginator';
 import SearchBar from './components/SearchBar';
-import RangeSlider from './components/RangeSlider';
+import Header from './components/Header';
+import SkillsForm from './components/SkillsForm';
 
 import * as productService from './services/product-service';
 
@@ -61,6 +61,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <Header />
+                <SkillsForm />
                 <Footer />
             </div>
         );

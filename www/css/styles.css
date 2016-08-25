@@ -149,9 +149,8 @@ input[type="search"]:focus {
 }*/
 
 
-/*********************************** scott styles **/
 
-/*** COLORS *************/
+/*** GLOBAL COLOR ****************************************/
 
 :root {
   --main-accent: #e66400;
@@ -162,43 +161,10 @@ input[type="search"]:focus {
   --main-dark-grey: #222222;
 }
 
-html {
-  background: url(../assets/images/bwmap.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-#navBar {
-    background: linear-gradient(to bottom, var(--main-dark-grey), rgba(0,0,0,0));
-    width: 100%;
-    height: 150px;
-}
-
-#navItems {
-    margin: 20px;
-}
+/*** COLOR CLASSES ****************************************/
 
 .white {
     color: var(--main-light);
-}
-
-#skillsForm {
-    width: 100%;
-}
-
-#skillsPanel {
-    margin: 5px;
-}
-
-#skillsForm p input {
-    background: var(--main-dark-grey);
-    color: var(--main-light);
-}
-
-.starIcon:active {
-    color: var(--main-accent);
 }
 
 .input.is-orange:active, .input.is-orange:focus {
@@ -217,6 +183,51 @@ html {
   background-color: var(--main-accent-dark);
   border-color: transparent;
   color: white;
+}
+
+/*** PAGE LAYOUT ****************************************/
+
+html {
+  background: url(../assets/images/bwmap.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+/*
+#navBar a img {
+    height: 150px;
+}*/
+
+/*** NAV ****************************************/
+
+#navBar {
+    background: linear-gradient(to bottom, var(--main-dark-grey), rgba(0,0,0,0));
+    width: 100%;
+    height: 150px;
+}
+
+#navItems {
+    margin: 20px;
+}
+
+/*** SKILLSFORM ****************************************/
+
+#skillsForm {
+    width: 100%;
+}
+
+#skillsPanel {
+    margin: 5px;
+}
+
+#skillsForm p input {
+    background: var(--main-dark-grey);
+    color: var(--main-light);
+}
+
+.starIcon:active {
+    color: var(--main-accent);
 }
 
 #skillsPanel p.panel-heading {
@@ -243,6 +254,8 @@ html {
     background: var(--main-dark-grey);
 }
 
+/*** FOOTER ****************************************/
+
 .footer {
   background: var(--main-dark-grey);
   height: 75px;
@@ -251,8 +264,3 @@ html {
 .footer-icon {
   color: var(--main-light);;
 }
-
-/*not working, overridden by something
-#navBar a img {
-    height: 150px;
-}*/
