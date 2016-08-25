@@ -10,7 +10,8 @@ app.set('port', process.env.PORT || 3000);
 app.use(compression());
 
 app.use('/', express.static(__dirname + '/www'));
-app.use('/footer', express.static(__dirname + '/www'));
+app.use('/account', express.static(__dirname + '/www'));
+app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
 
 // Adding CORS support

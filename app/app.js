@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
+import Main from './components/Main';
+import Account from './components/Account';
 import Footer from './components/Footer';
-import ProductList from './components/ProductList';
-import SearchBar from './components/SearchBar';
 import Header from './components/Header';
 import SkillsForm from './components/SkillsForm';
 
@@ -12,58 +12,10 @@ import * as productService from './services/product-service';
 
 class App extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchKey: "",
-            min: 0,
-            max: 30,
-            products: [],
-            total: 0,
-            page: 1
-        }
-    }
-
-    componentDidMount() {
-        this.findProducts();
-    }
-
-    searchKeyChangeHandler(searchKey) {
-        this.setState({searchKey: searchKey, page: 1}, this.findProducts);
-    }
-
-    rangeChangeHandler(values) {
-        this.setState({min: values[0], max: values[1], page: 1}, this.findProducts);
-    }
-
-    findProducts() {
-        productService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page})
-            .then(data => {
-                this.setState({
-                    products: data.products,
-                    page: data.page,
-                    pageSize: data.pageSize,
-                    total: data.total
-                });
-            });
-    }
-
-    nextPageHandler() {
-        let p = this.state.page + 1;
-        this.setState({page: p}, this.findProducts);
-    }
-
-    prevPageHandler() {
-        let p = this.state.page - 1;
-        this.setState({page: p}, this.findProducts);
-    }
-
     render() {
         return (
             <div>
-                <Header />
                 <SkillsForm />
-                <Footer />
             </div>
         );
     }
@@ -72,6 +24,7 @@ class App extends React.Component {
 ReactDOM.render((
 <Router history={browserHistory}>
   <Route path="/" component={App}/>
-  <Route path="/footer" component={App}/>
+  <Route path="/account" component={Account}/>
+  <Route path="/main" component={Main}/>
 </Router>
-), document.getElementById("main"));
+), document.getElementById("content"));
