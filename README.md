@@ -1,33 +1,15 @@
-EDIT
+# LunchWith__
 
-# Belgian Beer Explorer
-
-Sample App demonstrating how to build applications with React, Node.js, and the Lightning Design System. Written with ECMAScript 6 on the client and on the server (leveraging the new ES6 support of Node.js 4+).
-
-The back-end is built with **Node.js** using a **Postgres** database.
-
-See it live here: [http://www.belgianbeerexplorer.com](http://www.belgianbeerexplorer.com).
+A web application for professionals looking to network in a new industry or area.
 
 
-## Automatic Deployment to Heroku
+### Prerequisites
 
-1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com)
+You will need the following things properly installed on your computer.
 
-1. Click the Button below to deploy the application on Heroku.
+* [Node.js](https://nodejs.org/en/download/)
+* [Postgres](https://www.postgresql.org/)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-Your own instance of the application is automatically deployed, and your own Postgres database is populated with sample data.
-
-1. If the Heroku Toolbelt is not install on your system, [install it](https://toolbelt.heroku.com/) now.
-
-1. Open a browser, [access beers.sql](https://raw.githubusercontent.com/ccoenraets/belgian-beer-explorer/master/beers.sql), and save the file locally.
-
-1. On the command prompt, type the following command to populate your database:
-
-    ```
-    heroku pg:psql --app YOUR_HEROKU_APP_NAME < beers.sql
-    ```
 
 ## Local Installation
 
@@ -65,4 +47,9 @@ Follow the instructions below if you prefer to install the application on your l
 
     The database is automatically populated
 
-1. Open a browser and access [http://localhost:5000](http://localhost:5000)
+1. Open a browser and access [http://localhost:3000](http://localhost:3000)
+
+
+### License
+
+MIT License. Copyright (c) 2016 **_Kyle Wolfson & Scott Holland, Jr._**
