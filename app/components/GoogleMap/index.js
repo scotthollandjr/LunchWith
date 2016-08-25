@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 var GoogleMap = React.createClass({
   render: function() {
@@ -10,4 +10,4 @@ var GoogleMap = React.createClass({
   }
 });
 
-module.exports = GoogleMap;
+export default GoogleMap;
