@@ -98,7 +98,7 @@
 	    function App(props) {
 	        _classCallCheck(this, App);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 	
 	        _this.state = {
 	            searchKey: "",
@@ -158,19 +158,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'slds-grid slds-p-top--small slds-grid--align-center' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'slds-col' },
-	                        _react2.default.createElement(_SearchBar2.default, { searchKey: this.state.searchKey, onChange: this.searchKeyChangeHandler.bind(this) }),
-	                        _react2.default.createElement(_RangeSlider2.default, { defaultValue: [0, 26], min: 0, max: 26, step: .5, withBars: true, onChange: this.rangeChangeHandler.bind(this) })
-	                    )
-	                ),
-	                _react2.default.createElement(_Paginator2.default, { page: this.state.page, pageSize: this.state.pageSize, total: this.state.total, onPrevious: this.prevPageHandler.bind(this), onNext: this.nextPageHandler.bind(this) }),
-	                _react2.default.createElement(_ProductList2.default, { products: this.state.products, total: this.state.total, onSearchKeyChange: this.searchKeyChangeHandler.bind(this) }),
-	                _react2.default.createElement(_Footer2.default, { text: 'Belgian Beer Explorer' })
+	                _react2.default.createElement(_Footer2.default, null)
 	            );
 	        }
 	    }]);
@@ -27524,7 +27512,7 @@
 	  function Footer() {
 	    _classCallCheck(this, Footer);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
 	  }
 	
 	  _createClass(Footer, [{
@@ -27617,7 +27605,7 @@
 	    function ProductList() {
 	        _classCallCheck(this, ProductList);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductList).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (ProductList.__proto__ || Object.getPrototypeOf(ProductList)).apply(this, arguments));
 	    }
 	
 	    _createClass(ProductList, [{
@@ -27673,7 +27661,7 @@
 	    function ProductListItem() {
 	        _classCallCheck(this, ProductListItem);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductListItem).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (ProductListItem.__proto__ || Object.getPrototypeOf(ProductListItem)).apply(this, arguments));
 	    }
 	
 	    _createClass(ProductListItem, [{
@@ -27795,7 +27783,7 @@
 	    function Paginator() {
 	        _classCallCheck(this, Paginator);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Paginator).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Paginator.__proto__ || Object.getPrototypeOf(Paginator)).apply(this, arguments));
 	    }
 	
 	    _createClass(Paginator, [{
@@ -27885,7 +27873,7 @@
 	    function SearchBar() {
 	        _classCallCheck(this, SearchBar);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(SearchBar).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).apply(this, arguments));
 	    }
 	
 	    _createClass(SearchBar, [{
@@ -27976,7 +27964,7 @@
 	    function RangeSlider(props) {
 	        _classCallCheck(this, RangeSlider);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(RangeSlider).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (RangeSlider.__proto__ || Object.getPrototypeOf(RangeSlider)).call(this, props));
 	
 	        _this.state = {
 	            value: [0, 26]
