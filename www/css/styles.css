@@ -1,4 +1,4 @@
-a:link,
+/*a:link,
 a:visited,
 a:hover {
     color: #F25C05;
@@ -146,4 +146,113 @@ input[type="search"]:focus {
 
 .slds-card img {
     margin: 4px;
+}*/
+
+
+/*********************************** scott styles **/
+
+/*** COLORS *************/
+
+:root {
+  --main-accent: #e66400;
+  --main-accent-dark: #cd5900;
+  --main-light: #ffffff;
+  --main-grey: #e66400;
+  --main-light-grey: #e66400;
+  --main-dark-grey: #222222;
 }
+
+html {
+  background: url(../assets/images/bwmap.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#navBar {
+    background: linear-gradient(to bottom, var(--main-dark-grey), rgba(0,0,0,0));
+    width: 100%;
+    height: 150px;
+}
+
+#navItems {
+    margin: 20px;
+}
+
+.white {
+    color: var(--main-light);
+}
+
+#skillsForm {
+    width: 100%;
+}
+
+#skillsPanel {
+    margin: 5px;
+}
+
+#skillsForm p input {
+    background: var(--main-dark-grey);
+    color: var(--main-light);
+}
+
+.starIcon:active {
+    color: var(--main-accent);
+}
+
+.input.is-orange:active, .input.is-orange:focus {
+  border-color: var(--main-accent);
+  outline: none;
+}
+
+.button.is-orange {
+  background-color: var(--main-accent);
+  border-color: transparent;
+  color: white;
+  text-decoration: none;
+}
+
+.button.is-orange:active {
+  background-color: var(--main-accent-dark);
+  border-color: transparent;
+  color: white;
+}
+
+#skillsPanel p.panel-heading {
+    background: var(--main-dark-grey);
+    color: var(--main-light);
+}
+
+.panel {
+  border: 1px solid #444;
+  border-radius: 5px;
+}
+
+.panel-heading {
+  border-bottom: 1px solid #555;
+}
+
+.panel-block:not(:last-child) {
+  border-bottom: 1px solid #555;
+  background: #333;
+  color: var(--main-light);
+}
+
+.panel-block:last-child {
+    background: var(--main-dark-grey);
+}
+
+.footer {
+  background: var(--main-dark-grey);
+  height: 75px;
+}
+
+.footer-icon {
+  color: var(--main-light);;
+}
+
+/*not working, overridden by something
+#navBar a img {
+    height: 150px;
+}*/
