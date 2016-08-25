@@ -44,7 +44,7 @@ var SkillsForm = React.createClass({
 		    </span>
 		  </p>
 		  <div className="panel-block">
-		    <a href="/main" className="button is-primary is-fullwidth">
+		    <a href="/main" className="button is-blue is-fullwidth">
 		      Submit
 		    </a>
 		  </div>

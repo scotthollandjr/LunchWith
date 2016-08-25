@@ -6,7 +6,7 @@ class Login extends React.Component {
           	<div>
 	          	<script type="in/Login"></script>
 
-	           	<a href="/account" className="button is-blue" id="linked-button">
+	           	<a href="/account" className="button is-blue is-medium" id="linked-button">
 			  		<span className="icon linked-icon">
 			    		<i className="fa fa-linkedin"></i>
 			  		</span>

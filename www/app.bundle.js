@@ -27674,7 +27674,7 @@
 																	_react2.default.createElement("script", { type: "in/Login" }),
 																	_react2.default.createElement(
 																					"a",
-																					{ href: "/account", className: "button is-blue", id: "linked-button" },
+																					{ href: "/account", className: "button is-blue is-medium", id: "linked-button" },
 																					_react2.default.createElement(
 																									"span",
 																									{ className: "icon linked-icon" },
@@ -27840,7 +27840,7 @@
 					{ className: "panel-block" },
 					_react2.default.createElement(
 						"a",
-						{ href: "/main", className: "button is-primary is-fullwidth" },
+						{ href: "/main", className: "button is-blue is-fullwidth" },
 						"Submit"
 					)
 				)

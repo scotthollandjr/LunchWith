@@ -247,7 +247,8 @@ html {
 }
 
 #skillsPanel {
-    margin: 5px;
+    margin: 10px;
+    margin-top: 100px;
 }
 
 #skillsForm p input {
