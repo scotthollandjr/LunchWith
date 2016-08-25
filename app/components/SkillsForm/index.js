@@ -1,56 +1,82 @@
 import React from 'react';
 
-var skill1 = "Android";
-var skill2 = "Java";
-var skill3 = "React";
-var skill4 = "ALGOL";
+var SkillsList = React.createClass({
+	render: function() {
+		var skillEntries = this.props.entries;
+
+		function createSkill(skill) {
+			return (
+				<p key={skill.key} className="panel-block" href="#">
+				    {skill.text}
+				    <span className="panel-icon starIcon">
+				      	<i className="fa fa-star"></i>
+				    </span>
+				 </p>
+			);
+		}
+
+		var skillList = skillEntries.map(createSkill);
+
+		return (
+			<div>
+				{skillList}
+			</div>
+		);
+	}
+});
 
 var SkillsForm = React.createClass({
-  render: function() {
-    return (
-		<nav className="panel" id="skillsPanel">
-		  	<p className="panel-heading">
-		    	Show us your skills
-		  	</p>
-			<p className="panel-block control has-addons">
-				<input className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
-				<a className="button is-medium is-orange">
-					Add
-				</a>
-			</p>
 
-		  <p className="panel-block" href="#">
-		    { skill1 }
-		    <span className="panel-icon starIcon">
-		      <i className="fa fa-star"></i>
-		    </span>
-		  </p>
-		  <p className="panel-block" href="#">
-		    { skill2 }
-		    <span className="panel-icon starIcon">
-		      <i className="fa fa-star"></i>
-		    </span>
-		  </p>
-		  <p className="panel-block" href="#">
-		    { skill3 }
-		    <span className="panel-icon starIcon">
-		      <i className="fa fa-star"></i>
-		    </span>
-		  </p>
-		  <p className="panel-block" href="#">
-		    { skill4 }
-		    <span className="panel-icon starIcon">
-		      <i className="fa fa-star"></i>
-		    </span>
-		  </p>
-		  <div className="panel-block">
-		    <a href="/main" className="button is-blue is-fullwidth">
-		      Submit
-		    </a>
-		  </div>
-		</nav>
-    )
-  }
+	getInitialState: function() {
+		return {
+			skills: []
+		};
+	},
+
+	addSkill: function(e) {
+		var skillArray = this.state.skills;
+
+		skillArray.push(
+		{
+			text: this._inputElement.value,
+			key: Date.now(),
+			starred: false
+			}
+		);
+		this.setState({
+			skills: skillArray
+		});
+
+		this._inputElement.value = "";
+
+		e.preventDefault();
+	},
+
+  	render: function() {
+    	return (
+			<nav className="panel" id="skillsPanel">
+			  	<p className="panel-heading">
+			    	Show us your skills
+			  	</p>
+			  	<form onSubmit={this.addSkill}>
+					<p className="panel-block control has-addons">
+						<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
+						<button type="submit" className="button is-medium is-orange">
+							Add
+						</button>
+					</p>
+				</form>
+
+				<SkillsList entries={this.state.skills} />
+
+			  	<div className="panel-block">
+			    	<a href="/main" className="button is-blue is-fullwidth">
+			      		Submit
+			    	</a>
+			  	</div>
+			</nav>
+	    )
+	}
 });
 
 export default SkillsForm;

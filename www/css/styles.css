@@ -274,14 +274,13 @@ html {
   border-bottom: 1px solid #555;
 }
 
-.panel-block:not(:last-child) {
-  border-bottom: 1px solid #555;
+.panel-block {
   background: #333;
   color: var(--main-light);
 }
 
-.panel-block:last-child {
-    background: var(--main-dark-grey);
+.panel-block:not(:last-child) {
+  border-bottom: 1px solid #555;
 }
 
 /*** FOOTER ****************************************/

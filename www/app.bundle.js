@@ -27768,15 +27768,65 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var skill1 = "Android";
-	var skill2 = "Java";
-	var skill3 = "React";
-	var skill4 = "ALGOL";
+	var SkillsList = _react2.default.createClass({
+		displayName: "SkillsList",
+	
+		render: function render() {
+			var skillEntries = this.props.entries;
+	
+			function createSkill(skill) {
+				return _react2.default.createElement(
+					"p",
+					{ key: skill.key, className: "panel-block", href: "#" },
+					skill.text,
+					_react2.default.createElement(
+						"span",
+						{ className: "panel-icon starIcon" },
+						_react2.default.createElement("i", { className: "fa fa-star" })
+					)
+				);
+			}
+	
+			var skillList = skillEntries.map(createSkill);
+	
+			return _react2.default.createElement(
+				"div",
+				null,
+				skillList
+			);
+		}
+	});
 	
 	var SkillsForm = _react2.default.createClass({
 		displayName: "SkillsForm",
 	
+	
+		getInitialState: function getInitialState() {
+			return {
+				skills: []
+			};
+		},
+	
+		addSkill: function addSkill(e) {
+			var skillArray = this.state.skills;
+	
+			skillArray.push({
+				text: this._inputElement.value,
+				key: Date.now(),
+				starred: false
+			});
+			this.setState({
+				skills: skillArray
+			});
+	
+			this._inputElement.value = "";
+	
+			e.preventDefault();
+		},
+	
 		render: function render() {
+			var _this = this;
+	
 			return _react2.default.createElement(
 				"nav",
 				{ className: "panel", id: "skillsPanel" },
@@ -27786,55 +27836,22 @@
 					"Show us your skills"
 				),
 				_react2.default.createElement(
-					"p",
-					{ className: "panel-block control has-addons" },
-					_react2.default.createElement("input", { className: "input is-expanded is-medium is-orange", type: "text", placeholder: "Ex. JavaScript" }),
+					"form",
+					{ onSubmit: this.addSkill },
 					_react2.default.createElement(
-						"a",
-						{ className: "button is-medium is-orange" },
-						"Add"
+						"p",
+						{ className: "panel-block control has-addons" },
+						_react2.default.createElement("input", { ref: function ref(a) {
+								return _this._inputElement = a;
+							}, className: "input is-expanded is-medium is-orange", type: "text", placeholder: "Ex. JavaScript" }),
+						_react2.default.createElement(
+							"button",
+							{ type: "submit", className: "button is-medium is-orange" },
+							"Add"
+						)
 					)
 				),
-				_react2.default.createElement(
-					"p",
-					{ className: "panel-block", href: "#" },
-					skill1,
-					_react2.default.createElement(
-						"span",
-						{ className: "panel-icon starIcon" },
-						_react2.default.createElement("i", { className: "fa fa-star" })
-					)
-				),
-				_react2.default.createElement(
-					"p",
-					{ className: "panel-block", href: "#" },
-					skill2,
-					_react2.default.createElement(
-						"span",
-						{ className: "panel-icon starIcon" },
-						_react2.default.createElement("i", { className: "fa fa-star" })
-					)
-				),
-				_react2.default.createElement(
-					"p",
-					{ className: "panel-block", href: "#" },
-					skill3,
-					_react2.default.createElement(
-						"span",
-						{ className: "panel-icon starIcon" },
-						_react2.default.createElement("i", { className: "fa fa-star" })
-					)
-				),
-				_react2.default.createElement(
-					"p",
-					{ className: "panel-block", href: "#" },
-					skill4,
-					_react2.default.createElement(
-						"span",
-						{ className: "panel-icon starIcon" },
-						_react2.default.createElement("i", { className: "fa fa-star" })
-					)
-				),
+				_react2.default.createElement(SkillsList, { entries: this.state.skills }),
 				_react2.default.createElement(
 					"div",
 					{ className: "panel-block" },
