@@ -202,13 +202,13 @@ input[type="search"]:focus {
 
 /*** PAGE LAYOUT ****************************************/
 
-html {
+/*html {
   background: url(../assets/images/bwmap.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+}*/
 /*
 #navBar a img {
     height: 150px;

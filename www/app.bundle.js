@@ -62,11 +62,11 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _Login = __webpack_require__(238);
+	var _Login = __webpack_require__(240);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Account = __webpack_require__(239);
+	var _Account = __webpack_require__(241);
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
@@ -78,11 +78,11 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _SkillsForm = __webpack_require__(240);
+	var _SkillsForm = __webpack_require__(242);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
-	var _productService = __webpack_require__(241);
+	var _productService = __webpack_require__(243);
 	
 	var productService = _interopRequireWildcard(_productService);
 	
@@ -27456,6 +27456,14 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
+	var _LinkedIn = __webpack_require__(238);
+	
+	var _LinkedIn2 = _interopRequireDefault(_LinkedIn);
+	
+	var _Map = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../Map\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	
+	var _Map2 = _interopRequireDefault(_Map);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27479,8 +27487,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Header2.default, null),
-	        _react2.default.createElement(_Footer2.default, null)
+	        _react2.default.createElement(_Map2.default, { google: window.google })
 	      );
 	    }
 	  }]);
@@ -27639,6 +27646,62 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LinkedIn = function (_React$Component) {
+	  _inherits(LinkedIn, _React$Component);
+	
+	  function LinkedIn() {
+	    _classCallCheck(this, LinkedIn);
+	
+	    return _possibleConstructorReturn(this, (LinkedIn.__proto__ || Object.getPrototypeOf(LinkedIn)).apply(this, arguments));
+	  }
+	
+	  _createClass(LinkedIn, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "h1",
+	          { className: "title" },
+	          "TEST"
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return LinkedIn;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = LinkedIn;
+
+/***/ },
+/* 239 */,
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
 					value: true
 	});
 	
@@ -27698,7 +27761,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 239 */
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27713,7 +27776,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(240);
+	var _SkillsForm = __webpack_require__(242);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27753,7 +27816,7 @@
 	exports.default = Account;
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27868,7 +27931,7 @@
 	exports.default = SkillsForm;
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27878,7 +27941,7 @@
 	});
 	exports.findById = exports.findAll = undefined;
 	
-	var _request = __webpack_require__(242);
+	var _request = __webpack_require__(244);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
@@ -27906,7 +27969,7 @@
 	};
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports) {
 
 	"use strict";
