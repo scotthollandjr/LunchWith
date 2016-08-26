@@ -6,7 +6,7 @@ let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let findAll = (req, res, next) => {
 
-    let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 12,
+    let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 120,
         page = req.query.page ? parseInt(req.query.page) : 1,
         search = req.query.search,
         min = req.query.min,

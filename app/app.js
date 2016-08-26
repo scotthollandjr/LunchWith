@@ -7,6 +7,7 @@ import ProductList from './components/ProductList';
 import Paginator from './components/Paginator';
 import SearchBar from './components/SearchBar';
 import RangeSlider from './components/RangeSlider';
+import NewUser from './components/NewUser';
 
 import * as productService from './services/product-service';
 
@@ -79,5 +80,6 @@ ReactDOM.render((
 <Router history={browserHistory}>
   <Route path="/" component={App}/>
   <Route path="/footer" component={App}/>
+  <Route path="/newuser" component={NewUser}/>
 </Router>
 ), document.getElementById("main"));
