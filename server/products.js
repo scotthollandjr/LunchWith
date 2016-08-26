@@ -59,5 +59,20 @@ let findById = (req, res, next) => {
         .catch(next);
 };
 
+var newUser = (req, res, next) => {
+  var firstName = "Kyle";
+  var lastName = "Wolfson";
+  var test = "test";
+
+  var sql = "INSERT INTO users (FirstName, LastName) VALUES ('" + firstName + "','" + lastName + "')";
+
+  console.log(sql);
+
+  db.query(sql, null)
+    .then({})
+    .catch(next);
+}
+
+exports.newUser = newUser;
 exports.findAll = findAll;
 exports.findById = findById;
