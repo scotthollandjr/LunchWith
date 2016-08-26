@@ -45,7 +45,7 @@
             var title = JSON.stringify(data.positions.values[0].title);
             var pictureUrl = JSON.stringify(data.pictureUrl);
             
-            var newUser = new Object();
+            var newUser = {id: id, };
             newUser.id = id;
             newUser.firstName = firstName;
             newUser.lastName = lastName;
@@ -53,6 +53,8 @@
             newUser.company = company;
             newUser.title = title;
             newUser.pictureUrl = pictureUrl;
+            
+            //htmldatarequest.post( ---> route)
         }
         // Handle an error response from the API call
         function onError(error) {
