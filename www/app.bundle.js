@@ -82,7 +82,15 @@
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
-	var _productService = __webpack_require__(243);
+	var _SkillsForm = __webpack_require__(243);
+	
+	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
+	
+	var _Account = __webpack_require__(246);
+	
+	var _Account2 = _interopRequireDefault(_Account);
+	
+	var _productService = __webpack_require__(244);
 	
 	var productService = _interopRequireWildcard(_productService);
 	
@@ -189,7 +197,8 @@
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/newuser', component: _NewUser2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/newuser', component: _NewUser2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
 	), document.getElementById("main"));
 
 /***/ },
@@ -28854,14 +28863,144 @@
 /* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _productService = __webpack_require__(244);
+	
+	var productService = _interopRequireWildcard(_productService);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SkillsList = _react2.default.createClass({
+		displayName: 'SkillsList',
+	
+		render: function render() {
+			var skillEntries = this.props.entries;
+	
+			function createSkill(skill) {
+				return _react2.default.createElement(
+					'p',
+					{ key: skill.key, className: 'panel-block', href: '#' },
+					skill.text,
+					_react2.default.createElement(
+						'span',
+						{ className: 'panel-icon starIcon' },
+						_react2.default.createElement('i', { className: 'fa fa-star' })
+					)
+				);
+			}
+	
+			var skillList = skillEntries.map(createSkill);
+	
+			return _react2.default.createElement(
+				'div',
+				null,
+				skillList
+			);
+		}
+	});
+	
+	var SkillsForm = _react2.default.createClass({
+		displayName: 'SkillsForm',
+	
+	
+		getInitialState: function getInitialState() {
+			return {
+				skills: []
+			};
+		},
+	
+		addSkill: function addSkill(e) {
+			var skillArray = this.state.skills;
+	
+			skillArray.push({
+				text: this._inputElement.value,
+				key: Date.now(),
+				starred: false
+			});
+			this.setState({
+				skills: skillArray
+			});
+	
+			this._inputElement.value = "";
+	
+			e.preventDefault();
+		},
+	
+		render: function render() {
+			var _this = this;
+	
+			return _react2.default.createElement(
+				'nav',
+				{ className: 'panel', id: 'skillsPanel' },
+				_react2.default.createElement(
+					'p',
+					{ className: 'panel-heading' },
+					'Show us your skills'
+				),
+				_react2.default.createElement(
+					'form',
+					{ onSubmit: this.addSkill },
+					_react2.default.createElement(
+						'p',
+						{ className: 'panel-block control has-addons' },
+						_react2.default.createElement('input', { ref: function ref(a) {
+								return _this._inputElement = a;
+							}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', className: 'button is-medium is-orange' },
+							'Add'
+						)
+					)
+				),
+				_react2.default.createElement(SkillsList, { entries: this.state.skills }),
+				_react2.default.createElement(
+					'div',
+					{ className: 'panel-block' },
+					_react2.default.createElement(
+						'a',
+						{ href: '/main', className: 'button is-blue is-fullwidth' },
+						'Submit'
+					)
+				),
+				_react2.default.createElement(
+					'p',
+					{ className: 'panel-block control has-addons' },
+					_react2.default.createElement(
+						'button',
+						{ onClick: productService.newUser, type: 'submit', className: 'button is-medium is-orange' },
+						'New User'
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = SkillsForm;
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.findById = exports.findAll = undefined;
+	exports.newUser = exports.findById = exports.findAll = undefined;
 	
-	var _request = __webpack_require__(244);
+	var _request = __webpack_require__(245);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
@@ -28887,9 +29026,15 @@
 	        return data = JSON.parse(data);
 	    });
 	};
+	
+	var newUser = exports.newUser = function newUser() {
+	    return (0, _request2.default)({ url: baseURL + "/postTest" }).then(function (data) {
+	        return console.log(data);
+	    });
+	};
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28927,6 +29072,61 @@
 	        xhr.send(opts.data);
 	    });
 	};
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SkillsForm = __webpack_require__(243);
+	
+	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Account = function (_React$Component) {
+	  _inherits(Account, _React$Component);
+	
+	  function Account() {
+	    _classCallCheck(this, Account);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Account).apply(this, arguments));
+	  }
+	
+	  _createClass(Account, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_SkillsForm2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return Account;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = Account;
 
 /***/ }
 /******/ ]);

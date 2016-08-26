@@ -8,6 +8,8 @@ import Paginator from './components/Paginator';
 import SearchBar from './components/SearchBar';
 import RangeSlider from './components/RangeSlider';
 import NewUser from './components/NewUser';
+import SkillsForm from './components/SkillsForm';
+import Account from './components/Account';
 
 import * as productService from './services/product-service';
 
@@ -81,5 +83,6 @@ ReactDOM.render((
   <Route path="/" component={App}/>
   <Route path="/footer" component={App}/>
   <Route path="/newuser" component={NewUser}/>
+  <Route path="/account" component={Account}/>
 </Router>
 ), document.getElementById("main"));
