@@ -19,7 +19,8 @@ export let findById = () => {
         .then(data => data = JSON.parse(data))
 }
 
-export var newUser = () => {
-  return request({url: baseURL + "/postTest"})
+export var newUser = (values) => {
+  console.log("new user in products.js" + values);
+  return request({url: baseURL + "/postTest", values: values})
     .then(data => console.log(data));
 }

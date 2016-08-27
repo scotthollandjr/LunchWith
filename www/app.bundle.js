@@ -28884,6 +28884,7 @@
 	var SkillsList = _react2.default.createClass({
 		displayName: 'SkillsList',
 	
+	
 		render: function render() {
 			var skillEntries = this.props.entries;
 	
@@ -28913,6 +28914,10 @@
 	var SkillsForm = _react2.default.createClass({
 		displayName: 'SkillsForm',
 	
+	
+		createNewUser: function createNewUser() {
+			productService.newUser({ firstName: "Scott", lastName: "Holland" });
+		},
 	
 		getInitialState: function getInitialState() {
 			return {
@@ -28979,7 +28984,7 @@
 					{ className: 'panel-block control has-addons' },
 					_react2.default.createElement(
 						'button',
-						{ onClick: productService.newUser, type: 'submit', className: 'button is-medium is-orange' },
+						{ onClick: this.createNewUser, type: 'submit', className: 'button is-medium is-orange' },
 						'New User'
 					)
 				)
@@ -29027,8 +29032,9 @@
 	    });
 	};
 	
-	var newUser = exports.newUser = function newUser() {
-	    return (0, _request2.default)({ url: baseURL + "/postTest" }).then(function (data) {
+	var newUser = exports.newUser = function newUser(values) {
+	    console.log("new user in products.js" + values);
+	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(function (data) {
 	        return console.log(data);
 	    });
 	};
@@ -29044,9 +29050,11 @@
 	});
 	
 	exports.default = function (opts) {
+	    var params = opts.values;
 	    return new Promise(function (resolve, reject) {
 	        var xhr = new XMLHttpRequest();
-	        xhr.open(opts.method || "GET", opts.url);
+	        xhr.open("POST", opts.url + "?firstName=ipsum&lastName=binny");
+	        debugger;
 	        xhr.onload = function () {
 	            if (xhr.status >= 200 && xhr.status < 300) {
 	                resolve(xhr.response);
@@ -29069,7 +29077,7 @@
 	            });
 	        }
 	
-	        xhr.send(opts.data);
+	        xhr.send();
 	    });
 	};
 

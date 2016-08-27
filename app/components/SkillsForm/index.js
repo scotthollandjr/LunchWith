@@ -3,6 +3,7 @@ import * as productService from '../../services/product-service';
 
 
 var SkillsList = React.createClass({
+
 	render: function() {
 		var skillEntries = this.props.entries;
 
@@ -28,6 +29,10 @@ var SkillsList = React.createClass({
 });
 
 var SkillsForm = React.createClass({
+
+  createNewUser: function() {
+    productService.newUser({firstName: "Scott", lastName: "Holland"});
+  },
 
 	getInitialState: function() {
 		return {
@@ -78,7 +83,7 @@ var SkillsForm = React.createClass({
 			  	</div>
 
           <p className="panel-block control has-addons">
-            <button onClick={productService.newUser} type="submit" className="button is-medium is-orange">
+            <button onClick={this.createNewUser} type="submit" className="button is-medium is-orange">
               New User
             </button>
           </p>

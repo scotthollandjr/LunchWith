@@ -60,9 +60,9 @@ let findById = (req, res, next) => {
 };
 
 let newUser = (req, res, next) => {
-  var firstName = "Kyle";
-  var lastName = "Wolfson";
-  var test = "test";
+  console.log(req.method);
+  var firstName = req.query.firstName;
+  var lastName = req.query.lastName;
 
   var sql = "INSERT INTO users (FirstName, LastName) VALUES ('" + firstName + "','" + lastName + "')";
 
