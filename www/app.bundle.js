@@ -29051,10 +29051,12 @@
 	
 	exports.default = function (opts) {
 	    var params = opts.values;
+	    console.log(params);
+	    var paramsString = "?firstName=" + params.firstName + "&lastName=" + params.lastName;
+	    console.log(paramsString);
 	    return new Promise(function (resolve, reject) {
 	        var xhr = new XMLHttpRequest();
-	        xhr.open("POST", opts.url + "?firstName=ipsum&lastName=binny");
-	        debugger;
+	        xhr.open("POST", opts.url + paramsString);
 	        xhr.onload = function () {
 	            if (xhr.status >= 200 && xhr.status < 300) {
 	                resolve(xhr.response);
