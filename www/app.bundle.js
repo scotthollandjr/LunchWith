@@ -62,11 +62,11 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _Login = __webpack_require__(240);
+	var _Login = __webpack_require__(239);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Account = __webpack_require__(241);
+	var _Account = __webpack_require__(240);
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
@@ -78,11 +78,11 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _SkillsForm = __webpack_require__(242);
+	var _SkillsForm = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/SkillsForm\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
-	var _productService = __webpack_require__(243);
+	var _productService = __webpack_require__(242);
 	
 	var productService = _interopRequireWildcard(_productService);
 	
@@ -27460,10 +27460,6 @@
 	
 	var _LinkedIn2 = _interopRequireDefault(_LinkedIn);
 	
-	var _Map = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../Map\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _Map2 = _interopRequireDefault(_Map);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27487,7 +27483,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_Map2.default, { google: window.google })
+	        _react2.default.createElement(_Header2.default, null),
+	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
 	  }]);
@@ -27678,11 +27675,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement(
-	          "h1",
-	          { className: "title" },
-	          "TEST"
-	        )
+	        _react2.default.createElement("h1", { className: "title" })
 	      );
 	    }
 	  }]);
@@ -27695,8 +27688,7 @@
 	exports.default = LinkedIn;
 
 /***/ },
-/* 239 */,
-/* 240 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27761,7 +27753,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 241 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27776,7 +27768,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(242);
+	var _SkillsForm = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../SkillsForm\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27816,122 +27808,8 @@
 	exports.default = Account;
 
 /***/ },
+/* 241 */,
 /* 242 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var SkillsList = _react2.default.createClass({
-		displayName: "SkillsList",
-	
-		render: function render() {
-			var skillEntries = this.props.entries;
-	
-			function createSkill(skill) {
-				return _react2.default.createElement(
-					"p",
-					{ key: skill.key, className: "panel-block", href: "#" },
-					skill.text,
-					_react2.default.createElement(
-						"span",
-						{ className: "panel-icon starIcon" },
-						_react2.default.createElement("i", { className: "fa fa-star" })
-					)
-				);
-			}
-	
-			var skillList = skillEntries.map(createSkill);
-	
-			return _react2.default.createElement(
-				"div",
-				null,
-				skillList
-			);
-		}
-	});
-	
-	var SkillsForm = _react2.default.createClass({
-		displayName: "SkillsForm",
-	
-	
-		getInitialState: function getInitialState() {
-			return {
-				skills: []
-			};
-		},
-	
-		addSkill: function addSkill(e) {
-			var skillArray = this.state.skills;
-	
-			skillArray.push({
-				text: this._inputElement.value,
-				key: Date.now(),
-				starred: false
-			});
-			this.setState({
-				skills: skillArray
-			});
-	
-			this._inputElement.value = "";
-	
-			e.preventDefault();
-		},
-	
-		render: function render() {
-			var _this = this;
-	
-			return _react2.default.createElement(
-				"nav",
-				{ className: "panel", id: "skillsPanel" },
-				_react2.default.createElement(
-					"p",
-					{ className: "panel-heading" },
-					"Show us your skills"
-				),
-				_react2.default.createElement(
-					"form",
-					{ onSubmit: this.addSkill },
-					_react2.default.createElement(
-						"p",
-						{ className: "panel-block control has-addons" },
-						_react2.default.createElement("input", { ref: function ref(a) {
-								return _this._inputElement = a;
-							}, className: "input is-expanded is-medium is-orange", type: "text", placeholder: "Ex. JavaScript" }),
-						_react2.default.createElement(
-							"button",
-							{ type: "submit", className: "button is-medium is-orange" },
-							"Add"
-						)
-					)
-				),
-				_react2.default.createElement(SkillsList, { entries: this.state.skills }),
-				_react2.default.createElement(
-					"div",
-					{ className: "panel-block" },
-					_react2.default.createElement(
-						"a",
-						{ href: "/main", className: "button is-blue is-fullwidth" },
-						"Submit"
-					)
-				)
-			);
-		}
-	});
-	
-	exports.default = SkillsForm;
-
-/***/ },
-/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -27941,7 +27819,7 @@
 	});
 	exports.findById = exports.findAll = undefined;
 	
-	var _request = __webpack_require__(244);
+	var _request = __webpack_require__(243);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
@@ -27969,7 +27847,7 @@
 	};
 
 /***/ },
-/* 244 */
+/* 243 */
 /***/ function(module, exports) {
 
 	"use strict";

@@ -33,6 +33,12 @@ var SkillsForm = React.createClass({
 		};
 	},
 
+	handleClick: function() {
+		if (this.state.skills <= 2) {
+			alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
+		} else return;
+	},
+
 	addSkill: function(e) {
 		var skillArray = this.state.skills;
 
@@ -70,7 +76,7 @@ var SkillsForm = React.createClass({
 				<SkillsList entries={this.state.skills} />
 
 			  	<div className="panel-block">
-			    	<a href="/main" className="button is-blue is-fullwidth">
+			    	<a onClick={this.handleClick} className="button is-blue is-fullwidth">
 			      		Submit
 			    	</a>
 			  	</div>
