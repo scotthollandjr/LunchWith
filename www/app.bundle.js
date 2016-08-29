@@ -177,19 +177,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'slds-grid slds-p-top--small slds-grid--align-center' },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'slds-col' },
-	                        _react2.default.createElement(_SearchBar2.default, { searchKey: this.state.searchKey, onChange: this.searchKeyChangeHandler.bind(this) }),
-	                        _react2.default.createElement(_RangeSlider2.default, { defaultValue: [0, 26], min: 0, max: 26, step: .5, withBars: true, onChange: this.rangeChangeHandler.bind(this) })
-	                    )
-	                ),
-	                _react2.default.createElement(_Paginator2.default, { page: this.state.page, pageSize: this.state.pageSize, total: this.state.total, onPrevious: this.prevPageHandler.bind(this), onNext: this.nextPageHandler.bind(this) }),
-	                _react2.default.createElement(_ProductList2.default, { products: this.state.products, total: this.state.total, onSearchKeyChange: this.searchKeyChangeHandler.bind(this) }),
-	                _react2.default.createElement(_Footer2.default, { text: 'Belgian Beer Explorer' })
+	                _react2.default.createElement(_Footer2.default, null)
 	            );
 	        }
 	    }]);

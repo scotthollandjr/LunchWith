@@ -71,15 +71,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="slds-grid slds-p-top--small slds-grid--align-center">
-                    <div className="slds-col">
-                        <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)}/>
-                        <RangeSlider defaultValue={[0, 26]} min={0} max={26} step={.5} withBars={true} onChange={this.rangeChangeHandler.bind(this)}/>
-                    </div>
-                </div>
-                <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)}/>
-                <ProductList products={this.state.products} total={this.state.total} onSearchKeyChange={this.searchKeyChangeHandler.bind(this)}/>
-                <Footer text="Belgian Beer Explorer"/>
+                <Footer />
             </div>
         );
     }

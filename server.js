@@ -5,7 +5,7 @@ let express = require('express'),
     users = require('./server/users'),
     app = express();
 
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 3000);
 
 app.use(compression());
 
