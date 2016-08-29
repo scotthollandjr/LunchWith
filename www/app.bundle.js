@@ -78,7 +78,7 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _SkillsForm = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/SkillsForm\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _SkillsForm = __webpack_require__(241);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27768,7 +27768,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../SkillsForm\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _SkillsForm = __webpack_require__(241);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27808,7 +27808,127 @@
 	exports.default = Account;
 
 /***/ },
-/* 241 */,
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var SkillsList = _react2.default.createClass({
+		displayName: "SkillsList",
+	
+		render: function render() {
+			var skillEntries = this.props.entries;
+	
+			function createSkill(skill) {
+				return _react2.default.createElement(
+					"p",
+					{ key: skill.key, className: "panel-block", href: "#" },
+					skill.text,
+					_react2.default.createElement(
+						"span",
+						{ className: "panel-icon starIcon" },
+						_react2.default.createElement("i", { className: "fa fa-star" })
+					)
+				);
+			}
+	
+			var skillList = skillEntries.map(createSkill);
+	
+			return _react2.default.createElement(
+				"div",
+				null,
+				skillList
+			);
+		}
+	});
+	
+	var SkillsForm = _react2.default.createClass({
+		displayName: "SkillsForm",
+	
+	
+		getInitialState: function getInitialState() {
+			return {
+				skills: []
+			};
+		},
+	
+		handleClick: function handleClick() {
+			if (this.state.skills <= 2) {
+				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
+			} else return;
+		},
+	
+		addSkill: function addSkill(e) {
+			var skillArray = this.state.skills;
+	
+			skillArray.push({
+				text: this._inputElement.value,
+				key: Date.now(),
+				starred: false
+			});
+			this.setState({
+				skills: skillArray
+			});
+	
+			this._inputElement.value = "";
+	
+			e.preventDefault();
+		},
+	
+		render: function render() {
+			var _this = this;
+	
+			return _react2.default.createElement(
+				"nav",
+				{ className: "panel", id: "skillsPanel" },
+				_react2.default.createElement(
+					"p",
+					{ className: "panel-heading" },
+					"Show us your skills"
+				),
+				_react2.default.createElement(
+					"form",
+					{ onSubmit: this.addSkill },
+					_react2.default.createElement(
+						"p",
+						{ className: "panel-block control has-addons" },
+						_react2.default.createElement("input", { ref: function ref(a) {
+								return _this._inputElement = a;
+							}, className: "input is-expanded is-medium is-orange", type: "text", placeholder: "Ex. JavaScript" }),
+						_react2.default.createElement(
+							"button",
+							{ type: "submit", className: "button is-medium is-orange" },
+							"Add"
+						)
+					)
+				),
+				_react2.default.createElement(SkillsList, { entries: this.state.skills }),
+				_react2.default.createElement(
+					"div",
+					{ className: "panel-block" },
+					_react2.default.createElement(
+						"a",
+						{ onClick: this.handleClick, className: "button is-blue is-fullwidth" },
+						"Submit"
+					)
+				)
+			);
+		}
+	});
+	
+	exports.default = SkillsForm;
+
+/***/ },
 /* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
