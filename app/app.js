@@ -7,7 +7,9 @@ import Login from './components/Login';
 import Account from './components/Account';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import SkillsForm from './components/SkillsForm';
+import ProductList from './components/ProductList';
+import SearchBar from './components/SearchBar';
+import NewUser from './components/NewUser';
 
 import * as productService from './services/product-service';
 
@@ -24,8 +26,8 @@ class App extends React.Component {
 
 ReactDOM.render((
 <Router history={browserHistory}>
-  <Route path="/" component={Login}/>
+  <Route path="/" component={Main}/>
+  <Route path="/newuser" component={NewUser}/>
   <Route path="/account" component={Account}/>
-  <Route path="/main" component={Main}/>
 </Router>
 ), document.getElementById("content"));

@@ -6,7 +6,7 @@ let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let findAll = (req, res, next) => {
 
-    let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 12,
+    let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 120,
         page = req.query.page ? parseInt(req.query.page) : 1,
         search = req.query.search,
         min = req.query.min,
@@ -59,5 +59,18 @@ let findById = (req, res, next) => {
         .catch(next);
 };
 
+let newUser = (req, res, next) => {
+  console.log(req.method);
+  var firstName = req.query.firstName;
+  var lastName = req.query.lastName;
+
+  var sql = "INSERT INTO users (FirstName, LastName) VALUES ('" + firstName + "','" + lastName + "')";
+
+  db.query(sql, null)
+    .then({})
+    .catch(next);
+};
+
+exports.newUser = newUser;
 exports.findAll = findAll;
 exports.findById = findById;

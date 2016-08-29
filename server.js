@@ -13,6 +13,8 @@ app.use('/', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
+app.use('/account', express.static(__dirname + '/www'));
+
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
@@ -29,8 +31,10 @@ app.all('*', function (req, res, next) {
     }
 });
 
-app.get('/products', products.findAll);
-app.get('/products/:id', products.findById);
+app.use('/products', products.findAll);
+app.use('/products/:id', products.findById);
+app.use('/postTest', products.newUser);
+app.use('/newUser', express.static(__dirname + '/www'));
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

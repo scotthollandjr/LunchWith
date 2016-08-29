@@ -36,30 +36,32 @@
         function onSuccess(data) {
             // Pre-populate your form fields here once you know the call
             // came back successfully
-            
             console.log(data);
+            // var id = JSON.stringify(data.id);
+            // var firstName = JSON.stringify(data.firstName);
+            // var lastName = JSON.stringify(data.lastName);
+            // var emailAddress = JSON.stringify(data.emailAddress);
+            // var company = JSON.stringify(data.positions.values[0].company.name);
+            // var title = JSON.stringify(data.positions.values[0].title);
+            // var pictureUrl = JSON.stringify(data.pictureUrl);
 
-            var id = JSON.stringify(data.id);
-            var firstName = JSON.stringify(data.firstName);
-            var lastName = JSON.stringify(data.lastName);
-            var emailAddress = JSON.stringify(data.emailAddress);
-            var company = JSON.stringify(data.positions.values[0].company.name);
-            var title = JSON.stringify(data.positions.values[0].title);
-            var pictureUrl = JSON.stringify(data.pictureUrl);
-            debugger;
-            var newUser = {id: id, };
-            newUser.id = id;
-            newUser.firstName = firstName;
-            newUser.lastName = lastName;
-            newUser.emailAddress = emailAddress;
-            newUser.company = company;
-            newUser.title = title;
-            newUser.pictureUrl = pictureUrl;
+            // var newUser = {id: id, firstName: firstName, lastName: lastName, emailAddress: emailAddress, company: company, title: title, pictureUrl: pictureUrl};
 
+            sendData(data);
 
-
-            
-            //htmldatarequest.post( ---> route)
+            // var options = {
+            //     url: 'www.google.com',
+            //     method: 'POST',
+            //     form: {
+            //         id: JSON.stringify(data.id),
+            //         firstName: JSON.stringify(data.firstName),
+            //         lastName: JSON.stringify(data.lastName),
+            //         emailAddress: JSON.stringify(data.emailAddress),
+            //         company: JSON.stringify(data.company),
+            //         title: JSON.stringify(data.title),
+            //         pictureUrl: JSON.stringify(data.pictureUrl)
+            //     }
+            // }
         }
         // Handle an error response from the API call
         function onError(error) {
@@ -68,6 +70,32 @@
         // Use the API call wrapper to request the member's basic profile data
         function getProfileData() {
             IN.API.Raw("/people/~:(id,firstName,lastName,emailAddress,summary,current-share,positions,picture-url)").result(onSuccess).error(onError);
+        }
+
+        function sendData(data) {
+          var XHR = new XMLHttpRequest();
+          var urlEncodedData = 'firstName=' + JSON.stringify(data.firstName) + 
+                               '&lastName=' + JSON.stringify(data.lastName);
+
+          // We define what will happen if the data is successfully sent
+          XHR.addEventListener('load', function(event) {
+            alert('Yeah! Data sent and response loaded.');
+          });
+
+          // We define what will happen in case of error
+          XHR.addEventListener('error', function(event) {
+            alert('Oups! Something goes wrong.');
+          });
+
+          // We setup our request
+          XHR.open('POST', '/postTest');
+
+          // We add the required HTTP header to handle a form data POST request
+          XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          XHR.setRequestHeader('Content-Length', urlEncodedData.length);
+
+          // And finally, We send our data.
+          XHR.send(urlEncodedData);
         }
     </script>
 </head>

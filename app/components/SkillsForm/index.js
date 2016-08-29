@@ -1,6 +1,9 @@
 import React from 'react';
+import * as productService from '../../services/product-service';
+
 
 var SkillsList = React.createClass({
+
 	render: function() {
 		var skillEntries = this.props.entries;
 
@@ -26,6 +29,10 @@ var SkillsList = React.createClass({
 });
 
 var SkillsForm = React.createClass({
+
+  createNewUser: function() {
+    productService.newUser({firstName: "Scott", lastName: "Holland"});
+  },
 
 	getInitialState: function() {
 		return {
@@ -60,27 +67,35 @@ var SkillsForm = React.createClass({
 
   	render: function() {
     	return (
-			<nav className="panel" id="skillsPanel">
-			  	<p className="panel-heading">
-			    	Show us your skills
-			  	</p>
-			  	<form onSubmit={this.addSkill}>
-					<p className="panel-block control has-addons">
-						<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
-						<button type="submit" className="button is-medium is-orange">
-							Add
-						</button>
-					</p>
-				</form>
+	    	<div>
+				<nav className="panel" id="skillsPanel">
+				  	<p className="panel-heading">
+				    	Show us your skills
+				  	</p>
+				  	<form onSubmit={this.addSkill}>
+						<p className="panel-block control has-addons">
+							<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
+							<button type="submit" className="button is-medium is-orange">
+								Add
+							</button>
+						</p>
+					</form>
 
-				<SkillsList entries={this.state.skills} />
+					<SkillsList entries={this.state.skills} />
 
-			  	<div className="panel-block">
-			    	<a onClick={this.handleClick} className="button is-blue is-fullwidth">
-			      		Submit
-			    	</a>
-			  	</div>
-			</nav>
+				  	<div className="panel-block">
+				    	<a onClick={this.handleClick} className="button is-blue is-fullwidth">
+				      		Submit
+				    	</a>
+				  	</div>
+
+				</nav>
+		        <p className="panel-block control has-addons">
+	            	<button onClick={this.createNewUser} type="submit" className="button is-medium is-orange">
+	              		New User
+	            	</button>
+		        </p>
+	        </div>
 	    )
 	}
 });
