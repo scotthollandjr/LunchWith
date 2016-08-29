@@ -37,13 +37,13 @@
             // Pre-populate your form fields here once you know the call
             // came back successfully
             console.log(data);
-            var id = JSON.stringify(data.id);
-            var firstName = JSON.stringify(data.firstName);
-            var lastName = JSON.stringify(data.lastName);
-            var emailAddress = JSON.stringify(data.emailAddress);
-            var company = JSON.stringify(data.positions.values[0].company.name);
-            var title = JSON.stringify(data.positions.values[0].title);
-            var pictureUrl = JSON.stringify(data.pictureUrl);
+            var id = data.id;
+            var firstName = data.firstName;
+            var lastName = data.lastName;
+            var emailAddress = data.emailAddress;
+            var company = data.positions.values[0].company.name;
+            var title = data.positions.values[0].title;
+            var pictureUrl = data.pictureUrl;
 
             var newUser = {id: id, firstName: firstName, lastName: lastName, emailAddress: emailAddress, company: company, title: title, pictureUrl: pictureUrl};
 
@@ -81,16 +81,16 @@
 
           // We define what will happen if the data is successfully sent
           XHR.addEventListener('load', function(event) {
-            alert('Yeah! Data sent and response loaded.');
+            alert('Data sent and response loaded.');
           });
 
           // We define what will happen in case of error
           XHR.addEventListener('error', function(event) {
-            alert('Oups! Something goes wrong.');
+            alert('Error');
           });
 
           // We setup our request
-          XHR.open('POST', '/postTest' + urlEncodedData);
+          XHR.open('POST', '/newUserCreation' + urlEncodedData);
 
           // We add the required HTTP header to handle a form data POST request
           XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
