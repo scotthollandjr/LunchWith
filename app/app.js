@@ -2,15 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
+import Main from './components/Main';
+import Login from './components/Login';
+import Account from './components/Account';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import ProductList from './components/ProductList';
-import Paginator from './components/Paginator';
 import SearchBar from './components/SearchBar';
-import RangeSlider from './components/RangeSlider';
 import NewUser from './components/NewUser';
 import SkillsForm from './components/SkillsForm';
-import Account from './components/Account';
-import Main from './components/Main';
+
 
 import * as userService from './services/user-service';
 
@@ -72,7 +73,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Footer />
+
             </div>
         );
     }
@@ -85,4 +86,4 @@ ReactDOM.render((
   <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account}/>
 </Router>
-), document.getElementById("main"));
+), document.getElementById("content"));
