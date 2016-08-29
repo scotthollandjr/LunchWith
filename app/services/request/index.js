@@ -1,11 +1,17 @@
 export default opts => {
-  var params = opts.values;
-  console.log(params);
-  var paramsString = "?firstName="+params.firstName+"&lastName="+params.lastName;
-  console.log(paramsString);
+
+    function formUrlEncode(obj) {
+      var urlData = '';
+      for (var x in obj) {
+          urlData = urlData + x + '=' + obj[x] + '&';
+      }
+      urlData = urlData.substr(0, (urlData.length - 1));
+      return urlData;
+    }
+
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", opts.url+paramsString);
+        xhr.open("POST", opts.url+'?'+formUrlEncode(opts.values));
         xhr.onload = () => {
             if (xhr.status >= 200 && xhr.status < 300) {
                 resolve(xhr.response);

@@ -60,17 +60,30 @@ let findById = (req, res, next) => {
 };
 
 let newUser = (req, res, next) => {
-  console.log(req.method);
   var firstName = req.query.firstName;
   var lastName = req.query.lastName;
 
-  var sql = "INSERT INTO users (FirstName, LastName) VALUES ('" + firstName + "','" + lastName + "')";
+  var sql = "INSERT INTO users (firstName, lastName) VALUES ('" + firstName + "','" + lastName + "')";
 
   db.query(sql, null)
-    .then({})
+    .then(user => res.json("new user created!"))
     .catch(next);
 };
 
+let queryUsers = (req, res, next) => {
+  var params = req.query;
+  var firstname = req.query.firstname;
+  var lastname;
+  var sql = "SELECT * FROM users WHERE firstname = $1";
+
+  db.query(sql, [firstname])
+    .then(function (user) {
+      return res.json({"user" : user})
+    })
+    .catch(next);
+};
+
+exports.queryUsers = queryUsers;
 exports.newUser = newUser;
 exports.findAll = findAll;
 exports.findById = findById;

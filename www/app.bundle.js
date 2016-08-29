@@ -127,6 +127,14 @@
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 	            this.findProducts();
+	            this.displayUsers();
+	        }
+	    }, {
+	        key: 'displayUsers',
+	        value: function displayUsers() {
+	            productService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	                console.log(data);
+	            });
 	        }
 	    }, {
 	        key: 'searchKeyChangeHandler',
@@ -28916,7 +28924,7 @@
 	
 	
 		createNewUser: function createNewUser() {
-			productService.newUser({ firstName: "Scott", lastName: "Holland" });
+			productService.newUser({ firstName: "sweet-ass", lastName: "auto-encoder" });
 		},
 	
 		getInitialState: function getInitialState() {
@@ -28998,18 +29006,20 @@
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.newUser = exports.findById = exports.findAll = undefined;
+	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
 	
 	var _request = __webpack_require__(245);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Router = __webpack_require__(172);
 	
 	var baseURL = "";
 	
@@ -29033,9 +29043,12 @@
 	};
 	
 	var newUser = exports.newUser = function newUser(values) {
-	    console.log("new user in products.js" + values);
-	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(function (data) {
-	        return console.log(data);
+	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(Router.browserHistory.push('newUser'));
+	};
+	
+	var queryUsers = exports.queryUsers = function queryUsers(values) {
+	    return (0, _request2.default)({ url: baseURL + "/getTest", values: values }).then(function (data) {
+	        return JSON.parse(data);
 	    });
 	};
 
@@ -29043,20 +29056,26 @@
 /* 245 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
 	exports.default = function (opts) {
-	    var params = opts.values;
-	    console.log(params);
-	    var paramsString = "?firstName=" + params.firstName + "&lastName=" + params.lastName;
-	    console.log(paramsString);
+	
+	    function formUrlEncode(obj) {
+	        var urlData = '';
+	        for (var x in obj) {
+	            urlData = urlData + x + '=' + obj[x] + '&';
+	        }
+	        urlData = urlData.substr(0, urlData.length - 1);
+	        return urlData;
+	    }
+	
 	    return new Promise(function (resolve, reject) {
 	        var xhr = new XMLHttpRequest();
-	        xhr.open("POST", opts.url + paramsString);
+	        xhr.open("POST", opts.url + '?' + formUrlEncode(opts.values));
 	        xhr.onload = function () {
 	            if (xhr.status >= 200 && xhr.status < 300) {
 	                resolve(xhr.response);

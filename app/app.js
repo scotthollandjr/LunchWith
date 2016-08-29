@@ -29,6 +29,14 @@ class App extends React.Component {
 
     componentDidMount() {
         this.findProducts();
+        this.displayUsers();
+    }
+
+    displayUsers() {
+      productService.queryUsers({firstname: "sweet-ass"})
+        .then(data => {
+          console.log(data)
+        });
     }
 
     searchKeyChangeHandler(searchKey) {
