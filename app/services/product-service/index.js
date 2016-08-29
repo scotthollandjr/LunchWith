@@ -22,7 +22,7 @@ export let findById = () => {
 
 export var newUser = (values) => {
   return request({url: baseURL + "/postTest", values: values})
-    .then(Router.browserHistory.push('newUser'));
+    .then(Router.browserHistory.push('/newUser'));
 }
 
 export var queryUsers = (values) => {

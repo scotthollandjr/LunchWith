@@ -2,7 +2,7 @@
 
 let express = require('express'),
     compression = require('compression'),
-    products = require('./server/products'),
+    users = require('./server/users'),
     app = express();
 
 app.set('port', process.env.PORT || 5000);
@@ -30,10 +30,8 @@ app.all('*', function (req, res, next) {
     }
 });
 
-app.use('/products', products.findAll);
-app.use('/products/:id', products.findById);
-app.use('/postTest', products.newUser);
-app.use('/getTest', products.queryUsers);
+app.use('/postTest', users.newUser);
+app.use('/getTest', users.queryUsers);
 app.use('/newUser', express.static(__dirname + '/www'));
 
 app.listen(app.get('port'), function () {

@@ -126,7 +126,6 @@
 	    _createClass(App, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.findProducts();
 	            this.displayUsers();
 	        }
 	    }, {
@@ -29043,7 +29042,7 @@
 	};
 	
 	var newUser = exports.newUser = function newUser(values) {
-	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(Router.browserHistory.push('newUser'));
+	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(Router.browserHistory.push('/newUser'));
 	};
 	
 	var queryUsers = exports.queryUsers = function queryUsers(values) {

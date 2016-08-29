@@ -28,7 +28,6 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.findProducts();
         this.displayUsers();
     }
 
