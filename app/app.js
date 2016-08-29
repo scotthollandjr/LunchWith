@@ -79,8 +79,7 @@ class App extends React.Component {
 
 ReactDOM.render((
 <Router history={browserHistory}>
-  <Route path="/" component={App}/>
-  <Route path="/footer" component={App}/>
+  <Route path="/" component={Main}/>
   <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account}/>
 </Router>
