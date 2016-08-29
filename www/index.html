@@ -74,7 +74,8 @@
 
         function sendData(data) {
           var XHR = new XMLHttpRequest();
-          var urlEncodedData = 'firstName=scooter&lastName=gentry';
+          var urlEncodedData = '?firstName=' + data.firstName +
+                                '&lastName=' + data.lastName;
 
           console.log(urlEncodedData);
 
@@ -89,7 +90,7 @@
           });
 
           // We setup our request
-          XHR.open('POST', 'http://localhost:3000/postTest');
+          XHR.open('POST', '/postTest' + urlEncodedData);
 
           // We add the required HTTP header to handle a form data POST request
           XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

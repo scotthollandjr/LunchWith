@@ -189,7 +189,8 @@
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newuser', component: _NewUser2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/postTest', component: _Account2.default })
 	), document.getElementById("content"));
 
 /***/ },

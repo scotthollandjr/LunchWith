@@ -83,5 +83,6 @@ ReactDOM.render((
   <Route path="/" component={Main}/>
   <Route path="/newuser" component={NewUser}/>
   <Route path="/account" component={Account}/>
+  <Route path="/postTest" component={Account}/>
 </Router>
 ), document.getElementById("content"));
