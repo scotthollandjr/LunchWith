@@ -1,4 +1,5 @@
 import request from '../request';
+var Router = require('react-router');
 
 let baseURL = "";
 
@@ -20,7 +21,13 @@ export let findById = () => {
 }
 
 export var newUser = (values) => {
-  console.log("new user in products.js" + values);
   return request({url: baseURL + "/postTest", values: values})
-    .then(data => console.log(data));
+    .then(Router.browserHistory.push('newUser'));
+}
+
+export var queryUsers = (values) => {
+  return request({url: baseURL + "/getTest", values: values})
+    .then(function(data){
+      return JSON.parse(data)
+    })
 }

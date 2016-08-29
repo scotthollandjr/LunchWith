@@ -34,6 +34,7 @@ app.all('*', function (req, res, next) {
 app.use('/products', products.findAll);
 app.use('/products/:id', products.findById);
 app.use('/postTest', products.newUser);
+app.use('/getTest', products.queryUsers);
 app.use('/newUser', express.static(__dirname + '/www'));
 
 app.listen(app.get('port'), function () {

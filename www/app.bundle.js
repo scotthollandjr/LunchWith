@@ -114,6 +114,58 @@
 	    }
 	
 	    _createClass(App, [{
+<<<<<<< HEAD
+=======
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.findProducts();
+	            this.displayUsers();
+	        }
+	    }, {
+	        key: 'displayUsers',
+	        value: function displayUsers() {
+	            productService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	                console.log(data);
+	            });
+	        }
+	    }, {
+	        key: 'searchKeyChangeHandler',
+	        value: function searchKeyChangeHandler(searchKey) {
+	            this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
+	        }
+	    }, {
+	        key: 'rangeChangeHandler',
+	        value: function rangeChangeHandler(values) {
+	            this.setState({ min: values[0], max: values[1], page: 1 }, this.findProducts);
+	        }
+	    }, {
+	        key: 'findProducts',
+	        value: function findProducts() {
+	            var _this2 = this;
+	
+	            productService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
+	                _this2.setState({
+	                    products: data.products,
+	                    page: data.page,
+	                    pageSize: data.pageSize,
+	                    total: data.total
+	                });
+	            });
+	        }
+	    }, {
+	        key: 'nextPageHandler',
+	        value: function nextPageHandler() {
+	            var p = this.state.page + 1;
+	            this.setState({ page: p }, this.findProducts);
+	        }
+	    }, {
+	        key: 'prevPageHandler',
+	        value: function prevPageHandler() {
+	            var p = this.state.page - 1;
+	            this.setState({ page: p }, this.findProducts);
+	        }
+	    }, {
+>>>>>>> 2533a01ecba23865e6b3eed42d9822f732f80645
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement('div', null);
@@ -27802,7 +27854,7 @@
 	
 	
 		createNewUser: function createNewUser() {
-			productService.newUser({ firstName: "Scott", lastName: "Holland" });
+			productService.newUser({ firstName: "sweet-ass", lastName: "auto-encoder" });
 		},
 	
 		getInitialState: function getInitialState() {
@@ -28165,11 +28217,15 @@
 /* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+<<<<<<< HEAD
+=======
+	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
+>>>>>>> 2533a01ecba23865e6b3eed42d9822f732f80645
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -28179,18 +28235,43 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+<<<<<<< HEAD
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+=======
+	var Router = __webpack_require__(172);
+	
+	var baseURL = "";
+>>>>>>> 2533a01ecba23865e6b3eed42d9822f732f80645
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+<<<<<<< HEAD
 	var SearchBar = function (_React$Component) {
 	    _inherits(SearchBar, _React$Component);
+=======
+	var newUser = exports.newUser = function newUser(values) {
+	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(Router.browserHistory.push('newUser'));
+	};
+	
+	var queryUsers = exports.queryUsers = function queryUsers(values) {
+	    return (0, _request2.default)({ url: baseURL + "/getTest", values: values }).then(function (data) {
+	        return JSON.parse(data);
+	    });
+	};
+
+/***/ },
+/* 245 */
+/***/ function(module, exports) {
+
+	'use strict';
+>>>>>>> 2533a01ecba23865e6b3eed42d9822f732f80645
 	
 	    function SearchBar() {
 	        _classCallCheck(this, SearchBar);
 	
+<<<<<<< HEAD
 	        return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).apply(this, arguments));
 	    }
 	
@@ -28236,6 +28317,42 @@
 	                    )
 	                )
 	            );
+=======
+	exports.default = function (opts) {
+	
+	    function formUrlEncode(obj) {
+	        var urlData = '';
+	        for (var x in obj) {
+	            urlData = urlData + x + '=' + obj[x] + '&';
+	        }
+	        urlData = urlData.substr(0, urlData.length - 1);
+	        return urlData;
+	    }
+	
+	    return new Promise(function (resolve, reject) {
+	        var xhr = new XMLHttpRequest();
+	        xhr.open("POST", opts.url + '?' + formUrlEncode(opts.values));
+	        xhr.onload = function () {
+	            if (xhr.status >= 200 && xhr.status < 300) {
+	                resolve(xhr.response);
+	            } else {
+	                reject({
+	                    status: undefined.status,
+	                    statusText: xhr.statusText
+	                });
+	            }
+	        };
+	        xhr.onerror = function () {
+	            reject({
+	                status: undefined.status,
+	                statusText: xhr.statusText
+	            });
+	        };
+	        if (opts.headers) {
+	            Object.keys(opts.headers).forEach(function (key) {
+	                xhr.setRequestHeader(key, opts.headers[key]);
+	            });
+>>>>>>> 2533a01ecba23865e6b3eed42d9822f732f80645
 	        }
 	    }]);
 	
