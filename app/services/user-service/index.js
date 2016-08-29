@@ -21,12 +21,12 @@ export let findById = () => {
 }
 
 export var newUser = (values) => {
-  return request({url: baseURL + "/postTest", values: values})
-    .then(Router.browserHistory.push('newUser'));
+  return request({url: baseURL + "/newUserCreation", values: values})
+    .then(Router.browserHistory.push('/newUserWelcome'));
 }
 
 export var queryUsers = (values) => {
-  return request({url: baseURL + "/getTest", values: values})
+  return request({url: baseURL + "/searchUsers", values: values})
     .then(function(data){
       return JSON.parse(data)
     })

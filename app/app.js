@@ -11,7 +11,7 @@ import ProductList from './components/ProductList';
 import SearchBar from './components/SearchBar';
 import NewUser from './components/NewUser';
 
-import * as productService from './services/product-service';
+import * as userService from './services/user-service';
 
 class App extends React.Component {
 
@@ -28,12 +28,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        this.findProducts();
         this.displayUsers();
     }
 
     displayUsers() {
-      productService.queryUsers({firstname: "sweet-ass"})
+      userService.queryUsers({firstname: "sweet-ass"})
         .then(data => {
           console.log(data)
         });
@@ -48,7 +47,7 @@ class App extends React.Component {
     }
 
     findProducts() {
-        productService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page})
+        userService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page})
             .then(data => {
                 this.setState({
                     products: data.products,
@@ -80,9 +79,9 @@ class App extends React.Component {
 
 ReactDOM.render((
 <Router history={browserHistory}>
-  <Route path="/" component={Main}/>
-  <Route path="/newuser" component={NewUser}/>
+  <Route path="/" component={App}/>
+  <Route path="/footer" component={App}/>
+  <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account}/>
-  <Route path="/postTest" component={Account}/>
 </Router>
 ), document.getElementById("content"));

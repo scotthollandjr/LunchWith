@@ -1,5 +1,5 @@
 import React from 'react';
-import * as productService from '../../services/product-service';
+import * as userService from '../../services/user-service';
 
 
 var SkillsList = React.createClass({

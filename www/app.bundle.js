@@ -90,9 +90,13 @@
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
+<<<<<<< HEAD
 	var _productService = __webpack_require__(241);
+=======
+	var _userService = __webpack_require__(244);
+>>>>>>> fe6e0f796cd1542d115b852d0e2a1362fe58c7b8
 	
-	var productService = _interopRequireWildcard(_productService);
+	var userService = _interopRequireWildcard(_userService);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -126,13 +130,12 @@
 	    _createClass(App, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            this.findProducts();
 	            this.displayUsers();
 	        }
 	    }, {
 	        key: 'displayUsers',
 	        value: function displayUsers() {
-	            productService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	            userService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
 	                console.log(data);
 	            });
 	        }
@@ -151,7 +154,7 @@
 	        value: function findProducts() {
 	            var _this2 = this;
 	
-	            productService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
+	            userService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
 	                _this2.setState({
 	                    products: data.products,
 	                    page: data.page,
@@ -187,11 +190,19 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
+<<<<<<< HEAD
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newuser', component: _NewUser2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/postTest', component: _Account2.default })
 	), document.getElementById("content"));
+=======
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
+	), document.getElementById("main"));
+>>>>>>> fe6e0f796cd1542d115b852d0e2a1362fe58c7b8
 
 /***/ },
 /* 1 */
@@ -28126,6 +28137,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+<<<<<<< HEAD
+=======
+	var _userService = __webpack_require__(244);
+	
+	var userService = _interopRequireWildcard(_userService);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+>>>>>>> fe6e0f796cd1542d115b852d0e2a1362fe58c7b8
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28259,11 +28279,29 @@
 	var SearchBar = function (_React$Component) {
 	    _inherits(SearchBar, _React$Component);
 	
+<<<<<<< HEAD
 	    function SearchBar() {
 	        _classCallCheck(this, SearchBar);
 	
 	        return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).apply(this, arguments));
 	    }
+=======
+	var newUser = exports.newUser = function newUser(values) {
+	    return (0, _request2.default)({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
+	};
+	
+	var queryUsers = exports.queryUsers = function queryUsers(values) {
+	    return (0, _request2.default)({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
+	        return JSON.parse(data);
+	    });
+	};
+
+/***/ },
+/* 245 */
+/***/ function(module, exports) {
+
+	'use strict';
+>>>>>>> fe6e0f796cd1542d115b852d0e2a1362fe58c7b8
 	
 	    _createClass(SearchBar, [{
 	        key: "searchKeyChangeHandler",
