@@ -90,9 +90,9 @@
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
-	var _productService = __webpack_require__(244);
+	var _userService = __webpack_require__(244);
 	
-	var productService = _interopRequireWildcard(_productService);
+	var userService = _interopRequireWildcard(_userService);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -131,7 +131,7 @@
 	    }, {
 	        key: 'displayUsers',
 	        value: function displayUsers() {
-	            productService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	            userService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
 	                console.log(data);
 	            });
 	        }
@@ -150,7 +150,7 @@
 	        value: function findProducts() {
 	            var _this2 = this;
 	
-	            productService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
+	            userService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
 	                _this2.setState({
 	                    products: data.products,
 	                    page: data.page,
@@ -204,7 +204,7 @@
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/newuser', component: _NewUser2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
 	), document.getElementById("main"));
 
@@ -28880,9 +28880,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _productService = __webpack_require__(244);
+	var _userService = __webpack_require__(244);
 	
-	var productService = _interopRequireWildcard(_productService);
+	var userService = _interopRequireWildcard(_userService);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -29042,11 +29042,11 @@
 	};
 	
 	var newUser = exports.newUser = function newUser(values) {
-	    return (0, _request2.default)({ url: baseURL + "/postTest", values: values }).then(Router.browserHistory.push('/newUser'));
+	    return (0, _request2.default)({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
 	};
 	
 	var queryUsers = exports.queryUsers = function queryUsers(values) {
-	    return (0, _request2.default)({ url: baseURL + "/getTest", values: values }).then(function (data) {
+	    return (0, _request2.default)({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
 	        return JSON.parse(data);
 	    });
 	};

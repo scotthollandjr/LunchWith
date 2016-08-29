@@ -30,9 +30,9 @@ app.all('*', function (req, res, next) {
     }
 });
 
-app.use('/postTest', users.newUser);
-app.use('/getTest', users.queryUsers);
-app.use('/newUser', express.static(__dirname + '/www'));
+app.use('/newUserCreation', users.newUser);
+app.use('/searchUsers', users.queryUsers);
+app.use('/newUserWelcome', express.static(__dirname + '/www'));
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
