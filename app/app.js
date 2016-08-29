@@ -10,6 +10,7 @@ import RangeSlider from './components/RangeSlider';
 import NewUser from './components/NewUser';
 import SkillsForm from './components/SkillsForm';
 import Account from './components/Account';
+import Main from './components/Main';
 
 import * as userService from './services/user-service';
 
@@ -79,7 +80,7 @@ class App extends React.Component {
 
 ReactDOM.render((
 <Router history={browserHistory}>
-  <Route path="/" component={App}/>
+  <Route path="/" component={Main}/>
   <Route path="/footer" component={App}/>
   <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account}/>

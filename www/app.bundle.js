@@ -190,7 +190,7 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: Main }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
