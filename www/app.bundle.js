@@ -27600,6 +27600,16 @@
 	  }
 	
 	  _createClass(Footer, [{
+	    key: "showCalendar",
+	    value: function showCalendar() {
+	      alert("the calendar just popped up, trust me");
+	    }
+	  }, {
+	    key: "showAccount",
+	    value: function showAccount() {
+	      alert("here is your account. go head and edit away");
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -27622,7 +27632,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    "a",
-	                    { className: "footer-tab" },
+	                    { href: "/activity", className: "footer-tab" },
 	                    _react2.default.createElement(
 	                      "span",
 	                      { className: "icon is-large" },
@@ -27635,7 +27645,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    "a",
-	                    { className: "footer-tab" },
+	                    { onClick: this.showCalendar, className: "footer-tab" },
 	                    _react2.default.createElement(
 	                      "span",
 	                      { className: "icon is-large" },
@@ -27648,7 +27658,7 @@
 	                  null,
 	                  _react2.default.createElement(
 	                    "a",
-	                    { className: "footer-tab" },
+	                    { onClick: this.showAccount, className: "footer-tab" },
 	                    _react2.default.createElement(
 	                      "span",
 	                      { className: "icon is-large" },

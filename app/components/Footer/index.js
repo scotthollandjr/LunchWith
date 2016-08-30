@@ -1,6 +1,14 @@
 import React from 'react';
 
 class Footer extends React.Component {
+    showCalendar() {
+      alert("the calendar just popped up, trust me");
+    }
+
+    showAccount() {
+      alert("here is your account. go head and edit away");
+    }
+
     render() {
         return (
           <section className="footerx hero is-small">
@@ -9,21 +17,21 @@ class Footer extends React.Component {
                 <div className="container">
                   <ul>
                     <li>
-                      <a className="footer-tab">
+                      <a href="/activity" className="footer-tab">
                         <span className="icon is-large">
                           <i className="fa fa-home"></i>
                         </span>
                       </a>
                     </li>
                     <li>
-                      <a className="footer-tab">
+                      <a onClick={this.showCalendar} className="footer-tab">
                         <span className="icon is-large">
                           <i className="fa fa-calendar-plus-o"></i>
                         </span>
                       </a>
                     </li>
                     <li>
-                      <a className="footer-tab">
+                      <a onClick={this.showAccount} className="footer-tab">
                         <span className="icon is-large">
                           <i className="fa fa-user"></i>
                         </span>
