@@ -193,7 +193,8 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default })
 	), document.getElementById("content"));
 
 /***/ },

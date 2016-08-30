@@ -5,15 +5,27 @@ let express = require('express'),
     users = require('./server/users'),
     app = express();
 
+    var passport = require('passport');
+    var session = require('express-session');
+
 app.set('port', process.env.PORT || 3000);
 
 app.use(compression());
+
+app.use(session({
+secret: 'keyboard cat',
+resave: true,
+saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
 app.use('/account', express.static(__dirname + '/www'));
+app.use('/login', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
