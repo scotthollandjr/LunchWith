@@ -31,7 +31,7 @@ var SkillsList = React.createClass({
 var SkillsForm = React.createClass({
 
   createNewUser: function() {
-    productService.newUser({firstName: "sweet-ass", lastName: "auto-encoder"});
+    productService.newUser({firstName: "Test", lastName: "auto-encoder"});
   },
 
 	getInitialState: function() {

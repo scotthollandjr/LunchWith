@@ -27865,7 +27865,7 @@
 	
 	
 		createNewUser: function createNewUser() {
-			productService.newUser({ firstName: "sweet-ass", lastName: "auto-encoder" });
+			productService.newUser({ firstName: "Test", lastName: "auto-encoder" });
 		},
 	
 		getInitialState: function getInitialState() {

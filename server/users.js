@@ -7,8 +7,12 @@ let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 let newUser = (req, res, next) => {
   var firstName = req.query.firstName;
   var lastName = req.query.lastName;
+  var emailAddress = req.query.emailAddress;
+  var company = req.query.company;
+  var title = req.query.title;
+  var pictureUrl = req.query.pictureUrl;
 
-  var sql = "INSERT INTO users (firstName, lastName) VALUES ('" + firstName + "','" + lastName + "')";
+  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "')";
 
   db.query(sql, null)
     .then(user => res.json("new user created!"))
