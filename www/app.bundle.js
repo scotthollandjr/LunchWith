@@ -27604,7 +27604,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "section",
-	        { className: "hero is-small" },
+	        { className: "footerx hero is-small" },
 	        _react2.default.createElement(
 	          "div",
 	          { className: "hero-foot" },
@@ -27619,10 +27619,10 @@
 	                null,
 	                _react2.default.createElement(
 	                  "li",
-	                  { className: "is-left" },
+	                  null,
 	                  _react2.default.createElement(
 	                    "a",
-	                    null,
+	                    { className: "footer-tab" },
 	                    _react2.default.createElement(
 	                      "span",
 	                      { className: "icon is-large" },
@@ -27632,10 +27632,10 @@
 	                ),
 	                _react2.default.createElement(
 	                  "li",
-	                  { className: "is-center" },
+	                  null,
 	                  _react2.default.createElement(
 	                    "a",
-	                    null,
+	                    { className: "footer-tab" },
 	                    _react2.default.createElement(
 	                      "span",
 	                      { className: "icon is-large" },
@@ -27645,10 +27645,10 @@
 	                ),
 	                _react2.default.createElement(
 	                  "li",
-	                  { className: "is-right" },
+	                  null,
 	                  _react2.default.createElement(
 	                    "a",
-	                    null,
+	                    { className: "footer-tab" },
 	                    _react2.default.createElement(
 	                      "span",
 	                      { className: "icon is-large" },
@@ -27888,9 +27888,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'site' },
+	        { className: 'flex_container' },
 	        _react2.default.createElement(_Header2.default, null),
-	        _react2.default.createElement('div', { className: 'site_content' }),
+	        _react2.default.createElement('div', { className: 'flex_body' }),
 	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }

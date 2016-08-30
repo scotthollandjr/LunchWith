@@ -293,11 +293,19 @@ html {
 
 /*** FOOTER ****************************************/
 
-.footer {
+.footerx {
   background: var(--main-dark-grey);
-  height: 75px;
+  align-items: center;
 }
 
-.footer-icon {
+.footerx > .is-tab:hover {
+  background: tomato;
+}
+.footer-tab {
   color: var(--main-light);;
+}
+
+.footer-tab:hover {
+  color: var(--main-dark-grey);
+  background: var(--main-grey);
 }

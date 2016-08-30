@@ -3,27 +3,27 @@ import React from 'react';
 class Footer extends React.Component {
     render() {
         return (
-          <section className="hero is-small">
+          <section className="footerx hero is-small">
             <div className="hero-foot">
               <nav className="tabs is-boxed is-fullwidth">
                 <div className="container">
                   <ul>
-                    <li className="is-left">
-                      <a>
+                    <li>
+                      <a className="footer-tab">
                         <span className="icon is-large">
                           <i className="fa fa-home"></i>
                         </span>
                       </a>
                     </li>
-                    <li className="is-center">
-                      <a>
+                    <li>
+                      <a className="footer-tab">
                         <span className="icon is-large">
                           <i className="fa fa-calendar-plus-o"></i>
                         </span>
                       </a>
                     </li>
-                    <li className="is-right">
-                      <a>
+                    <li>
+                      <a className="footer-tab">
                         <span className="icon is-large">
                           <i className="fa fa-user"></i>
                         </span>
