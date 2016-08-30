@@ -70,7 +70,7 @@
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Account = __webpack_require__(241);
+	var _Account = __webpack_require__(242);
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
@@ -82,19 +82,19 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _ProductList = __webpack_require__(245);
+	var _ProductList = __webpack_require__(246);
 	
 	var _ProductList2 = _interopRequireDefault(_ProductList);
 	
-	var _SearchBar = __webpack_require__(247);
+	var _SearchBar = __webpack_require__(248);
 	
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 	
-	var _NewUser = __webpack_require__(248);
+	var _NewUser = __webpack_require__(249);
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
-	var _userService = __webpack_require__(243);
+	var _userService = __webpack_require__(244);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -27603,39 +27603,59 @@
 	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "footer",
-	        { className: "footer nav" },
+	        "section",
+	        { className: "hero is-small" },
 	        _react2.default.createElement(
 	          "div",
-	          { className: "container" },
+	          { className: "hero-foot" },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "nav-center" },
+	            "nav",
+	            { className: "tabs is-boxed is-fullwidth" },
 	            _react2.default.createElement(
-	              "a",
-	              { className: "nav-item is-tab is-active" },
+	              "div",
+	              { className: "container" },
 	              _react2.default.createElement(
-	                "span",
-	                { className: "icon is-large footer-icon" },
-	                _react2.default.createElement("i", { className: "fa fa-home" })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "a",
-	              { className: "nav-item is-tab is-active" },
-	              _react2.default.createElement(
-	                "span",
-	                { className: "icon is-large footer-icon" },
-	                _react2.default.createElement("i", { className: "fa fa-calendar-plus-o" })
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "a",
-	              { className: "nav-item is-tab is-active" },
-	              _react2.default.createElement(
-	                "span",
-	                { className: "icon is-large footer-icon" },
-	                _react2.default.createElement("i", { className: "fa fa-user" })
+	                "ul",
+	                null,
+	                _react2.default.createElement(
+	                  "li",
+	                  { className: "is-left" },
+	                  _react2.default.createElement(
+	                    "a",
+	                    null,
+	                    _react2.default.createElement(
+	                      "span",
+	                      { className: "icon is-large" },
+	                      _react2.default.createElement("i", { className: "fa fa-home" })
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  "li",
+	                  { className: "is-center" },
+	                  _react2.default.createElement(
+	                    "a",
+	                    null,
+	                    _react2.default.createElement(
+	                      "span",
+	                      { className: "icon is-large" },
+	                      _react2.default.createElement("i", { className: "fa fa-calendar-plus-o" })
+	                    )
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  "li",
+	                  { className: "is-right" },
+	                  _react2.default.createElement(
+	                    "a",
+	                    null,
+	                    _react2.default.createElement(
+	                      "span",
+	                      { className: "icon is-large" },
+	                      _react2.default.createElement("i", { className: "fa fa-user" })
+	                    )
+	                  )
+	                )
 	              )
 	            )
 	          )
@@ -27842,9 +27862,9 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Login = __webpack_require__(238);
+	var _Map = __webpack_require__(241);
 	
-	var _Login2 = _interopRequireDefault(_Login);
+	var _Map2 = _interopRequireDefault(_Map);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27868,8 +27888,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'site' },
 	        _react2.default.createElement(_Header2.default, null),
+	        _react2.default.createElement('div', { className: 'site_content' }),
 	        _react2.default.createElement(_Footer2.default, null)
 	      );
 	    }
@@ -27884,6 +27905,40 @@
 
 /***/ },
 /* 241 */
+/***/ function(module, exports) {
+
+	// import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
+	
+	// export default function Map (props) {
+	// 	const ARC_DE_TRIOMPHE_POSITION = {
+	// 	  lat: 48.873947,
+	// 	  lng: 2.295038
+	// 	};
+	
+	// 	const EIFFEL_TOWER_POSITION = {
+	// 	  lat: 48.858608,
+	// 	  lng: 2.294471
+	// 	};
+	
+	// 	class Map extends React.Component {
+	// 	  render() {
+	// 	    const mapStyle = {
+	// 	      width: 500,
+	// 	      height: 300,
+	// 	      border: '1px solid black'
+	// 	    };
+	// 	}
+	
+	//     return (
+	//       <div ref="map" style={mapStyle}>I should be a map!</div>
+	//     );
+	//   }
+	
+	//  export default Map;
+	"use strict";
+
+/***/ },
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27898,7 +27953,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(242);
+	var _SkillsForm = __webpack_require__(243);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27938,7 +27993,7 @@
 	exports.default = Account;
 
 /***/ },
-/* 242 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27951,7 +28006,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userService = __webpack_require__(243);
+	var _userService = __webpack_require__(244);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -28096,7 +28151,7 @@
 	exports.default = SkillsForm;
 
 /***/ },
-/* 243 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28106,7 +28161,7 @@
 	});
 	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
 	
-	var _request = __webpack_require__(244);
+	var _request = __webpack_require__(245);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
@@ -28146,7 +28201,7 @@
 	};
 
 /***/ },
-/* 244 */
+/* 245 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28196,7 +28251,7 @@
 	};
 
 /***/ },
-/* 245 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28211,7 +28266,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ProductListItem = __webpack_require__(246);
+	var _ProductListItem = __webpack_require__(247);
 	
 	var _ProductListItem2 = _interopRequireDefault(_ProductListItem);
 	
@@ -28256,7 +28311,7 @@
 	exports.default = ProductList;
 
 /***/ },
-/* 246 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28378,7 +28433,7 @@
 	exports.default = ProductListItem;
 
 /***/ },
-/* 247 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28465,7 +28520,7 @@
 	//<button className="btn btn-link" ><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.clearText.bind(this)}></span></button>
 
 /***/ },
-/* 248 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

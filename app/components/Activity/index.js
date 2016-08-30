@@ -1,13 +1,14 @@
 import React from 'react';
 import Footer from '../Footer';
 import Header from '../Header';
-import Login from '../Login';
+import MapComp from '../Map';
 
 class Activity extends React.Component {
     render() {
         return (
-          <div>
+          <div className="flex_container">
             <Header />
+            <div className="flex_body"></div>
             <Footer />
           </div>
         );

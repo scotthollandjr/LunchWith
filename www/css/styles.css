@@ -209,10 +209,18 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
-/*
-#navBar a img {
-    height: 150px;
-}*/
+
+/*** FOR STICKY FOOTER PURPOSES ***************************/
+
+.flex_container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.flex_body {
+  flex: 1;
+}
 
 /*** NAV ****************************************/
 
