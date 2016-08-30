@@ -1,9 +1,12 @@
 import React from 'react';
+import LinkedIn from '../LinkedIn';
 
 class Login extends React.Component {
     render() {
         return (
-            <script type="in/Login"></script>
+            <div>
+            	<LinkedIn />
+            </div>
         );
     }
 };

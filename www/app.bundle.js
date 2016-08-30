@@ -62,11 +62,15 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
+	var _Activity = __webpack_require__(240);
+	
+	var _Activity2 = _interopRequireDefault(_Activity);
+	
 	var _Login = __webpack_require__(238);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Account = __webpack_require__(239);
+	var _Account = __webpack_require__(241);
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
@@ -78,19 +82,19 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _ProductList = __webpack_require__(243);
+	var _ProductList = __webpack_require__(245);
 	
 	var _ProductList2 = _interopRequireDefault(_ProductList);
 	
-	var _SearchBar = __webpack_require__(245);
+	var _SearchBar = __webpack_require__(247);
 	
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 	
-	var _NewUser = __webpack_require__(246);
+	var _NewUser = __webpack_require__(248);
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
-	var _userService = __webpack_require__(241);
+	var _userService = __webpack_require__(243);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -188,7 +192,8 @@
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default })
 	), document.getElementById("content"));
 
 /***/ },
@@ -27705,7 +27710,7 @@
 /* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -27716,6 +27721,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _LinkedIn = __webpack_require__(239);
+	
+	var _LinkedIn2 = _interopRequireDefault(_LinkedIn);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27735,9 +27744,13 @@
 	    }
 	
 	    _createClass(Login, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement("script", { type: "in/Login" });
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_LinkedIn2.default, null)
+	            );
 	        }
 	    }]);
 	
@@ -27764,7 +27777,128 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(240);
+	var _reactRouter = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LinkedIn = function (_React$Component) {
+	  _inherits(LinkedIn, _React$Component);
+	
+	  function LinkedIn() {
+	    _classCallCheck(this, LinkedIn);
+	
+	    return _possibleConstructorReturn(this, (LinkedIn.__proto__ || Object.getPrototypeOf(LinkedIn)).apply(this, arguments));
+	  }
+	
+	  _createClass(LinkedIn, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/account' },
+	          _react2.default.createElement('script', { type: 'in/Login' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return LinkedIn;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = LinkedIn;
+
+/***/ },
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Footer = __webpack_require__(236);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	var _Header = __webpack_require__(237);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _Login = __webpack_require__(238);
+	
+	var _Login2 = _interopRequireDefault(_Login);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Activity = function (_React$Component) {
+	  _inherits(Activity, _React$Component);
+	
+	  function Activity() {
+	    _classCallCheck(this, Activity);
+	
+	    return _possibleConstructorReturn(this, (Activity.__proto__ || Object.getPrototypeOf(Activity)).apply(this, arguments));
+	  }
+	
+	  _createClass(Activity, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Header2.default, null),
+	        _react2.default.createElement(_Footer2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return Activity;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = Activity;
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SkillsForm = __webpack_require__(242);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27804,7 +27938,7 @@
 	exports.default = Account;
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27817,13 +27951,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userService = __webpack_require__(241);
+	var _userService = __webpack_require__(243);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Router = __webpack_require__(172);
 	
 	var SkillsList = _react2.default.createClass({
 		displayName: 'SkillsList',
@@ -27841,6 +27977,11 @@
 						'span',
 						{ className: 'panel-icon starIcon' },
 						_react2.default.createElement('i', { className: 'fa fa-star' })
+					),
+					_react2.default.createElement(
+						'span',
+						{ className: 'panel-icon is-right' },
+						_react2.default.createElement('i', { className: 'fa fa-trash' })
 					)
 				);
 			}
@@ -27869,10 +28010,12 @@
 			};
 		},
 	
-		handleClick: function handleClick() {
+		handleClick: function handleClick(event) {
 			if (this.state.skills <= 2) {
 				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
-			} else return;
+			} else {
+				Router.browserHistory.push('/activity');
+			}
 		},
 	
 		addSkill: function addSkill(e) {
@@ -27928,8 +28071,12 @@
 						{ className: 'panel-block' },
 						_react2.default.createElement(
 							'a',
-							{ onClick: this.handleClick, className: 'button is-blue is-fullwidth' },
-							'Submit'
+							{ to: '/main', onClick: this.handleClick, className: 'button is-blue is-fullwidth' },
+							_react2.default.createElement(
+								'p',
+								null,
+								'Submit'
+							)
 						)
 					)
 				),
@@ -27949,7 +28096,7 @@
 	exports.default = SkillsForm;
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27959,7 +28106,7 @@
 	});
 	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
 	
-	var _request = __webpack_require__(242);
+	var _request = __webpack_require__(244);
 	
 	var _request2 = _interopRequireDefault(_request);
 	
@@ -27999,7 +28146,7 @@
 	};
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28049,7 +28196,7 @@
 	};
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28064,7 +28211,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ProductListItem = __webpack_require__(244);
+	var _ProductListItem = __webpack_require__(246);
 	
 	var _ProductListItem2 = _interopRequireDefault(_ProductListItem);
 	
@@ -28109,7 +28256,7 @@
 	exports.default = ProductList;
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28231,7 +28378,7 @@
 	exports.default = ProductListItem;
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28318,7 +28465,7 @@
 	//<button className="btn btn-link" ><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.clearText.bind(this)}></span></button>
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, browserHistory } from 'react-router';
 
 import Main from './components/Main';
+import Activity from './components/Activity';
 import Login from './components/Login';
 import Account from './components/Account';
 import Footer from './components/Footer';
@@ -82,5 +83,6 @@ ReactDOM.render((
   <Route path="/" component={Main}/>
   <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account}/>
+  <Route path="/activity" component={Activity}/>
 </Router>
 ), document.getElementById("content"));

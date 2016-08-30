@@ -1,6 +1,8 @@
 import React from 'react';
 import * as userService from '../../services/user-service';
 
+var Router = require('react-router');
+
 
 var SkillsList = React.createClass({
 
@@ -14,6 +16,10 @@ var SkillsList = React.createClass({
 				    <span className="panel-icon starIcon">
 				      	<i className="fa fa-star"></i>
 				    </span>
+				    <span className="panel-icon is-right">
+				      	<i className="fa fa-trash"></i>
+				    </span>
+				    
 				 </p>
 			);
 		}
@@ -30,9 +36,9 @@ var SkillsList = React.createClass({
 
 var SkillsForm = React.createClass({
 
-  createNewUser: function() {
-    productService.newUser({firstName: "sweet-ass", lastName: "auto-encoder"});
-  },
+	createNewUser: function() {
+	    productService.newUser({firstName: "sweet-ass", lastName: "auto-encoder"});
+	},
 
 	getInitialState: function() {
 		return {
@@ -40,10 +46,12 @@ var SkillsForm = React.createClass({
 		};
 	},
 
-	handleClick: function() {
+	handleClick: function(event) {
 		if (this.state.skills <= 2) {
 			alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
-		} else return;
+		} else {
+			Router.browserHistory.push('/activity');
+		}
 	},
 
 	addSkill: function(e) {
@@ -84,8 +92,8 @@ var SkillsForm = React.createClass({
 					<SkillsList entries={this.state.skills} />
 
 				  	<div className="panel-block">
-				    	<a onClick={this.handleClick} className="button is-blue is-fullwidth">
-				      		Submit
+				    	<a to="/main" onClick={this.handleClick} className="button is-blue is-fullwidth">
+				      		<p>Submit</p>
 				    	</a>
 				  	</div>
 

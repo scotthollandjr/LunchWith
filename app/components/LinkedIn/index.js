@@ -1,12 +1,15 @@
 import React from 'react';
+import { Router, Route, Link, hashHistory } from 'react-router';
 
 class LinkedIn extends React.Component {
 
     render() {
         return (
-          <div>
-            	
-          </div>
+          	<div>
+          		<Link to="/account">
+            		<script type="in/Login"></script>
+            	</Link>
+          	</div>
         );
     }
 };
