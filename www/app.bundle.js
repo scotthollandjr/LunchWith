@@ -135,7 +135,7 @@
 	    }, {
 	        key: 'displayUsers',
 	        value: function displayUsers() {
-	            userService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	            userService.queryUsers({ firstname: "Kyle" }).then(function (data) {
 	                console.log(data);
 	            });
 	        }

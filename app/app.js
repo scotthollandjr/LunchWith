@@ -34,7 +34,7 @@ class App extends React.Component {
     }
 
     displayUsers() {
-      userService.queryUsers({firstname: "sweet-ass"})
+      userService.queryUsers({firstname: "Kyle"})
         .then(data => {
           console.log(data)
         });
