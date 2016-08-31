@@ -5,6 +5,7 @@ var User = require('./linkedinauth/usermodel');
 module.exports = function() {
 
   passport.serializeUser(function(user, done) {
+    debugger;
     done(null, user.id);
   });
 

@@ -5,9 +5,15 @@ let express = require('express'),
     users = require('./server/users'),
     app = express();
 
-    var passport = require('passport');
+    var passport = require('passport'),
+    OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
     var session = require('express-session');
     var passportLinkedIn = require('./app/auth/linkedinauth');
+
+    // passport.use('provider', new OAuth2Strategy({
+    //   authorizationURL: 'https://www.linkedin.com/uas/oauth2/authorization',
+    //   token
+    // }))
 
 app.set('port', process.env.PORT || 3000);
 
@@ -43,13 +49,18 @@ app.all('*', function (req, res, next) {
     }
 });
 
-app.use('/auth/linkedin', passportLinkedIn.authenticate('linkedin'));
+app.get('/auth/linkedin',
+  passport.authenticate('linkedin'),
+  function(req, res) {
+    console.log("shouldn't be here");
+  });
 
 app.use('/auth/linkedin/callback',
-  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/login' }),
+
+  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin' }),
   function(req, res) {
     // Successful authentication
-    res.json(req.user);
+    res.json(req.user._json.emailAddress);
   });
 
 app.use('/newUserCreation', users.newUser);
