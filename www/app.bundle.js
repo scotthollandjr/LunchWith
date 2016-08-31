@@ -27940,15 +27940,35 @@
 	  lng: -122.683163
 	};
 	
+	var userInfo = {
+	  lat2: 45.519530,
+	  lng2: -122.678061,
+	  firstName: "Scout",
+	  lastName: "Rodriguez",
+	  title: "Junior Developer",
+	  company: "Tacocat Industries",
+	  skills: ["Java", "Android", "Googling"]
+	};
+	
 	var GoogleMap = _react2.default.createClass({
 	  displayName: 'GoogleMap',
-	  onMapCreated: function onMapCreated(map) {
-	    map.setOptions({
-	      disableDefaultUI: true
+	  onMapCreated: function onMapCreated() {
+	    var Gmaps = this.refs.Gmaps;
+	
+	    Gmaps.getMap().setOptions({
+	      styles: [{
+	        featureType: 'all',
+	        stylers: [{ saturation: -80 }]
+	      }, {
+	        featureType: 'road.arterial',
+	        elementType: 'geometry',
+	        stylers: [{ hue: '#00ffee' }, { saturation: 50 }]
+	      }, {
+	        featureType: 'poi.business',
+	        elementType: 'labels',
+	        stylers: [{ visibility: 'off' }]
+	      }]
 	    });
-	  },
-	  onDragEnd: function onDragEnd(e) {
-	    console.log('onDragEnd', e);
 	  },
 	  onCloseClick: function onCloseClick() {
 	    console.log('onCloseClick');
@@ -27960,28 +27980,24 @@
 	    return _react2.default.createElement(
 	      _reactGmaps.Gmaps,
 	      {
+	        ref: 'Gmaps',
 	        width: '100vh',
 	        height: '100vh',
 	        lat: coords.lat,
 	        lng: coords.lng,
-	        zoom: 12,
+	        zoom: 14,
 	        loadingMessage: 'Be happy',
 	        params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
 	        onMapCreated: this.onMapCreated },
-	      _react2.default.createElement(_reactGmaps.Marker, {
-	        lat: coords.lat,
-	        lng: coords.lng,
-	        draggable: true,
-	        onDragEnd: this.onDragEnd }),
-	      _react2.default.createElement(_reactGmaps.InfoWindow, {
-	        lat: coords.lat,
-	        lng: coords.lng,
-	        content: 'Hello, React :)',
-	        onCloseClick: this.onCloseClick }),
 	      _react2.default.createElement(_reactGmaps.Circle, {
-	        lat: coords.lat,
-	        lng: coords.lng,
-	        radius: 500,
+	        lat: userInfo.lat2,
+	        lng: userInfo.lng2,
+	        radius: 25,
+	        fillColor: '#e66400',
+	        fillOpacity: .65,
+	        strokeColor: '#e66400',
+	        strokeOpacity: .25,
+	        strokeWeight: 10,
 	        onClick: this.onClick })
 	    );
 	  }

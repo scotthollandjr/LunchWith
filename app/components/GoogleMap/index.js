@@ -4,55 +4,78 @@ import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 const coords = {
 	lat: 45.527129,
-	lng: -122.683163
+	lng: -122.683163,
 };
 
-const GoogleMap = React.createClass({
-	  onMapCreated(map) {
-    map.setOptions({
-      disableDefaultUI: true
-    });
+const userInfo = {
+	lat2: 45.519530,
+	lng2: -122.678061,
+	firstName: "Scout",
+	lastName: "Rodriguez",
+	title: "Junior Developer",
+	company: "Tacocat Industries",
+	skills: ["Java", "Android", "Googling"]
+};
+
+var GoogleMap = React.createClass({
+  onMapCreated() {
+    const {Gmaps} = this.refs;
+    Gmaps.getMap().setOptions({
+      styles: [
+      		{
+              featureType: 'all',
+              stylers: [
+                { saturation: -80 }
+              ]
+            },{
+              featureType: 'road.arterial',
+              elementType: 'geometry',
+              stylers: [
+                { hue: '#00ffee' },
+                { saturation: 50 }
+              ]
+            },{
+              featureType: 'poi.business',
+              elementType: 'labels',
+              stylers: [
+                { visibility: 'off' }
+              ]
+            }
+          ]
+      });
   },
 
-  onDragEnd(e) {
-    console.log('onDragEnd', e);
-  },
+  	onCloseClick() {
+    	console.log('onCloseClick');
+  	},
 
-  onCloseClick() {
-    console.log('onCloseClick');
-  },
-
-  onClick(e) {
-    console.log('onClick', e);
-  },
+  	onClick(e) {
+    	console.log('onClick', e);
+  	},
 
   render() {
     return (
-      <Gmaps
-        width={'100vh'}
-        height={'100vh'}
-        lat={coords.lat}
-        lng={coords.lng}
-        zoom={12}
-        loadingMessage={'Be happy'}
-        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
-        onMapCreated={this.onMapCreated}>
-        <Marker
-          lat={coords.lat}
-          lng={coords.lng}
-          draggable={true}
-          onDragEnd={this.onDragEnd} />
-        <InfoWindow
-          lat={coords.lat}
-          lng={coords.lng}
-          content={'Hello, React :)'}
-          onCloseClick={this.onCloseClick} />
-        <Circle
-          lat={coords.lat}
-          lng={coords.lng}
-          radius={500}
-          onClick={this.onClick} />
-      </Gmaps>
+        <Gmaps
+        	ref='Gmaps'
+	        width={'100vh'}
+	        height={'100vh'}
+	        lat={coords.lat}
+	        lng={coords.lng}
+	        zoom={14}
+	        loadingMessage={'Be happy'}
+	        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
+	        onMapCreated={this.onMapCreated}>
+	        <Circle
+	          lat={userInfo.lat2}
+	          lng={userInfo.lng2}
+	          radius={25}
+	          fillColor={'#e66400'}
+	          fillOpacity={.65}
+	          strokeColor={'#e66400'}
+	          strokeOpacity={.25}
+	          strokeWeight={10}
+	          onClick={this.onClick} />
+	    </Gmaps>
     );
   }
 
