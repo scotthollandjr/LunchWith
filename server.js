@@ -7,6 +7,7 @@ let express = require('express'),
 
     var passport = require('passport');
     var session = require('express-session');
+    var passportLinkedIn = require('./app/auth/linkedinauth');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -41,6 +42,15 @@ app.all('*', function (req, res, next) {
         next();
     }
 });
+
+app.use('/auth/linkedin', passportLinkedIn.authenticate('linkedin'));
+
+app.use('/auth/linkedin/callback',
+  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication
+    res.json(req.user);
+  });
 
 app.use('/newUserCreation', users.newUser);
 app.use('/searchUsers', users.queryUsers);
