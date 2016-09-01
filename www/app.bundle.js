@@ -140,42 +140,6 @@
 	            });
 	        }
 	    }, {
-	        key: 'searchKeyChangeHandler',
-	        value: function searchKeyChangeHandler(searchKey) {
-	            this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
-	        }
-	    }, {
-	        key: 'rangeChangeHandler',
-	        value: function rangeChangeHandler(values) {
-	            this.setState({ min: values[0], max: values[1], page: 1 }, this.findProducts);
-	        }
-	    }, {
-	        key: 'findProducts',
-	        value: function findProducts() {
-	            var _this2 = this;
-	
-	            userService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
-	                _this2.setState({
-	                    products: data.products,
-	                    page: data.page,
-	                    pageSize: data.pageSize,
-	                    total: data.total
-	                });
-	            });
-	        }
-	    }, {
-	        key: 'nextPageHandler',
-	        value: function nextPageHandler() {
-	            var p = this.state.page + 1;
-	            this.setState({ page: p }, this.findProducts);
-	        }
-	    }, {
-	        key: 'prevPageHandler',
-	        value: function prevPageHandler() {
-	            var p = this.state.page - 1;
-	            this.setState({ page: p }, this.findProducts);
-	        }
-	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement('div', null);
@@ -27960,48 +27924,64 @@
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
-	
-	var _request = __webpack_require__(242);
-	
-	var _request2 = _interopRequireDefault(_request);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
+	var request = __webpack_require__(242);
 	var Router = __webpack_require__(172);
+	// var db = require('../../../server/pghelper');
+	
 	
 	var baseURL = "";
 	
-	var findAll = exports.findAll = function findAll(values) {
-	    var qs = "";
-	    if (values) {
-	        qs = Object.keys(values).map(function (key) {
-	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
-	        }).join('&');
-	        qs = "?" + qs;
+	var findAll = function findAll(values) {
+	  var qs = "";
+	  if (values) {
+	    qs = Object.keys(values).map(function (key) {
+	      return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
+	    }).join('&');
+	    qs = "?" + qs;
+	  }
+	  return request({ url: baseURL + "/products" + qs }).then(function (data) {
+	    return data = JSON.parse(data);
+	  });
+	};
+	
+	var findById = function findById() {
+	  return request({ url: baseURL + "/products/" + id }).then(function (data) {
+	    return data = JSON.parse(data);
+	  });
+	};
+	
+	var newUser = function newUser(values) {
+	  return request({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
+	};
+	
+	var findOrCreateUser = function findOrCreateUser(values) {
+	  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+	
+	  db.query(sql, [values.email]).then(function (err, user) {
+	    console.log("not being called", user);
+	    if (user) {
+	      return JSON.parse(data);
+	    } else {
+	      // CREATE user
+	      return JSON.parse({});
 	    }
-	    return (0, _request2.default)({ url: baseURL + "/products" + qs }).then(function (data) {
-	        return data = JSON.parse(data);
-	    });
+	  });
+	  // return request({url: baseURL + "/findOrCreateUser", values: values})
+	  //   .then(function(data){
+	  //     return JSON.parse(data)
+	  //   })
 	};
 	
-	var findById = exports.findById = function findById() {
-	    return (0, _request2.default)({ url: baseURL + "/products/" + id }).then(function (data) {
-	        return data = JSON.parse(data);
-	    });
+	var queryUsers = function queryUsers(values) {
+	  return request({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
+	    return JSON.parse(data);
+	  });
 	};
 	
-	var newUser = exports.newUser = function newUser(values) {
-	    return (0, _request2.default)({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
-	};
-	
-	var queryUsers = exports.queryUsers = function queryUsers(values) {
-	    return (0, _request2.default)({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
-	        return JSON.parse(data);
-	    });
+	module.exports = {
+	  newUser: newUser,
+	  queryUsers: queryUsers,
+	  findOrCreateUser: findOrCreateUser
 	};
 
 /***/ },
@@ -28010,20 +27990,17 @@
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	exports.default = function (opts) {
-	
-	    function formUrlEncode(obj) {
-	        var urlData = '';
-	        for (var x in obj) {
-	            urlData = urlData + x + '=' + obj[x] + '&';
-	        }
-	        urlData = urlData.substr(0, urlData.length - 1);
-	        return urlData;
+	function formUrlEncode(obj) {
+	    var urlData = '';
+	    for (var x in obj) {
+	        urlData = urlData + x + '=' + obj[x] + '&';
 	    }
+	    urlData = urlData.substr(0, urlData.length - 1);
+	    return urlData;
+	}
+	
+	module.exports = function (opts) {
+	    var _this = this;
 	
 	    return new Promise(function (resolve, reject) {
 	        var xhr = new XMLHttpRequest();
@@ -28033,14 +28010,14 @@
 	                resolve(xhr.response);
 	            } else {
 	                reject({
-	                    status: undefined.status,
+	                    status: _this.status,
 	                    statusText: xhr.statusText
 	                });
 	            }
 	        };
 	        xhr.onerror = function () {
 	            reject({
-	                status: undefined.status,
+	                status: _this.status,
 	                statusText: xhr.statusText
 	            });
 	        };

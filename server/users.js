@@ -19,6 +19,18 @@ let newUser = (req, res, next) => {
     .catch(next);
 };
 
+let findOrCreateUser = (req, res, next) => {
+  var email = req.query.email;
+  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+  db.query(sql, [email])
+  .then(function (user) {
+    console.log("query user", user);
+    return res.json({"user" : user})
+  })
+  .catch(next);
+};
+
 let queryUsers = (req, res, next) => {
   var params = req.query;
   var firstname = req.query.firstname;
@@ -27,10 +39,12 @@ let queryUsers = (req, res, next) => {
 
   db.query(sql, [firstname])
     .then(function (user) {
+      console.log("index user", user);
       return res.json({"user" : user})
     })
     .catch(next);
 };
 
+exports.findOrCreateUser = findOrCreateUser;
 exports.queryUsers = queryUsers;
 exports.newUser = newUser;

@@ -1,20 +1,49 @@
+
+var userService = require('../../services/user-service');
 var passport = require('passport');
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
-var User = require('./usermodel');
 var config = require('../../../server/config');
 var init = require('../');
 
+let pg = require('pg'),
+    databaseURL = 'postgres://localhost:5432/lunchwith',
+    db = require('../../../server/pghelper');
+
 passport.serializeUser(function(user, done) {
-  console.log("serialize user", user._json.emailAddress);
   done(null, user._json.emailAddress);
 });
 
 passport.deserializeUser(function(email, done) {
-  console.log("deserialize", email);
+    var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+    db.query(sql, [email])
+    .then(function (err, data) {
+      console.log("Deserialized user", data);
+      if (user) {
+        return JSON.parse(data)
+      } else {
+        // CREATE user
+        return JSON.parse({})
+      }
+    })
+    // return request({url: baseURL + "/findOrCreateUser", values: values})
+    //   .then(function(data){
+    //     return JSON.parse(data)
+    //   })
+
+
+
+  // Find or create user
+  // var user = userService.findOrCreateUser({email : email})
+  //   .then(
+  //     console.log("deserialize log", user),
+  //     done(null, user)
+  //   );
   // User.findById(id, function (err, user) {
   //   done(err, user);
   // });
+  console.log(email);
   done(null, email);
 });
 

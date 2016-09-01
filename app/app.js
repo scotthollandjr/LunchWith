@@ -40,36 +40,6 @@ class App extends React.Component {
         });
     }
 
-    searchKeyChangeHandler(searchKey) {
-        this.setState({searchKey: searchKey, page: 1}, this.findProducts);
-    }
-
-    rangeChangeHandler(values) {
-        this.setState({min: values[0], max: values[1], page: 1}, this.findProducts);
-    }
-
-    findProducts() {
-        userService.findAll({search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page})
-            .then(data => {
-                this.setState({
-                    products: data.products,
-                    page: data.page,
-                    pageSize: data.pageSize,
-                    total: data.total
-                });
-            });
-    }
-
-    nextPageHandler() {
-        let p = this.state.page + 1;
-        this.setState({page: p}, this.findProducts);
-    }
-
-    prevPageHandler() {
-        let p = this.state.page - 1;
-        this.setState({page: p}, this.findProducts);
-    }
-
     render() {
         return (
             <div>

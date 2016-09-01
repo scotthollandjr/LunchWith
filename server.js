@@ -2,7 +2,8 @@
 
 let express = require('express'),
     compression = require('compression'),
-    users = require('./server/users'),
+    db = require('./server/pghelper'),
+    // users = require('./server/users')(db),
     app = express();
 
     var passport = require('passport'),
@@ -14,6 +15,58 @@ let express = require('express'),
     //   authorizationURL: 'https://www.linkedin.com/uas/oauth2/authorization',
     //   token
     // }))
+
+
+
+
+
+
+    let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
+    let newUser = (req, res, next) => {
+      var firstName = req.query.firstName;
+      var lastName = req.query.lastName;
+      var emailAddress = req.query.emailAddress;
+      var company = req.query.company;
+      var title = req.query.title;
+      var pictureUrl = req.query.pictureUrl;
+
+      var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "')";
+
+      db.query(sql, null)
+        .then(user => res.json("new user created!"))
+        .catch(next);
+    };
+
+    let findOrCreateUser = (req, res, next) => {
+      var email = req.query.email;
+      var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+      db.query(sql, [email])
+      .then(function (user) {
+        console.log("Not being called", user);
+        return res.json({"user" : user})
+      })
+      .catch(next);
+    };
+
+    let queryUsers = (req, res, next) => {
+      var params = req.query;
+      var firstname = req.query.firstname;
+      var lastname;
+      var sql = "SELECT * FROM users WHERE firstname = $1";
+
+      db.query(sql, [firstname])
+        .then(function (user) {
+          console.log("index user", user);
+          return res.json({"user" : user})
+        })
+        .catch(next);
+    };
+
+
+
+
 
 app.set('port', process.env.PORT || 3000);
 
@@ -58,13 +111,21 @@ app.get('/auth/linkedin',
 app.use('/auth/linkedin/callback',
 
   passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin' }),
-  function(req, res) {
+  function(req, res, next) {
     // Successful authentication
-    res.json(req.user._json.emailAddress);
+    var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+    db.query(sql, [req.user._json.emailAddress])
+    .then(function (user) {
+      console.log("query user -------", user);
+      return res.json({"user" : user})
+    })
+    .catch(next);
+    // res.json(req.user._json.emailAddress);
   });
 
-app.use('/newUserCreation', users.newUser);
-app.use('/searchUsers', users.queryUsers);
+app.use('/newUserCreation', newUser);
+app.use('/searchUsers', queryUsers);
 app.use('/newUserWelcome', express.static(__dirname + '/www'));
 
 app.listen(app.get('port'), function () {

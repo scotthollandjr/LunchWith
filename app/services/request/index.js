@@ -1,15 +1,14 @@
-export default opts => {
+function formUrlEncode(obj) {
+  var urlData = '';
+  for (var x in obj) {
+    urlData = urlData + x + '=' + obj[x] + '&';
+  }
+  urlData = urlData.substr(0, (urlData.length - 1));
+  return urlData;
+}
 
-    function formUrlEncode(obj) {
-      var urlData = '';
-      for (var x in obj) {
-          urlData = urlData + x + '=' + obj[x] + '&';
-      }
-      urlData = urlData.substr(0, (urlData.length - 1));
-      return urlData;
-    }
-
-    return new Promise((resolve, reject) => {
+module.exports = function(opts) {
+  return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", opts.url+'?'+formUrlEncode(opts.values));
         xhr.onload = () => {
@@ -35,5 +34,5 @@ export default opts => {
         }
 
         xhr.send();
-    });
+    })
 }
