@@ -22,26 +22,56 @@ var GoogleMap = React.createClass({
     const {Gmaps} = this.refs;
     Gmaps.getMap().setOptions({
       styles: [
-      		{
-              featureType: 'all',
-              stylers: [
-                { saturation: -80 }
-              ]
-            },{
-              featureType: 'road.arterial',
-              elementType: 'geometry',
-              stylers: [
-                { hue: '#00ffee' },
-                { saturation: 50 }
-              ]
-            },{
-              featureType: 'poi.business',
-              elementType: 'labels',
-              stylers: [
-                { visibility: 'off' }
-              ]
-            }
-          ]
+		  {
+		    "featureType": "landscape.man_made",
+		    "stylers": [
+		      { "color": "#666666" }
+		    ]
+		  },{
+		    "featureType": "administrative",
+		    "elementType": "labels.icon",
+		    "stylers": [
+		      { "visibility": "off" }
+		    ]
+		  },{
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      { "color": "#ffffff" }
+		    ]
+		  },{
+		    "featureType": "water",
+		    "stylers": [
+		      { "color": "#808080" }
+		    ]
+		  },{
+		  },{
+		    "featureType": "transit.line",
+		    "stylers": [
+		      { "color": "#808080" }
+		    ]
+		  },{
+		    "featureType": "road",
+		    "stylers": [
+		      { "color": "#333333" }
+		    ]
+		  },{
+		    "elementType": "labels.text.fill",
+		    "stylers": [
+		      { "color": "#ffffff" }
+		    ]
+		  },{
+		    "elementType": "labels.text.stroke",
+		    "stylers": [
+		      { "color": "#000000" }
+		    ]
+		  },{
+		    "featureType": "poi",
+		    "stylers": [
+		      { "color": "#808080" }
+		    ]
+		  },{
+		  }
+		]
       });
   },
 

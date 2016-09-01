@@ -232,6 +232,7 @@ html {
     background: linear-gradient(to bottom, var(--main-dark-grey), rgba(0,0,0,0));
     width: 100%;
     height: 150px;
+    position: absolute;
 }
 
 #navItems {
@@ -302,12 +303,12 @@ html {
   width: 250px;
 }
 
-
 /*** FOOTER ****************************************/
 
 .footerx {
   background: var(--main-dark-grey);
   align-items: center;
+  /*position: absolute;*/
 }
 
 .footerx > .is-tab:hover {
