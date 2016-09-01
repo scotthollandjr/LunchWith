@@ -15,10 +15,11 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(email, done) {
+
     var sql = "SELECT * FROM users WHERE emailaddress = $1";
 
     db.query(sql, [email])
-    .then(function (err, data) {
+    .then(function (data) {
       console.log("Deserialized user", data);
       if (user) {
         return JSON.parse(data)

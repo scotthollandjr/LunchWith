@@ -55,6 +55,9 @@ let express = require('express'),
       var firstname = req.query.firstname;
       var lastname;
       var sql = "SELECT * FROM users WHERE firstname = $1";
+      var loggedInUser = req.user;
+
+      console.log("logged in user: ", loggedInUser);
 
       db.query(sql, [firstname])
         .then(function (user) {
@@ -117,7 +120,7 @@ app.use('/auth/linkedin/callback',
 
     db.query(sql, [req.user._json.emailAddress])
     .then(function (user) {
-      console.log("query user -------", user);
+      console.log("Passport Authenticate user: ", user);
       return res.json({"user" : user})
     })
     .catch(next);
