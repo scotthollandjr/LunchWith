@@ -7,7 +7,7 @@ let pg = require('pg'),
 exports.query = function (sql, values, singleItem, dontLog) {
 
     if (!dontLog) {
-        // console.log(sql, values);
+        console.log(sql, values);
     }
 
     return new Promise((resolve, reject) => {
@@ -16,7 +16,6 @@ exports.query = function (sql, values, singleItem, dontLog) {
             if (err) return reject(err);
             try {
                 conn.query(sql, values, function (err, result) {
-                  console.log("server SQL", sql, values);
                     done();
                     if (err) {
                         reject(err);

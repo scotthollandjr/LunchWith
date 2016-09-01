@@ -20,32 +20,14 @@ passport.deserializeUser(function(email, done) {
 
     db.query(sql, [email])
     .then(function (data) {
-      console.log("Deserialized user", data);
-      if (user) {
-        return JSON.parse(data)
-      } else {
-        // CREATE user
-        return JSON.parse({})
-      }
+      done(null, data[0]);
+      // if (user) {
+      //   return JSON.parse(data)
+      // } else {
+      //   // CREATE user
+      //   return JSON.parse({})
+      // }
     })
-    // return request({url: baseURL + "/findOrCreateUser", values: values})
-    //   .then(function(data){
-    //     return JSON.parse(data)
-    //   })
-
-
-
-  // Find or create user
-  // var user = userService.findOrCreateUser({email : email})
-  //   .then(
-  //     console.log("deserialize log", user),
-  //     done(null, user)
-  //   );
-  // User.findById(id, function (err, user) {
-  //   done(err, user);
-  // });
-  console.log(email);
-  done(null, email);
 });
 
 passport.use(new LinkedInStrategy({
