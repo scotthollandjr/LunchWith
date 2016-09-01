@@ -18,15 +18,9 @@ passport.deserializeUser(function(email, done) {
 
     var sql = "SELECT * FROM users WHERE emailaddress = $1";
 
-    db.query(sql, [email])
-    .then(function (data) {
-      done(null, data[0]);
-      // if (user) {
-      //   return JSON.parse(data)
-      // } else {
-      //   // CREATE user
-      //   return JSON.parse({})
-      // }
+    db.query(sql, [email], true)
+    .then(function (user) {
+      done(null, user);
     })
 });
 

@@ -59,17 +59,12 @@ let express = require('express'),
 
       console.log("logged in user: ", loggedInUser);
 
-      db.query(sql, [firstname])
+      db.query(sql, ["Kyle"])
         .then(function (user) {
-          console.log("index user", user);
           return res.json({"user" : user})
         })
         .catch(next);
     };
-
-
-
-
 
 app.set('port', process.env.PORT || 3000);
 
