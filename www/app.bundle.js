@@ -28280,11 +28280,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var coords = {
-		lat: 45.527129,
-		lng: -122.683163
-	};
-	
 	var userInfo = {
 		lat2: 45.519530,
 		lng2: -122.678061,
@@ -28295,9 +28290,34 @@
 		skills: ["Java", "Android", "Googling"]
 	};
 	
+	var users = {
+		user1: {
+			coords: { lat: 45.527129, lng: -122.678061 },
+			name: "Scout"
+		},
+		user2: {
+			coords: { lat: 45.519530, lng: -122.678061 },
+			name: "Wolfie"
+		},
+		user3: {
+			coords: { lat: 45.526636, lng: -122.685553 },
+			name: "Appa"
+		},
+		user4: {
+			coords: { lat: 45.527439, lng: -122.677932 },
+			name: "Brunch"
+		},
+		user5: {
+			coords: { lat: 45.532971, lng: -122.681966 },
+			name: "Peaches"
+		}
+	};
+	
 	var GoogleMap = _react2.default.createClass({
 		displayName: 'GoogleMap',
 		onMapCreated: function onMapCreated(map) {
+			var _this = this;
+	
 			var Gmaps = this.refs.Gmaps;
 	
 			if (navigator.geolocation) {
@@ -28306,8 +28326,34 @@
 						lat: position.coords.latitude,
 						lng: position.coords.longitude
 					});
+					var centerCircle = new google.maps.Circle({
+						map: map,
+						center: { lat: position.coords.latitude, lng: position.coords.longitude },
+						radius: 25,
+						fillColor: '#09c7ed',
+						fillOpacity: .75,
+						strokeColor: '#09c7ed',
+						strokeOpacity: .25,
+						strokeWeight: 10,
+						onClick: _this.onClick
+					});
 				});
 			}
+	
+			for (var user in users) {
+				var userCircle = new google.maps.Circle({
+					map: map,
+					center: users[user].coords,
+					radius: 20,
+					fillColor: '#ff8528',
+					fillOpacity: .75,
+					strokeColor: '#ff8528',
+					strokeOpacity: .25,
+					strokeWeight: 10,
+					onClick: this.onClick
+				});
+			}
+	
 			Gmaps.getMap().setOptions({
 				styles: [{
 					"featureType": "landscape.man_made",
@@ -28363,29 +28409,16 @@
 			console.log('onClick', e);
 		},
 		render: function render() {
-			return _react2.default.createElement(
-				_reactGmaps.Gmaps,
-				{
-					ref: 'Gmaps',
-					width: '100vh',
-					height: '100vh',
-					lat: 0,
-					lng: 0,
-					zoom: 15,
-					loadingMessage: 'Be happy',
-					params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
-					onMapCreated: this.onMapCreated },
-				_react2.default.createElement(_reactGmaps.Circle, {
-					lat: userInfo.lat2,
-					lng: userInfo.lng2,
-					radius: 25,
-					fillColor: '#09c7ed',
-					fillOpacity: .75,
-					strokeColor: '#09c7ed',
-					strokeOpacity: .25,
-					strokeWeight: 10,
-					onClick: this.onClick })
-			);
+			return _react2.default.createElement(_reactGmaps.Gmaps, {
+				ref: 'Gmaps',
+				width: '100vh',
+				height: '100vh',
+				lat: 0,
+				lng: 0,
+				zoom: 15,
+				loadingMessage: 'Be happy',
+				params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
+				onMapCreated: this.onMapCreated });
 		}
 	});
 	
