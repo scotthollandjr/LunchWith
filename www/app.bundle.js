@@ -27926,8 +27926,6 @@
 	
 	var request = __webpack_require__(242);
 	var Router = __webpack_require__(172);
-	// var db = require('../../../server/pghelper');
-	
 	
 	var baseURL = "";
 	

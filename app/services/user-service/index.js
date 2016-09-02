@@ -1,6 +1,5 @@
 var request = require('../request');
 var Router = require('react-router');
-// var db = require('../../../server/pghelper');
 
 
 let baseURL = "";

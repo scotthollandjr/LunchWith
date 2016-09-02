@@ -17,19 +17,16 @@ let express = require('express'),
     // }))
 
 
-
-
-
-
     let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
     let newUser = (req, res, next) => {
-      var firstName = req.query.firstName;
-      var lastName = req.query.lastName;
-      var emailAddress = req.query.emailAddress;
-      var company = req.query.company;
-      var title = req.query.title;
-      var pictureUrl = req.query.pictureUrl;
+      console.log(req);
+      var firstName = req.firstName;
+      var lastName = req.lastName;
+      var emailAddress = req.emailAddress;
+      var company = req.company;
+      var title = req.title;
+      var pictureUrl = req.pictureUrl;
 
       var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "')";
 
@@ -59,7 +56,7 @@ let express = require('express'),
 
       console.log("logged in user: ", loggedInUser);
 
-      db.query(sql, ["Kyle"])
+      db.query(sql, ["Scott"])
         .then(function (user) {
           return res.json({"user" : user})
         })
@@ -75,8 +72,6 @@ secret: 'keyboard cat',
 resave: true,
 saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
@@ -100,6 +95,9 @@ app.all('*', function (req, res, next) {
     }
 });
 
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.get('/auth/linkedin',
   passport.authenticate('linkedin'),
   function(req, res) {
@@ -115,8 +113,11 @@ app.use('/auth/linkedin/callback',
 
     db.query(sql, [req.user._json.emailAddress])
     .then(function (user) {
-      console.log("Passport Authenticate user: ", user);
+      if (!user[0]) {
+        newUser(req.user._json, res, next);
+      } else {
       return res.json({"user" : user})
+      }
     })
     .catch(next);
     // res.json(req.user._json.emailAddress);
