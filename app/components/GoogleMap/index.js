@@ -28,6 +28,16 @@ var GoogleMap = React.createClass({
 		      { "color": "#4b4b4b" }
 		    ]
 		  },{
+		    "featureType": "landscape.natural",
+		    "stylers": [
+		      { "color": "#5f5f5f" }
+		    ]
+		  },{
+		    "featureType": "administrative",
+		    "stylers": [
+		      { "color": "#5f5f5f" }
+		    ]
+		  },{
 		    "featureType": "administrative",
 		    "elementType": "labels.icon",
 		    "stylers": [
@@ -62,7 +72,7 @@ var GoogleMap = React.createClass({
 		  },{
 		    "featureType": "road.highway",
 		    "stylers": [
-		      { "color": "#444444" }
+		      { "color": "#3d3d3d" }
 		    ]
 		  },{
 		    "elementType": "labels.text.fill",
@@ -78,6 +88,11 @@ var GoogleMap = React.createClass({
 		    "featureType": "poi",
 		    "stylers": [
 		      { "visibility": "off" }
+		    ]
+		  },{
+		    "featureType": "transit.station.airport",
+		    "stylers": [
+		      { "color": "#4b4b4b" }
 		    ]
 		  },{
 		  }
