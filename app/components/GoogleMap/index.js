@@ -9,6 +9,7 @@ const userInfo = {
 	lastName: "Rodriguez",
 	title: "Junior Developer",
 	company: "Tacocat Industries",
+	summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 	skills: ["Java", "Android", "Googling"]
 };
 
@@ -19,6 +20,7 @@ var users = {
 		lastName: "Rodriguez",
 		title: "Junior Developer",
 		company: "Tacocat Industries",
+		summary: "I am starting a start-up and looking to find out about the local tech scene!",
 		skills: ["Java", "Android", "Googling"]
 	},
 	user2: {
@@ -27,6 +29,7 @@ var users = {
 		lastName: "Kyleson",
 		title: "Intern",
 		company: "EyeCue Lab",
+		summary: "Looking to find out more about company culture in this area.",
 		skills: ["postgres", "Ruby on Rails", "React"]
 	},
 	user3: {
@@ -35,6 +38,7 @@ var users = {
 		lastName: "Sunflower",
 		title: "Software Engineer",
 		company: "Nike",
+		summary: "I'm trying to get into mobile development, and looking for pointers.",
 		skills: ["JavaScript", "Node.js", "mongoDB"]
 	},
 	user4: {
@@ -43,6 +47,7 @@ var users = {
 		lastName: "Ann",
 		title: "Web Designer",
 		company: "Cozy",
+		summary: "Let's be honest, I'm looking for free lunch.",
 		skills: ["CSS", "HTML", "JavaScript"]
 	},
 	user5: {
@@ -51,6 +56,7 @@ var users = {
 		lastName: "McGee",
 		title: "UX Designer",
 		company: "Cat Stevens, Inc.",
+		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 		skills: ["Adobe", "Design", "CSS"]
 	},
 }
@@ -90,6 +96,9 @@ var GoogleMap = React.createClass({
 				strokeOpacity: .25,
 				strokeWeight: 10,
 				firstName: users[user].firstName,
+				lastName: users[user].lastName,
+				title: users[user].title,
+				summary: users[user].summary,
 				onClick: this.onClick
 			});
 
@@ -100,6 +109,9 @@ var GoogleMap = React.createClass({
 			userCircle.addListener('click', function() {
 				document.getElementById("userPanel").style.height = "40%";
 				document.getElementById("footer").style.display = "none";
+				document.getElementById("panel-name").textContent = this.firstName + ' ' + this.lastName;
+				document.getElementById("panel-title").textContent = this.title;
+				document.getElementById("panel-summary").textContent = this.summary;
 			});
 		}
 
@@ -208,7 +220,13 @@ var GoogleMap = React.createClass({
 		        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
 		        onMapCreated={this.onMapCreated}>
 		    </Gmaps>
-				<div id="userPanel" className="overlay"></div>
+				<div id="userPanel" className="overlay">
+					<div className="overlay-content">
+						<p id="panel-name" className="title panel-text is-2"></p>
+						<p id="panel-title" className="title panel-text is-4"></p>
+						<p id="panel-summary" className="panel-text"></p>
+					</div>
+				</div>
 			</div>
     );
   }

@@ -166,6 +166,18 @@ html {
   transition: .1s;
 }
 
+.overlay-content {
+  color: var(--main-light);
+  position: relative;
+  top: 30%;
+  width: 100%;
+  padding: 5%;
+}
+
+.panel-text {
+  color: var(--main-light);
+}
+
 /*** FOOTER ****************************************/
 
 .footerx {

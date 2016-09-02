@@ -28287,6 +28287,7 @@
 		lastName: "Rodriguez",
 		title: "Junior Developer",
 		company: "Tacocat Industries",
+		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 		skills: ["Java", "Android", "Googling"]
 	};
 	
@@ -28297,6 +28298,7 @@
 			lastName: "Rodriguez",
 			title: "Junior Developer",
 			company: "Tacocat Industries",
+			summary: "I am starting a start-up and looking to find out about the local tech scene!",
 			skills: ["Java", "Android", "Googling"]
 		},
 		user2: {
@@ -28305,6 +28307,7 @@
 			lastName: "Kyleson",
 			title: "Intern",
 			company: "EyeCue Lab",
+			summary: "Looking to find out more about company culture in this area.",
 			skills: ["postgres", "Ruby on Rails", "React"]
 		},
 		user3: {
@@ -28313,6 +28316,7 @@
 			lastName: "Sunflower",
 			title: "Software Engineer",
 			company: "Nike",
+			summary: "I'm trying to get into mobile development, and looking for pointers.",
 			skills: ["JavaScript", "Node.js", "mongoDB"]
 		},
 		user4: {
@@ -28321,6 +28325,7 @@
 			lastName: "Ann",
 			title: "Web Designer",
 			company: "Cozy",
+			summary: "Let's be honest, I'm looking for free lunch.",
 			skills: ["CSS", "HTML", "JavaScript"]
 		},
 		user5: {
@@ -28329,6 +28334,7 @@
 			lastName: "McGee",
 			title: "UX Designer",
 			company: "Cat Stevens, Inc.",
+			summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 			skills: ["Adobe", "Design", "CSS"]
 		}
 	};
@@ -28371,6 +28377,9 @@
 					strokeOpacity: .25,
 					strokeWeight: 10,
 					firstName: users[user].firstName,
+					lastName: users[user].lastName,
+					title: users[user].title,
+					summary: users[user].summary,
 					onClick: this.onClick
 				});
 	
@@ -28381,6 +28390,9 @@
 				userCircle.addListener('click', function () {
 					document.getElementById("userPanel").style.height = "40%";
 					document.getElementById("footer").style.display = "none";
+					document.getElementById("panel-name").textContent = this.firstName + ' ' + this.lastName;
+					document.getElementById("panel-title").textContent = this.title;
+					document.getElementById("panel-summary").textContent = this.summary;
 				});
 			}
 	
@@ -28455,7 +28467,17 @@
 					onClick: this.onClick,
 					params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
 					onMapCreated: this.onMapCreated }),
-				_react2.default.createElement('div', { id: 'userPanel', className: 'overlay' })
+				_react2.default.createElement(
+					'div',
+					{ id: 'userPanel', className: 'overlay' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'overlay-content' },
+						_react2.default.createElement('p', { id: 'panel-name', className: 'title panel-text is-2' }),
+						_react2.default.createElement('p', { id: 'panel-title', className: 'title panel-text is-4' }),
+						_react2.default.createElement('p', { id: 'panel-summary', className: 'panel-text' })
+					)
+				)
 			);
 		}
 	});
