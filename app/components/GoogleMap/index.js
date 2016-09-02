@@ -25,7 +25,7 @@ var GoogleMap = React.createClass({
 		  {
 		    "featureType": "landscape.man_made",
 		    "stylers": [
-		      { "color": "#666666" }
+		      { "color": "#4b4b4b" }
 		    ]
 		  },{
 		    "featureType": "administrative",
@@ -36,7 +36,7 @@ var GoogleMap = React.createClass({
 		  },{
 		    "elementType": "labels.text.fill",
 		    "stylers": [
-		      { "color": "#ffffff" }
+		      { "color": "#ebebeb" }
 		    ]
 		  },{
 		    "featureType": "water",
@@ -44,10 +44,15 @@ var GoogleMap = React.createClass({
 		      { "color": "#808080" }
 		    ]
 		  },{
+		    "featureType": "transit",
+		    "elementType": "labels",
+		    "stylers": [
+		      { "visibility": "off" }
+		    ]
 		  },{
 		    "featureType": "transit.line",
 		    "stylers": [
-		      { "color": "#808080" }
+		      { "color": "#333333" }
 		    ]
 		  },{
 		    "featureType": "road",
@@ -55,9 +60,14 @@ var GoogleMap = React.createClass({
 		      { "color": "#333333" }
 		    ]
 		  },{
+		    "featureType": "road.highway",
+		    "stylers": [
+		      { "color": "#444444" }
+		    ]
+		  },{
 		    "elementType": "labels.text.fill",
 		    "stylers": [
-		      { "color": "#ffffff" }
+		      { "color": "#ebebeb" }
 		    ]
 		  },{
 		    "elementType": "labels.text.stroke",
@@ -67,7 +77,7 @@ var GoogleMap = React.createClass({
 		  },{
 		    "featureType": "poi",
 		    "stylers": [
-		      { "color": "#808080" }
+		      { "visibility": "off" }
 		    ]
 		  },{
 		  }
@@ -89,9 +99,9 @@ var GoogleMap = React.createClass({
         	ref='Gmaps'
 	        width={'100vh'}
 	        height={'100vh'}
-	        lat={coords.lat}
-	        lng={coords.lng}
-	        zoom={14}
+	        lat={userInfo.lat2}
+	        lng={userInfo.lng2}
+	        zoom={15}
 	        loadingMessage={'Be happy'}
 	        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
 	        onMapCreated={this.onMapCreated}>
@@ -99,9 +109,9 @@ var GoogleMap = React.createClass({
 	          lat={userInfo.lat2}
 	          lng={userInfo.lng2}
 	          radius={25}
-	          fillColor={'#e66400'}
+	          fillColor={'#ff8528'}
 	          fillOpacity={.65}
-	          strokeColor={'#e66400'}
+	          strokeColor={'#ff8528'}
 	          strokeOpacity={.25}
 	          strokeWeight={10}
 	          onClick={this.onClick} />
