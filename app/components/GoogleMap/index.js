@@ -15,23 +15,43 @@ const userInfo = {
 var users = {
 	user1: {
 		coords: {lat: 45.527129, lng: -122.678061},
-		name: "Scout"
+		firstName: "Scout",
+		lastName: "Rodriguez",
+		title: "Junior Developer",
+		company: "Tacocat Industries",
+		skills: ["Java", "Android", "Googling"]
 	},
 	user2: {
 		coords: {lat: 45.519530, lng: -122.678061},
-		name: "Wolfie"
+		firstName: "Wolfie",
+		lastName: "Kyleson",
+		title: "Intern",
+		company: "EyeCue Lab",
+		skills: ["postgres", "Ruby on Rails", "React"]
 	},
 	user3: {
 		coords: {lat: 45.526636, lng: -122.685553},
-		name: "Appa"
+		firstName: "Appa",
+		lastName: "Sunflower",
+		title: "Software Engineer",
+		company: "Nike",
+		skills: ["JavaScript", "Node.js", "mongoDB"]
 	},
 	user4: {
 		coords: {lat: 45.527439, lng: -122.677932},
-		name: "Brunch"
+		firstName: "Brunch",
+		lastName: "Ann",
+		title: "Web Designer",
+		company: "Cozy",
+		skills: ["CSS", "HTML", "JavaScript"]
 	},
 	user5: {
 		coords: {lat: 45.532971, lng: -122.681966},
-		name: "Peaches"
+		firstName: "Peaches",
+		lastName: "McGee",
+		title: "UX Designer",
+		company: "Cat Stevens, Inc.",
+		skills: ["Adobe", "Design", "CSS"]
 	},
 }
 
@@ -59,17 +79,34 @@ var GoogleMap = React.createClass({
 		}
 
 		for (var user in users) {
-				var userCircle = new google.maps.Circle({
-					map: map,
-					center: users[user].coords,
-					radius: 20,
-					fillColor: '#ff8528',
-					fillOpacity: .75,
-					strokeColor: '#ff8528',
-					strokeOpacity: .25,
-					strokeWeight: 10,
-					onClick: this.onClick
-				});
+			var userCircle = new google.maps.Circle({
+				map: map,
+				center: users[user].coords,
+				radius: 20,
+				fillColor: '#ff8528',
+				fillOpacity: .75,
+				strokeColor: '#ff8528',
+				strokeOpacity: .25,
+				strokeWeight: 10,
+				firstName: users[user].firstName,
+				onClick: this.onClick
+			});
+
+			var contentString = '<div id="content">'+
+				'</div>'+
+				'<h1 id="firstHeading" class="firstHeading">' + users[user].firstName + ' ' + users[user].lastName + '</h1>'+
+				'<div id="bodyContent">'+
+				'<p>' + users[user].title + ' at <b>' + users[user].company + '</b></p>'+
+				'<p>Skills: ' + users[user].skills[0] + ', ' + users[user].skills[1] + ', ' + users[user].skills[2] + '</p>'+
+				'</div>';
+
+			var infowindow = new google.maps.InfoWindow({
+				content: userCircle.firstName
+			});
+
+			userCircle.addListener('click', function() {
+				infowindow.open(map, this.center);
+			});
 		}
 
     Gmaps.getMap().setOptions({
@@ -162,17 +199,21 @@ var GoogleMap = React.createClass({
 
   render() {
     return (
-        <Gmaps
-        	ref='Gmaps'
-	        width={'100vh'}
-	        height={'100vh'}
-	        lat={0}
-	        lng={0}
-	        zoom={15}
-	        loadingMessage={'Be happy'}
-	        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
-	        onMapCreated={this.onMapCreated}>
-	    </Gmaps>
+				<div>
+	        <Gmaps
+	        	ref='Gmaps'
+		        width={'100vh'}
+		        height={'100vh'}
+		        lat={0}
+		        lng={0}
+		        zoom={15}
+						disableDefaultUI={true}
+		        loadingMessage={'Be happy'}
+		        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
+		        onMapCreated={this.onMapCreated}>
+		    </Gmaps>
+				<div className="overlay"></div>
+			</div>
     );
   }
 
