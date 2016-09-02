@@ -70,7 +70,7 @@
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _Account = __webpack_require__(259);
+	var _Account = __webpack_require__(258);
 	
 	var _Account2 = _interopRequireDefault(_Account);
 	
@@ -82,19 +82,23 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _ProductList = __webpack_require__(263);
+	var _ProductList = __webpack_require__(262);
 	
 	var _ProductList2 = _interopRequireDefault(_ProductList);
 	
-	var _SearchBar = __webpack_require__(265);
+	var _SearchBar = __webpack_require__(264);
 	
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 	
-	var _NewUser = __webpack_require__(266);
+	var _NewUser = __webpack_require__(265);
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
-	var _userService = __webpack_require__(261);
+	var _SkillsForm = __webpack_require__(259);
+	
+	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
+	
+	var _userService = __webpack_require__(260);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -114,7 +118,7 @@
 	    function App(props) {
 	        _classCallCheck(this, App);
 	
-	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
 	
 	        _this.state = {
 	            searchKey: "",
@@ -135,45 +139,9 @@
 	    }, {
 	        key: 'displayUsers',
 	        value: function displayUsers() {
-	            userService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	            userService.queryUsers({ firstname: "Kyle" }).then(function (data) {
 	                console.log(data);
 	            });
-	        }
-	    }, {
-	        key: 'searchKeyChangeHandler',
-	        value: function searchKeyChangeHandler(searchKey) {
-	            this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
-	        }
-	    }, {
-	        key: 'rangeChangeHandler',
-	        value: function rangeChangeHandler(values) {
-	            this.setState({ min: values[0], max: values[1], page: 1 }, this.findProducts);
-	        }
-	    }, {
-	        key: 'findProducts',
-	        value: function findProducts() {
-	            var _this2 = this;
-	
-	            userService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
-	                _this2.setState({
-	                    products: data.products,
-	                    page: data.page,
-	                    pageSize: data.pageSize,
-	                    total: data.total
-	                });
-	            });
-	        }
-	    }, {
-	        key: 'nextPageHandler',
-	        value: function nextPageHandler() {
-	            var p = this.state.page + 1;
-	            this.setState({ page: p }, this.findProducts);
-	        }
-	    }, {
-	        key: 'prevPageHandler',
-	        value: function prevPageHandler() {
-	            var p = this.state.page - 1;
-	            this.setState({ page: p }, this.findProducts);
 	        }
 	    }, {
 	        key: 'render',
@@ -191,9 +159,11 @@
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default })
 	), document.getElementById("content"));
 
 /***/ },
@@ -27545,7 +27515,7 @@
 	  function Main() {
 	    _classCallCheck(this, Main);
 	
-	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
 	  }
 	
 	  _createClass(Main, [{
@@ -27596,7 +27566,7 @@
 	  function Footer() {
 	    _classCallCheck(this, Footer);
 	
-	    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
 	  }
 	
 	  _createClass(Footer, [{
@@ -27770,7 +27740,7 @@
 	    function Login() {
 	        _classCallCheck(this, Login);
 	
-	        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Login).apply(this, arguments));
 	    }
 	
 	    _createClass(Login, [{
@@ -27823,7 +27793,7 @@
 	  function LinkedIn() {
 	    _classCallCheck(this, LinkedIn);
 	
-	    return _possibleConstructorReturn(this, (LinkedIn.__proto__ || Object.getPrototypeOf(LinkedIn)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(LinkedIn).apply(this, arguments));
 	  }
 	
 	  _createClass(LinkedIn, [{
@@ -27890,7 +27860,7 @@
 	  function Activity() {
 	    _classCallCheck(this, Activity);
 	
-	    return _possibleConstructorReturn(this, (Activity.__proto__ || Object.getPrototypeOf(Activity)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Activity).apply(this, arguments));
 	  }
 	
 	  _createClass(Activity, [{
@@ -27958,32 +27928,39 @@
 					Gmaps.getMap().setOptions({
 							styles: [{
 									"featureType": "landscape.man_made",
-									"stylers": [{ "color": "#666666" }]
+									"stylers": [{ "color": "#4b4b4b" }]
 							}, {
 									"featureType": "administrative",
 									"elementType": "labels.icon",
 									"stylers": [{ "visibility": "off" }]
 							}, {
 									"elementType": "labels.text.fill",
-									"stylers": [{ "color": "#ffffff" }]
+									"stylers": [{ "color": "#ebebeb" }]
 							}, {
 									"featureType": "water",
 									"stylers": [{ "color": "#808080" }]
-							}, {}, {
+							}, {
+									"featureType": "transit",
+									"elementType": "labels",
+									"stylers": [{ "visibility": "off" }]
+							}, {
 									"featureType": "transit.line",
-									"stylers": [{ "color": "#808080" }]
+									"stylers": [{ "color": "#333333" }]
 							}, {
 									"featureType": "road",
 									"stylers": [{ "color": "#333333" }]
 							}, {
+									"featureType": "road.highway",
+									"stylers": [{ "color": "#444444" }]
+							}, {
 									"elementType": "labels.text.fill",
-									"stylers": [{ "color": "#ffffff" }]
+									"stylers": [{ "color": "#ebebeb" }]
 							}, {
 									"elementType": "labels.text.stroke",
 									"stylers": [{ "color": "#000000" }]
 							}, {
 									"featureType": "poi",
-									"stylers": [{ "color": "#808080" }]
+									"stylers": [{ "visibility": "off" }]
 							}, {}]
 					});
 			},
@@ -28000,9 +27977,9 @@
 									ref: 'Gmaps',
 									width: '100vh',
 									height: '100vh',
-									lat: coords.lat,
-									lng: coords.lng,
-									zoom: 14,
+									lat: userInfo.lat2,
+									lng: userInfo.lng2,
+									zoom: 15,
 									loadingMessage: 'Be happy',
 									params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
 									onMapCreated: this.onMapCreated },
@@ -28010,9 +27987,9 @@
 									lat: userInfo.lat2,
 									lng: userInfo.lng2,
 									radius: 25,
-									fillColor: '#e66400',
+									fillColor: '#ff8528',
 									fillOpacity: .65,
-									strokeColor: '#e66400',
+									strokeColor: '#ff8528',
 									strokeOpacity: .25,
 									strokeWeight: 10,
 									onClick: this.onClick })
@@ -28040,15 +28017,15 @@
 	
 	var _componentsGmaps2 = _interopRequireDefault(_componentsGmaps);
 	
-	var _componentsMarker = __webpack_require__(252);
+	var _componentsMarker = __webpack_require__(251);
 	
 	var _componentsMarker2 = _interopRequireDefault(_componentsMarker);
 	
-	var _componentsInfoWindow = __webpack_require__(255);
+	var _componentsInfoWindow = __webpack_require__(254);
 	
 	var _componentsInfoWindow2 = _interopRequireDefault(_componentsInfoWindow);
 	
-	var _componentsCircle = __webpack_require__(257);
+	var _componentsCircle = __webpack_require__(256);
 	
 	var _componentsCircle2 = _interopRequireDefault(_componentsCircle);
 	
@@ -28089,23 +28066,23 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _objectAssign = __webpack_require__(244);
+	var _objectAssign = __webpack_require__(4);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _eventsMap = __webpack_require__(245);
+	var _eventsMap = __webpack_require__(244);
 	
 	var _eventsMap2 = _interopRequireDefault(_eventsMap);
 	
-	var _mixinsListener = __webpack_require__(246);
+	var _mixinsListener = __webpack_require__(245);
 	
 	var _mixinsListener2 = _interopRequireDefault(_mixinsListener);
 	
-	var _utilsGoogleMaps = __webpack_require__(247);
+	var _utilsGoogleMaps = __webpack_require__(246);
 	
 	var _utilsGoogleMaps2 = _interopRequireDefault(_utilsGoogleMaps);
 	
-	var _utilsCompareProps = __webpack_require__(251);
+	var _utilsCompareProps = __webpack_require__(250);
 	
 	var _utilsCompareProps2 = _interopRequireDefault(_utilsCompareProps);
 	
@@ -28195,94 +28172,6 @@
 /***/ function(module, exports) {
 
 	'use strict';
-	/* eslint-disable no-unused-vars */
-	
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-	
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-	
-		return Object(val);
-	}
-	
-	function shouldUseNative() {
-		try {
-			if (!Object.assign) {
-				return false;
-			}
-	
-			// Detect buggy property enumeration order in older V8 versions.
-	
-			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc'); // eslint-disable-line
-			test1[5] = 'de';
-			if (Object.getOwnPropertyNames(test1)[0] === '5') {
-				return false;
-			}
-	
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test2 = {};
-			for (var i = 0; i < 10; i++) {
-				test2['_' + String.fromCharCode(i)] = i;
-			}
-			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-				return test2[n];
-			});
-			if (order2.join('') !== '0123456789') {
-				return false;
-			}
-	
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test3 = {};
-			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-				test3[letter] = letter;
-			});
-			if (Object.keys(Object.assign({}, test3)).join('') !== 'abcdefghijklmnopqrst') {
-				return false;
-			}
-	
-			return true;
-		} catch (e) {
-			// We don't expect any of the above to throw, but better to be safe.
-			return false;
-		}
-	}
-	
-	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-	
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-	
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-	
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-	
-		return to;
-	};
-
-/***/ },
-/* 245 */
-/***/ function(module, exports) {
-
-	'use strict';
 	
 	Object.defineProperty(exports, '__esModule', {
 	  value: true
@@ -28311,7 +28200,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 246 */
+/* 245 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28349,7 +28238,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 247 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28362,7 +28251,7 @@
 	  return obj && obj.__esModule ? obj : { 'default': obj };
 	}
 	
-	var _querystring = __webpack_require__(248);
+	var _querystring = __webpack_require__(247);
 	
 	var _querystring2 = _interopRequireDefault(_querystring);
 	
@@ -28420,16 +28309,16 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 248 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	exports.decode = exports.parse = __webpack_require__(249);
-	exports.encode = exports.stringify = __webpack_require__(250);
+	exports.decode = exports.parse = __webpack_require__(248);
+	exports.encode = exports.stringify = __webpack_require__(249);
 
 /***/ },
-/* 249 */
+/* 248 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -28507,7 +28396,7 @@
 	
 	    if (!hasOwnProperty(obj, k)) {
 	      obj[k] = v;
-	    } else if (isArray(obj[k])) {
+	    } else if (Array.isArray(obj[k])) {
 	      obj[k].push(v);
 	    } else {
 	      obj[k] = [obj[k], v];
@@ -28516,13 +28405,9 @@
 	
 	  return obj;
 	};
-	
-	var isArray = Array.isArray || function (xs) {
-	  return Object.prototype.toString.call(xs) === '[object Array]';
-	};
 
 /***/ },
-/* 250 */
+/* 249 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -28574,10 +28459,10 @@
 	  }
 	
 	  if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object') {
-	    return map(objectKeys(obj), function (k) {
+	    return Object.keys(obj).map(function (k) {
 	      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-	      if (isArray(obj[k])) {
-	        return map(obj[k], function (v) {
+	      if (Array.isArray(obj[k])) {
+	        return obj[k].map(function (v) {
 	          return ks + encodeURIComponent(stringifyPrimitive(v));
 	        }).join(sep);
 	      } else {
@@ -28589,30 +28474,9 @@
 	  if (!name) return '';
 	  return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
 	};
-	
-	var isArray = Array.isArray || function (xs) {
-	  return Object.prototype.toString.call(xs) === '[object Array]';
-	};
-	
-	function map(xs, f) {
-	  if (xs.map) return xs.map(f);
-	  var res = [];
-	  for (var i = 0; i < xs.length; i++) {
-	    res.push(f(xs[i], i));
-	  }
-	  return res;
-	}
-	
-	var objectKeys = Object.keys || function (obj) {
-	  var res = [];
-	  for (var key in obj) {
-	    if (Object.prototype.hasOwnProperty.call(obj, key)) res.push(key);
-	  }
-	  return res;
-	};
 
 /***/ },
-/* 251 */
+/* 250 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28642,7 +28506,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 252 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28655,11 +28519,11 @@
 	  return obj && obj.__esModule ? obj : { 'default': obj };
 	}
 	
-	var _entity = __webpack_require__(253);
+	var _entity = __webpack_require__(252);
 	
 	var _entity2 = _interopRequireDefault(_entity);
 	
-	var _eventsMarker = __webpack_require__(254);
+	var _eventsMarker = __webpack_require__(253);
 	
 	var _eventsMarker2 = _interopRequireDefault(_eventsMarker);
 	
@@ -28667,7 +28531,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 253 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28702,11 +28566,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _mixinsListener = __webpack_require__(246);
+	var _mixinsListener = __webpack_require__(245);
 	
 	var _mixinsListener2 = _interopRequireDefault(_mixinsListener);
 	
-	var _utilsCompareProps = __webpack_require__(251);
+	var _utilsCompareProps = __webpack_require__(250);
 	
 	var _utilsCompareProps2 = _interopRequireDefault(_utilsCompareProps);
 	
@@ -28754,7 +28618,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 254 */
+/* 253 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28788,7 +28652,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 255 */
+/* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28801,11 +28665,11 @@
 	  return obj && obj.__esModule ? obj : { 'default': obj };
 	}
 	
-	var _entity = __webpack_require__(253);
+	var _entity = __webpack_require__(252);
 	
 	var _entity2 = _interopRequireDefault(_entity);
 	
-	var _eventsInfoWindow = __webpack_require__(256);
+	var _eventsInfoWindow = __webpack_require__(255);
 	
 	var _eventsInfoWindow2 = _interopRequireDefault(_eventsInfoWindow);
 	
@@ -28813,7 +28677,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 256 */
+/* 255 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28831,7 +28695,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 257 */
+/* 256 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28844,11 +28708,11 @@
 	  return obj && obj.__esModule ? obj : { 'default': obj };
 	}
 	
-	var _entity = __webpack_require__(253);
+	var _entity = __webpack_require__(252);
 	
 	var _entity2 = _interopRequireDefault(_entity);
 	
-	var _eventsCircle = __webpack_require__(258);
+	var _eventsCircle = __webpack_require__(257);
 	
 	var _eventsCircle2 = _interopRequireDefault(_eventsCircle);
 	
@@ -28856,7 +28720,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 258 */
+/* 257 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28882,7 +28746,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 259 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28897,7 +28761,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(260);
+	var _SkillsForm = __webpack_require__(259);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -28915,7 +28779,7 @@
 	  function Account() {
 	    _classCallCheck(this, Account);
 	
-	    return _possibleConstructorReturn(this, (Account.__proto__ || Object.getPrototypeOf(Account)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Account).apply(this, arguments));
 	  }
 	
 	  _createClass(Account, [{
@@ -28937,7 +28801,7 @@
 	exports.default = Account;
 
 /***/ },
-/* 260 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28950,7 +28814,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userService = __webpack_require__(261);
+	var _userService = __webpack_require__(260);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -29095,75 +28959,86 @@
 	exports.default = SkillsForm;
 
 /***/ },
-/* 261 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
-	
-	var _request = __webpack_require__(262);
-	
-	var _request2 = _interopRequireDefault(_request);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
+	var request = __webpack_require__(261);
 	var Router = __webpack_require__(172);
 	
 	var baseURL = "";
 	
-	var findAll = exports.findAll = function findAll(values) {
-	    var qs = "";
-	    if (values) {
-	        qs = Object.keys(values).map(function (key) {
-	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
-	        }).join('&');
-	        qs = "?" + qs;
+	var findAll = function findAll(values) {
+	  var qs = "";
+	  if (values) {
+	    qs = Object.keys(values).map(function (key) {
+	      return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
+	    }).join('&');
+	    qs = "?" + qs;
+	  }
+	  return request({ url: baseURL + "/products" + qs }).then(function (data) {
+	    return data = JSON.parse(data);
+	  });
+	};
+	
+	var findById = function findById() {
+	  return request({ url: baseURL + "/products/" + id }).then(function (data) {
+	    return data = JSON.parse(data);
+	  });
+	};
+	
+	var newUser = function newUser(values) {
+	  return request({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
+	};
+	
+	var findOrCreateUser = function findOrCreateUser(values) {
+	  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+	
+	  db.query(sql, [values.email]).then(function (err, user) {
+	    console.log("not being called", user);
+	    if (user) {
+	      return JSON.parse(data);
+	    } else {
+	      // CREATE user
+	      return JSON.parse({});
 	    }
-	    return (0, _request2.default)({ url: baseURL + "/products" + qs }).then(function (data) {
-	        return data = JSON.parse(data);
-	    });
+	  });
+	  // return request({url: baseURL + "/findOrCreateUser", values: values})
+	  //   .then(function(data){
+	  //     return JSON.parse(data)
+	  //   })
 	};
 	
-	var findById = exports.findById = function findById() {
-	    return (0, _request2.default)({ url: baseURL + "/products/" + id }).then(function (data) {
-	        return data = JSON.parse(data);
-	    });
+	var queryUsers = function queryUsers(values) {
+	  return request({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
+	    return JSON.parse(data);
+	  });
 	};
 	
-	var newUser = exports.newUser = function newUser(values) {
-	    return (0, _request2.default)({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
-	};
-	
-	var queryUsers = exports.queryUsers = function queryUsers(values) {
-	    return (0, _request2.default)({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
-	        return JSON.parse(data);
-	    });
+	module.exports = {
+	  newUser: newUser,
+	  queryUsers: queryUsers,
+	  findOrCreateUser: findOrCreateUser
 	};
 
 /***/ },
-/* 262 */
+/* 261 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	exports.default = function (opts) {
-	
-	    function formUrlEncode(obj) {
-	        var urlData = '';
-	        for (var x in obj) {
-	            urlData = urlData + x + '=' + obj[x] + '&';
-	        }
-	        urlData = urlData.substr(0, urlData.length - 1);
-	        return urlData;
+	function formUrlEncode(obj) {
+	    var urlData = '';
+	    for (var x in obj) {
+	        urlData = urlData + x + '=' + obj[x] + '&';
 	    }
+	    urlData = urlData.substr(0, urlData.length - 1);
+	    return urlData;
+	}
+	
+	module.exports = function (opts) {
+	    var _this = this;
 	
 	    return new Promise(function (resolve, reject) {
 	        var xhr = new XMLHttpRequest();
@@ -29173,14 +29048,14 @@
 	                resolve(xhr.response);
 	            } else {
 	                reject({
-	                    status: undefined.status,
+	                    status: _this.status,
 	                    statusText: xhr.statusText
 	                });
 	            }
 	        };
 	        xhr.onerror = function () {
 	            reject({
-	                status: undefined.status,
+	                status: _this.status,
 	                statusText: xhr.statusText
 	            });
 	        };
@@ -29195,7 +29070,7 @@
 	};
 
 /***/ },
-/* 263 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29210,7 +29085,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ProductListItem = __webpack_require__(264);
+	var _ProductListItem = __webpack_require__(263);
 	
 	var _ProductListItem2 = _interopRequireDefault(_ProductListItem);
 	
@@ -29228,7 +29103,7 @@
 	    function ProductList() {
 	        _classCallCheck(this, ProductList);
 	
-	        return _possibleConstructorReturn(this, (ProductList.__proto__ || Object.getPrototypeOf(ProductList)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductList).apply(this, arguments));
 	    }
 	
 	    _createClass(ProductList, [{
@@ -29255,7 +29130,7 @@
 	exports.default = ProductList;
 
 /***/ },
-/* 264 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29284,7 +29159,7 @@
 	    function ProductListItem() {
 	        _classCallCheck(this, ProductListItem);
 	
-	        return _possibleConstructorReturn(this, (ProductListItem.__proto__ || Object.getPrototypeOf(ProductListItem)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductListItem).apply(this, arguments));
 	    }
 	
 	    _createClass(ProductListItem, [{
@@ -29377,7 +29252,7 @@
 	exports.default = ProductListItem;
 
 /***/ },
-/* 265 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29406,7 +29281,7 @@
 	    function SearchBar() {
 	        _classCallCheck(this, SearchBar);
 	
-	        return _possibleConstructorReturn(this, (SearchBar.__proto__ || Object.getPrototypeOf(SearchBar)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(SearchBar).apply(this, arguments));
 	    }
 	
 	    _createClass(SearchBar, [{
@@ -29464,7 +29339,7 @@
 	//<button className="btn btn-link" ><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.clearText.bind(this)}></span></button>
 
 /***/ },
-/* 266 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29497,7 +29372,7 @@
 	  function NewUser() {
 	    _classCallCheck(this, NewUser);
 	
-	    return _possibleConstructorReturn(this, (NewUser.__proto__ || Object.getPrototypeOf(NewUser)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(NewUser).apply(this, arguments));
 	  }
 	
 	  _createClass(NewUser, [{

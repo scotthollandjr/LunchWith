@@ -1,9 +1,10 @@
-import request from '../request';
+var request = require('../request');
 var Router = require('react-router');
+
 
 let baseURL = "";
 
-export let findAll = (values) => {
+let findAll = (values) => {
     let qs = "";
     if (values) {
         qs = Object.keys(values).map(key => {
@@ -15,19 +16,44 @@ export let findAll = (values) => {
         .then(data => data = JSON.parse(data))
 }
 
-export let findById = () => {
+let findById = () => {
     return request({url: baseURL + "/products/" + id})
         .then(data => data = JSON.parse(data))
 }
 
-export var newUser = (values) => {
+let newUser = (values) => {
   return request({url: baseURL + "/newUserCreation", values: values})
     .then(Router.browserHistory.push('/newUserWelcome'));
 }
 
-export var queryUsers = (values) => {
+let findOrCreateUser = (values) => {
+  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+  db.query(sql, [values.email])
+  .then(function (err, user) {
+    console.log("not being called", user);
+    if (user) {
+      return JSON.parse(data)
+    } else {
+      // CREATE user
+      return JSON.parse({})
+    }
+  })
+  // return request({url: baseURL + "/findOrCreateUser", values: values})
+  //   .then(function(data){
+  //     return JSON.parse(data)
+  //   })
+}
+
+let queryUsers = (values) => {
   return request({url: baseURL + "/searchUsers", values: values})
     .then(function(data){
       return JSON.parse(data)
     })
+}
+
+module.exports = {
+  newUser,
+  queryUsers,
+  findOrCreateUser
 }

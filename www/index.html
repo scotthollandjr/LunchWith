@@ -9,7 +9,6 @@
     <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
     <link href="css/styles.css" rel="stylesheet" type="text/css">
-
     <script type="text/javascript" src="//platform.linkedin.com/in.js">
       api_key:   78b3ua1u1ptbbj
       onLoad:    onLinkedInLoad
@@ -65,9 +64,11 @@
         function sendData(data) {
           var XHR = new XMLHttpRequest();
           var urlEncodedData = '?firstName=' + data.firstName +
-                                '&lastName=' + data.lastName;
-
-          console.log(urlEncodedData);
+                                '&lastName=' + data.lastName +
+                                '&emailAddress=' + data.emailAddress +
+                                '&company=' + data.company +
+                                '&title=' + data.title +
+                                '&pictureUrl=' + data.pictureUrl;
 
           // We define what will happen if the data is successfully sent
           XHR.addEventListener('load', function(event) {
@@ -86,7 +87,7 @@
           XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
           // And finally, We send our data.
-          XHR.send(urlEncodedData);
+          XHR.send();
         }
     </script>
 </head>
