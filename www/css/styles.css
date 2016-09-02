@@ -161,9 +161,9 @@ html {
   z-index: 1;
   left: 0;
   bottom: 0;
-  background: linear-gradient(to top, var(--main-nav-grey) 50%, rgba(0,0,0,0));
+  background: linear-gradient(to top, var(--main-nav-grey) 60%, rgba(0,0,0,0));
   overflow-x: hidden;
-  transition: 0.5s;
+  transition: .1s;
 }
 
 /*** FOOTER ****************************************/

@@ -27618,7 +27618,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "section",
-	        { className: "footerx hero is-small" },
+	        { id: "footer", className: "footerx hero is-small" },
 	        _react2.default.createElement(
 	          "div",
 	          { className: "hero-foot" },
@@ -28374,14 +28374,13 @@
 					onClick: this.onClick
 				});
 	
-				var contentString = '<div id="content">' + '</div>' + '<h1 id="firstHeading" class="firstHeading">' + users[user].firstName + ' ' + users[user].lastName + '</h1>' + '<div id="bodyContent">' + '<p>' + users[user].title + ' at <b>' + users[user].company + '</b></p>' + '<p>Skills: ' + users[user].skills[0] + ', ' + users[user].skills[1] + ', ' + users[user].skills[2] + '</p>' + '</div>';
-	
 				var infowindow = new google.maps.InfoWindow({
 					content: userCircle.firstName
 				});
 	
 				userCircle.addListener('click', function () {
-					infowindow.open(map, this.center);
+					document.getElementById("userPanel").style.height = "40%";
+					document.getElementById("footer").style.display = "none";
 				});
 			}
 	
@@ -28436,8 +28435,9 @@
 		onCloseClick: function onCloseClick() {
 			console.log('onCloseClick');
 		},
-		onClick: function onClick(e) {
-			console.log('onClick', e);
+		onClick: function onClick() {
+			document.getElementById("userPanel").style.height = "0%";
+			document.getElementById("footer").style.display = "";
 		},
 		render: function render() {
 			return _react2.default.createElement(
@@ -28452,9 +28452,10 @@
 					zoom: 15,
 					disableDefaultUI: true,
 					loadingMessage: 'Be happy',
+					onClick: this.onClick,
 					params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
 					onMapCreated: this.onMapCreated }),
-				_react2.default.createElement('div', { className: 'overlay' })
+				_react2.default.createElement('div', { id: 'userPanel', className: 'overlay' })
 			);
 		}
 	});

@@ -56,6 +56,7 @@ var users = {
 }
 
 var GoogleMap = React.createClass({
+
   onMapCreated(map) {
 		const {Gmaps} = this.refs;
 		if (navigator.geolocation) {
@@ -92,20 +93,13 @@ var GoogleMap = React.createClass({
 				onClick: this.onClick
 			});
 
-			var contentString = '<div id="content">'+
-				'</div>'+
-				'<h1 id="firstHeading" class="firstHeading">' + users[user].firstName + ' ' + users[user].lastName + '</h1>'+
-				'<div id="bodyContent">'+
-				'<p>' + users[user].title + ' at <b>' + users[user].company + '</b></p>'+
-				'<p>Skills: ' + users[user].skills[0] + ', ' + users[user].skills[1] + ', ' + users[user].skills[2] + '</p>'+
-				'</div>';
-
 			var infowindow = new google.maps.InfoWindow({
 				content: userCircle.firstName
 			});
 
 			userCircle.addListener('click', function() {
-				infowindow.open(map, this.center);
+				document.getElementById("userPanel").style.height = "40%";
+				document.getElementById("footer").style.display = "none";
 			});
 		}
 
@@ -189,13 +183,14 @@ var GoogleMap = React.createClass({
       });
   },
 
-  	onCloseClick() {
-    	console.log('onCloseClick');
-  	},
+	onCloseClick() {
+  	console.log('onCloseClick');
+	},
 
-  	onClick(e) {
-    	console.log('onClick', e);
-  	},
+	onClick() {
+		document.getElementById("userPanel").style.height = "0%";
+		document.getElementById("footer").style.display = "";
+	},
 
   render() {
     return (
@@ -209,10 +204,11 @@ var GoogleMap = React.createClass({
 		        zoom={15}
 						disableDefaultUI={true}
 		        loadingMessage={'Be happy'}
+						onClick={this.onClick}
 		        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
 		        onMapCreated={this.onMapCreated}>
 		    </Gmaps>
-				<div className="overlay"></div>
+				<div id="userPanel" className="overlay"></div>
 			</div>
     );
   }
