@@ -28473,9 +28473,23 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'overlay-content' },
-						_react2.default.createElement('p', { id: 'panel-name', className: 'title panel-text is-2' }),
-						_react2.default.createElement('p', { id: 'panel-title', className: 'title panel-text is-4' }),
-						_react2.default.createElement('p', { id: 'panel-summary', className: 'panel-text' })
+						_react2.default.createElement('p', { id: 'panel-name', className: 'title panel-text' }),
+						_react2.default.createElement('p', { id: 'panel-title', className: 'title panel-text' }),
+						_react2.default.createElement('p', { id: 'panel-summary', className: 'panel-text' }),
+						_react2.default.createElement(
+							'div',
+							{ className: 'panel-footer' },
+							_react2.default.createElement(
+								'span',
+								{ className: 'icon is-large' },
+								_react2.default.createElement('i', { className: 'fa fa-angle-up' })
+							),
+							_react2.default.createElement(
+								'p',
+								null,
+								'FULL PROFILE'
+							)
+						)
 					)
 				)
 			);

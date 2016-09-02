@@ -222,9 +222,15 @@ var GoogleMap = React.createClass({
 		    </Gmaps>
 				<div id="userPanel" className="overlay">
 					<div className="overlay-content">
-						<p id="panel-name" className="title panel-text is-2"></p>
-						<p id="panel-title" className="title panel-text is-4"></p>
+						<p id="panel-name" className="title panel-text"></p>
+						<p id="panel-title" className="title panel-text"></p>
 						<p id="panel-summary" className="panel-text"></p>
+						<div className="panel-footer">
+							<span className='icon is-large'>
+								<i className="fa fa-angle-up"></i>
+							</span>
+							<p>FULL PROFILE</p>
+						</div>
 					</div>
 				</div>
 			</div>

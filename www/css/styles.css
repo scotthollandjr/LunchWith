@@ -4,6 +4,7 @@
   --main-orange: #e66400;
   --main-orange-dark: #cd5900;
   --main-light: #ffffff;
+  --main-text-dark: #ebebeb;
   --main-grey: #3d3d3d;
   --main-light-grey: #333333;
   --main-dark-grey: #2c2c2c;
@@ -176,6 +177,32 @@ html {
 
 .panel-text {
   color: var(--main-light);
+}
+
+#panel-name {
+  line-height: .75;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+#panel-title {
+  line-height: .75;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#panel-summary {
+  color: var(--main-text-dark);
+}
+
+.panel-footer {
+  line-height: .75;
+  color: var(--main-text-dark);
+  font-weight: bold;
+  font-size: .9em;
+  text-align: center;
+  position: relative;
+  bottom: 0;
 }
 
 /*** FOOTER ****************************************/
