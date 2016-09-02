@@ -46,6 +46,8 @@
 
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -82,15 +84,15 @@
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _ProductList = __webpack_require__(262);
+	var _ProductList = __webpack_require__(263);
 	
 	var _ProductList2 = _interopRequireDefault(_ProductList);
 	
-	var _SearchBar = __webpack_require__(264);
+	var _SearchBar = __webpack_require__(265);
 	
 	var _SearchBar2 = _interopRequireDefault(_SearchBar);
 	
-	var _NewUser = __webpack_require__(265);
+	var _NewUser = __webpack_require__(266);
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
@@ -112,23 +114,15 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var props;
+	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
 	
-	    function App(props) {
+	    function App() {
 	        _classCallCheck(this, App);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
-	
-	        _this.state = {
-	            searchKey: "",
-	            min: 0,
-	            max: 30,
-	            products: [],
-	            total: 0,
-	            page: 1
-	        };
-	        return _this;
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(App).apply(this, arguments));
 	    }
 	
 	    _createClass(App, [{
@@ -161,7 +155,7 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
+	    _react2.default.createElement(_reactRouter.Route, _extends({ path: '/account', component: _Account2.default }, props)),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default })
 	), document.getElementById("content"));
@@ -28765,6 +28759,10 @@
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
+	var _UpdateForm = __webpack_require__(262);
+	
+	var _UpdateForm2 = _interopRequireDefault(_UpdateForm);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28772,6 +28770,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var props = {};
+	props.firstName = "Kyle Test firstname";
+	props.lastName = "Lastname test";
 	
 	var Account = function (_React$Component) {
 	  _inherits(Account, _React$Component);
@@ -28785,10 +28787,11 @@
 	  _createClass(Account, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props.firstName);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_SkillsForm2.default, null)
+	        _react2.default.createElement(_UpdateForm2.default, props)
 	      );
 	    }
 	  }]);
@@ -29076,6 +29079,85 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SkillsForm = __webpack_require__(259);
+	
+	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Router = __webpack_require__(172);
+	// import * as userService from '../../services/user-service';
+	
+	
+	var UpdateForm = _react2.default.createClass({
+		displayName: 'UpdateForm',
+	
+	
+		updateInfo: function updateInfo() {},
+	
+		render: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'form',
+					{ onSubmit: this.updateInfo },
+					_react2.default.createElement(
+						'p',
+						{ className: 'control' },
+						_react2.default.createElement('input', { className: 'input', placeholder: 'First Name', defaultValue: this.props.firstName })
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'control' },
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name', defaultValue: this.props.lastName })
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'control' },
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Company' })
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'control' },
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Title' })
+					),
+					_react2.default.createElement(
+						'p',
+						{ className: 'control' },
+						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio' })
+					),
+					_react2.default.createElement(
+						'button',
+						{ type: 'submit', className: 'button is-medium is-orange' },
+						_react2.default.createElement(
+							'p',
+							null,
+							'Update'
+						)
+					)
+				),
+				_react2.default.createElement(_SkillsForm2.default, null)
+			);
+		}
+	});
+	
+	exports.default = UpdateForm;
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
@@ -29085,7 +29167,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ProductListItem = __webpack_require__(263);
+	var _ProductListItem = __webpack_require__(264);
 	
 	var _ProductListItem2 = _interopRequireDefault(_ProductListItem);
 	
@@ -29130,7 +29212,7 @@
 	exports.default = ProductList;
 
 /***/ },
-/* 263 */
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29252,7 +29334,7 @@
 	exports.default = ProductListItem;
 
 /***/ },
-/* 264 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -29339,7 +29421,7 @@
 	//<button className="btn btn-link" ><span className="glyphicon glyphicon-remove" aria-hidden="true" onClick={this.clearText.bind(this)}></span></button>
 
 /***/ },
-/* 265 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

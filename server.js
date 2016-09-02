@@ -68,12 +68,12 @@ saveUninitialized: true
 }));
 
 app.use('/', express.static(__dirname + '/www'));
-app.use('/account', express.static(__dirname + '/www'));
 app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
 app.use('/activity', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));
+app.use('/newUserWelcome', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
@@ -120,7 +120,6 @@ app.use('/auth/linkedin/callback',
 
 app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
-app.use('/newUserWelcome', express.static(__dirname + '/www'));
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

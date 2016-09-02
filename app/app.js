@@ -13,22 +13,10 @@ import SearchBar from './components/SearchBar';
 import NewUser from './components/NewUser';
 import SkillsForm from './components/SkillsForm';
 import * as userService from './services/user-service';
+var props;
 
 class App extends React.Component {
 
-
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchKey: "",
-            min: 0,
-            max: 30,
-            products: [],
-            total: 0,
-            page: 1
-        }
-    }
 
     componentDidMount() {
         this.displayUsers();
@@ -55,7 +43,7 @@ ReactDOM.render((
   <Route path="/" component={Main}/>
   <Route path="/footer" component={App}/>
   <Route path="/newUserWelcome" component={NewUser}/>
-  <Route path="/account" component={Account}/>
+  <Route path="/account" component={Account} {...props}/>
   <Route path="/activity" component={Activity}/>
   <Route path="/login" component={Login}/>
 </Router>

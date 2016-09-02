@@ -1,5 +1,5 @@
 import React from 'react';
-import * as userService from '../../services/user-service';
+// import * as userService from '../../services/user-service';
 import SkillsForm from '../SkillsForm';
 var Router = require('react-router');
 
@@ -14,10 +14,10 @@ var UpdateForm = React.createClass({
 	  	<div>
 			  <form onSubmit={this.updateInfo}>
 					<p className="control">
-						<input className="input" placeholder="First Name" />
+						<input className="input" placeholder="First Name" defaultValue={this.props.firstName}/>
 					</p>
 					<p className="control">
-						<input className="input" placeholder="Last Name" />
+						<input className="input" placeholder="Last Name" defaultValue={this.props.lastName}/>
 					</p>
 					<p className="control">
 						<input className="input" placeholder="Company" />
