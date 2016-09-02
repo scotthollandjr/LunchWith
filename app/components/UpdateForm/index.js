@@ -6,7 +6,7 @@ var Router = require('react-router');
 var UpdateForm = React.createClass({
 
 	updateInfo: function() {
-		
+
 	},
 
 	render: function() {
@@ -32,6 +32,7 @@ var UpdateForm = React.createClass({
 						<p>Update</p>
 					</button>
 				</form>
+				<SkillsForm />
 	    </div>
 	  )
 	}
