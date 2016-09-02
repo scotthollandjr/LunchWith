@@ -18,8 +18,16 @@ const userInfo = {
 };
 
 var GoogleMap = React.createClass({
-  onMapCreated() {
-    const {Gmaps} = this.refs;
+  onMapCreated(map) {
+		const {Gmaps} = this.refs;
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				map.setCenter({
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				});
+			});
+		}
     Gmaps.getMap().setOptions({
       styles: [
 		  {
@@ -114,8 +122,8 @@ var GoogleMap = React.createClass({
         	ref='Gmaps'
 	        width={'100vh'}
 	        height={'100vh'}
-	        lat={userInfo.lat2}
-	        lng={userInfo.lng2}
+	        lat={0}
+	        lng={0}
 	        zoom={15}
 	        loadingMessage={'Be happy'}
 	        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
@@ -124,9 +132,9 @@ var GoogleMap = React.createClass({
 	          lat={userInfo.lat2}
 	          lng={userInfo.lng2}
 	          radius={25}
-	          fillColor={'#ff8528'}
-	          fillOpacity={.65}
-	          strokeColor={'#ff8528'}
+	          fillColor={'#09c7ed'}
+	          fillOpacity={.75}
+	          strokeColor={'#09c7ed'}
 	          strokeOpacity={.25}
 	          strokeWeight={10}
 	          onClick={this.onClick} />
