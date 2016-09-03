@@ -200,13 +200,24 @@ html {
 }
 
 .panel-footer {
-  margin-top: 10%;
   line-height: .2;
   color: var(--main-text-dark);
   font-weight: bold;
   font-size: .9em;
   text-align: center;
   bottom: 0;
+}
+
+.overlay2 {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  background: var(--main-nav-grey);
+  overflow-x: hidden;
+  transition: .1s;
 }
 
 /*** FOOTER ****************************************/

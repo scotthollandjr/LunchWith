@@ -28287,6 +28287,7 @@
 		lastName: "Rodriguez",
 		title: "Junior Developer",
 		company: "Tacocat Industries",
+		imageUrl: "",
 		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 		skills: ["Java", "Android", "Googling"]
 	};
@@ -28298,6 +28299,7 @@
 			lastName: "Rodriguez",
 			title: "Junior Developer",
 			company: "Tacocat Industries",
+			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 			summary: "I am starting a start-up and looking to find out about the local tech scene!",
 			skills: ["Java", "Android", "Googling"]
 		},
@@ -28307,6 +28309,7 @@
 			lastName: "Kyleson",
 			title: "Intern",
 			company: "EyeCue Lab",
+			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 			summary: "Looking to find out more about company culture in this area.",
 			skills: ["postgres", "Ruby on Rails", "React"]
 		},
@@ -28316,6 +28319,7 @@
 			lastName: "Sunflower",
 			title: "Software Engineer",
 			company: "Nike",
+			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 			summary: "I'm trying to get into mobile development, and looking for pointers.",
 			skills: ["JavaScript", "Node.js", "mongoDB"]
 		},
@@ -28325,6 +28329,7 @@
 			lastName: "Ann",
 			title: "Web Designer",
 			company: "Cozy",
+			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 			summary: "Let's be honest, I'm looking for free lunch.",
 			skills: ["CSS", "HTML", "JavaScript"]
 		},
@@ -28334,6 +28339,7 @@
 			lastName: "McGee",
 			title: "UX Designer",
 			company: "Cat Stevens, Inc.",
+			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 			summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 			skills: ["Adobe", "Design", "CSS"]
 		}
@@ -28349,8 +28355,8 @@
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					map.setCenter({
-						lat: position.coords.latitude,
-						lng: position.coords.longitude
+						lat: userInfo.lat2,
+						lng: userInfo.lng2
 					});
 					var centerCircle = new google.maps.Circle({
 						map: map,
@@ -28390,9 +28396,10 @@
 				userCircle.addListener('click', function () {
 					document.getElementById("userPanel").style.height = "35%";
 					document.getElementById("footer").style.display = "none";
-					document.getElementById("panel-name").textContent = this.firstName + ' ' + this.lastName;
-					document.getElementById("panel-title").textContent = this.title;
-					document.getElementById("panel-summary").textContent = this.summary;
+					document.getElementsByClassName("panel-name").textContent = this.firstName + ' ' + this.lastName;
+					document.getElementsByClassName("panel-title").textContent = this.title;
+					document.getElementsByClassName("panel-company").textContent = 'at ' + this.company;
+					document.getElementsByClassName("panel-summary").textContent = this.summary;
 				});
 			}
 	
@@ -28449,7 +28456,12 @@
 		},
 		onClick: function onClick() {
 			document.getElementById("userPanel").style.height = "0%";
+			document.getElementById("profilePanel").style.height = "0%";
 			document.getElementById("footer").style.display = "";
+		},
+		fullProfile: function fullProfile() {
+			document.getElementById("userPanel").style.height = "0%";
+			document.getElementById("profilePanel").style.height = "100%";
 		},
 		render: function render() {
 			return _react2.default.createElement(
@@ -28473,9 +28485,9 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'overlay-content' },
-						_react2.default.createElement('p', { id: 'panel-name', className: 'title panel-text' }),
-						_react2.default.createElement('p', { id: 'panel-title', className: 'title panel-text' }),
-						_react2.default.createElement('p', { id: 'panel-summary', className: 'panel-text' }),
+						_react2.default.createElement('p', { className: 'title panel-text panel-name' }),
+						_react2.default.createElement('p', { className: 'title panel-text panel-title' }),
+						_react2.default.createElement('p', { className: 'panel-text panel-summary' }),
 						_react2.default.createElement(
 							'div',
 							{ className: 'panel-footer' },
@@ -28486,10 +28498,28 @@
 							),
 							_react2.default.createElement(
 								'p',
-								null,
+								{ onClick: this.fullProfile },
 								'FULL PROFILE'
 							)
 						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ id: 'profilePanel', className: 'overlay2' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'overlay-content' },
+						_react2.default.createElement(
+							'span',
+							{ className: 'icon is-medium' },
+							_react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-times' })
+						),
+						_react2.default.createElement('p', { className: 'title panel-text panel-name' }),
+						_react2.default.createElement('p', { className: 'title panel-text panel-title' }),
+						_react2.default.createElement('p', { className: 'title panel-text panel-company' }),
+						_react2.default.createElement('p', { className: 'title panel-text panel-skills' }),
+						_react2.default.createElement('p', { className: 'panel-text panel-summary' })
 					)
 				)
 			);

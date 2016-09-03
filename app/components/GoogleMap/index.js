@@ -9,6 +9,7 @@ const userInfo = {
 	lastName: "Rodriguez",
 	title: "Junior Developer",
 	company: "Tacocat Industries",
+	imageUrl: "",
 	summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 	skills: ["Java", "Android", "Googling"]
 };
@@ -20,6 +21,7 @@ var users = {
 		lastName: "Rodriguez",
 		title: "Junior Developer",
 		company: "Tacocat Industries",
+		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 		summary: "I am starting a start-up and looking to find out about the local tech scene!",
 		skills: ["Java", "Android", "Googling"]
 	},
@@ -29,6 +31,7 @@ var users = {
 		lastName: "Kyleson",
 		title: "Intern",
 		company: "EyeCue Lab",
+		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 		summary: "Looking to find out more about company culture in this area.",
 		skills: ["postgres", "Ruby on Rails", "React"]
 	},
@@ -38,6 +41,7 @@ var users = {
 		lastName: "Sunflower",
 		title: "Software Engineer",
 		company: "Nike",
+		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 		summary: "I'm trying to get into mobile development, and looking for pointers.",
 		skills: ["JavaScript", "Node.js", "mongoDB"]
 	},
@@ -47,6 +51,7 @@ var users = {
 		lastName: "Ann",
 		title: "Web Designer",
 		company: "Cozy",
+		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 		summary: "Let's be honest, I'm looking for free lunch.",
 		skills: ["CSS", "HTML", "JavaScript"]
 	},
@@ -56,6 +61,7 @@ var users = {
 		lastName: "McGee",
 		title: "UX Designer",
 		company: "Cat Stevens, Inc.",
+		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 		skills: ["Adobe", "Design", "CSS"]
 	},
@@ -68,8 +74,8 @@ var GoogleMap = React.createClass({
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				map.setCenter({
-					lat: position.coords.latitude,
-					lng: position.coords.longitude
+					lat: userInfo.lat2,
+					lng: userInfo.lng2
 				});
 				var centerCircle = new google.maps.Circle({
 					map: map,
@@ -109,9 +115,11 @@ var GoogleMap = React.createClass({
 			userCircle.addListener('click', function() {
 				document.getElementById("userPanel").style.height = "35%";
 				document.getElementById("footer").style.display = "none";
-				document.getElementById("panel-name").textContent = this.firstName + ' ' + this.lastName;
-				document.getElementById("panel-title").textContent = this.title;
-				document.getElementById("panel-summary").textContent = this.summary;
+				document.getElementsByClassName("panel-name").textContent = this.firstName + ' ' + this.lastName;
+				document.getElementsByClassName("panel-title").textContent = this.title;
+				document.getElementsByClassName("panel-company").textContent = 'at ' + this.company;
+				document.getElementsByClassName("panel-summary").textContent = this.summary;
+				document.getElementsByClassName("panel-skills").textContent = 'Expert in: ' + this.skills[0] + ', ' + this.skills[1] + ' & ' + this.skills[2];
 			});
 		}
 
@@ -201,7 +209,13 @@ var GoogleMap = React.createClass({
 
 	onClick() {
 		document.getElementById("userPanel").style.height = "0%";
+		document.getElementById("profilePanel").style.height = "0%";
 		document.getElementById("footer").style.display = "";
+	},
+
+	fullProfile() {
+		document.getElementById("userPanel").style.height = "0%";
+		document.getElementById("profilePanel").style.height = "100%";
 	},
 
   render() {
@@ -222,15 +236,27 @@ var GoogleMap = React.createClass({
 		    </Gmaps>
 				<div id="userPanel" className="overlay">
 					<div className="overlay-content">
-						<p id="panel-name" className="title panel-text"></p>
-						<p id="panel-title" className="title panel-text"></p>
-						<p id="panel-summary" className="panel-text"></p>
+						<p className="title panel-text panel-name"></p>
+						<p className="title panel-text panel-title"></p>
+						<p className="panel-text panel-summary"></p>
 						<div className="panel-footer">
 							<span className='icon is-large'>
-								<i className="fa fa-angle-up"></i>
+								<i className="fa fa-angle-up" />
 							</span>
-							<p>FULL PROFILE</p>
+							<p onClick={this.fullProfile}>FULL PROFILE</p>
 						</div>
+					</div>
+				</div>
+				<div id="profilePanel" className="overlay2">
+					<div className="overlay-content">
+						<span className="icon is-medium">
+							<i onClick={this.onClick} className="fa fa-times" />
+						</span>
+						<p className="title panel-text panel-name"></p>
+						<p className="title panel-text panel-title"></p>
+						<p className="title panel-text panel-company"></p>
+						<p className="title panel-text panel-skills"></p>
+						<p className="panel-text panel-summary"></p>
 					</div>
 				</div>
 			</div>
