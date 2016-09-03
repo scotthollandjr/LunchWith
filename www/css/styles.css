@@ -155,6 +155,10 @@ html {
 
 /*** INFO PANEL ******************************************/
 
+#userPanel {
+  overflow: hidden;
+}
+
 .overlay {
   height: 0;
   width: 100%;
@@ -162,7 +166,7 @@ html {
   z-index: 1;
   left: 0;
   bottom: 0;
-  background: linear-gradient(to top, var(--main-nav-grey) 60%, rgba(0,0,0,0));
+  background: linear-gradient(to top, var(--main-nav-grey) 75%, rgba(0,0,0,0));
   overflow-x: hidden;
   transition: .1s;
 }
@@ -170,7 +174,7 @@ html {
 .overlay-content {
   color: var(--main-light);
   position: relative;
-  top: 30%;
+  top: 22%;
   width: 100%;
   padding: 5%;
 }
@@ -196,12 +200,12 @@ html {
 }
 
 .panel-footer {
-  line-height: .75;
+  margin-top: 10%;
+  line-height: .2;
   color: var(--main-text-dark);
   font-weight: bold;
   font-size: .9em;
   text-align: center;
-  position: relative;
   bottom: 0;
 }
 

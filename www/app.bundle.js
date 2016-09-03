@@ -28388,7 +28388,7 @@
 				});
 	
 				userCircle.addListener('click', function () {
-					document.getElementById("userPanel").style.height = "40%";
+					document.getElementById("userPanel").style.height = "35%";
 					document.getElementById("footer").style.display = "none";
 					document.getElementById("panel-name").textContent = this.firstName + ' ' + this.lastName;
 					document.getElementById("panel-title").textContent = this.title;
