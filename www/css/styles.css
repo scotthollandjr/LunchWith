@@ -153,9 +153,9 @@ html {
   width: 250px;
 }
 
-/*** INFO PANEL ******************************************/
+/*** HALF USER PANEL ******************************************/
 
-#userPanel {
+#halfPanel {
   overflow: hidden;
 }
 
@@ -208,6 +208,8 @@ html {
   bottom: 0;
 }
 
+/*** FULL USER PANEL ****************************************/
+
 .overlay2 {
   height: 0;
   width: 100%;
@@ -218,6 +220,48 @@ html {
   background: var(--main-nav-grey);
   overflow-x: hidden;
   transition: .1s;
+}
+
+#full-image {
+  background-color: tomato;
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  margin: auto;
+}
+
+.title-div {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+#full-name {
+  line-height: 1;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+#full-title {
+  line-height: 1;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+#full-skills {
+  line-height: 1;
+  font-size: 2em;
+}
+
+#full-summary {
+  font-size: 1.5em;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 0;
+  margin: 10px;
 }
 
 /*** FOOTER ****************************************/

@@ -9,7 +9,7 @@ const userInfo = {
 	lastName: "Rodriguez",
 	title: "Junior Developer",
 	company: "Tacocat Industries",
-	imageUrl: "",
+	imageUrl: "https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png",
 	summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 	skills: ["Java", "Android", "Googling"]
 };
@@ -135,7 +135,7 @@ var GoogleMap = React.createClass({
 					summary: this.summary,
 					skills: this.skills
 				};
-					document.getElementById("userPanel").style.height = "35%";
+					document.getElementById("halfPanel").style.height = "35%";
 					document.getElementById("footer").style.display = "none";
 					document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 					document.getElementById("panel-title").textContent = superUser.title;
@@ -228,18 +228,16 @@ var GoogleMap = React.createClass({
 	},
 
 	onClick() {
-		document.getElementById("userPanel").style.height = "0%";
-		document.getElementById("profilePanel").style.height = "0%";
+		document.getElementById("halfPanel").style.height = "0%";
+		document.getElementById("fullPanel").style.height = "0%";
 		document.getElementById("footer").style.display = "";
 	},
 
 	fullProfile() {
-		debugger;
-		document.getElementById("userPanel").style.height = "0%";
-		document.getElementById("profilePanel").style.height = "100%";
+		document.getElementById("halfPanel").style.height = "0%";
+		document.getElementById("fullPanel").style.height = "100%";
 		document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
-		document.getElementById("full-title").textContent = superUser.title;
-		document.getElementById("full-company").textContent = 'at ' + superUser.company;
+		document.getElementById("full-title").textContent = superUser.title + ' at ' + superUser.company;
 		document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];
 		document.getElementById("full-summary").textContent = superUser.summary;
 	},
@@ -260,7 +258,7 @@ var GoogleMap = React.createClass({
 		        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
 		        onMapCreated={this.onMapCreated}>
 		    </Gmaps>
-				<div id="userPanel" className="overlay">
+				<div id="halfPanel" className="overlay">
 					<div className="overlay-content">
 						<p id="panel-name" className="title panel-text"></p>
 						<p id="panel-title" className="title panel-text"></p>
@@ -273,15 +271,18 @@ var GoogleMap = React.createClass({
 						</div>
 					</div>
 				</div>
-				<div id="profilePanel" className="overlay2">
+				<div id="fullPanel" className="overlay2">
 					<div className="overlay-content">
-						<span className="icon is-medium">
+						<span className="icon is-medium closeIcon">
 							<i onClick={this.onClick} className="fa fa-times" />
 						</span>
-						<img src={superUser.imageUrl} id="full-image" />
-						<p id="full-name" className="title panel-text"></p>
-						<p id="full-title" className="title panel-text"></p>
-						<p id="full-company" className="title panel-text"></p>
+						<div>
+							<img src={superUser.imageUrl} id="full-image" />
+							<div className="title-div">
+								<p id="full-name" className="title panel-text"></p>
+								<p id="full-title" className="title panel-text"></p>
+							</div>
+						</div>
 						<p id="full-skills" className="title panel-text"></p>
 						<p id="full-summary" className="panel-text"></p>
 					</div>

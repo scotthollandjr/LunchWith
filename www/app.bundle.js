@@ -28287,7 +28287,7 @@
 		lastName: "Rodriguez",
 		title: "Junior Developer",
 		company: "Tacocat Industries",
-		imageUrl: "",
+		imageUrl: "https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png",
 		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 		skills: ["Java", "Android", "Googling"]
 	};
@@ -28416,7 +28416,7 @@
 						summary: this.summary,
 						skills: this.skills
 					};
-					document.getElementById("userPanel").style.height = "35%";
+					document.getElementById("halfPanel").style.height = "35%";
 					document.getElementById("footer").style.display = "none";
 					document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 					document.getElementById("panel-title").textContent = superUser.title;
@@ -28476,17 +28476,15 @@
 			console.log('onCloseClick');
 		},
 		onClick: function onClick() {
-			document.getElementById("userPanel").style.height = "0%";
-			document.getElementById("profilePanel").style.height = "0%";
+			document.getElementById("halfPanel").style.height = "0%";
+			document.getElementById("fullPanel").style.height = "0%";
 			document.getElementById("footer").style.display = "";
 		},
 		fullProfile: function fullProfile() {
-			debugger;
-			document.getElementById("userPanel").style.height = "0%";
-			document.getElementById("profilePanel").style.height = "100%";
+			document.getElementById("halfPanel").style.height = "0%";
+			document.getElementById("fullPanel").style.height = "100%";
 			document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
-			document.getElementById("full-title").textContent = superUser.title;
-			document.getElementById("full-company").textContent = 'at ' + superUser.company;
+			document.getElementById("full-title").textContent = superUser.title + ' at ' + superUser.company;
 			document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];
 			document.getElementById("full-summary").textContent = superUser.summary;
 		},
@@ -28508,7 +28506,7 @@
 					onMapCreated: this.onMapCreated }),
 				_react2.default.createElement(
 					'div',
-					{ id: 'userPanel', className: 'overlay' },
+					{ id: 'halfPanel', className: 'overlay' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'overlay-content' },
@@ -28533,19 +28531,26 @@
 				),
 				_react2.default.createElement(
 					'div',
-					{ id: 'profilePanel', className: 'overlay2' },
+					{ id: 'fullPanel', className: 'overlay2' },
 					_react2.default.createElement(
 						'div',
 						{ className: 'overlay-content' },
 						_react2.default.createElement(
 							'span',
-							{ className: 'icon is-medium' },
+							{ className: 'icon is-medium closeIcon' },
 							_react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-times' })
 						),
-						_react2.default.createElement('img', { src: superUser.imageUrl, id: 'full-image' }),
-						_react2.default.createElement('p', { id: 'full-name', className: 'title panel-text' }),
-						_react2.default.createElement('p', { id: 'full-title', className: 'title panel-text' }),
-						_react2.default.createElement('p', { id: 'full-company', className: 'title panel-text' }),
+						_react2.default.createElement(
+							'div',
+							null,
+							_react2.default.createElement('img', { src: superUser.imageUrl, id: 'full-image' }),
+							_react2.default.createElement(
+								'div',
+								{ className: 'title-div' },
+								_react2.default.createElement('p', { id: 'full-name', className: 'title panel-text' }),
+								_react2.default.createElement('p', { id: 'full-title', className: 'title panel-text' })
+							)
+						),
 						_react2.default.createElement('p', { id: 'full-skills', className: 'title panel-text' }),
 						_react2.default.createElement('p', { id: 'full-summary', className: 'panel-text' })
 					)
