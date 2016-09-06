@@ -43,8 +43,8 @@ var UpdateForm = React.createClass({
 				firstName: userInfo.firstname,
 				lastName: userInfo.lastname,
         company: userInfo.company,
-				title: "userInfo.title",
-				bio: "userInfo.bio"
+				title: userInfo.title,
+				bio: userInfo.bio
       });
     }.bind(this));
   },
