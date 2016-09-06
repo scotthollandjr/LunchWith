@@ -29,7 +29,7 @@ var users = {
 		coords: {lat: 45.519530, lng: -122.678061},
 		firstName: "Wolfie",
 		lastName: "Kyleson",
-		title: "Intern",
+		title: "Intern Extraordinaire",
 		company: "EyeCue Lab",
 		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
 		summary: "Looking to find out more about company culture in this area.",
@@ -68,6 +68,8 @@ var users = {
 }
 
 var GoogleMap = React.createClass({
+
+	
 
   onMapCreated(map) {
 		const {Gmaps} = this.refs;
@@ -113,13 +115,18 @@ var GoogleMap = React.createClass({
 			});
 
 			userCircle.addListener('click', function() {
+				setState({
+					firstName: this.firstName,
+					lastName: this.lastName,
+					company: this.company,
+					title: this.title,
+					summary: this.summary
+				});
 				document.getElementById("userPanel").style.height = "35%";
 				document.getElementById("footer").style.display = "none";
-				document.getElementsByClassName("panel-name").textContent = this.firstName + ' ' + this.lastName;
-				document.getElementsByClassName("panel-title").textContent = this.title;
-				document.getElementsByClassName("panel-company").textContent = 'at ' + this.company;
-				document.getElementsByClassName("panel-summary").textContent = this.summary;
-				document.getElementsByClassName("panel-skills").textContent = 'Expert in: ' + this.skills[0] + ', ' + this.skills[1] + ' & ' + this.skills[2];
+				document.getElementById("panel-name").textContent = this.state.firstName + ' ' + this.state.lastName;
+				document.getElementById("panel-title").textContent = this.state.title;
+				document.getElementById("panel-summary").textContent = this.state.summary;
 			});
 		}
 
@@ -216,6 +223,10 @@ var GoogleMap = React.createClass({
 	fullProfile() {
 		document.getElementById("userPanel").style.height = "0%";
 		document.getElementById("profilePanel").style.height = "100%";
+		document.getElementById("full-name").textContent = this.state.firstName + ' ' + this.state.lastName;
+		document.getElementById("full-title").textContent = this.state.title;
+		document.getElementById("full-company").textContent = 'at ' + this.state.company;
+		document.getElementById("full-summary").textContent = this.state.summary;
 	},
 
   render() {
@@ -236,9 +247,9 @@ var GoogleMap = React.createClass({
 		    </Gmaps>
 				<div id="userPanel" className="overlay">
 					<div className="overlay-content">
-						<p className="title panel-text panel-name"></p>
-						<p className="title panel-text panel-title"></p>
-						<p className="panel-text panel-summary"></p>
+						<p id="panel-name" className="title panel-text"></p>
+						<p id="panel-title" className="title panel-text"></p>
+						<p id="panel-summary" className="panel-text"></p>
 						<div className="panel-footer">
 							<span className='icon is-large'>
 								<i className="fa fa-angle-up" />
@@ -252,17 +263,16 @@ var GoogleMap = React.createClass({
 						<span className="icon is-medium">
 							<i onClick={this.onClick} className="fa fa-times" />
 						</span>
-						<p className="title panel-text panel-name"></p>
-						<p className="title panel-text panel-title"></p>
-						<p className="title panel-text panel-company"></p>
-						<p className="title panel-text panel-skills"></p>
-						<p className="panel-text panel-summary"></p>
+						<p id="full-name" className="title panel-text"></p>
+						<p id="full-title" className="title panel-text"></p>
+						<p id="full-company" className="title panel-text"></p>
+						<p id="full-skills" className="title panel-text"></p>
+						<p id="full-summary" className="panel-text"></p>
 					</div>
 				</div>
 			</div>
     );
   }
-
 });
 
 export default GoogleMap;
