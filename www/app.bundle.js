@@ -46,6 +46,8 @@
 
 	'use strict';
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
@@ -94,7 +96,11 @@
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
-	var _userService = __webpack_require__(241);
+	var _SkillsForm = __webpack_require__(241);
+	
+	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
+	
+	var _userService = __webpack_require__(242);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -108,23 +114,15 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	var props;
+	
 	var App = function (_React$Component) {
 	    _inherits(App, _React$Component);
 	
-	    function App(props) {
+	    function App() {
 	        _classCallCheck(this, App);
 	
-	        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
-	
-	        _this.state = {
-	            searchKey: "",
-	            min: 0,
-	            max: 30,
-	            products: [],
-	            total: 0,
-	            page: 1
-	        };
-	        return _this;
+	        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
 	    }
 	
 	    _createClass(App, [{
@@ -135,45 +133,9 @@
 	    }, {
 	        key: 'displayUsers',
 	        value: function displayUsers() {
-	            userService.queryUsers({ firstname: "sweet-ass" }).then(function (data) {
+	            userService.queryUsers({ firstname: "Kyle" }).then(function (data) {
 	                console.log(data);
 	            });
-	        }
-	    }, {
-	        key: 'searchKeyChangeHandler',
-	        value: function searchKeyChangeHandler(searchKey) {
-	            this.setState({ searchKey: searchKey, page: 1 }, this.findProducts);
-	        }
-	    }, {
-	        key: 'rangeChangeHandler',
-	        value: function rangeChangeHandler(values) {
-	            this.setState({ min: values[0], max: values[1], page: 1 }, this.findProducts);
-	        }
-	    }, {
-	        key: 'findProducts',
-	        value: function findProducts() {
-	            var _this2 = this;
-	
-	            userService.findAll({ search: this.state.searchKey, min: this.state.min, max: this.state.max, page: this.state.page }).then(function (data) {
-	                _this2.setState({
-	                    products: data.products,
-	                    page: data.page,
-	                    pageSize: data.pageSize,
-	                    total: data.total
-	                });
-	            });
-	        }
-	    }, {
-	        key: 'nextPageHandler',
-	        value: function nextPageHandler() {
-	            var p = this.state.page + 1;
-	            this.setState({ page: p }, this.findProducts);
-	        }
-	    }, {
-	        key: 'prevPageHandler',
-	        value: function prevPageHandler() {
-	            var p = this.state.page - 1;
-	            this.setState({ page: p }, this.findProducts);
 	        }
 	    }, {
 	        key: 'render',
@@ -191,9 +153,11 @@
 	    _reactRouter.Router,
 	    { history: _reactRouter.browserHistory },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _Main2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/newUserWelcome', component: _NewUser2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/account', component: _Account2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default })
+	    _react2.default.createElement(_reactRouter.Route, _extends({ path: '/account', component: _Account2.default }, props)),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default })
 	), document.getElementById("content"));
 
 /***/ },
@@ -27866,25 +27830,71 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userService = __webpack_require__(241);
-	
-	var userService = _interopRequireWildcard(_userService);
-	
-	var _SkillsForm = __webpack_require__(243);
+	var _SkillsForm = __webpack_require__(241);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Router = __webpack_require__(172);
+	// import * as userService from '../../services/user-service';
+	
 	
 	var UpdateForm = _react2.default.createClass({
 		displayName: 'UpdateForm',
 	
 	
-		updateInfo: function updateInfo() {},
+		getInitialState: function getInitialState() {
+			return {
+				firstName: "firstname",
+				lastName: "lastname",
+				company: "Initial company state",
+				title: "title",
+				bio: "bio"
+			};
+		},
+	
+		handleFirstNameChange: function handleFirstNameChange(e) {
+			this.setState({ firstName: e.target.value });
+		},
+	
+		handleLastNameChange: function handleLastNameChange(e) {
+			this.setState({ lastName: e.target.value });
+		},
+	
+		handleCompanyChange: function handleCompanyChange(e) {
+			this.setState({ company: e.target.value });
+		},
+	
+		handleTitleChange: function handleTitleChange(e) {
+			this.setState({ title: e.target.value });
+		},
+	
+		handleBioChange: function handleBioChange(e) {
+			this.setState({ bio: e.target.value });
+		},
+	
+		componentDidMount: function componentDidMount() {
+			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+				console.log(result.user);
+				var userInfo = result.user;
+				this.setState({
+					firstName: userInfo.firstname,
+					lastName: userInfo.lastname,
+					company: userInfo.company,
+					title: "userInfo.title",
+					bio: "userInfo.bio"
+				});
+			}.bind(this));
+		},
+	
+		submitUserUpdate: function submitUserUpdate(event) {
+			event.preventDefault();
+			var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
+			console.log(updateUrl);
+	
+			$.get(updateUrl, function (result) {});
+		},
 	
 		render: function render() {
 			return _react2.default.createElement(
@@ -27896,31 +27906,31 @@
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'First Name' })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'First Name', value: this.state.firstName, onChange: this.handleFirstNameChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name' })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name', value: this.state.lastName, onChange: this.handleLastNameChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Company' })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Company', value: this.state.company, onChange: this.handleCompanyChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Title' })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Title', value: this.state.title, onChange: this.handleTitleChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio' })
+						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio', value: this.state.bio, onChange: this.handleBioChange })
 					),
 					_react2.default.createElement(
 						'button',
-						{ type: 'submit', className: 'button is-medium is-orange' },
+						{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
 						_react2.default.createElement(
 							'p',
 							null,
@@ -27942,106 +27952,6 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.queryUsers = exports.newUser = exports.findById = exports.findAll = undefined;
-	
-	var _request = __webpack_require__(242);
-	
-	var _request2 = _interopRequireDefault(_request);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Router = __webpack_require__(172);
-	
-	var baseURL = "";
-	
-	var findAll = exports.findAll = function findAll(values) {
-	    var qs = "";
-	    if (values) {
-	        qs = Object.keys(values).map(function (key) {
-	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
-	        }).join('&');
-	        qs = "?" + qs;
-	    }
-	    return (0, _request2.default)({ url: baseURL + "/products" + qs }).then(function (data) {
-	        return data = JSON.parse(data);
-	    });
-	};
-	
-	var findById = exports.findById = function findById() {
-	    return (0, _request2.default)({ url: baseURL + "/products/" + id }).then(function (data) {
-	        return data = JSON.parse(data);
-	    });
-	};
-	
-	var newUser = exports.newUser = function newUser(values) {
-	    return (0, _request2.default)({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
-	};
-	
-	var queryUsers = exports.queryUsers = function queryUsers(values) {
-	    return (0, _request2.default)({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
-	        return JSON.parse(data);
-	    });
-	};
-
-/***/ },
-/* 242 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	exports.default = function (opts) {
-	
-	    function formUrlEncode(obj) {
-	        var urlData = '';
-	        for (var x in obj) {
-	            urlData = urlData + x + '=' + obj[x] + '&';
-	        }
-	        urlData = urlData.substr(0, urlData.length - 1);
-	        return urlData;
-	    }
-	
-	    return new Promise(function (resolve, reject) {
-	        var xhr = new XMLHttpRequest();
-	        xhr.open("POST", opts.url + '?' + formUrlEncode(opts.values));
-	        xhr.onload = function () {
-	            if (xhr.status >= 200 && xhr.status < 300) {
-	                resolve(xhr.response);
-	            } else {
-	                reject({
-	                    status: undefined.status,
-	                    statusText: xhr.statusText
-	                });
-	            }
-	        };
-	        xhr.onerror = function () {
-	            reject({
-	                status: undefined.status,
-	                statusText: xhr.statusText
-	            });
-	        };
-	        if (opts.headers) {
-	            Object.keys(opts.headers).forEach(function (key) {
-	                xhr.setRequestHeader(key, opts.headers[key]);
-	            });
-	        }
-	
-	        xhr.send();
-	    });
-	};
-
-/***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	
@@ -28049,7 +27959,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userService = __webpack_require__(241);
+	var _userService = __webpack_require__(242);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -28192,6 +28102,117 @@
 	});
 	
 	exports.default = SkillsForm;
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var request = __webpack_require__(243);
+	var Router = __webpack_require__(172);
+	
+	var baseURL = "";
+	
+	var findAll = function findAll(values) {
+	  var qs = "";
+	  if (values) {
+	    qs = Object.keys(values).map(function (key) {
+	      return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
+	    }).join('&');
+	    qs = "?" + qs;
+	  }
+	  return request({ url: baseURL + "/products" + qs }).then(function (data) {
+	    return data = JSON.parse(data);
+	  });
+	};
+	
+	var findById = function findById() {
+	  return request({ url: baseURL + "/products/" + id }).then(function (data) {
+	    return data = JSON.parse(data);
+	  });
+	};
+	
+	var newUser = function newUser(values) {
+	  return request({ url: baseURL + "/newUserCreation", values: values }).then(Router.browserHistory.push('/newUserWelcome'));
+	};
+	
+	var findOrCreateUser = function findOrCreateUser(values) {
+	  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+	
+	  db.query(sql, [values.email]).then(function (err, user) {
+	    console.log("not being called", user);
+	    if (user) {
+	      return JSON.parse(data);
+	    } else {
+	      // CREATE user
+	      return JSON.parse({});
+	    }
+	  });
+	  // return request({url: baseURL + "/findOrCreateUser", values: values})
+	  //   .then(function(data){
+	  //     return JSON.parse(data)
+	  //   })
+	};
+	
+	var queryUsers = function queryUsers(values) {
+	  return request({ url: baseURL + "/searchUsers", values: values }).then(function (data) {
+	    return JSON.parse(data);
+	  });
+	};
+	
+	module.exports = {
+	  newUser: newUser,
+	  queryUsers: queryUsers,
+	  findOrCreateUser: findOrCreateUser
+	};
+
+/***/ },
+/* 243 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	function formUrlEncode(obj) {
+	    var urlData = '';
+	    for (var x in obj) {
+	        urlData = urlData + x + '=' + obj[x] + '&';
+	    }
+	    urlData = urlData.substr(0, urlData.length - 1);
+	    return urlData;
+	}
+	
+	module.exports = function (opts) {
+	    var _this = this;
+	
+	    return new Promise(function (resolve, reject) {
+	        var xhr = new XMLHttpRequest();
+	        xhr.open("POST", opts.url + '?' + formUrlEncode(opts.values));
+	        xhr.onload = function () {
+	            if (xhr.status >= 200 && xhr.status < 300) {
+	                resolve(xhr.response);
+	            } else {
+	                reject({
+	                    status: _this.status,
+	                    statusText: xhr.statusText
+	                });
+	            }
+	        };
+	        xhr.onerror = function () {
+	            reject({
+	                status: _this.status,
+	                statusText: xhr.statusText
+	            });
+	        };
+	        if (opts.headers) {
+	            Object.keys(opts.headers).forEach(function (key) {
+	                xhr.setRequestHeader(key, opts.headers[key]);
+	            });
+	        }
+	
+	        xhr.send();
+	    });
+	};
 
 /***/ },
 /* 244 */
@@ -29436,9 +29457,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(243);
+	var _SkillsForm = __webpack_require__(241);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
+	
+	var _UpdateForm = __webpack_require__(240);
+	
+	var _UpdateForm2 = _interopRequireDefault(_UpdateForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29447,6 +29472,10 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var props = {};
+	props.firstName = "Kyle Test firstname";
+	props.lastName = "Lastname test";
 	
 	var Account = function (_React$Component) {
 	  _inherits(Account, _React$Component);
@@ -29463,7 +29492,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_SkillsForm2.default, null)
+	        _react2.default.createElement(_UpdateForm2.default, props)
 	      );
 	    }
 	  }]);

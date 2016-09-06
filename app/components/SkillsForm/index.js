@@ -19,7 +19,7 @@ var SkillsList = React.createClass({
 				    <span className="panel-icon is-right">
 				      	<i className="fa fa-trash"></i>
 				    </span>
-				    
+
 				 </p>
 			);
 		}
