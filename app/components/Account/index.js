@@ -7,8 +7,9 @@ props.lastName = "Lastname test";
 
 class Account extends React.Component {
 
+
+
     render() {
-      console.log(this.props.firstName);
         return (
           <div>
             <UpdateForm {...props} />

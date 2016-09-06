@@ -28787,7 +28787,6 @@
 	  _createClass(Account, [{
 	    key: 'render',
 	    value: function render() {
-	      console.log(this.props.firstName);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -29100,7 +29099,57 @@
 		displayName: 'UpdateForm',
 	
 	
-		updateInfo: function updateInfo() {},
+		getInitialState: function getInitialState() {
+			return {
+				firstName: "firstname",
+				lastName: "lastname",
+				company: "Initial company state",
+				title: "title",
+				bio: "bio"
+			};
+		},
+	
+		handleFirstNameChange: function handleFirstNameChange(e) {
+			this.setState({ firstName: e.target.value });
+		},
+	
+		handleLastNameChange: function handleLastNameChange(e) {
+			this.setState({ lastName: e.target.value });
+		},
+	
+		handleCompanyChange: function handleCompanyChange(e) {
+			this.setState({ company: e.target.value });
+		},
+	
+		handleTitleChange: function handleTitleChange(e) {
+			this.setState({ title: e.target.value });
+		},
+	
+		handleBioChange: function handleBioChange(e) {
+			this.setState({ bio: e.target.value });
+		},
+	
+		componentDidMount: function componentDidMount() {
+			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+				console.log(result.user);
+				var userInfo = result.user;
+				this.setState({
+					firstName: userInfo.firstname,
+					lastName: userInfo.lastname,
+					company: userInfo.company,
+					title: "userInfo.title",
+					bio: "userInfo.bio"
+				});
+			}.bind(this));
+		},
+	
+		submitUserUpdate: function submitUserUpdate(event) {
+			event.preventDefault();
+			var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
+			console.log(updateUrl);
+	
+			$.get(updateUrl, function (result) {});
+		},
 	
 		render: function render() {
 			return _react2.default.createElement(
@@ -29112,31 +29161,31 @@
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'First Name', defaultValue: this.props.firstName })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'First Name', value: this.state.firstName, onChange: this.handleFirstNameChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name', defaultValue: this.props.lastName })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name', value: this.state.lastName, onChange: this.handleLastNameChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Company' })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Company', value: this.state.company, onChange: this.handleCompanyChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Title' })
+						_react2.default.createElement('input', { className: 'input', placeholder: 'Title', value: this.state.title, onChange: this.handleTitleChange })
 					),
 					_react2.default.createElement(
 						'p',
 						{ className: 'control' },
-						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio' })
+						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio', value: this.state.bio, onChange: this.handleBioChange })
 					),
 					_react2.default.createElement(
 						'button',
-						{ type: 'submit', className: 'button is-medium is-orange' },
+						{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
 						_react2.default.createElement(
 							'p',
 							null,
