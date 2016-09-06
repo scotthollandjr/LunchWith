@@ -28348,9 +28348,11 @@
 	var superUser = {
 		firstName: "",
 		lastName: "",
-		company: "",
 		title: "",
-		summary: ""
+		company: "",
+		imageUrl: "",
+		summary: "",
+		skills: []
 	};
 	
 	var GoogleMap = _react2.default.createClass({
@@ -28393,7 +28395,10 @@
 					firstName: users[user].firstName,
 					lastName: users[user].lastName,
 					title: users[user].title,
+					company: users[user].company,
+					imageUrl: users[user].imageUrl,
 					summary: users[user].summary,
+					skills: users[user].skills,
 					onClick: this.onClick
 				});
 	
@@ -28405,9 +28410,11 @@
 					superUser = {
 						firstName: this.firstName,
 						lastName: this.lastName,
-						company: this.company,
 						title: this.title,
-						summary: this.summary
+						company: this.company,
+						imageUrl: this.imageUrl,
+						summary: this.summary,
+						skills: this.skills
 					};
 					document.getElementById("userPanel").style.height = "35%";
 					document.getElementById("footer").style.display = "none";
@@ -28474,11 +28481,13 @@
 			document.getElementById("footer").style.display = "";
 		},
 		fullProfile: function fullProfile() {
+			debugger;
 			document.getElementById("userPanel").style.height = "0%";
 			document.getElementById("profilePanel").style.height = "100%";
 			document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 			document.getElementById("full-title").textContent = superUser.title;
 			document.getElementById("full-company").textContent = 'at ' + superUser.company;
+			document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];
 			document.getElementById("full-summary").textContent = superUser.summary;
 		},
 		render: function render() {
@@ -28533,6 +28542,7 @@
 							{ className: 'icon is-medium' },
 							_react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-times' })
 						),
+						_react2.default.createElement('img', { src: superUser.imageUrl, id: 'full-image' }),
 						_react2.default.createElement('p', { id: 'full-name', className: 'title panel-text' }),
 						_react2.default.createElement('p', { id: 'full-title', className: 'title panel-text' }),
 						_react2.default.createElement('p', { id: 'full-company', className: 'title panel-text' }),
