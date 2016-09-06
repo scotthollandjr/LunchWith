@@ -28345,17 +28345,16 @@
 		}
 	};
 	
+	var superUser = {
+		firstName: "",
+		lastName: "",
+		company: "",
+		title: "",
+		summary: ""
+	};
+	
 	var GoogleMap = _react2.default.createClass({
 		displayName: 'GoogleMap',
-		getInitialState: function getInitialState() {
-			return {
-				firstName: "",
-				lastName: "",
-				company: "",
-				title: "",
-				summary: ""
-			};
-		},
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
@@ -28403,18 +28402,18 @@
 				});
 	
 				userCircle.addListener('click', function () {
-					setState({
+					superUser = {
 						firstName: this.firstName,
 						lastName: this.lastName,
 						company: this.company,
 						title: this.title,
 						summary: this.summary
-					});
+					};
 					document.getElementById("userPanel").style.height = "35%";
 					document.getElementById("footer").style.display = "none";
-					document.getElementById("panel-name").textContent = this.state.firstName + ' ' + this.state.lastName;
-					document.getElementById("panel-title").textContent = this.state.title;
-					document.getElementById("panel-summary").textContent = this.state.summary;
+					document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
+					document.getElementById("panel-title").textContent = superUser.title;
+					document.getElementById("panel-summary").textContent = superUser.summary;
 				});
 			}
 	
@@ -28477,10 +28476,10 @@
 		fullProfile: function fullProfile() {
 			document.getElementById("userPanel").style.height = "0%";
 			document.getElementById("profilePanel").style.height = "100%";
-			document.getElementById("full-name").textContent = this.state.firstName + ' ' + this.state.lastName;
-			document.getElementById("full-title").textContent = this.state.title;
-			document.getElementById("full-company").textContent = 'at ' + this.state.company;
-			document.getElementById("full-summary").textContent = this.state.summary;
+			document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
+			document.getElementById("full-title").textContent = superUser.title;
+			document.getElementById("full-company").textContent = 'at ' + superUser.company;
+			document.getElementById("full-summary").textContent = superUser.summary;
 		},
 		render: function render() {
 			return _react2.default.createElement(
