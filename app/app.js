@@ -8,9 +8,6 @@ import Login from './components/Login';
 import Account from './components/Account';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import ProductList from './components/ProductList';
-import SearchBar from './components/SearchBar';
-import NewUser from './components/NewUser';
 import SkillsForm from './components/SkillsForm';
 import * as userService from './services/user-service';
 var props;
@@ -42,7 +39,6 @@ ReactDOM.render((
 <Router history={browserHistory}>
   <Route path="/" component={Main}/>
   <Route path="/footer" component={App}/>
-  <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account} {...props}/>
   <Route path="/activity" component={Activity}/>
   <Route path="/login" component={Login}/>

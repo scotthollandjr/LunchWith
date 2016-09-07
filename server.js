@@ -120,22 +120,8 @@ app.get('/auth/linkedin',
   });
 
 app.use('/auth/linkedin/callback',
-
-  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin', successRedirect: '/account' }),
-  function(req, res, next) {
-    // Successful authentication
-    var sql = "SELECT * FROM users WHERE emailaddress = $1";
-
-    db.query(sql, [req.user._json.emailAddress])
-    .then(function (user) {
-      if (!user[0]) {
-        newUser(req.user._json, res, next);
-      } else {
-      res.json({"user" : user});
-      }
-    })
-    .catch(next);
-  });
+  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin', successRedirect: '/account' })
+);
 
 app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
