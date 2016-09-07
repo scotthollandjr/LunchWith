@@ -68,7 +68,7 @@
 	
 	var _Activity2 = _interopRequireDefault(_Activity);
 	
-	var _Login = __webpack_require__(238);
+	var _Login = __webpack_require__(242);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -80,7 +80,7 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(237);
+	var _Header = __webpack_require__(241);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
@@ -96,11 +96,11 @@
 	
 	var _NewUser2 = _interopRequireDefault(_NewUser);
 	
-	var _SkillsForm = __webpack_require__(241);
+	var _SkillsForm = __webpack_require__(238);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
-	var _userService = __webpack_require__(242);
+	var _userService = __webpack_require__(239);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -27487,15 +27487,15 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(237);
+	var _Header = __webpack_require__(241);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Login = __webpack_require__(238);
+	var _Login = __webpack_require__(242);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
-	var _UpdateForm = __webpack_require__(240);
+	var _UpdateForm = __webpack_require__(237);
 	
 	var _UpdateForm2 = _interopRequireDefault(_UpdateForm);
 	
@@ -27538,7 +27538,7 @@
 /* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -27549,6 +27549,10 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _UpdateForm = __webpack_require__(237);
+	
+	var _UpdateForm2 = _interopRequireDefault(_UpdateForm);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -27568,74 +27572,92 @@
 	  }
 	
 	  _createClass(Footer, [{
-	    key: "showCalendar",
+	    key: 'showCalendar',
 	    value: function showCalendar() {
 	      alert("the calendar just popped up, trust me");
 	    }
 	  }, {
-	    key: "showAccount",
+	    key: 'showAccount',
 	    value: function showAccount() {
-	      alert("here is your account. go head and edit away");
+	      var panel = document.getElementById("updatePanel");
+	      if (panel.style.height == "100%") {
+	        panel.style.height = "0%";
+	      } else {
+	        panel.style.height = "100%";
+	      }
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "section",
-	        { id: "footer", className: "footerx hero is-small" },
+	        'div',
+	        null,
 	        _react2.default.createElement(
-	          "div",
-	          { className: "hero-foot" },
+	          'section',
+	          { id: 'footer', className: 'footerx hero is-small' },
 	          _react2.default.createElement(
-	            "nav",
-	            { className: "tabs is-boxed is-fullwidth" },
+	            'div',
+	            { className: 'hero-foot' },
 	            _react2.default.createElement(
-	              "div",
-	              { className: "container" },
+	              'nav',
+	              { className: 'tabs is-boxed is-fullwidth' },
 	              _react2.default.createElement(
-	                "ul",
-	                null,
+	                'div',
+	                { className: 'container' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'ul',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "/activity", className: "footer-tab" },
+	                    'li',
+	                    null,
 	                    _react2.default.createElement(
-	                      "span",
-	                      { className: "icon is-large" },
-	                      _react2.default.createElement("i", { className: "fa fa-home" })
+	                      'a',
+	                      { href: '/activity', className: 'footer-tab' },
+	                      _react2.default.createElement(
+	                        'span',
+	                        { className: 'icon is-large' },
+	                        _react2.default.createElement('i', { className: 'fa fa-home' })
+	                      )
 	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  "li",
-	                  null,
+	                  ),
 	                  _react2.default.createElement(
-	                    "a",
-	                    { onClick: this.showCalendar, className: "footer-tab" },
+	                    'li',
+	                    null,
 	                    _react2.default.createElement(
-	                      "span",
-	                      { className: "icon is-large" },
-	                      _react2.default.createElement("i", { className: "fa fa-calendar-plus-o" })
+	                      'a',
+	                      { onClick: this.showCalendar, className: 'footer-tab' },
+	                      _react2.default.createElement(
+	                        'span',
+	                        { className: 'icon is-large' },
+	                        _react2.default.createElement('i', { className: 'fa fa-calendar-plus-o' })
+	                      )
 	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  "li",
-	                  null,
+	                  ),
 	                  _react2.default.createElement(
-	                    "a",
-	                    { onClick: this.showAccount, className: "footer-tab" },
+	                    'li',
+	                    null,
 	                    _react2.default.createElement(
-	                      "span",
-	                      { className: "icon is-large" },
-	                      _react2.default.createElement("i", { className: "fa fa-user" })
+	                      'a',
+	                      { onClick: this.showAccount, className: 'footer-tab' },
+	                      _react2.default.createElement(
+	                        'span',
+	                        { className: 'icon is-large' },
+	                        _react2.default.createElement('i', { className: 'fa fa-user' })
+	                      )
 	                    )
 	                  )
 	                )
 	              )
 	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'updatePanel', className: 'overlay2' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'overlay-content update-content' },
+	            _react2.default.createElement(_UpdateForm2.default, null)
 	          )
 	        )
 	      );
@@ -27653,173 +27675,6 @@
 /* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Header = _react2.default.createClass({
-	  displayName: "Header",
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      "div",
-	      null,
-	      _react2.default.createElement(
-	        "nav",
-	        { className: "nav", id: "navBar" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "container", id: "navItems" },
-	          _react2.default.createElement(
-	            "div",
-	            { className: "nav-left", id: "logo" },
-	            _react2.default.createElement(
-	              "span",
-	              { className: "icon is-medium" },
-	              _react2.default.createElement("i", { className: "fa fa-bars white" })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "nav-right" },
-	            _react2.default.createElement(
-	              "span",
-	              { className: "icon is-medium" },
-	              _react2.default.createElement("i", { className: "fa fa-search white" })
-	            )
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-	
-	exports.default = Header;
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _LinkedIn = __webpack_require__(239);
-	
-	var _LinkedIn2 = _interopRequireDefault(_LinkedIn);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Login = function (_React$Component) {
-	    _inherits(Login, _React$Component);
-	
-	    function Login() {
-	        _classCallCheck(this, Login);
-	
-	        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
-	    }
-	
-	    _createClass(Login, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(_LinkedIn2.default, null)
-	            );
-	        }
-	    }]);
-	
-	    return Login;
-	}(_react2.default.Component);
-	
-	;
-	
-	exports.default = Login;
-
-/***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(172);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var LinkedIn = function (_React$Component) {
-	  _inherits(LinkedIn, _React$Component);
-	
-	  function LinkedIn() {
-	    _classCallCheck(this, LinkedIn);
-	
-	    return _possibleConstructorReturn(this, (LinkedIn.__proto__ || Object.getPrototypeOf(LinkedIn)).apply(this, arguments));
-	  }
-	
-	  _createClass(LinkedIn, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: '/account' },
-	          _react2.default.createElement('script', { type: 'in/Login' })
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return LinkedIn;
-	}(_react2.default.Component);
-	
-	;
-	
-	exports.default = LinkedIn;
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -27830,7 +27685,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(241);
+	var _SkillsForm = __webpack_require__(238);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
@@ -27888,6 +27743,23 @@
 			}.bind(this));
 		},
 	
+		addSkill: function addSkill(e) {
+			var skillArray = this.state.skills;
+	
+			skillArray.push({
+				text: this._inputElement.value,
+				key: Date.now(),
+				starred: false
+			});
+			this.setState({
+				skills: skillArray
+			});
+	
+			this._inputElement.value = "";
+	
+			e.preventDefault();
+		},
+	
 		submitUserUpdate: function submitUserUpdate(event) {
 			event.preventDefault();
 			var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
@@ -27897,6 +27769,8 @@
 		},
 	
 		render: function render() {
+			var _this = this;
+	
 			return _react2.default.createElement(
 				'div',
 				null,
@@ -27929,6 +27803,18 @@
 						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio', value: this.state.bio, onChange: this.handleBioChange })
 					),
 					_react2.default.createElement(
+						'p',
+						{ className: 'panel-block control has-addons' },
+						_react2.default.createElement('input', { ref: function ref(a) {
+								return _this._inputElement = a;
+							}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', className: 'button is-medium is-orange' },
+							'Add'
+						)
+					),
+					_react2.default.createElement(
 						'button',
 						{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
 						_react2.default.createElement(
@@ -27937,8 +27823,7 @@
 							'Update'
 						)
 					)
-				),
-				_react2.default.createElement(_SkillsForm2.default, null)
+				)
 			);
 		}
 	});
@@ -27946,7 +27831,7 @@
 	exports.default = UpdateForm;
 
 /***/ },
-/* 241 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27959,7 +27844,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _userService = __webpack_require__(242);
+	var _userService = __webpack_require__(239);
 	
 	var userService = _interopRequireWildcard(_userService);
 	
@@ -28104,12 +27989,12 @@
 	exports.default = SkillsForm;
 
 /***/ },
-/* 242 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var request = __webpack_require__(243);
+	var request = __webpack_require__(240);
 	var Router = __webpack_require__(172);
 	
 	var baseURL = "";
@@ -28168,7 +28053,7 @@
 	};
 
 /***/ },
-/* 243 */
+/* 240 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28215,6 +28100,173 @@
 	};
 
 /***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Header = _react2.default.createClass({
+	  displayName: "Header",
+	
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      null,
+	      _react2.default.createElement(
+	        "nav",
+	        { className: "nav", id: "navBar" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "container", id: "navItems" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "nav-left", id: "logo" },
+	            _react2.default.createElement(
+	              "span",
+	              { className: "icon is-medium" },
+	              _react2.default.createElement("i", { className: "fa fa-bars white" })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "nav-right" },
+	            _react2.default.createElement(
+	              "span",
+	              { className: "icon is-medium" },
+	              _react2.default.createElement("i", { className: "fa fa-search white" })
+	            )
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+	
+	exports.default = Header;
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _LinkedIn = __webpack_require__(243);
+	
+	var _LinkedIn2 = _interopRequireDefault(_LinkedIn);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Login = function (_React$Component) {
+	    _inherits(Login, _React$Component);
+	
+	    function Login() {
+	        _classCallCheck(this, Login);
+	
+	        return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).apply(this, arguments));
+	    }
+	
+	    _createClass(Login, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(_LinkedIn2.default, null)
+	            );
+	        }
+	    }]);
+	
+	    return Login;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = Login;
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(172);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var LinkedIn = function (_React$Component) {
+	  _inherits(LinkedIn, _React$Component);
+	
+	  function LinkedIn() {
+	    _classCallCheck(this, LinkedIn);
+	
+	    return _possibleConstructorReturn(this, (LinkedIn.__proto__ || Object.getPrototypeOf(LinkedIn)).apply(this, arguments));
+	  }
+	
+	  _createClass(LinkedIn, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/account' },
+	          _react2.default.createElement('script', { type: 'in/Login' })
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return LinkedIn;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = LinkedIn;
+
+/***/ },
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28234,7 +28286,7 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(237);
+	var _Header = __webpack_require__(241);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
@@ -28386,8 +28438,8 @@
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					map.setCenter({
-						lat: userInfo.lat2,
-						lng: userInfo.lng2
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
 					});
 					var centerCircle = new google.maps.Circle({
 						map: map,
@@ -28512,10 +28564,10 @@
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ id: 'map' },
 				_react2.default.createElement(_reactGmaps.Gmaps, {
 					ref: 'Gmaps',
-					width: '100vh',
+					width: '100vw',
 					height: '100vh',
 					lat: 0,
 					lng: 0,
@@ -28533,20 +28585,15 @@
 						{ className: 'overlay-content' },
 						_react2.default.createElement('p', { id: 'panel-name', className: 'title panel-text' }),
 						_react2.default.createElement('p', { id: 'panel-title', className: 'title panel-text' }),
-						_react2.default.createElement('p', { id: 'panel-summary', className: 'panel-text' }),
+						_react2.default.createElement('p', { id: 'panel-summary', className: 'panel-text' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'footer-arrow' },
 						_react2.default.createElement(
-							'div',
-							{ className: 'panel-footer' },
-							_react2.default.createElement(
-								'span',
-								{ className: 'icon is-large' },
-								_react2.default.createElement('i', { className: 'fa fa-angle-up' })
-							),
-							_react2.default.createElement(
-								'p',
-								{ onClick: this.fullProfile },
-								'FULL PROFILE'
-							)
+							'span',
+							{ className: 'icon is-large panel-footer' },
+							_react2.default.createElement('i', { onClick: this.fullProfile, className: 'fa fa-angle-up' })
 						)
 					)
 				),
@@ -28556,28 +28603,24 @@
 					_react2.default.createElement(
 						'div',
 						{ className: 'overlay-content' },
-						_react2.default.createElement(
-							'span',
-							{ className: 'icon is-medium closeIcon' },
-							_react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-times' })
-						),
-						_react2.default.createElement(
-							'div',
-							null,
-							_react2.default.createElement('img', { src: superUser.imageUrl, id: 'full-image' }),
-							_react2.default.createElement(
-								'div',
-								{ className: 'title-div' },
-								_react2.default.createElement('p', { id: 'full-name', className: 'title panel-text' }),
-								_react2.default.createElement('p', { id: 'full-title', className: 'title panel-text' })
-							)
-						),
+						_react2.default.createElement('img', { src: superUser.imageUrl, id: 'full-image' }),
+						_react2.default.createElement('p', { id: 'full-name', className: 'title panel-text' }),
+						_react2.default.createElement('p', { id: 'full-title', className: 'title panel-text' }),
 						_react2.default.createElement('p', { id: 'full-skills', className: 'title panel-text' }),
 						_react2.default.createElement('p', { id: 'full-summary', className: 'panel-text' }),
 						_react2.default.createElement(
 							'button',
-							{ className: 'button is-blue' },
+							{ id: 'connect-button', className: 'button is-blue' },
 							'CONNECT'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'footer-arrow' },
+						_react2.default.createElement(
+							'span',
+							{ className: 'icon is-large panel-footer' },
+							_react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-angle-down' })
 						)
 					)
 				)
@@ -29462,11 +29505,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SkillsForm = __webpack_require__(241);
+	var _SkillsForm = __webpack_require__(238);
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
-	var _UpdateForm = __webpack_require__(240);
+	var _UpdateForm = __webpack_require__(237);
 	
 	var _UpdateForm2 = _interopRequireDefault(_UpdateForm);
 	

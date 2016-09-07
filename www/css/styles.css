@@ -64,6 +64,13 @@ html {
   background: var(--main-dark-grey);
 }
 
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
 /*** FOR STICKY FOOTER PURPOSES ***************************/
 
 .flex_container {
@@ -107,6 +114,7 @@ html {
 
 #skillsForm {
     width: 100%;
+    max-width: 550px;
 }
 
 #skillsPanel {
@@ -153,10 +161,30 @@ html {
   width: 250px;
 }
 
+@keyframes pulse_animation {
+	0% { transform: scale(1); }
+	30% { transform: scale(1); }
+	40% { transform: scale(1.08); }
+	50% { transform: scale(1); }
+	60% { transform: scale(1); }
+	70% { transform: scale(1.05); }
+	80% { transform: scale(1); }
+	100% { transform: scale(1); }
+}
+
+.pulse {
+  animation-name: pulse_animation;
+  animation-duration: 500ms;
+  transform-origin: 70% 70%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
 /*** HALF USER PANEL ******************************************/
 
 #halfPanel {
   overflow: hidden;
+
 }
 
 .overlay {
@@ -168,7 +196,7 @@ html {
   bottom: 0;
   background: linear-gradient(to top, var(--main-nav-grey) 75%, rgba(0,0,0,0));
   overflow-x: hidden;
-  transition: .1s;
+  transition: .4s ease;
 }
 
 .overlay-content {
@@ -205,10 +233,22 @@ html {
   font-weight: bold;
   font-size: .9em;
   text-align: center;
+  position: absolute;
   bottom: 0;
+  margin: 10px;
+}
+
+.footer-arrow {
+  z-index: 3;
+  width: 100%;
+  text-align: center;
 }
 
 /*** FULL USER PANEL ****************************************/
+
+#fullPanel {
+  overflow: hidden;
+}
 
 .overlay2 {
   height: 0;
@@ -219,7 +259,7 @@ html {
   bottom: 0;
   background: var(--main-nav-grey);
   overflow-x: hidden;
-  transition: .1s;
+  transition: .4s ease;
 }
 
 #full-image {
@@ -258,10 +298,24 @@ html {
   font-size: 1.5em;
 }
 
-.closeIcon {
-  position: absolute;
-  right: 0;
-  margin: 10px;
+#connect-button {
+
+}
+
+/*** UPDATE PANEL ****************************************/
+
+#updatePanel {
+  height: 0%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0px; /* hide scrollbar but still allow scrolling */
+}
+
+.update-content {
+  padding-bottom: 20%;
 }
 
 /*** FOOTER ****************************************/
@@ -272,6 +326,7 @@ html {
   position: fixed;
   width: 100%;
   bottom: 0;
+  z-index: 2;
 }
 
 .footerx > .is-tab:hover {
