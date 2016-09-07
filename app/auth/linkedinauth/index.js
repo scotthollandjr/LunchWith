@@ -10,14 +10,15 @@ let pg = require('pg'),
     db = require('../../../server/pghelper');
 
 let newUser = (profileData) => {
-  var firstName = profileData.firstName;
-  var lastName = profileData.lastName;
+  var firstName = profileData.firstName || "No first name provided?";
+  var lastName = profileData.lastName || "No last name provided";
   var emailAddress = profileData.emailAddress;
-  var company = profileData.company;
-  var title = profileData.title;
-  var pictureUrl = profileData.pictureUrl;
+  var company = profileData.company || "No company info provided";
+  var title = profileData.title || "No title provided";
+  var pictureUrl = profileData.pictureUrl || "No picture provided";
+  var bio = "No bio provided";
 
-  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "')";
+  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl, bio) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "','" + bio + "')";
 
   db.query(sql, null)
     .then(user => res.json("new user created!"))
