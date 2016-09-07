@@ -1,3 +1,5 @@
+"use strict";
+
 function formUrlEncode(obj) {
   var urlData = '';
   for (var x in obj) {

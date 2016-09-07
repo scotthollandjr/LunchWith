@@ -28107,7 +28107,7 @@
 /* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var request = __webpack_require__(243);
 	var Router = __webpack_require__(172);
@@ -28171,7 +28171,7 @@
 /* 243 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	function formUrlEncode(obj) {
 	    var urlData = '';
@@ -28573,7 +28573,12 @@
 							)
 						),
 						_react2.default.createElement('p', { id: 'full-skills', className: 'title panel-text' }),
-						_react2.default.createElement('p', { id: 'full-summary', className: 'panel-text' })
+						_react2.default.createElement('p', { id: 'full-summary', className: 'panel-text' }),
+						_react2.default.createElement(
+							'button',
+							{ className: 'button is-blue' },
+							'CONNECT'
+						)
 					)
 				)
 			);

@@ -285,6 +285,7 @@ var GoogleMap = React.createClass({
 						</div>
 						<p id="full-skills" className="title panel-text"></p>
 						<p id="full-summary" className="panel-text"></p>
+						<button className="button is-blue">CONNECT</button>
 					</div>
 				</div>
 			</div>
