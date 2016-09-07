@@ -84,8 +84,8 @@ var GoogleMap = React.createClass({
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				map.setCenter({
-					lat: userInfo.lat2,
-					lng: userInfo.lng2
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
 				});
 				var centerCircle = new google.maps.Circle({
 					map: map,
@@ -247,7 +247,7 @@ var GoogleMap = React.createClass({
 				<div>
 	        <Gmaps
 	        	ref='Gmaps'
-		        width={'100vh'}
+		        width={'100vw'}
 		        height={'100vh'}
 		        lat={0}
 		        lng={0}

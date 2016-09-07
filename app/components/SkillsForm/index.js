@@ -34,11 +34,11 @@ var SkillsList = React.createClass({
 	}
 });
 
-var SkillsForm = React.createClass({
+function logElements(skillObject){
+			console.log(skillObject.text);
+}
 
-	createNewUser: function() {
-	    productService.newUser({firstName: "sweet-ass", lastName: "auto-encoder"});
-	},
+var SkillsForm = React.createClass({
 
 	getInitialState: function() {
 		return {
@@ -67,6 +67,8 @@ var SkillsForm = React.createClass({
 		this.setState({
 			skills: skillArray
 		});
+
+		skillArray.forEach(logElements);
 
 		this._inputElement.value = "";
 
@@ -98,12 +100,7 @@ var SkillsForm = React.createClass({
 				  	</div>
 
 				</nav>
-		        <p className="panel-block control has-addons">
-	            	<button onClick={this.createNewUser} type="submit" className="button is-medium is-orange">
-	              		New User
-	            	</button>
-		        </p>
-	        </div>
+	    </div>
 	    )
 	}
 });

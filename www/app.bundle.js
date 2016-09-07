@@ -27991,13 +27991,13 @@
 		}
 	});
 	
+	function logElements(skillObject) {
+		console.log(skillObject.text);
+	}
+	
 	var SkillsForm = _react2.default.createClass({
 		displayName: 'SkillsForm',
 	
-	
-		createNewUser: function createNewUser() {
-			productService.newUser({ firstName: "sweet-ass", lastName: "auto-encoder" });
-		},
 	
 		getInitialState: function getInitialState() {
 			return {
@@ -28024,6 +28024,8 @@
 			this.setState({
 				skills: skillArray
 			});
+	
+			skillArray.forEach(logElements);
 	
 			this._inputElement.value = "";
 	
@@ -28073,15 +28075,6 @@
 								'Submit'
 							)
 						)
-					)
-				),
-				_react2.default.createElement(
-					'p',
-					{ className: 'panel-block control has-addons' },
-					_react2.default.createElement(
-						'button',
-						{ onClick: this.createNewUser, type: 'submit', className: 'button is-medium is-orange' },
-						'New User'
 					)
 				)
 			);
@@ -28373,8 +28366,8 @@
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					map.setCenter({
-						lat: userInfo.lat2,
-						lng: userInfo.lng2
+						lat: position.coords.latitude,
+						lng: position.coords.longitude
 					});
 					var centerCircle = new google.maps.Circle({
 						map: map,
@@ -28502,7 +28495,7 @@
 				null,
 				_react2.default.createElement(_reactGmaps.Gmaps, {
 					ref: 'Gmaps',
-					width: '100vh',
+					width: '100vw',
 					height: '100vh',
 					lat: 0,
 					lng: 0,
