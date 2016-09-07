@@ -27863,7 +27863,6 @@
 	
 		componentDidMount: function componentDidMount() {
 			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
-				console.log(result.user);
 				var userInfo = result.user;
 				this.setState({
 					firstName: userInfo.firstname,
@@ -27995,6 +27994,16 @@
 		console.log(skillObject.text);
 	}
 	
+	function formatSkills(skillsAsArray) {
+		var skillString = "";
+	
+		for (var i = 0; i < skillsAsArray.length; i++) {
+			skillString += skillsAsArray[i].text + ",";
+		}
+		skillString = skillString.slice(0, -1);
+		return skillString;
+	}
+	
 	var SkillsForm = _react2.default.createClass({
 		displayName: 'SkillsForm',
 	
@@ -28005,31 +28014,57 @@
 			};
 		},
 	
-		handleClick: function handleClick(event) {
-			if (this.state.skills <= 2) {
-				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
-			} else {
-				Router.browserHistory.push('/activity');
-			}
+		componentDidMount: function componentDidMount() {
+			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+				var userInfo = result.user;
+				var skillSplit = [];
+				if (userInfo.skills) {
+					skillSplit = userInfo.skills.split(",");
+				}
+				var skillObjects = [];
+				for (var i = 0; i < skillSplit.length; i++) {
+					var skillToPush = { text: skillSplit[i], key: i };
+					skillObjects.push(skillToPush);
+				}
+				this.setState({
+					skills: skillObjects
+				});
+				console.log(this.state.skills);
+			}.bind(this));
 		},
 	
 		addSkill: function addSkill(e) {
 			var skillArray = this.state.skills;
+			console.log(skillArray);
 	
-			skillArray.push({
-				text: this._inputElement.value,
-				key: Date.now(),
-				starred: false
-			});
-			this.setState({
-				skills: skillArray
-			});
-	
-			skillArray.forEach(logElements);
+			if (this._inputElement.value) {
+				skillArray.push({
+					text: this._inputElement.value,
+					key: Date.now(),
+					starred: false
+				});
+				this.setState({
+					skills: skillArray
+				});
+			}
 	
 			this._inputElement.value = "";
 	
 			e.preventDefault();
+		},
+	
+		submitUserUpdate: function submitUserUpdate(event) {
+			event.preventDefault();
+			var skillArray = this.state.skills;
+			var skillParam = formatSkills(skillArray);
+			var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
+			console.log(updateUrl);
+	
+			if (this.state.skills.length <= 2) {
+				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
+			} else {
+				$.get(updateUrl, function (result) {});
+			}
 		},
 	
 		render: function render() {
@@ -28068,7 +28103,7 @@
 						{ className: 'panel-block' },
 						_react2.default.createElement(
 							'a',
-							{ to: '/main', onClick: this.handleClick, className: 'button is-blue is-fullwidth' },
+							{ to: '/main', onClick: this.submitUserUpdate, className: 'button is-blue is-fullwidth' },
 							_react2.default.createElement(
 								'p',
 								null,

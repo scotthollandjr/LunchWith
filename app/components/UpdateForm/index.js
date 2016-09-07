@@ -37,7 +37,6 @@ var UpdateForm = React.createClass({
 
 	componentDidMount: function() {
     $.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
-			console.log(result.user);
       var userInfo = result.user;
       this.setState({
 				firstName: userInfo.firstname,

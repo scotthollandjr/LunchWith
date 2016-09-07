@@ -65,13 +65,15 @@ let getLoggedInUserDetails = (req, res, next) => {
   return res.json({"user" : loggedInUser})
 };
 
-// let accountRedirect = (req, res) => {
-//   console.log("redirect");
-//   res.redirect('/account');
-// }
-
 let updateUserDetails = (req, res) => {
   var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';"
+  console.log(sql);
+  db.query(sql);
+  return res;
+}
+
+let updateUserSkills = (req, res) => {
+  var sql = "UPDATE users SET skills='" + req.query.skills + "';";
   console.log(sql);
   db.query(sql);
   return "Updated!"
@@ -127,6 +129,7 @@ app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
+app.use('/updateUserSkills', updateUserSkills);
 
 
 app.listen(app.get('port'), function () {
