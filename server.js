@@ -65,6 +65,11 @@ let getLoggedInUserDetails = (req, res, next) => {
   return res.json({"user" : loggedInUser})
 };
 
+// let accountRedirect = (req, res) => {
+//   console.log("redirect");
+//   res.redirect('/account');
+// }
+
 let updateUserDetails = (req, res) => {
   var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';"
   console.log(sql);
@@ -116,7 +121,7 @@ app.get('/auth/linkedin',
 
 app.use('/auth/linkedin/callback',
 
-  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin' }),
+  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin', successRedirect: '/account' }),
   function(req, res, next) {
     // Successful authentication
     var sql = "SELECT * FROM users WHERE emailaddress = $1";
@@ -126,11 +131,10 @@ app.use('/auth/linkedin/callback',
       if (!user[0]) {
         newUser(req.user._json, res, next);
       } else {
-      return res.json({"user" : user})
+      res.json({"user" : user});
       }
     })
     .catch(next);
-    // res.json(req.user._json.emailAddress);
   });
 
 app.use('/newUserCreation', newUser);

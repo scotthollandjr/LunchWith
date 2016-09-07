@@ -11,7 +11,7 @@ class Footer extends React.Component {
 
     render() {
         return (
-          <section className="footerx hero is-small">
+          <section id="footer" className="footerx hero is-small">
             <div className="hero-foot">
               <nav className="tabs is-boxed is-fullwidth">
                 <div className="container">

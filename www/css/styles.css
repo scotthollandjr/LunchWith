@@ -1,164 +1,14 @@
-/*a:link,
-a:visited,
-a:hover {
-    color: #F25C05;
-}
-
-.footer {
-  height:24px !important; // Replace with the height your footer should be
-  width: 100% !important; // Don't change
-  background-image: none;
-  background-repeat: repeat;
-  background-attachment: scroll;
-  background-position: 0% 0%;
-  position: fixed;
-  bottom: 0pt;
-  left: 0pt;
-}
-
-.level {
-    opacity: 1;
-    height: 32px;
-    width: 32px;
-    background: #F25C05;
-    border-radius: 50%;
-    display: inline-block;
-    color: #ffffff;
-    padding-top: 8px;
-    font-size: 12px;
-    text-align: center;
-    padding-left: 0 !important;
-    margin: 6px 0 10px 0;
-}
-
-.search-bar {
-    width: 500px;
-    position: relative;
-}
-
-.search-bar button {
-    position: absolute;
-    right: 8px;
-    top: -20px;
-}
-
-input[type="search"]:focus {
-    border-color: #CFD7E6;
-    box-shadow: 0 0 4px #F25C05 !important;
-}
-
-.slider {
-    width: 100%;
-    max-width: 500px;
-    height: 40px;
-    margin: 4px 0;
-}
-
-.handle {
-    font-size: 0.9em;
-    text-align: center;
-    background-color: #F25C05;
-    color: white;
-    cursor: pointer;
-}
-
-.handle.active {
-    background-color: #F25C05;
-}
-
-.bar {
-    position: relative;
-    background: #EEF1F6;
-    border-radius: 4px;
-}
-
-.bar.bar-1 {
-    background: #F25C05;
-}
-
-.bar.bar-2 {
-    background: #EEF1F6;
-}
-
-.slider .bar {
-    top: 20px;
-    height: 10px;
-}
-
-.slider .handle {
-    top: 7px;
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    border-radius: 50%;
-    color:#FFF;
-}
-
-.slds-card {
-    background-color: #FFFFFF;
-}
-
-.slds-pill {
-    border-radius: 2px;
-    padding: 2px 4px;
-    margin: 0 2px 2px 0 !important;
-}
-
-.slds-page-header {
-    background-color: #F2C335;
-    border: none;
-    color: #ffffff;
-}
-
-.slds-page-header__title {
-    font-size: 32px;
-    margin-top: -4px;
-    font-family: 'Yanone Kaffeesatz', 'Open Sans', sans-serif;
-}
-
-.slds-card__header {
-    padding: 8px;
-    padding-top: 16px !important;
-    margin-bottom: 4px !important;
-
-}
-
-.slds-card {
-    height: 186px;
-}
-
-.slds-button, .slds-button:focus, .slds-button:hover {
-    color: #F25C05;
-}
-
-.slds-button:active, .slds-button:focus {
-    box-shadow: 0 0 4px #F25C05 !important;
-}
-
-.search-bar .slds-button:active, .search-bar .slds-button:focus {
-    box-shadow: none !important;
-
-}
-
-.slds-card__body {
-    padding-top: 4px;
-}
-
-.slds-card img {
-    margin: 4px;
-}*/
-
-
-
 /*** GLOBAL COLOR ****************************************/
 
 :root {
   --main-orange: #e66400;
   --main-orange-dark: #cd5900;
   --main-light: #ffffff;
-  --main-grey: #e66400;
-  --main-light-grey: #e66400;
-  --main-dark-grey: #222222;
+  --main-text-dark: #ebebeb;
+  --main-grey: #3d3d3d;
+  --main-light-grey: #333333;
+  --main-dark-grey: #2c2c2c;
+  --main-nav-grey: rgba(44,44,44,.9);
   --main-blue: #286099;
   --main-blue-dark: #1f4d7a;
 }
@@ -229,9 +79,9 @@ html {
 /*** NAV ****************************************/
 
 #navBar {
-    background: linear-gradient(to bottom, var(--main-dark-grey), rgba(0,0,0,0));
+    background: linear-gradient(to bottom, var(--main-nav-grey) 40%, rgba(0,0,0,0));
     width: 100%;
-    height: 150px;
+    height: 20%;
     position: absolute;
 }
 
@@ -303,19 +153,133 @@ html {
   width: 250px;
 }
 
+/*** HALF USER PANEL ******************************************/
+
+#halfPanel {
+  overflow: hidden;
+}
+
+.overlay {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(to top, var(--main-nav-grey) 75%, rgba(0,0,0,0));
+  overflow-x: hidden;
+  transition: .1s;
+}
+
+.overlay-content {
+  color: var(--main-light);
+  position: relative;
+  top: 22%;
+  width: 100%;
+  padding: 5%;
+}
+
+.panel-text {
+  color: var(--main-light);
+}
+
+#panel-name {
+  line-height: .75;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+#panel-title {
+  line-height: .75;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#panel-summary {
+  color: var(--main-text-dark);
+}
+
+.panel-footer {
+  line-height: .2;
+  color: var(--main-text-dark);
+  font-weight: bold;
+  font-size: .9em;
+  text-align: center;
+  bottom: 0;
+}
+
+/*** FULL USER PANEL ****************************************/
+
+.overlay2 {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  background: var(--main-nav-grey);
+  overflow-x: hidden;
+  transition: .1s;
+}
+
+#full-image {
+  background-color: tomato;
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  margin: auto;
+}
+
+.title-div {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+#full-name {
+  line-height: 1;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+#full-title {
+  line-height: 1;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+#full-skills {
+  line-height: 1;
+  font-size: 2em;
+}
+
+#full-summary {
+  font-size: 1.5em;
+}
+
+.closeIcon {
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+
 /*** FOOTER ****************************************/
 
 .footerx {
   background: var(--main-dark-grey);
   align-items: center;
-  /*position: absolute;*/
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .footerx > .is-tab:hover {
   background: tomato;
 }
+
 .footer-tab {
-  color: var(--main-light);;
+  color: var(--main-light);
 }
 
 .footer-tab:hover {
