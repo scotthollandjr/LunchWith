@@ -1,6 +1,6 @@
 import React from 'react';
 import * as userService from '../../services/user-service';
-import MultiSelect from 'ReactSelectize.MultiSelect';
+import Select from 'react-select';
 
 var Router = require('react-router');
 
@@ -77,47 +77,52 @@ var FieldForm = React.createClass({
 		e.preventDefault();
 	},
 
-  	render: function() {
+	render: function() {
+		var options = [
+			{ value: 'BACKEND', label: 'BACKEND' },
+			{ value: 'FRONTEND', label: 'FRONTEND' },
+			{ value: 'UI / UX', label: 'UI / UX' },
+			{ value: 'PROJECT MANAGEMENT', label: 'PROJECT MANAGEMENT' },
+			{ value: 'BRANDING / IDENTITY', label: 'BRANDING / IDENTITY' },
+			{ value: 'SALES / BUSINESS DEV', label: 'SALES / BUSINESS DEV' },
+			{ value: 'MOBILE', label: 'MOBILE' },
+			{ value: 'DATABASE', label: 'DATABASE' }
+		];
 
-    	return (
-	    	<div>
+  	return (
+    	<div>
 				<nav className="panel" id="skillsPanel">
-				  	<p className="panel-heading">Whats your expertise?</p>
-				  	<form onSubmit={this.addSkill}>
+			  	<p className="panel-heading">What is your expertise?</p>
+			  	<form onSubmit={this.addSkill}>
 						<p className="panel-block control has-addons">
-							<span className="select is-fullwidth is-expanded is-medium is-orange">
-								<MultiSelect
-									placeholder = "Skilz"
-									options = ["BACKEND", "FRONTEND", "UI / UX", "PROJECT MANAGEMENT", "BRANDING / IDENTITY", "SALES / BUSINESS DEV", "MOBILE", "DATABASE"].map(function(skill) {
-										return {label: skill, value: skill};
-									});
-									onValueChange = {function(values){
-										alert(values);
-									}}
-									/>
-							</span>
 							<button type="submit" className="button is-medium is-orange">
 								Add
 							</button>
 						</p>
 					</form>
 
+					<Select
+							name="form-field-name"
+							value="Select 3 fields"
+							multi={true}
+							options={options}
+					/>
+
 					<SkillsList entries={this.state.skills} />
 
-				  	<div className="panel-block">
-				    	<a to="/main" onClick={this.handleClick} className="button is-blue is-fullwidth">
-				      		<p>Submit</p>
-				    	</a>
-				  	</div>
-
+			  	<div className="panel-block">
+			    	<a to="/main" onClick={this.handleClick} className="button is-blue is-fullwidth">
+			      		<p>Submit</p>
+			    	</a>
+			  	</div>
 				</nav>
-		        <p className="panel-block control has-addons">
-	            	<button onClick={this.createNewUser} type="submit" className="button is-medium is-orange">
-	              		New User
-	            	</button>
-		        </p>
-	        </div>
-	    )
+        <p className="panel-block control has-addons">
+        	<button onClick={this.createNewUser} type="submit" className="button is-medium is-orange">
+          		New User
+        	</button>
+        </p>
+      </div>
+    );
 	}
 });
 
