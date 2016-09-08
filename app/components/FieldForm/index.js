@@ -89,24 +89,23 @@ var FieldForm = React.createClass({
 			{ value: 'DATABASE', label: 'DATABASE' }
 		];
 
+		function logChange(val) {
+
+			console.log("Selected: " + val);
+		}
+
   	return (
     	<div>
 				<nav className="panel" id="skillsPanel">
 			  	<p className="panel-heading">What is your expertise?</p>
 			  	<form onSubmit={this.addSkill}>
-						<p className="panel-block control has-addons">
-							<button type="submit" className="button is-medium is-orange">
-								Add
-							</button>
-						</p>
+						<Select
+								name="form-field-name"
+								value="Select 3 fields"
+								multi={true}
+								options={options}
+								onChange={logChange}/>
 					</form>
-
-					<Select
-							name="form-field-name"
-							value="Select 3 fields"
-							multi={true}
-							options={options}
-					/>
 
 					<SkillsList entries={this.state.skills} />
 
