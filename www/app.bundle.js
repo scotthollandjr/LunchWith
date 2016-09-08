@@ -88,6 +88,10 @@
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
+	var _Messages = __webpack_require__(263);
+	
+	var _Messages2 = _interopRequireDefault(_Messages);
+	
 	var _userService = __webpack_require__(242);
 	
 	var userService = _interopRequireWildcard(_userService);
@@ -144,7 +148,8 @@
 	    _react2.default.createElement(_reactRouter.Route, { path: '/footer', component: App }),
 	    _react2.default.createElement(_reactRouter.Route, _extends({ path: '/account', component: _Account2.default }, props)),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/activity', component: _Activity2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/messages', component: _Messages2.default })
 	), document.getElementById("content"));
 
 /***/ },
@@ -28058,7 +28063,6 @@
 			var skillArray = this.state.skills;
 			var skillParam = formatSkills(skillArray);
 			var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
-			console.log(updateUrl);
 	
 			if (this.state.skills.length <= 2) {
 				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
@@ -29405,6 +29409,71 @@
 	;
 	
 	exports.default = Account;
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Footer = __webpack_require__(236);
+	
+	var _Footer2 = _interopRequireDefault(_Footer);
+	
+	var _Header = __webpack_require__(237);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Messaging = function (_React$Component) {
+	  _inherits(Messaging, _React$Component);
+	
+	  function Messaging() {
+	    _classCallCheck(this, Messaging);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Messaging).apply(this, arguments));
+	  }
+	
+	  _createClass(Messaging, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'flex_container' },
+	        _react2.default.createElement(_Header2.default, null),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          ' messages!'
+	        ),
+	        _react2.default.createElement(_Footer2.default, null)
+	      );
+	    }
+	  }]);
+	
+	  return Messaging;
+	}(_react2.default.Component);
+	
+	;
+	
+	exports.default = Messaging;
 
 /***/ }
 /******/ ]);

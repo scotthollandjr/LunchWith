@@ -58,16 +58,21 @@ let queryUsers = (req, res, next) => {
 };
 
 let getLoggedInUserDetails = (req, res, next) => {
-  var sql = "SELECT * FROM users WHERE emailaddress = $1";
   var loggedInUser = req.user;
-  console.log(loggedInUser);
-
-  return res.json({"user" : loggedInUser})
+  return res.json({"user" : loggedInUser});
 };
+
+let checkMessages = (req, res, next) => {
+  var sql = "SELECT * FROM messages WHERE recipient_id = 25";
+  db.query(sql)
+  .then(function (messages){
+    console.log(messages);
+    return res.json({"messages": messages});
+  })
+}
 
 let updateUserDetails = (req, res) => {
   var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';"
-  console.log(sql);
   db.query(sql);
   return res;
 }
@@ -96,6 +101,7 @@ app.use('/activity', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));
 app.use('/newUserWelcome', express.static(__dirname + '/www'));
+app.use('/messages', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
@@ -125,6 +131,7 @@ app.use('/auth/linkedin/callback',
   passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin', successRedirect: '/account' })
 );
 
+app.use('/checkMessages', checkMessages);
 app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);

@@ -9,6 +9,7 @@ import Account from './components/Account';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import SkillsForm from './components/SkillsForm';
+import Messages from './components/Messages';
 import * as userService from './services/user-service';
 var props;
 
@@ -42,5 +43,6 @@ ReactDOM.render((
   <Route path="/account" component={Account} {...props}/>
   <Route path="/activity" component={Activity}/>
   <Route path="/login" component={Login}/>
+  <Route path="/messages" component={Messages}/>
 </Router>
 ), document.getElementById("content"));

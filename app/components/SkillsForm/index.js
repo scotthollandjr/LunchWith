@@ -102,7 +102,6 @@ var SkillsForm = React.createClass({
 		var skillArray = this.state.skills;
 		var skillParam = formatSkills(skillArray);
 		var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
-		console.log(updateUrl);
 
 		if (this.state.skills.length <= 2) {
 			alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
