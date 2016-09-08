@@ -26,7 +26,11 @@ let newUser = (profileData) => {
 };
 
 passport.serializeUser(function(user, done) {
-  done(null, user._json.emailAddress);
+  if (user._json) {
+    done(null, user._json.emailAddress)
+  } else {
+    done(null, user[0].emailaddress);
+  }
 });
 
 passport.deserializeUser(function(email, done) {
@@ -39,6 +43,20 @@ passport.deserializeUser(function(email, done) {
     })
 });
 
+function findOrCreateUser(profile, done) {
+  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+  db.query(sql, [profile._json.emailAddress])
+  .then(function (user) {
+    if (!user[0]) {
+      newUser(profile._json, done(null, profile));
+      return done(null, profile);
+    } else {
+    return done(null, user);
+    }
+  })
+}
+
 passport.use(new LinkedInStrategy({
     clientID: "78b3ua1u1ptbbj",
     clientSecret: "TN6C4QGvwiY5mIS1",
@@ -48,20 +66,12 @@ passport.use(new LinkedInStrategy({
   },
   // linkedin sends back the tokens and progile info
   function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-
-      var sql = "SELECT * FROM users WHERE emailaddress = $1";
-
-      db.query(sql, [profile._json.emailAddress])
-      .then(function (user) {
-        if (!user[0]) {
-          newUser(profile._json);
-        } else {
-        res.json({"user" : user});
-        }
-      })
+    process.nextTick(function() {
+      findOrCreateUser(profile, done, function(user){
+        console.log("In find or create");
         return done(null, profile);
-      });
-    }));
+      })
+    });
+  }));
 
 module.exports = passport;

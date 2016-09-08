@@ -121,6 +121,7 @@ app.all('*', function (req, res, next) {
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.get('/auth/linkedin',
   passport.authenticate('linkedin'),
   function(req, res) {
@@ -128,7 +129,14 @@ app.get('/auth/linkedin',
   });
 
 app.use('/auth/linkedin/callback',
-  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin', successRedirect: '/account' })
+  passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin' }),
+  function(req, res) {
+    if (req.user[0]){
+      res.redirect('/activity');
+    } else {
+      res.redirect('/account');
+    }
+  }
 );
 
 app.use('/checkMessages', checkMessages);
