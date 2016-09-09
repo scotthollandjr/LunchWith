@@ -93,8 +93,10 @@ saveUninitialized: true
 }));
 
 app.use('/', express.static(__dirname + '/www'));
+app.use('/splash', express.static(__dirname + '/www'));
 app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
+app.use('/images', express.static(__dirname + '/www/assets/images'));
 app.use('/activity', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));

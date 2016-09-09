@@ -244,7 +244,7 @@ var GoogleMap = React.createClass({
 
   render() {
     return (
-				<div>
+				<div id="map">
 	        <Gmaps
 	        	ref='Gmaps'
 		        width={'100vw'}
@@ -263,28 +263,26 @@ var GoogleMap = React.createClass({
 						<p id="panel-name" className="title panel-text"></p>
 						<p id="panel-title" className="title panel-text"></p>
 						<p id="panel-summary" className="panel-text"></p>
-						<div className="panel-footer">
-							<span className='icon is-large'>
-								<i className="fa fa-angle-up" />
-							</span>
-							<p onClick={this.fullProfile}>FULL PROFILE</p>
-						</div>
+					</div>
+					<div className="footer-arrow">
+						<span className="icon is-large panel-footer">
+							<i onClick={this.fullProfile} className="fa fa-angle-up" />
+						</span>
 					</div>
 				</div>
 				<div id="fullPanel" className="overlay2">
 					<div className="overlay-content">
-						<span className="icon is-medium closeIcon">
-							<i onClick={this.onClick} className="fa fa-times" />
-						</span>
-						<div>
-							<img src={superUser.imageUrl} id="full-image" />
-							<div className="title-div">
-								<p id="full-name" className="title panel-text"></p>
-								<p id="full-title" className="title panel-text"></p>
-							</div>
-						</div>
+						<img src={superUser.imageUrl} id="full-image" />
+						<p id="full-name" className="title panel-text"></p>
+						<p id="full-title" className="title panel-text"></p>
 						<p id="full-skills" className="title panel-text"></p>
 						<p id="full-summary" className="panel-text"></p>
+						<button id="connect-button" className="button is-blue">CONNECT</button>
+					</div>
+					<div className="footer-arrow">
+						<span className="icon is-large panel-footer">
+							<i onClick={this.onClick} className="fa fa-angle-down" />
+						</span>
 					</div>
 				</div>
 			</div>

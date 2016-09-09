@@ -48,6 +48,25 @@ var UpdateForm = React.createClass({
     }.bind(this));
   },
 
+	addSkill: function(e) {
+		var skillArray = this.state.skills;
+
+		skillArray.push(
+		{
+			text: this._inputElement.value,
+			key: Date.now(),
+			starred: false
+			}
+		);
+		this.setState({
+			skills: skillArray
+		});
+
+		this._inputElement.value = "";
+
+		e.preventDefault();
+	},
+
 	submitUserUpdate: function(event) {
 		event.preventDefault();
 		var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
@@ -76,11 +95,16 @@ var UpdateForm = React.createClass({
 					<p className="control">
 						<textarea className="textarea" placeholder="Bio" value={this.state.bio} onChange={this.handleBioChange}></textarea>
 					</p>
+					<p className="panel-block control has-addons">
+						<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
+						<button type="submit" className="button is-medium is-orange">
+							Add
+						</button>
+					</p>
 					<button className="button is-medium is-orange" onClick={this.submitUserUpdate}>
 						<p>Update</p>
 					</button>
 				</form>
-				<SkillsForm />
 	    </div>
 	  )
 	}
