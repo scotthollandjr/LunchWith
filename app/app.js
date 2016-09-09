@@ -11,6 +11,7 @@ import Header from './components/Header';
 import ProductList from './components/ProductList';
 import SearchBar from './components/SearchBar';
 import NewUser from './components/NewUser';
+import Splash from './components/Splash';
 import SkillsForm from './components/SkillsForm';
 import * as userService from './services/user-service';
 var props;
@@ -40,7 +41,7 @@ class App extends React.Component {
 
 ReactDOM.render((
 <Router history={browserHistory}>
-  <Route path="/" component={Main}/>
+  <Route path="/" component={Splash}/>
   <Route path="/footer" component={App}/>
   <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account} {...props}/>

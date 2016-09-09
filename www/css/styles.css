@@ -82,6 +82,34 @@ html, body {
 .flex_body {
   flex: 1;
 }
+/*** SPLASH SCREEN ****************************************/
+
+#splashDiv {
+  text-align: center;
+}
+
+#splashDiv h1 {
+  color: white;
+  padding: 25px;
+  margin-top: 10%;
+}
+
+#splashDiv img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+}
+
+#splashDiv button {
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  width: 200px;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 100px;
+}
 
 /*** NAV ****************************************/
 
