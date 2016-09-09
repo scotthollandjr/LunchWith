@@ -5,14 +5,33 @@ var passport = require('passport');
 var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 
 var config = require('../../../server/config');
-var init = require('../');
 
 let pg = require('pg'),
     databaseURL = 'postgres://localhost:5432/lunchwith',
     db = require('../../../server/pghelper');
 
+let newUser = (profileData) => {
+  var firstName = profileData.firstName || "No first name provided?";
+  var lastName = profileData.lastName || "No last name provided";
+  var emailAddress = profileData.emailAddress;
+  var company = profileData.company || "No company info provided";
+  var title = profileData.title || "No title provided";
+  var pictureUrl = profileData.pictureUrl || "No picture provided";
+  var bio = "No bio provided";
+
+  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl, bio) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "','" + bio + "')";
+
+  db.query(sql, null)
+    .then(user => res.json("new user created!"))
+    .catch(next);
+};
+
 passport.serializeUser(function(user, done) {
-  done(null, user._json.emailAddress);
+  if (user._json) {
+    done(null, user._json.emailAddress)
+  } else {
+    done(null, user[0].emailaddress);
+  }
 });
 
 passport.deserializeUser(function(email, done) {
@@ -25,6 +44,20 @@ passport.deserializeUser(function(email, done) {
     })
 });
 
+function findOrCreateUser(profile, done) {
+  var sql = "SELECT * FROM users WHERE emailaddress = $1";
+
+  db.query(sql, [profile._json.emailAddress])
+  .then(function (user) {
+    if (!user[0]) {
+      newUser(profile._json, done(null, profile));
+      return done(null, profile);
+    } else {
+    return done(null, user);
+    }
+  })
+}
+
 passport.use(new LinkedInStrategy({
     clientID: "78b3ua1u1ptbbj",
     clientSecret: "TN6C4QGvwiY5mIS1",
@@ -34,44 +67,12 @@ passport.use(new LinkedInStrategy({
   },
   // linkedin sends back the tokens and progile info
   function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-        // To keep the example simple, the user's LinkedIn profile is returned to
-        // represent the logged-in user. In a typical application, you would want
-        // to associate the LinkedIn account with a user record in your database,
-        // and return that user instead.
+    process.nextTick(function() {
+      findOrCreateUser(profile, done, function(user){
+        console.log("In find or create");
         return done(null, profile);
-      });
-    }));
-
-
-
-    // var searchQuery = {
-    //   name: profile.displayName
-    // };
-    //
-    // var updates = {
-    //   name: profile.displayName,
-    //   someID: profile.id
-    // };
-    //
-    // var options = {
-    //   upsert: true
-    // };
-    //
-    // // update the user if s/he exists or add a new user
-    // User.findOneAndUpdate(searchQuery, updates, options, function(err, user) {
-    //   if(err) {
-    //     return done(err);
-    //   } else {
-    //     return done(null, user);
-    //   }
-    // });
-//   }
-//
-// ));
-//
-// // serialize user into the session
-// init();
-
+      })
+    });
+  }));
 
 module.exports = passport;

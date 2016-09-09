@@ -44,11 +44,8 @@ let findOrCreateUser = (req, res, next) => {
 let queryUsers = (req, res, next) => {
   var params = req.query;
   var firstname = req.query.firstname;
-  var lastname;
   var sql = "SELECT * FROM users WHERE firstname = $1";
   var loggedInUser = req.user;
-
-  console.log("logged in user: ", loggedInUser);
 
   db.query(sql, ["Scott"])
     .then(function (user) {
@@ -58,15 +55,28 @@ let queryUsers = (req, res, next) => {
 };
 
 let getLoggedInUserDetails = (req, res, next) => {
-  var sql = "SELECT * FROM users WHERE emailaddress = $1";
   var loggedInUser = req.user;
-  console.log(loggedInUser);
-
-  return res.json({"user" : loggedInUser})
+  return res.json({"user" : loggedInUser});
 };
+
+let checkMessages = (req, res, next) => {
+  var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
+  console.log(req.user.id);
+  db.query(sql)
+  .then(function (messages){
+    console.log(messages);
+    return res.json({"messages": messages});
+  })
+}
 
 let updateUserDetails = (req, res) => {
   var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';"
+  db.query(sql);
+  return res;
+}
+
+let updateUserSkills = (req, res) => {
+  var sql = "UPDATE users SET skills='" + req.query.skills + "';";
   console.log(sql);
   db.query(sql);
   return "Updated!"
@@ -91,6 +101,7 @@ app.use('/activity', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));
 app.use('/newUserWelcome', express.static(__dirname + '/www'));
+app.use('/messages', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
@@ -110,6 +121,7 @@ app.all('*', function (req, res, next) {
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.get('/auth/linkedin',
   passport.authenticate('linkedin'),
   function(req, res) {
@@ -117,28 +129,22 @@ app.get('/auth/linkedin',
   });
 
 app.use('/auth/linkedin/callback',
-
   passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin' }),
-  function(req, res, next) {
-    // Successful authentication
-    var sql = "SELECT * FROM users WHERE emailaddress = $1";
+  function(req, res) {
+    if (req.user[0]){
+      res.redirect('/activity');
+    } else {
+      res.redirect('/account');
+    }
+  }
+);
 
-    db.query(sql, [req.user._json.emailAddress])
-    .then(function (user) {
-      if (!user[0]) {
-        newUser(req.user._json, res, next);
-      } else {
-      return res.json({"user" : user})
-      }
-    })
-    .catch(next);
-    // res.json(req.user._json.emailAddress);
-  });
-
+app.use('/checkMessages', checkMessages);
 app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
+app.use('/updateUserSkills', updateUserSkills);
 
 
 app.listen(app.get('port'), function () {

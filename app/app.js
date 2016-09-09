@@ -13,6 +13,7 @@ import SearchBar from './components/SearchBar';
 import NewUser from './components/NewUser';
 import Splash from './components/Splash';
 import SkillsForm from './components/SkillsForm';
+import Messages from './components/Messages';
 import * as userService from './services/user-service';
 var props;
 
@@ -43,9 +44,9 @@ ReactDOM.render((
 <Router history={browserHistory}>
   <Route path="/" component={Splash}/>
   <Route path="/footer" component={App}/>
-  <Route path="/newUserWelcome" component={NewUser}/>
   <Route path="/account" component={Account} {...props}/>
   <Route path="/activity" component={Activity}/>
   <Route path="/login" component={Login}/>
+  <Route path="/messages" component={Messages}/>
 </Router>
 ), document.getElementById("content"));
