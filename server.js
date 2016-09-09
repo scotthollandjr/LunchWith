@@ -44,11 +44,8 @@ let findOrCreateUser = (req, res, next) => {
 let queryUsers = (req, res, next) => {
   var params = req.query;
   var firstname = req.query.firstname;
-  var lastname;
   var sql = "SELECT * FROM users WHERE firstname = $1";
   var loggedInUser = req.user;
-
-  console.log("logged in user: ", loggedInUser);
 
   db.query(sql, ["Scott"])
     .then(function (user) {
@@ -63,7 +60,8 @@ let getLoggedInUserDetails = (req, res, next) => {
 };
 
 let checkMessages = (req, res, next) => {
-  var sql = "SELECT * FROM messages WHERE recipient_id = 25";
+  var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
+  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     console.log(messages);
