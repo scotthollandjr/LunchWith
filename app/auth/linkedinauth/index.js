@@ -61,7 +61,7 @@ function findOrCreateUser(profile, done) {
 passport.use(new LinkedInStrategy({
     clientID: "78b3ua1u1ptbbj",
     clientSecret: "TN6C4QGvwiY5mIS1",
-    callbackURL: "http://localhost:3000/auth/linkedin/callback",
+    callbackURL: "/auth/linkedin/callback",
     scope: ['r_emailaddress', 'r_basicprofile'],
     state: true
   },
