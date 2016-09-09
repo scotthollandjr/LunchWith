@@ -2,6 +2,10 @@
   "name": "lunch-with",
   "version": "0.0.0",
   "description": "lunch-with",
+  "engines": {
+    "node": "6.4.0"
+  }
+}
   "main": "server.js",
   "scripts": {
     "postinstall": "webpack",
