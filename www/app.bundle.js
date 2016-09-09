@@ -31903,8 +31903,8 @@
 	        ),
 	        _react2.default.createElement("img", { src: "/images/lunchlogo.png" }),
 	        _react2.default.createElement(
-	          "button",
-	          { className: "button is-blue is-large" },
+	          "a",
+	          { href: "/auth/linkedin", className: "button is-blue is-large" },
 	          "GET STARTED"
 	        )
 	      );
