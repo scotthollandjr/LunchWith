@@ -7,7 +7,6 @@
   },
   "main": "server.js",
   "scripts": {
-    "postinstall": "webpack",
     "webpack": "webpack",
     "start": "node server.js"
   },
