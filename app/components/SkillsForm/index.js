@@ -57,7 +57,7 @@ var SkillsForm = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+		$.get("/getLoggedInUserDetails", function (result) {
 			var userInfo = result.user;
 			var skillSplit = [];
 			if (userInfo.skills) {
@@ -101,7 +101,7 @@ var SkillsForm = React.createClass({
 		event.preventDefault();
 		var skillArray = this.state.skills;
 		var skillParam = formatSkills(skillArray);
-		var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
+		var updateUrl = "/updateUserSkills?skills=" + skillParam;
 
 		if (this.state.skills.length <= 2) {
 			alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")

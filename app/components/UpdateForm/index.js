@@ -36,7 +36,7 @@ var UpdateForm = React.createClass({
 	},
 
 	componentDidMount: function() {
-    $.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+    $.get("/getLoggedInUserDetails", function (result) {
       var userInfo = result.user;
       this.setState({
 				firstName: userInfo.firstname,
@@ -69,7 +69,7 @@ var UpdateForm = React.createClass({
 
 	submitUserUpdate: function(event) {
 		event.preventDefault();
-		var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
+		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
 		console.log(updateUrl);
 
 		$.get(updateUrl, function (result) {
