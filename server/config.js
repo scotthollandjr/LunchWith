@@ -3,6 +3,6 @@ module.exports = {
   linkedin: {
     clientID: "78b3ua1u1ptbbj",
     clientSecret: "TN6C4QGvwiY5mIS1",
-    callbackURL: "lunchwith.herokuapp.com/auth/linkedin/callback"
+    callbackURL: "/auth/linkedin/callback"
   }
 };
