@@ -13,8 +13,18 @@ let newUser = (profileData) => {
   var firstName = profileData.firstName || "No first name provided?";
   var lastName = profileData.lastName || "No last name provided";
   var emailAddress = profileData.emailAddress;
-  var company = profileData.positions.values[0].company.name || "No company info provided";
-  var title = profileData.positions.values[0].title || "No title provided";
+  var company;
+  if(profileData.positions.values[0]) {
+  company = profileData.positions.values[0].company.name
+  } else {
+  company = "No company info provided";
+  }
+  var title;
+  if(profileData.positions.values[0]) {
+  title = profileData.positions.values[0].title;
+  } else {
+  title = "No title provided";
+  }
   var pictureUrl = profileData.pictureUrl || "No picture provided";
   var bio = "No bio provided";
 
