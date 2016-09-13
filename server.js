@@ -113,11 +113,8 @@ app.use('/splash', express.static(__dirname + '/www'));
 app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
 app.use('/images', express.static(__dirname + '/www/assets/images'));
-app.use('/activity', express.static(__dirname + '/www'));
-app.use('/account', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));
 app.use('/newUserWelcome', express.static(__dirname + '/www'));
-app.use('/messages', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
@@ -136,13 +133,14 @@ app.all('*', function (req, res, next) {
 
 
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.get('/auth/linkedin',
   passport.authenticate('linkedin'),
   function(req, res) {
     console.log("shouldn't be here");
   });
+
 
 app.use('/auth/linkedin/callback',
   passportLinkedIn.authenticate('linkedin', { failureRedirect: '/auth/linkedin' }),
@@ -155,6 +153,18 @@ app.use('/auth/linkedin/callback',
   }
 );
 
+app.use(passport.session());
+app.use('*', function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    // req.user is available for use here
+    return next(); }
+    // denied. redirect to login
+    res.redirect('/auth/linkedin')
+  });
+
+app.use('/activity', express.static(__dirname + '/www'));
+app.use('/account', express.static(__dirname + '/www'));
+app.use('/messages', express.static(__dirname + '/www'));
 app.use('/checkReceivedMessages', checkReceivedMessages);
 app.use('/checkSentMessages', checkSentMessages);
 app.use('/newUserCreation', newUser);
@@ -162,7 +172,6 @@ app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
 app.use('/updateUserSkills', updateUserSkills);
-
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
