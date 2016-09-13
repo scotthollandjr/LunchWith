@@ -14,13 +14,13 @@ let newUser = (profileData) => {
   var lastName = profileData.lastName || "No last name provided";
   var emailAddress = profileData.emailAddress;
   var company;
-  if(profileData.positions.values[0]) {
+  if(profileData.positions.values) {
   company = profileData.positions.values[0].company.name
   } else {
   company = "No company info provided";
   }
   var title;
-  if(profileData.positions.values[0]) {
+  if(profileData.positions.values) {
   title = profileData.positions.values[0].title;
   } else {
   title = "No title provided";
