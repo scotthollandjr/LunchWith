@@ -9,6 +9,7 @@ var passport = require('passport'),
 OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var session = require('express-session');
 var passportLinkedIn = require('./app/auth/linkedinauth');
+require('dotenv').config();
 
 
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -59,12 +60,20 @@ let getLoggedInUserDetails = (req, res, next) => {
   return res.json({"user" : loggedInUser});
 };
 
-let checkMessages = (req, res, next) => {
-  var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id + " OR sender_id = " + req.user.id;
+let checkReceivedMessages = (req, res, next) => {
+  var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
   console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
-    console.log(messages);
+    return res.json({"messages": messages});
+  })
+}
+
+let checkSentMessages = (req, res, next) => {
+  var sql = "SELECT * FROM messages WHERE sender_id = " + req.user.id;
+  console.log(req.user.id);
+  db.query(sql)
+  .then(function (messages){
     return res.json({"messages": messages});
   })
 }
@@ -91,6 +100,16 @@ secret: 'keyboard cat',
 resave: true,
 saveUninitialized: true
 }));
+
+if (process.env.NODE_ENV != 'development') {
+  console.log(process.env.NODE_ENV)
+  app.get('*',function(req,res,next){
+    if(req.headers['x-forwarded-proto']!='https')
+      res.redirect('https://lunchwith.herokuapp.com'+req.url)
+    else
+      next() /* Continue to other routes if we're not redirecting */
+  })
+}
 
 app.use('/', express.static(__dirname + '/www'));
 app.use('/splash', express.static(__dirname + '/www'));
@@ -139,7 +158,8 @@ app.use('/auth/linkedin/callback',
   }
 );
 
-app.use('/checkMessages', checkMessages);
+app.use('/checkReceivedMessages', checkReceivedMessages);
+app.use('/checkSentMessages', checkSentMessages);
 app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);

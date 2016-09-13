@@ -1,0 +1,40 @@
+HTTP/1.1 302 Found
+Server: GitHub.com
+Date: Mon, 12 Sep 2016 23:49:02 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Status: 302 Found
+Cache-Control: no-cache
+Vary: X-PJAX
+Location: https://codeload.github.com/Neilpang/acme.sh/tar.gz/master
+X-UA-Compatible: IE=Edge,chrome=1
+Set-Cookie: logged_in=no; domain=.github.com; path=/; expires=Fri, 12 Sep 2036 23:49:02 -0000; secure; HttpOnly
+Set-Cookie: _gh_sess=eyJzZXNzaW9uX2lkIjoiOTYyNTI0NmY5MDBhMDAyYTA3MTA1NmU1YjAyMGVjMWIiLCJzcHlfcmVwbyI6Ik5laWxwYW5nL2FjbWUuc2giLCJzcHlfcmVwb19hdCI6MTQ3MzcyNDE0Mn0%3D--c520b01b7f96d31ead19012e2ca3c968312e9d33; path=/; secure; HttpOnly
+X-Request-Id: 4232b358d327736284dfe2bd07450d4a
+X-Runtime: 0.022487
+Content-Security-Policy: default-src 'none'; base-uri 'self'; block-all-mixed-content; child-src render.githubusercontent.com; connect-src 'self' uploads.github.com status.github.com api.github.com www.google-analytics.com github-cloud.s3.amazonaws.com wss://live.github.com; font-src assets-cdn.github.com; form-action 'self' github.com gist.github.com; frame-ancestors 'none'; frame-src render.githubusercontent.com; img-src 'self' data: assets-cdn.github.com identicons.github.com collector.githubapp.com github-cloud.s3.amazonaws.com *.githubusercontent.com; media-src 'none'; object-src assets-cdn.github.com; plugin-types application/x-shockwave-flash; script-src assets-cdn.github.com; style-src 'unsafe-inline' assets-cdn.github.com
+Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+Public-Key-Pins: max-age=5184000; pin-sha256="WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="; pin-sha256="RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho="; pin-sha256="k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws="; pin-sha256="K87oWBWM9UZfyddvDfoxL+8lpNyoUB2ptGtn0fv6G2Q="; pin-sha256="IQBnNBEiFuhj+8x6X8XLgh01V9Ic5/V3IRQLNFFc7v4="; pin-sha256="iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0="; pin-sha256="LvRiGEjRqfzurezaWuj8Wie2gyHMrW5Q06LspMnox7A="; includeSubDomains
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-XSS-Protection: 1; mode=block
+Vary: Accept-Encoding
+X-Served-By: 29885c8097c6d503a86029451b2e021c
+X-GitHub-Request-Id: 47EE2B48:1B9BF:52DF659:57D73EEE
+
+HTTP/1.1 200 OK
+Transfer-Encoding: chunked
+Access-Control-Allow-Origin: https://render.githubusercontent.com
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'
+Strict-Transport-Security: max-age=31536000
+Vary: Authorization,Accept-Encoding
+X-Content-Type-Options: nosniff
+X-Frame-Options: deny
+X-XSS-Protection: 1; mode=block
+ETag: "7b164426566d8c1a6eb085b40128c6ec5dd5a993"
+Content-Type: application/x-gzip
+Content-Disposition: attachment; filename=acme.sh-master.tar.gz
+X-Geo-Block-List: 
+Date: Mon, 12 Sep 2016 23:49:03 GMT
+X-GitHub-Request-Id: 47EE2B48:26A12:26693A:57D73EEF
+
