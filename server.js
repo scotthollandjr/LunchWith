@@ -9,6 +9,7 @@ var passport = require('passport'),
 OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var session = require('express-session');
 var passportLinkedIn = require('./app/auth/linkedinauth');
+require('dotenv').config();
 
 
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -100,12 +101,15 @@ resave: true,
 saveUninitialized: true
 }));
 
-app.get('*',function(req,res,next){
-  if(req.headers['x-forwarded-proto']!='https')
-    res.redirect('https://lunchwith.herokuapp.com'+req.url)
-  else
-    next() /* Continue to other routes if we're not redirecting */
-})
+if (process.env.NODE_ENV != 'development') {
+  console.log(process.env.NODE_ENV)
+  app.get('*',function(req,res,next){
+    if(req.headers['x-forwarded-proto']!='https')
+      res.redirect('https://lunchwith.herokuapp.com'+req.url)
+    else
+      next() /* Continue to other routes if we're not redirecting */
+  })
+}
 
 app.use('/', express.static(__dirname + '/www'));
 app.use('/splash', express.static(__dirname + '/www'));

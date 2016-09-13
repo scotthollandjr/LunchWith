@@ -7,7 +7,6 @@ var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var config = require('../../../server/config');
 
 let pg = require('pg'),
-    databaseURL = 'postgres://localhost:5432/lunchwith',
     db = require('../../../server/pghelper');
 
 let newUser = (profileData) => {
