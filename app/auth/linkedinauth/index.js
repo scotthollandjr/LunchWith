@@ -56,8 +56,6 @@ passport.deserializeUser(function(email, done) {
 function findOrCreateUser(profile, done) {
   var sql = "SELECT * FROM users WHERE emailaddress = $1";
 
-  console.log(profile._json.positions.values[0]);
-
   db.query(sql, [profile._json.emailAddress])
   .then(function (user) {
     if (!user[0]) {
