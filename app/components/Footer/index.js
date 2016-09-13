@@ -52,6 +52,7 @@ class Footer extends React.Component {
             </section>
             <div id="updatePanel" className="overlay2">
     					<div className="overlay-content update-content">
+                <h1 className="title is-3 white">Update account information:</h1>
                 <UpdateForm />
     					</div>
     				</div>

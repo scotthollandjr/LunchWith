@@ -234,8 +234,8 @@ var GoogleMap = React.createClass({
 	},
 
 	fullProfile() {
-		document.getElementById("halfPanel").style.height = "0%";
 		document.getElementById("fullPanel").style.height = "100%";
+			document.getElementById("halfPanel").style.height = "0%";
 		document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 		document.getElementById("full-title").textContent = superUser.title + ' at ' + superUser.company;
 		document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];

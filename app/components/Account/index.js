@@ -7,7 +7,7 @@ props.firstName = "Kyle Test firstname";
 props.lastName = "Lastname test";
 
 class Account extends React.Component {
-  
+
     render() {
         return (
           <div>

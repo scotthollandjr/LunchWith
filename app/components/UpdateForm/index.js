@@ -71,7 +71,6 @@ var UpdateForm = React.createClass({
 		event.preventDefault();
 		var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
 		console.log(updateUrl);
-
 		$.get(updateUrl, function (result) {
 		}
 	)},

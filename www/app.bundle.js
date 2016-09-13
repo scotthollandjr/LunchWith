@@ -27583,6 +27583,11 @@
 	      }
 	    }
 	  }, {
+	    key: 'hideUserPanel',
+	    value: function hideUserPanel() {
+	      alert("its hidden, footer");
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -27653,7 +27658,14 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'overlay-content update-content' },
-	            _react2.default.createElement(_UpdateForm2.default, null)
+	            _react2.default.createElement(
+	              'h1',
+	              { className: 'title is-3 white' },
+	              'Update account information:'
+	            ),
+	            _react2.default.createElement(_UpdateForm2.default, {
+	              hideUserPanel: this.hideUserPanel.bind(this)
+	            })
 	          )
 	        )
 	      );
@@ -27759,9 +27771,14 @@
 			event.preventDefault();
 			var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
 			console.log(updateUrl);
-	
+			hideUserPanel();
 			$.get(updateUrl, function (result) {});
 		},
+	
+		hideUserPanel: function hideUserPanel() {
+			alert("its hidden, updateform");
+		},
+	
 	
 		render: function render() {
 			var _this = this;
@@ -28577,8 +28594,8 @@
 			document.getElementById("footer").style.display = "";
 		},
 		fullProfile: function fullProfile() {
-			document.getElementById("halfPanel").style.height = "0%";
 			document.getElementById("fullPanel").style.height = "100%";
+			document.getElementById("halfPanel").style.height = "0%";
 			document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 			document.getElementById("full-title").textContent = superUser.title + ' at ' + superUser.company;
 			document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];
@@ -31904,8 +31921,8 @@
 	        _react2.default.createElement("img", { src: "/images/lunchlogo.png" }),
 	        _react2.default.createElement(
 	          "a",
-	          { href: "/auth/linkedin", className: "button is-blue is-large" },
-	          "GET STARTED"
+	          { href: "/auth/linkedin" },
+	          _react2.default.createElement("img", { src: "/images/linkedbutton.png" })
 	        )
 	      );
 	    }
