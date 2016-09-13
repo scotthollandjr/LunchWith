@@ -15,7 +15,6 @@ require('dotenv').config();
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let newUser = (req, res, next) => {
-  console.log(req);
   var firstName = req.firstName;
   var lastName = req.lastName;
   var emailAddress = req.emailAddress;
@@ -62,7 +61,6 @@ let getLoggedInUserDetails = (req, res, next) => {
 
 let checkReceivedMessages = (req, res, next) => {
   var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
-  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -71,7 +69,6 @@ let checkReceivedMessages = (req, res, next) => {
 
 let checkSentMessages = (req, res, next) => {
   var sql = "SELECT * FROM messages WHERE sender_id = " + req.user.id;
-  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});

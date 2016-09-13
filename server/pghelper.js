@@ -9,7 +9,7 @@ let pg = require('pg'),
 exports.query = function (sql, values, singleItem, dontLog) {
 
     if (!dontLog) {
-        console.log(databaseURL, sql, values);
+        console.log(sql, values);
     }
 
     return new Promise((resolve, reject) => {
