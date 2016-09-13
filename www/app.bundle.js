@@ -28477,6 +28477,7 @@
 	  _createClass(Activity, [{
 	    key: 'render',
 	    value: function render() {
+	      history.replaceState('', document.title, window.location.pathname);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'flex_container' },
@@ -29591,6 +29592,7 @@
 	  _createClass(Account, [{
 	    key: 'render',
 	    value: function render() {
+	      history.replaceState('', document.title, window.location.pathname);
 	      return _react2.default.createElement(
 	        'div',
 	        null,
