@@ -27580,8 +27580,10 @@
 	      var panel = document.getElementById("messagePanel");
 	      if (panel.style.height == "100%") {
 	        panel.style.height = "0%";
+	        document.getElementById("navBar").style.height = "20%";
 	      } else {
 	        panel.style.height = "100%";
+	        document.getElementById("navBar").style.height = "0%";
 	      }
 	    }
 	  }, {
@@ -27593,8 +27595,10 @@
 	      var panel = document.getElementById("updatePanel");
 	      if (panel.style.height == "100%") {
 	        panel.style.height = "0%";
+	        document.getElementById("navBar").style.height = "20%";
 	      } else {
 	        panel.style.height = "100%";
+	        document.getElementById("navBar").style.height = "0%";
 	      }
 	    }
 	  }, {
@@ -28191,7 +28195,106 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'messageList' },
-	      messageNodes
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar1.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Appa S.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '10:22 PM'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Appa would like to meet-up! How does Friday @ 12:00 work?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar2.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Taco C.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '3:24 PM'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Taco would like to meet-up! How does Friday @ 11:30 work?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar3.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Kyle W.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '9/11'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Kyle would like to meet-up! How does Thursday @ 1:00 work?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar1.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Rick H.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '9/10'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Rick would like to meet-up! How does Wednesday @ 11:00 work?'
+	          )
+	        )
+	      )
 	    );
 	  }
 	});
@@ -28250,11 +28353,6 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'flex_container' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        ' Message container '
-	      ),
 	      _react2.default.createElement(MessageRow, { messages: this.state.sentMessages })
 	    );
 	  }
