@@ -27572,8 +27572,8 @@
 	  }
 	
 	  _createClass(Footer, [{
-	    key: 'showCalendar',
-	    value: function showCalendar() {
+	    key: 'showMesssages',
+	    value: function showMesssages() {
 	      var other = document.getElementById("updatePanel");
 	      other.style.height = "0%";
 	
@@ -27636,7 +27636,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '/messages', className: 'footer-tab' },
+	                      { onClick: this.showMesssages, className: 'footer-tab' },
 	                      _react2.default.createElement(
 	                        'span',
 	                        { className: 'icon is-large' },
@@ -27681,7 +27681,7 @@
 	          { id: 'messagePanel', className: 'overlay2' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'overlay-content update-content' },
+	            { className: 'overlay-content message-content' },
 	            _react2.default.createElement(
 	              'h1',
 	              { className: 'title is-3 white' },
