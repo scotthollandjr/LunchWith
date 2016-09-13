@@ -1,19 +1,30 @@
 import React from 'react';
 import UpdateForm from '../UpdateForm';
+import Messages from '../Messages';
 
 class Footer extends React.Component {
     showCalendar() {
-      alert("the calendar just popped up, trust me");
+      var other = document.getElementById("updatePanel");
+      other.style.height = "0%";
+      
+      var panel = document.getElementById("messagePanel");
+      if (panel.style.height == "100%") {
+        panel.style.height = "0%";
+      } else {
+        panel.style.height = "100%";
+      }
     }
 
     showAccount() {
+      var other = document.getElementById("messagePanel");
+      other.style.height = "0%";
+
       var panel = document.getElementById("updatePanel");
       if (panel.style.height == "100%") {
         panel.style.height = "0%";
       } else {
         panel.style.height = "100%";
       }
-
     }
 
     render() {
@@ -34,7 +45,7 @@ class Footer extends React.Component {
                       <li>
                         <a onClick={this.showCalendar} className="footer-tab">
                           <span className="icon is-large">
-                            <i className="fa fa-calendar-plus-o"></i>
+                            <i className="fa fa-comments-o"></i>
                           </span>
                         </a>
                       </li>
@@ -56,6 +67,12 @@ class Footer extends React.Component {
                 <UpdateForm />
     					</div>
     				</div>
+            <div id="messagePanel" className="overlay2">
+              <div className="overlay-content update-content">
+                <h1 className="title is-3 white">Messages:</h1>
+                <Messages />
+              </div>
+            </div>
           </div>
         );
     }
