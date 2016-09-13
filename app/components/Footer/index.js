@@ -32,7 +32,7 @@ class Footer extends React.Component {
                         </a>
                       </li>
                       <li>
-                        <a onClick={this.showCalendar} className="footer-tab">
+                        <a href='/messages' className="footer-tab">
                           <span className="icon is-large">
                             <i className="fa fa-calendar-plus-o"></i>
                           </span>

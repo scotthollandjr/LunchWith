@@ -40,17 +40,27 @@ var Message = React.createClass({
 var Messaging = React.createClass ({
 
     getInitialState: function() {
-      return {messages: []};
+      return {
+        receivedMessages: [],
+        sentMessages: []
+      };
     },
 
     componentDidMount: function() {
-  		$.get("/checkMessages", function (result) {
+  		$.get("/checkReceivedMessages", function (result) {
         console.log(result);
 
         this.setState({
-          messages: result.messages
+          receivedMessages: result.messages
         });
   		}.bind(this));
+      $.get("/checkSentMessages", function (result) {
+        console.log(result);
+
+        this.setState({
+          sentMessages: result.messages
+        });
+      }.bind(this));
   	},
 
     render: function() {
@@ -60,7 +70,7 @@ var Messaging = React.createClass ({
 
         <h3> Message container </h3>
 
-        <MessageRow messages={this.state.messages} />
+        <MessageRow messages={this.state.sentMessages} />
 
         </div>
       );

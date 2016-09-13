@@ -1,5 +1,7 @@
 "use strict";
 
+require('dotenv').config();
+
 let pg = require('pg'),
     config = require('./config'),
     databaseURL = config.databaseURL;

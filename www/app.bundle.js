@@ -27621,7 +27621,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                      'a',
-	                      { onClick: this.showCalendar, className: 'footer-tab' },
+	                      { href: '/messages', className: 'footer-tab' },
 	                      _react2.default.createElement(
 	                        'span',
 	                        { className: 'icon is-large' },
@@ -31872,15 +31872,25 @@
 	
 	
 	  getInitialState: function getInitialState() {
-	    return { messages: [] };
+	    return {
+	      receivedMessages: [],
+	      sentMessages: []
+	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
-	    $.get("/checkMessages", function (result) {
+	    $.get("/checkReceivedMessages", function (result) {
 	      console.log(result);
 	
 	      this.setState({
-	        messages: result.messages
+	        receivedMessages: result.messages
+	      });
+	    }.bind(this));
+	    $.get("/checkSentMessages", function (result) {
+	      console.log(result);
+	
+	      this.setState({
+	        sentMessages: result.messages
 	      });
 	    }.bind(this));
 	  },
@@ -31895,7 +31905,7 @@
 	        null,
 	        ' Message container '
 	      ),
-	      _react2.default.createElement(MessageRow, { messages: this.state.messages })
+	      _react2.default.createElement(MessageRow, { messages: this.state.sentMessages })
 	    );
 	  }
 	});
