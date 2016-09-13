@@ -27572,8 +27572,8 @@
 	  }
 	
 	  _createClass(Footer, [{
-	    key: 'showCalendar',
-	    value: function showCalendar() {
+	    key: 'showMesssages',
+	    value: function showMesssages() {
 	      var other = document.getElementById("updatePanel");
 	      other.style.height = "0%";
 	
@@ -27636,7 +27636,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '/messages', className: 'footer-tab' },
+	                      { onClick: this.showMesssages, className: 'footer-tab' },
 	                      _react2.default.createElement(
 	                        'span',
 	                        { className: 'icon is-large' },
@@ -27681,7 +27681,7 @@
 	          { id: 'messagePanel', className: 'overlay2' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'overlay-content update-content' },
+	            { className: 'overlay-content message-content' },
 	            _react2.default.createElement(
 	              'h1',
 	              { className: 'title is-3 white' },
@@ -28222,15 +28222,25 @@
 	
 	
 	  getInitialState: function getInitialState() {
-	    return { messages: [] };
+	    return {
+	      receivedMessages: [],
+	      sentMessages: []
+	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
-	    $.get("/checkMessages", function (result) {
+	    $.get("/checkReceivedMessages", function (result) {
 	      console.log(result);
 	
 	      this.setState({
-	        messages: result.messages
+	        receivedMessages: result.messages
+	      });
+	    }.bind(this));
+	    $.get("/checkSentMessages", function (result) {
+	      console.log(result);
+	
+	      this.setState({
+	        sentMessages: result.messages
 	      });
 	    }.bind(this));
 	  },
@@ -28245,7 +28255,7 @@
 	        null,
 	        ' Message container '
 	      ),
-	      _react2.default.createElement(MessageRow, { messages: this.state.messages })
+	      _react2.default.createElement(MessageRow, { messages: this.state.sentMessages })
 	    );
 	  }
 	});
@@ -32048,116 +32058,6 @@
 	
 	exports.default = Splash;
 
-<<<<<<< HEAD
-=======
-/***/ },
-/* 276 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Footer = __webpack_require__(236);
-	
-	var _Footer2 = _interopRequireDefault(_Footer);
-	
-	var _Header = __webpack_require__(241);
-	
-	var _Header2 = _interopRequireDefault(_Header);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var MessageRow = _react2.default.createClass({
-	  displayName: 'MessageRow',
-	
-	
-	  render: function render() {
-	    var messageNodes = this.props.messages.map(function (singleMessage) {
-	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id,
-	        message: singleMessage.message });
-	    });
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'messageList' },
-	      messageNodes
-	    );
-	  }
-	});
-	
-	var Message = _react2.default.createClass({
-	  displayName: 'Message',
-	
-	  render: function render() {
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'message' },
-	      _react2.default.createElement(
-	        'h2',
-	        { className: 'messageSubject' },
-	        this.props.subject
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        this.props.message
-	      )
-	    );
-	  }
-	});
-	
-	var Messaging = _react2.default.createClass({
-	  displayName: 'Messaging',
-	
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      receivedMessages: [],
-	      sentMessages: []
-	    };
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    $.get("/checkReceivedMessages", function (result) {
-	      console.log(result);
-	
-	      this.setState({
-	        receivedMessages: result.messages
-	      });
-	    }.bind(this));
-	    $.get("/checkSentMessages", function (result) {
-	      console.log(result);
-	
-	      this.setState({
-	        sentMessages: result.messages
-	      });
-	    }.bind(this));
-	  },
-	
-	  render: function render() {
-	    var messages = [];
-	    return _react2.default.createElement(
-	      'div',
-	      { className: 'flex_container' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        ' Message container '
-	      ),
-	      _react2.default.createElement(MessageRow, { messages: this.state.sentMessages })
-	    );
-	  }
-	});
-	
-	exports.default = Messaging;
-
->>>>>>> 0bd99b9b5e7c955b5228d50493fed39b815ec907
 /***/ }
 /******/ ]);
 //# sourceMappingURL=app.bundle.js.map
