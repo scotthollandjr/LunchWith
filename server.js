@@ -60,7 +60,7 @@ let getLoggedInUserDetails = (req, res, next) => {
 };
 
 let checkMessages = (req, res, next) => {
-  var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
+  var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id + " OR sender_id = " + req.user.id;
   console.log(req.user.id);
   db.query(sql)
   .then(function (messages){

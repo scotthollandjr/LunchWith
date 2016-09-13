@@ -7,7 +7,7 @@ var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var config = require('../../../server/config');
 
 let pg = require('pg'),
-    databaseURL = 'postgres://localhost:5432/lunchwith',
+    databaseURL = 'postgres://pricdnjbkgcqgv:-IsFp-pWkCWPppo45CSn2IA42z@ec2-23-23-76-90.compute-1.amazonaws.com:5432/d9urkbhh7o3gm8',
     db = require('../../../server/pghelper');
 
 let newUser = (profileData) => {
@@ -61,7 +61,7 @@ function findOrCreateUser(profile, done) {
 passport.use(new LinkedInStrategy({
     clientID: "78b3ua1u1ptbbj",
     clientSecret: "TN6C4QGvwiY5mIS1",
-    callbackURL: "http://localhost:3000/auth/linkedin/callback",
+    callbackURL: "/auth/linkedin/callback",
     scope: ['r_emailaddress', 'r_basicprofile'],
     state: true
   },

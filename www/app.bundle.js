@@ -27583,11 +27583,6 @@
 	      }
 	    }
 	  }, {
-	    key: 'hideUserPanel',
-	    value: function hideUserPanel() {
-	      alert("its hidden, footer");
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -27663,9 +27658,7 @@
 	              { className: 'title is-3 white' },
 	              'Update account information:'
 	            ),
-	            _react2.default.createElement(_UpdateForm2.default, {
-	              hideUserPanel: this.hideUserPanel.bind(this)
-	            })
+	            _react2.default.createElement(_UpdateForm2.default, null)
 	          )
 	        )
 	      );
@@ -27738,7 +27731,7 @@
 		},
 	
 		componentDidMount: function componentDidMount() {
-			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+			$.get("/getLoggedInUserDetails", function (result) {
 				var userInfo = result.user;
 				this.setState({
 					firstName: userInfo.firstname,
@@ -27769,16 +27762,10 @@
 	
 		submitUserUpdate: function submitUserUpdate(event) {
 			event.preventDefault();
-			var updateUrl = "http://localhost:3000/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
+			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
 			console.log(updateUrl);
-			hideUserPanel();
 			$.get(updateUrl, function (result) {});
 		},
-	
-		hideUserPanel: function hideUserPanel() {
-			alert("its hidden, updateform");
-		},
-	
 	
 		render: function render() {
 			var _this = this;
@@ -27926,7 +27913,7 @@
 		},
 	
 		componentDidMount: function componentDidMount() {
-			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+			$.get("/getLoggedInUserDetails", function (result) {
 				var userInfo = result.user;
 				var skillSplit = [];
 				if (userInfo.skills) {
@@ -27968,7 +27955,7 @@
 			event.preventDefault();
 			var skillArray = this.state.skills;
 			var skillParam = formatSkills(skillArray);
-			var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
+			var updateUrl = "/updateUserSkills?skills=" + skillParam;
 	
 			if (this.state.skills.length <= 2) {
 				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
@@ -32006,7 +31993,7 @@
 	  },
 	
 	  componentDidMount: function componentDidMount() {
-	    $.get("http://localhost:3000/checkMessages", function (result) {
+	    $.get("/checkMessages", function (result) {
 	      console.log(result);
 	
 	      this.setState({

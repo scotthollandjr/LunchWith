@@ -44,7 +44,7 @@ var Messaging = React.createClass ({
     },
 
     componentDidMount: function() {
-  		$.get("http://localhost:3000/checkMessages", function (result) {
+  		$.get("/checkMessages", function (result) {
         console.log(result);
 
         this.setState({
