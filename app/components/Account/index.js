@@ -12,7 +12,6 @@ class Account extends React.Component {
         return (
           <div>
             <UpdateForm {...props} />
-            <FieldForm />
           </div>
         );
     }

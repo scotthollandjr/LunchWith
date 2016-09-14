@@ -2,6 +2,7 @@ import React from 'react';
 // import * as userService from '../../services/user-service';
 import SkillsForm from '../SkillsForm';
 var Router = require('react-router');
+import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 var UpdateForm = React.createClass({
 
@@ -11,7 +12,8 @@ var UpdateForm = React.createClass({
 			lastName: "lastname",
 			company: "Initial company state",
 			title: "title",
-			bio: "bio"
+			bio: "bio",
+			location: ""
 		};
 	},
 
@@ -75,6 +77,17 @@ var UpdateForm = React.createClass({
 		}
 	)},
 
+	onMapCreated(map) {
+		const {Gmaps} = this.refs;
+	},
+
+	onClick: function(location) {
+		var latty = location.latLng.lat()
+		var longy = location.latLng.lng()
+
+		console.log("Location: " + latty + ', ' + longy);
+	},
+
 	render: function() {
 		return (
 	  	<div>
@@ -94,12 +107,21 @@ var UpdateForm = React.createClass({
 					<p className="control">
 						<textarea className="textarea" placeholder="Bio" value={this.state.bio} onChange={this.handleBioChange}></textarea>
 					</p>
-					<p className="panel-block control has-addons">
-						<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
-						<button type="submit" className="button is-medium is-orange">
-							Add
-						</button>
-					</p>
+					<div id="update-map">
+						<Gmaps
+							ref='Gmaps'
+							width={'100%'}
+							height={'100%'}
+							lat={45.526943}
+							lng={-122.684112}
+							zoom={15}
+							disableDefaultUI={true}
+							loadingMessage={'Be happy'}
+							onClick={this.onClick}
+							params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
+							onMapCreated={this.onMapCreated}>
+						</Gmaps>
+					</div>
 					<button className="button is-medium is-orange" onClick={this.submitUserUpdate}>
 						<p>Update</p>
 					</button>
