@@ -84,6 +84,8 @@ var UpdateForm = React.createClass({
 		const coords = {
 			lat: this.state.centerLat,
 			lng: this.state.centerLng};
+
+			console.log("second map created");
 	},
 
 	onClick: function(location) {

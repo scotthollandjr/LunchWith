@@ -81,31 +81,25 @@ html, body {
 
 /*** SPLASH SCREEN ****************************************/
 
-#splashDiv {
+.splashDiv {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.splash-title {
+  font-size: 2.75em;
+  margin-bottom: 25px;
+}
+
+.splash-body {
+  font-size: 1.5em;
+}
+
+.splash-button {
+  width: 375px;
+}
+
+#splashDiv1 {
   text-align: center;
-}
-
-#splashDiv h1 {
-  opacity: .95;
-  color: white;
-  padding: 25px;
-  margin-top: 10%;
-}
-
-#splashDiv img {
-  opacity: .95;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px;
-  margin-bottom: 150px;
-}
-
-#splashDiv button {
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: bold;
-  width: 200px;
 }
 
 /*** NAV ****************************************/
