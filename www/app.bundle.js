@@ -64,11 +64,11 @@
 	
 	var _Main2 = _interopRequireDefault(_Main);
 	
-	var _Activity = __webpack_require__(245);
+	var _Activity = __webpack_require__(261);
 	
 	var _Activity2 = _interopRequireDefault(_Activity);
 	
-	var _Login = __webpack_require__(243);
+	var _Login = __webpack_require__(259);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -80,7 +80,7 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(242);
+	var _Header = __webpack_require__(258);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
@@ -92,7 +92,7 @@
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
-	var _Messages = __webpack_require__(241);
+	var _Messages = __webpack_require__(257);
 	
 	var _Messages2 = _interopRequireDefault(_Messages);
 	
@@ -27483,11 +27483,11 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(242);
+	var _Header = __webpack_require__(258);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Login = __webpack_require__(243);
+	var _Login = __webpack_require__(259);
 	
 	var _Login2 = _interopRequireDefault(_Login);
 	
@@ -27550,7 +27550,7 @@
 	
 	var _UpdateForm2 = _interopRequireDefault(_UpdateForm);
 	
-	var _Messages = __webpack_require__(241);
+	var _Messages = __webpack_require__(257);
 	
 	var _Messages2 = _interopRequireDefault(_Messages);
 	
@@ -27580,8 +27580,10 @@
 	      var panel = document.getElementById("messagePanel");
 	      if (panel.style.height == "100%") {
 	        panel.style.height = "0%";
+	        document.getElementById("navBar").style.height = "20%";
 	      } else {
 	        panel.style.height = "100%";
+	        document.getElementById("navBar").style.height = "0%";
 	      }
 	    }
 	  }, {
@@ -27593,8 +27595,10 @@
 	      var panel = document.getElementById("updatePanel");
 	      if (panel.style.height == "100%") {
 	        panel.style.height = "0%";
+	        document.getElementById("navBar").style.height = "20%";
 	      } else {
 	        panel.style.height = "100%";
+	        document.getElementById("navBar").style.height = "0%";
 	      }
 	    }
 	  }, {
@@ -27719,6 +27723,8 @@
 	
 	var _SkillsForm2 = _interopRequireDefault(_SkillsForm);
 	
+	var _reactGmaps = __webpack_require__(241);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Router = __webpack_require__(172);
@@ -27735,7 +27741,12 @@
 				lastName: "lastname",
 				company: "Initial company state",
 				title: "title",
-				bio: "bio"
+				bio: "bio",
+				latitude: "45.526943",
+				longitude: "-122.684112",
+				userLatitude: "45.526943",
+				userLongitude: "-122.684112",
+				hideMyLocation: true
 			};
 		},
 	
@@ -27759,15 +27770,26 @@
 			this.setState({ bio: e.target.value });
 		},
 	
+		handleCheckChange: function handleCheckChange(e) {
+			this.setState({ hideMyLocation: e.target.checked });
+		},
+	
 		componentDidMount: function componentDidMount() {
 			$.get("/getLoggedInUserDetails", function (result) {
 				var userInfo = result.user;
+				if (userInfo.latitude) {
+					this.setState({
+						hideMyLocation: false
+					});
+				}
 				this.setState({
 					firstName: userInfo.firstname,
 					lastName: userInfo.lastname,
 					company: userInfo.company,
 					title: userInfo.title,
-					bio: userInfo.bio
+					bio: userInfo.bio,
+					userLatitude: userInfo.latitude,
+					userLongitude: userInfo.longitude
 				});
 			}.bind(this));
 		},
@@ -27796,9 +27818,40 @@
 			$.get(updateUrl, function (result) {});
 		},
 	
-		render: function render() {
-			var _this = this;
+		submitUserLocationUpdate: function submitUserLocationUpdate(event) {
+			event.preventDefault();
+			var updateUrl;
+			if (this.state.hideMyLocation) {
+				updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
+			} else {
+				updateUrl = "/updateUserLocationDetails?latitude=" + this.state.userLatitude + "&longitude=" + this.state.userLongitude;
+			}
+			console.log(updateUrl);
+			$.get(updateUrl, function (result) {});
+		},
 	
+		onMapCreated: function onMapCreated(map) {
+			var Gmaps = this.refs.Gmaps;
+	
+	
+			var coords = {
+				lat: this.state.centerLat,
+				lng: this.state.centerLng };
+		},
+	
+	
+		onClick: function onClick(location) {
+			var latty = location.latLng.lat();
+			var longy = location.latLng.lng();
+			console.log("old: " + this.state.latitude + ", " + this.state.longitude);
+			this.setState({
+				userLongitude: longy,
+				userLatitude: latty
+			});
+			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
+		},
+	
+		render: function render() {
 			return _react2.default.createElement(
 				'div',
 				null,
@@ -27831,16 +27884,20 @@
 						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio', value: this.state.bio, onChange: this.handleBioChange })
 					),
 					_react2.default.createElement(
-						'p',
-						{ className: 'panel-block control has-addons' },
-						_react2.default.createElement('input', { ref: function ref(a) {
-								return _this._inputElement = a;
-							}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
-						_react2.default.createElement(
-							'button',
-							{ type: 'submit', className: 'button is-medium is-orange' },
-							'Add'
-						)
+						'div',
+						{ id: 'update-map' },
+						_react2.default.createElement(_reactGmaps.Gmaps, {
+							ref: 'Gmaps',
+							width: '100%',
+							height: '100%',
+							lat: this.state.latitude,
+							lng: this.state.longitude,
+							zoom: 15,
+							disableDefaultUI: true,
+							loadingMessage: 'Be happy',
+							onClick: this.onClick,
+							params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
+							onMapCreated: this.onMapCreated })
 					),
 					_react2.default.createElement(
 						'button',
@@ -27850,7 +27907,22 @@
 							null,
 							'Update'
 						)
-					)
+					),
+					_react2.default.createElement(
+						'button',
+						{ className: 'button is-medium is-blue', onClick: this.submitUserLocationUpdate },
+						_react2.default.createElement(
+							'p',
+							null,
+							'Update Location'
+						)
+					),
+					_react2.default.createElement(
+						'label',
+						null,
+						'Hide my location: '
+					),
+					_react2.default.createElement('input', { type: 'checkbox', checked: this.state.hideMyLocation, onChange: this.handleCheckChange })
 				)
 			);
 		}
@@ -28161,6 +28233,752 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _componentsGmaps = __webpack_require__(242);
+	
+	var _componentsGmaps2 = _interopRequireDefault(_componentsGmaps);
+	
+	var _componentsMarker = __webpack_require__(250);
+	
+	var _componentsMarker2 = _interopRequireDefault(_componentsMarker);
+	
+	var _componentsInfoWindow = __webpack_require__(253);
+	
+	var _componentsInfoWindow2 = _interopRequireDefault(_componentsInfoWindow);
+	
+	var _componentsCircle = __webpack_require__(255);
+	
+	var _componentsCircle2 = _interopRequireDefault(_componentsCircle);
+	
+	exports.Gmaps = _componentsGmaps2['default'];
+	exports.Marker = _componentsMarker2['default'];
+	exports.InfoWindow = _componentsInfoWindow2['default'];
+	exports.Circle = _componentsCircle2['default'];
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }return target;
+	};
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(34);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _objectAssign = __webpack_require__(4);
+	
+	var _objectAssign2 = _interopRequireDefault(_objectAssign);
+	
+	var _eventsMap = __webpack_require__(243);
+	
+	var _eventsMap2 = _interopRequireDefault(_eventsMap);
+	
+	var _mixinsListener = __webpack_require__(244);
+	
+	var _mixinsListener2 = _interopRequireDefault(_mixinsListener);
+	
+	var _utilsGoogleMaps = __webpack_require__(245);
+	
+	var _utilsGoogleMaps2 = _interopRequireDefault(_utilsGoogleMaps);
+	
+	var _utilsCompareProps = __webpack_require__(249);
+	
+	var _utilsCompareProps2 = _interopRequireDefault(_utilsCompareProps);
+	
+	var Gmaps = _react2['default'].createClass({
+	  displayName: 'Gmaps',
+	
+	  mixins: [_mixinsListener2['default']],
+	
+	  map: null,
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      isMapCreated: false
+	    };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    this.setState({
+	      callbackIndex: _utilsGoogleMaps2['default'].load(this.props.params, this.mapsCallback)
+	    });
+	  },
+	
+	  componentWillUnmount: function componentWillUnmount() {
+	    _utilsGoogleMaps2['default'].removeCallback(this.state.callbackIndex);
+	    this.removeListeners();
+	  },
+	
+	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	    if (this.map && !(0, _utilsCompareProps2['default'])(this.props, nextProps)) {
+	      this.map.setOptions(_extends({}, nextProps, {
+	        center: new google.maps.LatLng(nextProps.lat, nextProps.lng)
+	      }));
+	    }
+	  },
+	
+	  getMap: function getMap() {
+	    return this.map;
+	  },
+	
+	  mapsCallback: function mapsCallback() {
+	    this.createMap();
+	    this.addListeners(this.map, _eventsMap2['default']);
+	  },
+	
+	  createMap: function createMap() {
+	    var node = _reactDom2['default'].findDOMNode(this);
+	    this.map = new google.maps.Map(node, _extends({}, this.props, {
+	      center: new google.maps.LatLng(this.props.lat, this.props.lng)
+	    }));
+	    this.setState({
+	      isMapCreated: true
+	    });
+	    if (this.props.onMapCreated) {
+	      this.props.onMapCreated(this.map);
+	    }
+	  },
+	
+	  getChildren: function getChildren() {
+	    var _this = this;
+	
+	    return _react2['default'].Children.map(this.props.children, function (child) {
+	      if (!_react2['default'].isValidElement(child)) {
+	        return child;
+	      }
+	      return _react2['default'].cloneElement(child, {
+	        ref: child.ref,
+	        map: _this.map
+	      });
+	    });
+	  },
+	
+	  render: function render() {
+	    var style = (0, _objectAssign2['default'])({
+	      width: this.props.width,
+	      height: this.props.height
+	    }, this.props.style);
+	    return _react2['default'].createElement('div', { style: style, className: this.props.className }, this.props.loadingMessage || 'Loading...', this.state.isMapCreated ? this.getChildren() : null);
+	  }
+	
+	});
+	
+	exports['default'] = Gmaps;
+	module.exports = exports['default'];
+
+/***/ },
+/* 243 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = {
+	  onBoundsChanged: 'bounds_changed',
+	  onCenterChanged: 'center_changed',
+	  onClick: 'click',
+	  onDblClick: 'dblclick',
+	  onDrag: 'drag',
+	  onDragEnd: 'dragend',
+	  onDragStart: 'dragstart',
+	  onHeadingChanged: 'heading_changed',
+	  onIdle: 'idle',
+	  onMapTypeIdChanged: 'maptypeid_changed',
+	  onMouseMove: 'mousemove',
+	  onMouseOut: 'mouseout',
+	  onMouseOver: 'mouseover',
+	  onProjectionChanged: 'projection_changed',
+	  onResize: 'resize',
+	  onRightClick: 'rightclick',
+	  onTilesLoaded: 'tilesloaded',
+	  onTiltChanged: 'tilt_changed',
+	  onZoomChanged: 'zoom_changed'
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 244 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var Listener = {
+	
+	  addListeners: function addListeners(entity, events) {
+	    for (var prop in this.props) {
+	      if (this.props.hasOwnProperty(prop) && events[prop]) {
+	        var addListener = google.maps.event.addListener;
+	        var listener = addListener(entity, events[prop], this.props[prop]);
+	        if (!this.listeners) {
+	          this.listeners = [];
+	        }
+	        this.listeners.push(listener);
+	      }
+	    }
+	  },
+	
+	  removeListeners: function removeListeners() {
+	    if (window.google && this.listeners) {
+	      this.listeners.forEach(function (listener) {
+	        google.maps.event.removeListener(listener);
+	      });
+	    }
+	  }
+	
+	};
+	
+	exports["default"] = Listener;
+	module.exports = exports["default"];
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _querystring = __webpack_require__(246);
+	
+	var _querystring2 = _interopRequireDefault(_querystring);
+	
+	exports['default'] = {
+	
+	  callbacks: [],
+	
+	  appended: false,
+	
+	  load: function load(params, callback) {
+	    var index = this.callbacks.push(callback);
+	    if (window.google) {
+	      setTimeout(this.fireCallbacks.bind(this));
+	    } else {
+	      if (!this.appended) {
+	        window.mapsCallback = this.mapsCallback.bind(this);
+	        this.appendScript(params);
+	      }
+	    }
+	    return index;
+	  },
+	
+	  getSrc: function getSrc(params) {
+	    var src = 'https://maps.googleapis.com/maps/api/js';
+	    src += '?callback=mapsCallback&';
+	    src += _querystring2['default'].stringify(params);
+	    return src;
+	  },
+	
+	  appendScript: function appendScript(params) {
+	    var src = this.getSrc(params);
+	    var script = document.createElement('script');
+	    script.setAttribute('src', src);
+	    document.head.appendChild(script);
+	    this.appended = true;
+	  },
+	
+	  mapsCallback: function mapsCallback() {
+	    window.mapsCallback = undefined;
+	    this.fireCallbacks();
+	  },
+	
+	  fireCallbacks: function fireCallbacks() {
+	    this.callbacks.forEach(function (callback) {
+	      return callback();
+	    });
+	    this.callbacks = [];
+	  },
+	
+	  removeCallback: function removeCallback(index) {
+	    this.callbacks.splice(index - 1, 1);
+	  }
+	
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 246 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.decode = exports.parse = __webpack_require__(247);
+	exports.encode = exports.stringify = __webpack_require__(248);
+
+/***/ },
+/* 247 */
+/***/ function(module, exports) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	'use strict';
+	
+	// If obj.hasOwnProperty has been overridden, then calling
+	// obj.hasOwnProperty(prop) will break.
+	// See: https://github.com/joyent/node/issues/1707
+	
+	function hasOwnProperty(obj, prop) {
+	  return Object.prototype.hasOwnProperty.call(obj, prop);
+	}
+	
+	module.exports = function (qs, sep, eq, options) {
+	  sep = sep || '&';
+	  eq = eq || '=';
+	  var obj = {};
+	
+	  if (typeof qs !== 'string' || qs.length === 0) {
+	    return obj;
+	  }
+	
+	  var regexp = /\+/g;
+	  qs = qs.split(sep);
+	
+	  var maxKeys = 1000;
+	  if (options && typeof options.maxKeys === 'number') {
+	    maxKeys = options.maxKeys;
+	  }
+	
+	  var len = qs.length;
+	  // maxKeys <= 0 means that we should not limit keys count
+	  if (maxKeys > 0 && len > maxKeys) {
+	    len = maxKeys;
+	  }
+	
+	  for (var i = 0; i < len; ++i) {
+	    var x = qs[i].replace(regexp, '%20'),
+	        idx = x.indexOf(eq),
+	        kstr,
+	        vstr,
+	        k,
+	        v;
+	
+	    if (idx >= 0) {
+	      kstr = x.substr(0, idx);
+	      vstr = x.substr(idx + 1);
+	    } else {
+	      kstr = x;
+	      vstr = '';
+	    }
+	
+	    k = decodeURIComponent(kstr);
+	    v = decodeURIComponent(vstr);
+	
+	    if (!hasOwnProperty(obj, k)) {
+	      obj[k] = v;
+	    } else if (Array.isArray(obj[k])) {
+	      obj[k].push(v);
+	    } else {
+	      obj[k] = [obj[k], v];
+	    }
+	  }
+	
+	  return obj;
+	};
+
+/***/ },
+/* 248 */
+/***/ function(module, exports) {
+
+	// Copyright Joyent, Inc. and other Node contributors.
+	//
+	// Permission is hereby granted, free of charge, to any person obtaining a
+	// copy of this software and associated documentation files (the
+	// "Software"), to deal in the Software without restriction, including
+	// without limitation the rights to use, copy, modify, merge, publish,
+	// distribute, sublicense, and/or sell copies of the Software, and to permit
+	// persons to whom the Software is furnished to do so, subject to the
+	// following conditions:
+	//
+	// The above copyright notice and this permission notice shall be included
+	// in all copies or substantial portions of the Software.
+	//
+	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+	// USE OR OTHER DEALINGS IN THE SOFTWARE.
+	
+	'use strict';
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	
+	var stringifyPrimitive = function stringifyPrimitive(v) {
+	  switch (typeof v === 'undefined' ? 'undefined' : _typeof(v)) {
+	    case 'string':
+	      return v;
+	
+	    case 'boolean':
+	      return v ? 'true' : 'false';
+	
+	    case 'number':
+	      return isFinite(v) ? v : '';
+	
+	    default:
+	      return '';
+	  }
+	};
+	
+	module.exports = function (obj, sep, eq, name) {
+	  sep = sep || '&';
+	  eq = eq || '=';
+	  if (obj === null) {
+	    obj = undefined;
+	  }
+	
+	  if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object') {
+	    return Object.keys(obj).map(function (k) {
+	      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
+	      if (Array.isArray(obj[k])) {
+	        return obj[k].map(function (v) {
+	          return ks + encodeURIComponent(stringifyPrimitive(v));
+	        }).join(sep);
+	      } else {
+	        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
+	      }
+	    }).join(sep);
+	  }
+	
+	  if (!name) return '';
+	  return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
+	};
+
+/***/ },
+/* 249 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	exports['default'] = function (props, nextProps) {
+	
+	  var propsKeys = Object.keys(props);
+	  var nextPropsKeys = Object.keys(nextProps);
+	  if (propsKeys.length !== nextPropsKeys.length) {
+	    return false;
+	  }
+	
+	  for (var i = 0; i < propsKeys.length; i++) {
+	    var key = propsKeys[i];
+	    if (key !== 'children' && key.indexOf('on') !== 0 && (!nextProps.hasOwnProperty(key) || props[key] !== nextProps[key])) {
+	      return false;
+	    }
+	  }
+	
+	  return true;
+	};
+	
+	module.exports = exports['default'];
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _entity = __webpack_require__(251);
+	
+	var _entity2 = _interopRequireDefault(_entity);
+	
+	var _eventsMarker = __webpack_require__(252);
+	
+	var _eventsMarker2 = _interopRequireDefault(_eventsMarker);
+	
+	exports['default'] = (0, _entity2['default'])('Marker', 'position', _eventsMarker2['default']);
+	module.exports = exports['default'];
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i];for (var key in source) {
+	      if (Object.prototype.hasOwnProperty.call(source, key)) {
+	        target[key] = source[key];
+	      }
+	    }
+	  }return target;
+	};
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
+	  } else {
+	    obj[key] = value;
+	  }return obj;
+	}
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _mixinsListener = __webpack_require__(244);
+	
+	var _mixinsListener2 = _interopRequireDefault(_mixinsListener);
+	
+	var _utilsCompareProps = __webpack_require__(249);
+	
+	var _utilsCompareProps2 = _interopRequireDefault(_utilsCompareProps);
+	
+	exports['default'] = function (name, latLngProp, events) {
+	  return _react2['default'].createClass({
+	
+	    mixins: [_mixinsListener2['default']],
+	
+	    entity: null,
+	
+	    componentDidMount: function componentDidMount() {
+	      var options = this.getOptions(this.props);
+	      this.entity = new google.maps[name](options);
+	      this.addListeners(this.entity, events);
+	    },
+	
+	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+	      if (!(0, _utilsCompareProps2['default'])(this.props, nextProps)) {
+	        var options = this.getOptions(nextProps);
+	        this.entity.setOptions(options);
+	      }
+	    },
+	
+	    componentWillUnmount: function componentWillUnmount() {
+	      this.entity.setMap(null);
+	      this.removeListeners();
+	      this.entity = null;
+	    },
+	
+	    getEntity: function getEntity() {
+	      return this.entity;
+	    },
+	
+	    getOptions: function getOptions(props) {
+	      return _extends({}, props, _defineProperty({}, latLngProp, new google.maps.LatLng(props.lat, props.lng)));
+	    },
+	
+	    render: function render() {
+	      return null;
+	    }
+	
+	  });
+	};
+	
+	module.exports = exports['default'];
+
+/***/ },
+/* 252 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = {
+	  onAnimationChanged: 'animation_changed',
+	  onClick: 'click',
+	  onClickableChanged: 'clickable_changed',
+	  onCursorChanged: 'cursor_changed',
+	  onDblClick: 'dblclick',
+	  onDrag: 'drag',
+	  onDragEnd: 'dragend',
+	  onDraggableChanged: 'draggable_changed',
+	  onDragStart: 'dragstart',
+	  onFlatChanged: 'flat_changed',
+	  onIconChanged: 'icon_changed',
+	  onMouseDown: 'mousedown',
+	  onMouseOut: 'mouseout',
+	  onMouseOver: 'mouseover',
+	  onMouseUp: 'mouseup',
+	  onPositionChanged: 'position_changed',
+	  onRightClick: 'rightclick',
+	  onShapeChanged: 'shape_changed',
+	  onTitleChanged: 'title_changed',
+	  onVisibleChanged: 'visible_changed',
+	  onZindexChanged: 'zindex_changed'
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _entity = __webpack_require__(251);
+	
+	var _entity2 = _interopRequireDefault(_entity);
+	
+	var _eventsInfoWindow = __webpack_require__(254);
+	
+	var _eventsInfoWindow2 = _interopRequireDefault(_eventsInfoWindow);
+	
+	exports['default'] = (0, _entity2['default'])('InfoWindow', 'position', _eventsInfoWindow2['default']);
+	module.exports = exports['default'];
+
+/***/ },
+/* 254 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = {
+	  onCloseClick: 'closeclick',
+	  onContentChanged: 'content_changed',
+	  onDOMReady: 'domready',
+	  onPositionChanged: 'position_changed',
+	  onZindexChanged: 'zindex_changed'
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+	
+	var _entity = __webpack_require__(251);
+	
+	var _entity2 = _interopRequireDefault(_entity);
+	
+	var _eventsCircle = __webpack_require__(256);
+	
+	var _eventsCircle2 = _interopRequireDefault(_eventsCircle);
+	
+	exports['default'] = (0, _entity2['default'])('Circle', 'center', _eventsCircle2['default']);
+	module.exports = exports['default'];
+
+/***/ },
+/* 256 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, '__esModule', {
+	  value: true
+	});
+	exports['default'] = {
+	  onCenterChanged: 'center_changed',
+	  onClick: 'click',
+	  onDblClick: 'dblclick',
+	  onDrag: 'drag',
+	  onDragEnd: 'dragend',
+	  onDragStart: 'dragstart',
+	  onMouseDown: 'mousedown',
+	  onMouseMove: 'mousemove',
+	  onMouseOut: 'mouseout',
+	  onMouseOver: 'mouseover',
+	  onMouseUp: 'mouseup',
+	  onRadiusChanged: 'radius_changed',
+	  onRightClick: 'rightclick'
+	};
+	module.exports = exports['default'];
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -28173,7 +28991,7 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(242);
+	var _Header = __webpack_require__(258);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
@@ -28191,7 +29009,106 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'messageList' },
-	      messageNodes
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar1.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Appa S.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '10:22 PM'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Appa would like to meet-up! How does Friday @ 12:00 work?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar2.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Taco C.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '3:24 PM'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Taco would like to meet-up! How does Friday @ 11:30 work?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar3.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Kyle W.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '9/11'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Kyle would like to meet-up! How does Thursday @ 1:00 work?'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'message' },
+	          _react2.default.createElement('img', { src: '/images/avatar1.jpg', className: 'messagePhoto' }),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageSubject' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageName' },
+	              'Rick H.'
+	            ),
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'messageTime' },
+	              '9/10'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'messageBody' },
+	            'Rick would like to meet-up! How does Wednesday @ 11:00 work?'
+	          )
+	        )
+	      )
 	    );
 	  }
 	});
@@ -28250,11 +29167,6 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'flex_container' },
-	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        ' Message container '
-	      ),
 	      _react2.default.createElement(MessageRow, { messages: this.state.sentMessages })
 	    );
 	  }
@@ -28263,7 +29175,7 @@
 	exports.default = Messaging;
 
 /***/ },
-/* 242 */
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28318,7 +29230,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 243 */
+/* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28333,7 +29245,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _LinkedIn = __webpack_require__(244);
+	var _LinkedIn = __webpack_require__(260);
 	
 	var _LinkedIn2 = _interopRequireDefault(_LinkedIn);
 	
@@ -28373,7 +29285,7 @@
 	exports.default = Login;
 
 /***/ },
-/* 244 */
+/* 260 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28430,7 +29342,7 @@
 	exports.default = LinkedIn;
 
 /***/ },
-/* 245 */
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28449,11 +29361,11 @@
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _Header = __webpack_require__(242);
+	var _Header = __webpack_require__(258);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _GoogleMap = __webpack_require__(246);
+	var _GoogleMap = __webpack_require__(262);
 	
 	var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
 	
@@ -28496,7 +29408,7 @@
 	exports.default = Activity;
 
 /***/ },
-/* 246 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28513,7 +29425,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactGmaps = __webpack_require__(247);
+	var _reactGmaps = __webpack_require__(241);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28594,6 +29506,24 @@
 	
 	var GoogleMap = _react2.default.createClass({
 		displayName: 'GoogleMap',
+	
+	
+		getInitialState: function getInitialState() {
+			return {
+				users: []
+			};
+		},
+	
+		componentDidMount: function componentDidMount() {
+			$.get("/queryUsers", function (result) {
+				console.log(result);
+	
+				this.setState({
+					users: result.users
+				});
+			}.bind(this));
+		},
+	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
@@ -28795,752 +29725,6 @@
 	exports.default = GoogleMap;
 
 /***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _componentsGmaps = __webpack_require__(248);
-	
-	var _componentsGmaps2 = _interopRequireDefault(_componentsGmaps);
-	
-	var _componentsMarker = __webpack_require__(256);
-	
-	var _componentsMarker2 = _interopRequireDefault(_componentsMarker);
-	
-	var _componentsInfoWindow = __webpack_require__(259);
-	
-	var _componentsInfoWindow2 = _interopRequireDefault(_componentsInfoWindow);
-	
-	var _componentsCircle = __webpack_require__(261);
-	
-	var _componentsCircle2 = _interopRequireDefault(_componentsCircle);
-	
-	exports.Gmaps = _componentsGmaps2['default'];
-	exports.Marker = _componentsMarker2['default'];
-	exports.InfoWindow = _componentsInfoWindow2['default'];
-	exports.Circle = _componentsCircle2['default'];
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i];for (var key in source) {
-	      if (Object.prototype.hasOwnProperty.call(source, key)) {
-	        target[key] = source[key];
-	      }
-	    }
-	  }return target;
-	};
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactDom = __webpack_require__(34);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
-	var _objectAssign = __webpack_require__(4);
-	
-	var _objectAssign2 = _interopRequireDefault(_objectAssign);
-	
-	var _eventsMap = __webpack_require__(249);
-	
-	var _eventsMap2 = _interopRequireDefault(_eventsMap);
-	
-	var _mixinsListener = __webpack_require__(250);
-	
-	var _mixinsListener2 = _interopRequireDefault(_mixinsListener);
-	
-	var _utilsGoogleMaps = __webpack_require__(251);
-	
-	var _utilsGoogleMaps2 = _interopRequireDefault(_utilsGoogleMaps);
-	
-	var _utilsCompareProps = __webpack_require__(255);
-	
-	var _utilsCompareProps2 = _interopRequireDefault(_utilsCompareProps);
-	
-	var Gmaps = _react2['default'].createClass({
-	  displayName: 'Gmaps',
-	
-	  mixins: [_mixinsListener2['default']],
-	
-	  map: null,
-	
-	  getInitialState: function getInitialState() {
-	    return {
-	      isMapCreated: false
-	    };
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    this.setState({
-	      callbackIndex: _utilsGoogleMaps2['default'].load(this.props.params, this.mapsCallback)
-	    });
-	  },
-	
-	  componentWillUnmount: function componentWillUnmount() {
-	    _utilsGoogleMaps2['default'].removeCallback(this.state.callbackIndex);
-	    this.removeListeners();
-	  },
-	
-	  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	    if (this.map && !(0, _utilsCompareProps2['default'])(this.props, nextProps)) {
-	      this.map.setOptions(_extends({}, nextProps, {
-	        center: new google.maps.LatLng(nextProps.lat, nextProps.lng)
-	      }));
-	    }
-	  },
-	
-	  getMap: function getMap() {
-	    return this.map;
-	  },
-	
-	  mapsCallback: function mapsCallback() {
-	    this.createMap();
-	    this.addListeners(this.map, _eventsMap2['default']);
-	  },
-	
-	  createMap: function createMap() {
-	    var node = _reactDom2['default'].findDOMNode(this);
-	    this.map = new google.maps.Map(node, _extends({}, this.props, {
-	      center: new google.maps.LatLng(this.props.lat, this.props.lng)
-	    }));
-	    this.setState({
-	      isMapCreated: true
-	    });
-	    if (this.props.onMapCreated) {
-	      this.props.onMapCreated(this.map);
-	    }
-	  },
-	
-	  getChildren: function getChildren() {
-	    var _this = this;
-	
-	    return _react2['default'].Children.map(this.props.children, function (child) {
-	      if (!_react2['default'].isValidElement(child)) {
-	        return child;
-	      }
-	      return _react2['default'].cloneElement(child, {
-	        ref: child.ref,
-	        map: _this.map
-	      });
-	    });
-	  },
-	
-	  render: function render() {
-	    var style = (0, _objectAssign2['default'])({
-	      width: this.props.width,
-	      height: this.props.height
-	    }, this.props.style);
-	    return _react2['default'].createElement('div', { style: style, className: this.props.className }, this.props.loadingMessage || 'Loading...', this.state.isMapCreated ? this.getChildren() : null);
-	  }
-	
-	});
-	
-	exports['default'] = Gmaps;
-	module.exports = exports['default'];
-
-/***/ },
-/* 249 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports['default'] = {
-	  onBoundsChanged: 'bounds_changed',
-	  onCenterChanged: 'center_changed',
-	  onClick: 'click',
-	  onDblClick: 'dblclick',
-	  onDrag: 'drag',
-	  onDragEnd: 'dragend',
-	  onDragStart: 'dragstart',
-	  onHeadingChanged: 'heading_changed',
-	  onIdle: 'idle',
-	  onMapTypeIdChanged: 'maptypeid_changed',
-	  onMouseMove: 'mousemove',
-	  onMouseOut: 'mouseout',
-	  onMouseOver: 'mouseover',
-	  onProjectionChanged: 'projection_changed',
-	  onResize: 'resize',
-	  onRightClick: 'rightclick',
-	  onTilesLoaded: 'tilesloaded',
-	  onTiltChanged: 'tilt_changed',
-	  onZoomChanged: 'zoom_changed'
-	};
-	module.exports = exports['default'];
-
-/***/ },
-/* 250 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var Listener = {
-	
-	  addListeners: function addListeners(entity, events) {
-	    for (var prop in this.props) {
-	      if (this.props.hasOwnProperty(prop) && events[prop]) {
-	        var addListener = google.maps.event.addListener;
-	        var listener = addListener(entity, events[prop], this.props[prop]);
-	        if (!this.listeners) {
-	          this.listeners = [];
-	        }
-	        this.listeners.push(listener);
-	      }
-	    }
-	  },
-	
-	  removeListeners: function removeListeners() {
-	    if (window.google && this.listeners) {
-	      this.listeners.forEach(function (listener) {
-	        google.maps.event.removeListener(listener);
-	      });
-	    }
-	  }
-	
-	};
-	
-	exports["default"] = Listener;
-	module.exports = exports["default"];
-
-/***/ },
-/* 251 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _querystring = __webpack_require__(252);
-	
-	var _querystring2 = _interopRequireDefault(_querystring);
-	
-	exports['default'] = {
-	
-	  callbacks: [],
-	
-	  appended: false,
-	
-	  load: function load(params, callback) {
-	    var index = this.callbacks.push(callback);
-	    if (window.google) {
-	      setTimeout(this.fireCallbacks.bind(this));
-	    } else {
-	      if (!this.appended) {
-	        window.mapsCallback = this.mapsCallback.bind(this);
-	        this.appendScript(params);
-	      }
-	    }
-	    return index;
-	  },
-	
-	  getSrc: function getSrc(params) {
-	    var src = 'https://maps.googleapis.com/maps/api/js';
-	    src += '?callback=mapsCallback&';
-	    src += _querystring2['default'].stringify(params);
-	    return src;
-	  },
-	
-	  appendScript: function appendScript(params) {
-	    var src = this.getSrc(params);
-	    var script = document.createElement('script');
-	    script.setAttribute('src', src);
-	    document.head.appendChild(script);
-	    this.appended = true;
-	  },
-	
-	  mapsCallback: function mapsCallback() {
-	    window.mapsCallback = undefined;
-	    this.fireCallbacks();
-	  },
-	
-	  fireCallbacks: function fireCallbacks() {
-	    this.callbacks.forEach(function (callback) {
-	      return callback();
-	    });
-	    this.callbacks = [];
-	  },
-	
-	  removeCallback: function removeCallback(index) {
-	    this.callbacks.splice(index - 1, 1);
-	  }
-	
-	};
-	module.exports = exports['default'];
-
-/***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	exports.decode = exports.parse = __webpack_require__(253);
-	exports.encode = exports.stringify = __webpack_require__(254);
-
-/***/ },
-/* 253 */
-/***/ function(module, exports) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-	
-	'use strict';
-	
-	// If obj.hasOwnProperty has been overridden, then calling
-	// obj.hasOwnProperty(prop) will break.
-	// See: https://github.com/joyent/node/issues/1707
-	
-	function hasOwnProperty(obj, prop) {
-	  return Object.prototype.hasOwnProperty.call(obj, prop);
-	}
-	
-	module.exports = function (qs, sep, eq, options) {
-	  sep = sep || '&';
-	  eq = eq || '=';
-	  var obj = {};
-	
-	  if (typeof qs !== 'string' || qs.length === 0) {
-	    return obj;
-	  }
-	
-	  var regexp = /\+/g;
-	  qs = qs.split(sep);
-	
-	  var maxKeys = 1000;
-	  if (options && typeof options.maxKeys === 'number') {
-	    maxKeys = options.maxKeys;
-	  }
-	
-	  var len = qs.length;
-	  // maxKeys <= 0 means that we should not limit keys count
-	  if (maxKeys > 0 && len > maxKeys) {
-	    len = maxKeys;
-	  }
-	
-	  for (var i = 0; i < len; ++i) {
-	    var x = qs[i].replace(regexp, '%20'),
-	        idx = x.indexOf(eq),
-	        kstr,
-	        vstr,
-	        k,
-	        v;
-	
-	    if (idx >= 0) {
-	      kstr = x.substr(0, idx);
-	      vstr = x.substr(idx + 1);
-	    } else {
-	      kstr = x;
-	      vstr = '';
-	    }
-	
-	    k = decodeURIComponent(kstr);
-	    v = decodeURIComponent(vstr);
-	
-	    if (!hasOwnProperty(obj, k)) {
-	      obj[k] = v;
-	    } else if (Array.isArray(obj[k])) {
-	      obj[k].push(v);
-	    } else {
-	      obj[k] = [obj[k], v];
-	    }
-	  }
-	
-	  return obj;
-	};
-
-/***/ },
-/* 254 */
-/***/ function(module, exports) {
-
-	// Copyright Joyent, Inc. and other Node contributors.
-	//
-	// Permission is hereby granted, free of charge, to any person obtaining a
-	// copy of this software and associated documentation files (the
-	// "Software"), to deal in the Software without restriction, including
-	// without limitation the rights to use, copy, modify, merge, publish,
-	// distribute, sublicense, and/or sell copies of the Software, and to permit
-	// persons to whom the Software is furnished to do so, subject to the
-	// following conditions:
-	//
-	// The above copyright notice and this permission notice shall be included
-	// in all copies or substantial portions of the Software.
-	//
-	// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-	// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-	// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-	// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-	// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-	// USE OR OTHER DEALINGS IN THE SOFTWARE.
-	
-	'use strict';
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-	
-	var stringifyPrimitive = function stringifyPrimitive(v) {
-	  switch (typeof v === 'undefined' ? 'undefined' : _typeof(v)) {
-	    case 'string':
-	      return v;
-	
-	    case 'boolean':
-	      return v ? 'true' : 'false';
-	
-	    case 'number':
-	      return isFinite(v) ? v : '';
-	
-	    default:
-	      return '';
-	  }
-	};
-	
-	module.exports = function (obj, sep, eq, name) {
-	  sep = sep || '&';
-	  eq = eq || '=';
-	  if (obj === null) {
-	    obj = undefined;
-	  }
-	
-	  if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object') {
-	    return Object.keys(obj).map(function (k) {
-	      var ks = encodeURIComponent(stringifyPrimitive(k)) + eq;
-	      if (Array.isArray(obj[k])) {
-	        return obj[k].map(function (v) {
-	          return ks + encodeURIComponent(stringifyPrimitive(v));
-	        }).join(sep);
-	      } else {
-	        return ks + encodeURIComponent(stringifyPrimitive(obj[k]));
-	      }
-	    }).join(sep);
-	  }
-	
-	  if (!name) return '';
-	  return encodeURIComponent(stringifyPrimitive(name)) + eq + encodeURIComponent(stringifyPrimitive(obj));
-	};
-
-/***/ },
-/* 255 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	exports['default'] = function (props, nextProps) {
-	
-	  var propsKeys = Object.keys(props);
-	  var nextPropsKeys = Object.keys(nextProps);
-	  if (propsKeys.length !== nextPropsKeys.length) {
-	    return false;
-	  }
-	
-	  for (var i = 0; i < propsKeys.length; i++) {
-	    var key = propsKeys[i];
-	    if (key !== 'children' && key.indexOf('on') !== 0 && (!nextProps.hasOwnProperty(key) || props[key] !== nextProps[key])) {
-	      return false;
-	    }
-	  }
-	
-	  return true;
-	};
-	
-	module.exports = exports['default'];
-
-/***/ },
-/* 256 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _entity = __webpack_require__(257);
-	
-	var _entity2 = _interopRequireDefault(_entity);
-	
-	var _eventsMarker = __webpack_require__(258);
-	
-	var _eventsMarker2 = _interopRequireDefault(_eventsMarker);
-	
-	exports['default'] = (0, _entity2['default'])('Marker', 'position', _eventsMarker2['default']);
-	module.exports = exports['default'];
-
-/***/ },
-/* 257 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	var _extends = Object.assign || function (target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i];for (var key in source) {
-	      if (Object.prototype.hasOwnProperty.call(source, key)) {
-	        target[key] = source[key];
-	      }
-	    }
-	  }return target;
-	};
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	function _defineProperty(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-	  } else {
-	    obj[key] = value;
-	  }return obj;
-	}
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _mixinsListener = __webpack_require__(250);
-	
-	var _mixinsListener2 = _interopRequireDefault(_mixinsListener);
-	
-	var _utilsCompareProps = __webpack_require__(255);
-	
-	var _utilsCompareProps2 = _interopRequireDefault(_utilsCompareProps);
-	
-	exports['default'] = function (name, latLngProp, events) {
-	  return _react2['default'].createClass({
-	
-	    mixins: [_mixinsListener2['default']],
-	
-	    entity: null,
-	
-	    componentDidMount: function componentDidMount() {
-	      var options = this.getOptions(this.props);
-	      this.entity = new google.maps[name](options);
-	      this.addListeners(this.entity, events);
-	    },
-	
-	    componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-	      if (!(0, _utilsCompareProps2['default'])(this.props, nextProps)) {
-	        var options = this.getOptions(nextProps);
-	        this.entity.setOptions(options);
-	      }
-	    },
-	
-	    componentWillUnmount: function componentWillUnmount() {
-	      this.entity.setMap(null);
-	      this.removeListeners();
-	      this.entity = null;
-	    },
-	
-	    getEntity: function getEntity() {
-	      return this.entity;
-	    },
-	
-	    getOptions: function getOptions(props) {
-	      return _extends({}, props, _defineProperty({}, latLngProp, new google.maps.LatLng(props.lat, props.lng)));
-	    },
-	
-	    render: function render() {
-	      return null;
-	    }
-	
-	  });
-	};
-	
-	module.exports = exports['default'];
-
-/***/ },
-/* 258 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports['default'] = {
-	  onAnimationChanged: 'animation_changed',
-	  onClick: 'click',
-	  onClickableChanged: 'clickable_changed',
-	  onCursorChanged: 'cursor_changed',
-	  onDblClick: 'dblclick',
-	  onDrag: 'drag',
-	  onDragEnd: 'dragend',
-	  onDraggableChanged: 'draggable_changed',
-	  onDragStart: 'dragstart',
-	  onFlatChanged: 'flat_changed',
-	  onIconChanged: 'icon_changed',
-	  onMouseDown: 'mousedown',
-	  onMouseOut: 'mouseout',
-	  onMouseOver: 'mouseover',
-	  onMouseUp: 'mouseup',
-	  onPositionChanged: 'position_changed',
-	  onRightClick: 'rightclick',
-	  onShapeChanged: 'shape_changed',
-	  onTitleChanged: 'title_changed',
-	  onVisibleChanged: 'visible_changed',
-	  onZindexChanged: 'zindex_changed'
-	};
-	module.exports = exports['default'];
-
-/***/ },
-/* 259 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _entity = __webpack_require__(257);
-	
-	var _entity2 = _interopRequireDefault(_entity);
-	
-	var _eventsInfoWindow = __webpack_require__(260);
-	
-	var _eventsInfoWindow2 = _interopRequireDefault(_eventsInfoWindow);
-	
-	exports['default'] = (0, _entity2['default'])('InfoWindow', 'position', _eventsInfoWindow2['default']);
-	module.exports = exports['default'];
-
-/***/ },
-/* 260 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports['default'] = {
-	  onCloseClick: 'closeclick',
-	  onContentChanged: 'content_changed',
-	  onDOMReady: 'domready',
-	  onPositionChanged: 'position_changed',
-	  onZindexChanged: 'zindex_changed'
-	};
-	module.exports = exports['default'];
-
-/***/ },
-/* 261 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { 'default': obj };
-	}
-	
-	var _entity = __webpack_require__(257);
-	
-	var _entity2 = _interopRequireDefault(_entity);
-	
-	var _eventsCircle = __webpack_require__(262);
-	
-	var _eventsCircle2 = _interopRequireDefault(_eventsCircle);
-	
-	exports['default'] = (0, _entity2['default'])('Circle', 'center', _eventsCircle2['default']);
-	module.exports = exports['default'];
-
-/***/ },
-/* 262 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, '__esModule', {
-	  value: true
-	});
-	exports['default'] = {
-	  onCenterChanged: 'center_changed',
-	  onClick: 'click',
-	  onDblClick: 'dblclick',
-	  onDrag: 'drag',
-	  onDragEnd: 'dragend',
-	  onDragStart: 'dragstart',
-	  onMouseDown: 'mousedown',
-	  onMouseMove: 'mousemove',
-	  onMouseOut: 'mouseout',
-	  onMouseOver: 'mouseover',
-	  onMouseUp: 'mouseup',
-	  onRadiusChanged: 'radius_changed',
-	  onRightClick: 'rightclick'
-	};
-	module.exports = exports['default'];
-
-/***/ },
 /* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -29596,8 +29780,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_UpdateForm2.default, props),
-	        _react2.default.createElement(_FieldForm2.default, null)
+	        _react2.default.createElement(_UpdateForm2.default, props)
 	      );
 	    }
 	  }]);

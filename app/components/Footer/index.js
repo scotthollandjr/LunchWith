@@ -10,8 +10,10 @@ class Footer extends React.Component {
       var panel = document.getElementById("messagePanel");
       if (panel.style.height == "100%") {
         panel.style.height = "0%";
+        document.getElementById("navBar").style.height = "20%";
       } else {
         panel.style.height = "100%";
+        document.getElementById("navBar").style.height = "0%";
       }
     }
 
@@ -22,8 +24,10 @@ class Footer extends React.Component {
       var panel = document.getElementById("updatePanel");
       if (panel.style.height == "100%") {
         panel.style.height = "0%";
+        document.getElementById("navBar").style.height = "20%";
       } else {
         panel.style.height = "100%";
+        document.getElementById("navBar").style.height = "0%";
       }
     }
 

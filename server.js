@@ -45,15 +45,9 @@ let findOrCreateUser = (req, res, next) => {
 
 let queryUsers = (req, res, next) => {
   var params = req.query;
-  var firstname = req.query.firstname;
-  var sql = "SELECT * FROM users WHERE firstname = $1";
-  var loggedInUser = req.user;
+  var sql = "SELECT * FROM users";
 
-  db.query(sql, ["Scott"])
-    .then(function (user) {
-      return res.json({"user" : user})
-    })
-    .catch(next);
+  return res.json({"users" : users})
 };
 
 let getLoggedInUserDetails = (req, res, next) => {
@@ -78,13 +72,24 @@ let checkSentMessages = (req, res, next) => {
 }
 
 let updateUserDetails = (req, res) => {
-  var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';"
+  var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';";
+  db.query(sql);
+  return res;
+}
+
+let updateUserLocationDetails = (req, res) => {
+  var sql;
+  if (req.query.latitude === 'NULL') {
+    sql = "UPDATE users SET latitude=NULL,longitude=NULL WHERE emailaddress='" + req.user.emailaddress + "';";
+  } else {
+    sql = "UPDATE users SET latitude='" + req.query.latitude + "',longitude='" + req.query.longitude +"' WHERE emailaddress='" + req.user.emailaddress + "';";
+  }
   db.query(sql);
   return res;
 }
 
 let updateUserSkills = (req, res) => {
-  var sql = "UPDATE users SET skills='" + req.query.skills + "';";
+  var sql = "UPDATE users SET skills='" + req.query.skills + "' WHERE emailaddress='" + req.user.emailaddress + ";";
   console.log(sql);
   db.query(sql);
   return "Updated!"
@@ -189,6 +194,7 @@ app.use('/newUserCreation', newUser);
 app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
+app.use('/updateUserLocationDetails', updateUserLocationDetails);
 app.use('/updateUserSkills', updateUserSkills);
 
 app.listen(app.get('port'), function () {

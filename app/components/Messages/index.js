@@ -14,7 +14,48 @@ var MessageRow = React.createClass ({
       });
       return (
         <div className="messageList">
-          {messageNodes}
+          <div>
+            <div className="message">
+              <img src="/images/avatar1.jpg" className="messagePhoto"></img>
+              <p className="messageSubject">
+                <span className="messageName">Appa S.</span>
+                <span className="messageTime">10:22 PM</span>
+              </p>
+              <p className="messageBody">
+                Appa would like to meet-up! How does Friday @ 12:00 work?
+              </p>
+            </div>
+            <div className="message">
+              <img src="/images/avatar2.jpg" className="messagePhoto"></img>
+              <p className="messageSubject">
+                <span className="messageName">Taco C.</span>
+                <span className="messageTime">3:24 PM</span>
+              </p>
+              <p className="messageBody">
+                Taco would like to meet-up! How does Friday @ 11:30 work?
+              </p>
+            </div>
+            <div className="message">
+              <img src="/images/avatar3.jpg" className="messagePhoto"></img>
+              <p className="messageSubject">
+                <span className="messageName">Kyle W.</span>
+                <span className="messageTime">9/11</span>
+              </p>
+              <p className="messageBody">
+                Kyle would like to meet-up! How does Thursday @ 1:00 work?
+              </p>
+            </div>
+            <div className="message">
+              <img src="/images/avatar1.jpg" className="messagePhoto"></img>
+              <p className="messageSubject">
+                <span className="messageName">Rick H.</span>
+                <span className="messageTime">9/10</span>
+              </p>
+              <p className="messageBody">
+                Rick would like to meet-up! How does Wednesday @ 11:00 work?
+              </p>
+            </div>
+          </div>
         </div>
 
     );
@@ -68,9 +109,7 @@ var Messaging = React.createClass ({
       return (
         <div className="flex_container">
 
-        <h3> Message container </h3>
-
-        <MessageRow messages={this.state.sentMessages} />
+          <MessageRow messages={this.state.sentMessages} />
 
         </div>
       );
