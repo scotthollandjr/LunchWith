@@ -27731,11 +27731,6 @@
 	// import * as userService from '../../services/user-service';
 	
 	
-	var coords = {
-		lat: undefined.state.centerLat,
-		lng: undefined.state.centerLng
-	};
-	
 	var UpdateForm = _react2.default.createClass({
 		displayName: 'UpdateForm',
 	
@@ -27747,10 +27742,8 @@
 				company: "Initial company state",
 				title: "title",
 				bio: "bio",
-				latitude: "",
-				longitude: "",
-				centerLat: 45.526943,
-				centerLng: -122.684112
+				latitude: "45.526943",
+				longitude: "-122.684112"
 			};
 		},
 	
@@ -27815,23 +27808,32 @@
 			var Gmaps = this.refs.Gmaps;
 	
 	
-			var centerCircle = new google.maps.Circle({
-				map: map,
-				center: { lat: coords.lat, lng: coords.lng },
-				radius: 25,
-				fillColor: '#09c7ed',
-				fillOpacity: .75,
-				strokeColor: '#09c7ed',
-				strokeOpacity: .25,
-				strokeWeight: 10,
-				onClick: this.onClick
-			});
+			var coords = {
+				lat: this.state.centerLat,
+				lng: this.state.centerLng };
 		},
 	
 	
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
 			var longy = location.latLng.lng();
+			console.log("old: " + this.state.latitude + ", " + this.state.longitude);
+			this.setState({
+				longitude: longy,
+				latitude: latty
+			});
+			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
+	
+			var centerCircle = new google.maps.Circle({
+				map: _reactGmaps.Gmaps,
+				center: { lat: this.state.latitude, lng: this.state.longitude },
+				radius: 25,
+				fillColor: '#09c7ed',
+				fillOpacity: .75,
+				strokeColor: '#09c7ed',
+				strokeOpacity: .25,
+				strokeWeight: 10
+			});
 		},
 	
 		render: function render() {
@@ -27873,8 +27875,8 @@
 							ref: 'Gmaps',
 							width: '100%',
 							height: '100%',
-							lat: this.state.centerLat,
-							lng: this.state.centerLng,
+							lat: this.state.latitude,
+							lng: this.state.longitude,
 							zoom: 15,
 							disableDefaultUI: true,
 							loadingMessage: 'Be happy',
