@@ -95,17 +95,6 @@ var UpdateForm = React.createClass({
 			latitude: latty
 		});
 		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
-
-		var centerCircle = new google.maps.Circle({
-			map: Gmaps,
-			center: {lat: this.state.latitude, lng: this.state.longitude},
-			radius: 25,
-			fillColor: '#09c7ed',
-			fillOpacity: .75,
-			strokeColor: '#09c7ed',
-			strokeOpacity: .25,
-			strokeWeight: 10
-		});
 	},
 
 

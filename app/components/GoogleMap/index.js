@@ -260,19 +260,19 @@ var GoogleMap = React.createClass({
 
   render() {
     return (
-				<div id="map">
-	        <Gmaps
-	        	ref='Gmaps'
-		        width={'100vw'}
-		        height={'100vh'}
-		        lat={0}
-		        lng={0}
-		        zoom={15}
-						disableDefaultUI={true}
-		        loadingMessage={'Be happy'}
-						onClick={this.onClick}
-		        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
-		        onMapCreated={this.onMapCreated}>
+			<div id="map">
+        <Gmaps
+        	ref='Gmaps'
+	        width={'100vw'}
+	        height={'100vh'}
+	        lat={0}
+	        lng={0}
+	        zoom={15}
+					disableDefaultUI={true}
+	        loadingMessage={'Be happy'}
+					onClick={this.onClick}
+	        params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
+	        onMapCreated={this.onMapCreated}>
 		    </Gmaps>
 				<div id="halfPanel" className="overlay">
 					<div className="overlay-content">
