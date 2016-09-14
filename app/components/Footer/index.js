@@ -3,10 +3,10 @@ import UpdateForm from '../UpdateForm';
 import Messages from '../Messages';
 
 class Footer extends React.Component {
-    showCalendar() {
+    showMesssages() {
       var other = document.getElementById("updatePanel");
       other.style.height = "0%";
-      
+
       var panel = document.getElementById("messagePanel");
       if (panel.style.height == "100%") {
         panel.style.height = "0%";
@@ -43,7 +43,7 @@ class Footer extends React.Component {
                         </a>
                       </li>
                       <li>
-                        <a href='/messages' className="footer-tab">
+                        <a onClick={this.showMesssages} className="footer-tab">
                           <span className="icon is-large">
                             <i className="fa fa-comments-o"></i>
                           </span>
@@ -68,7 +68,7 @@ class Footer extends React.Component {
     					</div>
     				</div>
             <div id="messagePanel" className="overlay2">
-              <div className="overlay-content update-content">
+              <div className="overlay-content message-content">
                 <h1 className="title is-3 white">Messages:</h1>
                 <Messages />
               </div>

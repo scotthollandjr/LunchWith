@@ -216,7 +216,7 @@ html, body {
   height: 0;
   width: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   bottom: 0;
   background: linear-gradient(to top, var(--main-nav-grey) 75%, rgba(0,0,0,0));
@@ -227,7 +227,7 @@ html, body {
 .overlay-content {
   color: var(--main-light);
   position: relative;
-  top: 22%;
+  top: 10%;
   width: 100%;
   padding: 5%;
 }

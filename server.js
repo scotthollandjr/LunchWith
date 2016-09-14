@@ -10,12 +10,13 @@ OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var session = require('express-session');
 var passportLinkedIn = require('./app/auth/linkedinauth');
 require('dotenv').config();
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 
 
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let newUser = (req, res, next) => {
-  console.log(req);
   var firstName = req.firstName;
   var lastName = req.lastName;
   var emailAddress = req.emailAddress;
@@ -62,7 +63,6 @@ let getLoggedInUserDetails = (req, res, next) => {
 
 let checkReceivedMessages = (req, res, next) => {
   var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
-  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -71,7 +71,6 @@ let checkReceivedMessages = (req, res, next) => {
 
 let checkSentMessages = (req, res, next) => {
   var sql = "SELECT * FROM messages WHERE sender_id = " + req.user.id;
-  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -95,11 +94,11 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(compression());
 
-app.use(session({
-secret: 'keyboard cat',
-resave: true,
-saveUninitialized: true
-}));
+// app.use(session({
+// secret: 'keyboard cat',
+// resave: true,
+// saveUninitialized: true
+// }));
 
 if (process.env.NODE_ENV != 'development') {
   console.log(process.env.NODE_ENV)
@@ -116,14 +115,12 @@ app.use('/splash', express.static(__dirname + '/www'));
 app.use('/main', express.static(__dirname + '/www'));
 app.use('/css', express.static(__dirname + '/node_modules/bulma/css'));
 app.use('/images', express.static(__dirname + '/www/assets/images'));
-app.use('/activity', express.static(__dirname + '/www'));
-app.use('/account', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));
 app.use('/newUserWelcome', express.static(__dirname + '/www'));
-app.use('/messages', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
+    console.log('---------request', req.url)
     // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
@@ -137,9 +134,18 @@ app.all('*', function (req, res, next) {
     }
 });
 
-
+let cookieSecret = 'dfkghjkdhgjkdg';
+app.use(cookieParser(cookieSecret));
+app.use(cookieSession({
+  key    : 'fggfddfgdgfdfgg',
+  secret : cookieSecret,
+  cookie : {
+    maxAge: 3600
+  }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.get('/auth/linkedin',
   passport.authenticate('linkedin'),
@@ -158,6 +164,25 @@ app.use('/auth/linkedin/callback',
   }
 );
 
+app.use('*', function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    // req.user is available for use here
+    return next(); }
+  // denied. redirect to login
+  res.redirect('/auth/linkedin')
+});
+
+// function stopDeserializingConstantly(req, res, next) {
+//
+//   if (!req.user){
+//     app.use(passport.session());
+//   }
+//   next();
+// }
+
+app.use('/activity', express.static(__dirname + '/www'));
+app.use('/account', express.static(__dirname + '/www'));
+app.use('/messages', express.static(__dirname + '/www'));
 app.use('/checkReceivedMessages', checkReceivedMessages);
 app.use('/checkSentMessages', checkSentMessages);
 app.use('/newUserCreation', newUser);
@@ -165,7 +190,6 @@ app.use('/searchUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
 app.use('/updateUserSkills', updateUserSkills);
-
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

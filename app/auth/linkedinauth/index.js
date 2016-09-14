@@ -14,13 +14,15 @@ let newUser = (profileData) => {
   var lastName = profileData.lastName || "No last name provided";
   var emailAddress = profileData.emailAddress;
   var company;
-  if(profileData.positions.values[0]) {
+
+  if(profileData.positions.values) {
   company = profileData.positions.values[0].company.name
   } else {
   company = "No company info provided";
   }
   var title;
-  if(profileData.positions.values[0]) {
+
+  if(profileData.positions.values) {
   title = profileData.positions.values[0].title;
   } else {
   title = "No title provided";
@@ -55,8 +57,6 @@ passport.deserializeUser(function(email, done) {
 
 function findOrCreateUser(profile, done) {
   var sql = "SELECT * FROM users WHERE emailaddress = $1";
-
-  console.log(profile._json.positions.values[0]);
 
   db.query(sql, [profile._json.emailAddress])
   .then(function (user) {
