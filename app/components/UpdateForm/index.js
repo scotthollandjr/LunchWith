@@ -13,7 +13,10 @@ var UpdateForm = React.createClass({
 			company: "Initial company state",
 			title: "title",
 			bio: "bio",
-			location: ""
+			latitude: "",
+			longitude: "",
+			centerLat: 45.526943,
+			centerLng: -122.684112
 		};
 	},
 
@@ -79,14 +82,31 @@ var UpdateForm = React.createClass({
 
 	onMapCreated(map) {
 		const {Gmaps} = this.refs;
+
+		const coords = {
+			lat: this.state.centerLat,
+			lng: this.state.centerLng};
+
+		var centerCircle = new google.maps.Circle({
+			map: map,
+			center: {lat: coords.lat, lng: coords.lng},
+			radius: 25,
+			fillColor: '#09c7ed',
+			fillOpacity: .75,
+			strokeColor: '#09c7ed',
+			strokeOpacity: .25,
+			strokeWeight: 10,
+			onClick: this.onClick
+		});
 	},
 
 	onClick: function(location) {
 		var latty = location.latLng.lat()
 		var longy = location.latLng.lng()
 
-		console.log("Location: " + latty + ', ' + longy);
+
 	},
+
 
 	render: function() {
 		return (
@@ -112,8 +132,8 @@ var UpdateForm = React.createClass({
 							ref='Gmaps'
 							width={'100%'}
 							height={'100%'}
-							lat={45.526943}
-							lng={-122.684112}
+							lat={this.state.centerLat}
+							lng={this.state.centerLng}
 							zoom={15}
 							disableDefaultUI={true}
 							loadingMessage={'Be happy'}

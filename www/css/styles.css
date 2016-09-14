@@ -344,6 +344,11 @@ html, body {
   padding-bottom: 20%;
 }
 
+#update-map {
+  width: 500px;
+  height: 500px;
+}
+
 /*** MESSAGES ****************************************/
 
 .messageList {

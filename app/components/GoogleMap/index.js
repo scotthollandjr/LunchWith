@@ -79,6 +79,22 @@ var superUser = {
 
 var GoogleMap = React.createClass({
 
+	getInitialState:function() {
+		return {
+			users: [],
+		};
+	},
+
+	componentDidMount: function() {
+		$.get("/queryUsers", function(result) {
+			console.log(result);
+
+			this.setState({
+				users: result.users
+			});
+		}.bind(this));
+	},
+
   onMapCreated(map) {
 		const {Gmaps} = this.refs;
 		if (navigator.geolocation) {

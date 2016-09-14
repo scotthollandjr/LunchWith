@@ -44,15 +44,9 @@ let findOrCreateUser = (req, res, next) => {
 
 let queryUsers = (req, res, next) => {
   var params = req.query;
-  var firstname = req.query.firstname;
-  var sql = "SELECT * FROM users WHERE firstname = $1";
-  var loggedInUser = req.user;
+  var sql = "SELECT * FROM users";
 
-  db.query(sql, ["Scott"])
-    .then(function (user) {
-      return res.json({"user" : user})
-    })
-    .catch(next);
+  return res.json({"users" : users})
 };
 
 let getLoggedInUserDetails = (req, res, next) => {
