@@ -371,6 +371,8 @@ html, body {
 
 #update-form {
   width: 500px;
+  margin: auto;
+  margin-top: 25px;
 }
 
 #updatePanel {
@@ -380,7 +382,7 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-    width: 0px; /* hide scrollbar but still allow scrolling */
+  width: 0px; /* hide scrollbar but still allow scrolling */
 }
 
 .update-content {

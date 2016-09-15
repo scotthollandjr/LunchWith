@@ -4,6 +4,9 @@ import SkillsForm from '../SkillsForm';
 var Router = require('react-router');
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
+var smap;
+var smarkers = [];
+
 var UpdateForm = React.createClass({
 
 	getInitialState: function() {
@@ -79,6 +82,8 @@ var UpdateForm = React.createClass({
 	)},
 
 	onMapCreated(map) {
+		smap = map;
+
 		const {Gmaps} = this.refs;
 
 		const coords = {
@@ -97,12 +102,24 @@ var UpdateForm = React.createClass({
 			latitude: latty
 		});
 		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
+
+		var centerCircle = new google.maps.Circle({
+			map: smap,
+			center: {lat: latty, lng: longy},
+			radius: 25,
+			fillColor: '#09c7ed',
+			fillOpacity: .75,
+			strokeColor: '#09c7ed',
+			strokeOpacity: .25,
+			strokeWeight: 10,
+		});
 	},
 
 
 	render: function() {
 		return (
 	  	<div id="update-form">
+				<h1 className="title white is-3">Update your account info:</h1>
 			  <form onSubmit={this.updateInfo}>
 					<div className="panel-block">
 						<p className="control">
@@ -137,6 +154,7 @@ var UpdateForm = React.createClass({
 								lng={this.state.longitude}
 								zoom={15}
 								disableDefaultUI={true}
+								clickableIcons={false}
 								loadingMessage={'Be happy'}
 								onClick={this.onClick}
 								params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}

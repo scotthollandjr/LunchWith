@@ -27731,6 +27731,9 @@
 	// import * as userService from '../../services/user-service';
 	
 	
+	var smap;
+	var smarkers = [];
+	
 	var UpdateForm = _react2.default.createClass({
 		displayName: 'UpdateForm',
 	
@@ -27805,6 +27808,8 @@
 		},
 	
 		onMapCreated: function onMapCreated(map) {
+			smap = map;
+	
 			var Gmaps = this.refs.Gmaps;
 	
 	
@@ -27825,6 +27830,17 @@
 				latitude: latty
 			});
 			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
+	
+			var centerCircle = new google.maps.Circle({
+				map: smap,
+				center: { lat: latty, lng: longy },
+				radius: 25,
+				fillColor: '#09c7ed',
+				fillOpacity: .75,
+				strokeColor: '#09c7ed',
+				strokeOpacity: .25,
+				strokeWeight: 10
+			});
 		},
 	
 		render: function render() {
@@ -27833,6 +27849,11 @@
 			return _react2.default.createElement(
 				'div',
 				{ id: 'update-form' },
+				_react2.default.createElement(
+					'h1',
+					{ className: 'title white is-3' },
+					'Update your account info:'
+				),
 				_react2.default.createElement(
 					'form',
 					{ onSubmit: this.updateInfo },
@@ -27891,6 +27912,7 @@
 								lng: this.state.longitude,
 								zoom: 15,
 								disableDefaultUI: true,
+								clickableIcons: false,
 								loadingMessage: 'Be happy',
 								onClick: this.onClick,
 								params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
