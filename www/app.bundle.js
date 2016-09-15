@@ -32183,40 +32183,266 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'splashDiv' },
-	        _react2.default.createElement('img', { src: '/images/lunchlogo.png' }),
+	        null,
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'splash-title white' },
+	          'nav',
+	          { className: 'nav', id: 'splash-nav' },
 	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'The best way to grow your professional network'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'Without all the awkwardness.'
+	            'div',
+	            { className: 'nav-right' },
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'nav-item clickable', href: '#' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'icon' },
+	                _react2.default.createElement('i', { className: 'fa fa-github' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { className: 'nav-item clickable', href: '#' },
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'icon' },
+	                _react2.default.createElement('i', { className: 'fa fa-twitter' })
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'nav-item' },
+	              'Already have an account?',
+	              _react2.default.createElement(
+	                'a',
+	                { href: '/auth/linkedin', className: 'nav-item  clickable' },
+	                'Log-in'
+	              )
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'splash-body white' },
+	          { id: 'splashDiv1', className: 'splashDiv' },
+	          _react2.default.createElement('img', { src: '/images/lunchlogo.png' }),
 	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'LunchWith is the first in-person social network that takes all the guess work'
+	            'div',
+	            { className: 'splash-title white' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'The best way to grow your professional network'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'Without all the awkwardness.'
+	            )
 	          ),
 	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'out of meeting new professionals in your field'
+	            'div',
+	            { className: 'splash-body white' },
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'LunchWith is the first in-person social network that takes all the guess work out of meeting new professionals in your field'
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'a',
+	            { href: '/auth/linkedin' },
+	            _react2.default.createElement('img', { className: 'splash-button', src: '/images/linkedbutton.png' })
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'a',
-	          { href: '/auth/linkedin' },
-	          _react2.default.createElement('img', { className: 'splash-button', src: '/images/linkedbutton.png' })
+	          'div',
+	          { id: 'splashDiv2', className: 'splashDiv' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'splash-left' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'splash-title white' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Want to learn from your local experts?'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'No problem. Buy them a meal.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'splash-body white' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Whether you are someone new to the industry or a veteran who is happy to share your experience, LunchWith is happy to match you up with people with the right background to chat over lunch!'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '/auth/linkedin' },
+	              _react2.default.createElement('img', { className: 'splash-button', src: '/images/linkedbutton.png' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('img', { src: '/images/lunchlogo.png' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'splashDiv3', className: 'splashDiv' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'splash-left' },
+	            _react2.default.createElement('img', { src: '/images/lunchlogo.png' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'splash-title white' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Grow your professional network.'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Meet your future colleagues.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'splash-body white' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Jobs change, but relationships stay. Growing a solid network of professionals in your area across differenct functions is key to staying relevant.'
+	              ),
+	              ' ',
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'LunchWith believes in the value of one-on-one in-person interactions. You may just end up meeting your future boss or employee.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '/auth/linkedin' },
+	              _react2.default.createElement('img', { className: 'splash-button', src: '/images/linkedbutton.png' })
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'splashDiv4', className: 'splashDiv' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'splash-left' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'splash-title white' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'No solicitations, recruiters,'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'vendors or business spies'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'allowed.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'splash-body white' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'LunchWith is committed to the quality of all users experience. We have a zero tolerance policy for the misuse of the application.'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'All reported abuse accounts will be immediately terminated upon verification.'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'a',
+	              { href: '/auth/linkedin' },
+	              _react2.default.createElement('img', { className: 'splash-button', src: '/images/linkedbutton.png' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement('img', { src: '/images/lunchlogo.png' })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'footer',
+	          { className: 'footer', id: 'splash-footer' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'content' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'footer-left' },
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'footer-item' },
+	                '© LunchWith, an ',
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#', className: 'clickable' },
+	                  'EyeCue Lab'
+	                ),
+	                ' Product, Copyright 2016'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'footer-right' },
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'footer-item' },
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '/', className: 'clickable' },
+	                    'Privacy Policy'
+	                  ),
+	                  ' | ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '/', className: 'clickable' },
+	                    'Contact Us'
+	                  ),
+	                  ' | ',
+	                  _react2.default.createElement(
+	                    'a',
+	                    { href: '/', className: 'clickable' },
+	                    'About'
+	                  )
+	                )
+	              )
+	            )
+	          )
 	        )
 	      );
 	    }
