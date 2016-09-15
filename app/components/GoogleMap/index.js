@@ -86,7 +86,13 @@ var GoogleMap = React.createClass({
 	},
 
 	componentDidMount: function() {
-
+		var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
+		$.get("/queryUsers"+locationQueryString, function(result) {
+			console.log("Location searched!", result);
+			this.setState({
+				users: result.users
+			});
+		}.bind(this));
 	},
 
   onMapCreated(map) {
