@@ -82,20 +82,32 @@ var GoogleMap = React.createClass({
 	getInitialState:function() {
 		return {
 			users: [],
+			myLatLng: {lat: userInfo.latitude, lng: userInfo.longitude},
+			map: "mappity"
 		};
 	},
 
 	componentDidMount: function() {
+		const {Gmaps} = this.refs;
+
 		var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
 		$.get("/queryUsers"+locationQueryString, function(result) {
 			console.log("Location searched!", result);
 			this.setState({
 				users: result.users
 			});
+			var pref = {
+				position: this.state.myLatLng,
+				map: this.state.map
+			};
+			this.marker = new google.maps.Marker(pref);
 		}.bind(this));
 	},
 
   onMapCreated(map) {
+		this.setState({
+			map: map
+		});
 		const {Gmaps} = this.refs;
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {

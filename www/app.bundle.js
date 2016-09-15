@@ -29510,23 +29510,36 @@
 	
 		getInitialState: function getInitialState() {
 			return {
-				users: []
+				users: [],
+				myLatLng: { lat: userInfo.latitude, lng: userInfo.longitude },
+				map: "mappity"
 			};
 		},
 	
 		componentDidMount: function componentDidMount() {
+			var Gmaps = this.refs.Gmaps;
+	
+	
 			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
 			$.get("/queryUsers" + locationQueryString, function (result) {
 				console.log("Location searched!", result);
 				this.setState({
 					users: result.users
 				});
+				var pref = {
+					position: this.state.myLatLng,
+					map: this.state.map
+				};
+				this.marker = new google.maps.Marker(pref);
 			}.bind(this));
 		},
 	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
+			this.setState({
+				map: map
+			});
 			var Gmaps = this.refs.Gmaps;
 	
 			if (navigator.geolocation) {
