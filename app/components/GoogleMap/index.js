@@ -93,13 +93,6 @@ var GoogleMap = React.createClass({
 		const {Gmaps} = this.refs;
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
-				var locationQueryString = "?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
-				$.get("/queryUsers"+locationQueryString, function(result) {
-					console.log("Location searched!", result);
-					this.setState({
-						users: result.users
-					});
-				}.bind(this));
 				map.setCenter({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
