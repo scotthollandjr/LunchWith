@@ -27828,60 +27828,86 @@
 		},
 	
 		render: function render() {
+			var _this = this;
+	
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ id: 'update-form' },
 				_react2.default.createElement(
 					'form',
 					{ onSubmit: this.updateInfo },
 					_react2.default.createElement(
-						'p',
-						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'First Name', value: this.state.firstName, onChange: this.handleFirstNameChange })
+						'div',
+						{ className: 'panel-block' },
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement('input', { className: 'input', placeholder: 'First Name', value: this.state.firstName, onChange: this.handleFirstNameChange })
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name', value: this.state.lastName, onChange: this.handleLastNameChange })
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement('input', { className: 'input', placeholder: 'Company', value: this.state.company, onChange: this.handleCompanyChange })
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement('input', { className: 'input', placeholder: 'Title', value: this.state.title, onChange: this.handleTitleChange })
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio', value: this.state.bio, onChange: this.handleBioChange })
+						)
 					),
 					_react2.default.createElement(
 						'p',
-						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Last Name', value: this.state.lastName, onChange: this.handleLastNameChange })
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Company', value: this.state.company, onChange: this.handleCompanyChange })
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'control' },
-						_react2.default.createElement('input', { className: 'input', placeholder: 'Title', value: this.state.title, onChange: this.handleTitleChange })
-					),
-					_react2.default.createElement(
-						'p',
-						{ className: 'control' },
-						_react2.default.createElement('textarea', { className: 'textarea', placeholder: 'Bio', value: this.state.bio, onChange: this.handleBioChange })
+						{ className: 'panel-block control has-addons' },
+						_react2.default.createElement('input', { ref: function ref(a) {
+								return _this._inputElement = a;
+							}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
+						_react2.default.createElement(
+							'button',
+							{ type: 'submit', className: 'button is-medium is-orange' },
+							'Add'
+						)
 					),
 					_react2.default.createElement(
 						'div',
-						{ id: 'update-map' },
-						_react2.default.createElement(_reactGmaps.Gmaps, {
-							ref: 'Gmaps',
-							width: '100%',
-							height: '100%',
-							lat: this.state.latitude,
-							lng: this.state.longitude,
-							zoom: 15,
-							disableDefaultUI: true,
-							loadingMessage: 'Be happy',
-							onClick: this.onClick,
-							params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
-							onMapCreated: this.onMapCreated })
+						{ className: 'panel-block control' },
+						_react2.default.createElement(
+							'div',
+							{ id: 'update-map' },
+							_react2.default.createElement(_reactGmaps.Gmaps, {
+								ref: 'Gmaps',
+								width: '100%',
+								height: '100%',
+								lat: this.state.latitude,
+								lng: this.state.longitude,
+								zoom: 15,
+								disableDefaultUI: true,
+								loadingMessage: 'Be happy',
+								onClick: this.onClick,
+								params: { v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E' },
+								onMapCreated: this.onMapCreated })
+						)
 					),
 					_react2.default.createElement(
-						'button',
-						{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
+						'div',
+						{ className: 'panel-block control' },
 						_react2.default.createElement(
-							'p',
-							null,
-							'Update'
+							'button',
+							{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
+							_react2.default.createElement(
+								'p',
+								null,
+								'Update'
+							)
 						)
 					)
 				)

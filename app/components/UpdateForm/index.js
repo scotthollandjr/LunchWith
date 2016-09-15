@@ -102,41 +102,53 @@ var UpdateForm = React.createClass({
 
 	render: function() {
 		return (
-	  	<div>
+	  	<div id="update-form">
 			  <form onSubmit={this.updateInfo}>
-					<p className="control">
-						<input className="input" placeholder="First Name" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
-					</p>
-					<p className="control">
-						<input className="input" placeholder="Last Name" value={this.state.lastName} onChange={this.handleLastNameChange}/>
-					</p>
-					<p className="control">
-						<input className="input" placeholder="Company" value={this.state.company} onChange={this.handleCompanyChange}/>
-					</p>
-					<p className="control">
-						<input className="input" placeholder="Title" value={this.state.title} onChange={this.handleTitleChange}/>
-					</p>
-					<p className="control">
-						<textarea className="textarea" placeholder="Bio" value={this.state.bio} onChange={this.handleBioChange}></textarea>
-					</p>
-					<div id="update-map">
-						<Gmaps
-							ref='Gmaps'
-							width={'100%'}
-							height={'100%'}
-							lat={this.state.latitude}
-							lng={this.state.longitude}
-							zoom={15}
-							disableDefaultUI={true}
-							loadingMessage={'Be happy'}
-							onClick={this.onClick}
-							params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
-							onMapCreated={this.onMapCreated}>
-						</Gmaps>
+					<div className="panel-block">
+						<p className="control">
+							<input className="input" placeholder="First Name" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
+						</p>
+						<p className="control">
+							<input className="input" placeholder="Last Name" value={this.state.lastName} onChange={this.handleLastNameChange}/>
+						</p>
+						<p className="control">
+							<input className="input" placeholder="Company" value={this.state.company} onChange={this.handleCompanyChange}/>
+						</p>
+						<p className="control">
+							<input className="input" placeholder="Title" value={this.state.title} onChange={this.handleTitleChange}/>
+						</p>
+						<p className="control">
+							<textarea className="textarea" placeholder="Bio" value={this.state.bio} onChange={this.handleBioChange}></textarea>
+						</p>
 					</div>
-					<button className="button is-medium is-orange" onClick={this.submitUserUpdate}>
-						<p>Update</p>
-					</button>
+					<p className="panel-block control has-addons">
+						<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
+						<button type="submit" className="button is-medium is-orange">
+							Add
+						</button>
+					</p>
+					<div className="panel-block control">
+						<div id="update-map">
+							<Gmaps
+								ref='Gmaps'
+								width={'100%'}
+								height={'100%'}
+								lat={this.state.latitude}
+								lng={this.state.longitude}
+								zoom={15}
+								disableDefaultUI={true}
+								loadingMessage={'Be happy'}
+								onClick={this.onClick}
+								params={{v: '3.exp', key: 'AIzaSyCJa4qHOKLW1eYexkJr2WLQ5I24xyqP-5E'}}
+								onMapCreated={this.onMapCreated}>
+							</Gmaps>
+						</div>
+					</div>
+					<div className="panel-block control">
+						<button className="button is-medium is-orange" onClick={this.submitUserUpdate}>
+							<p>Update</p>
+						</button>
+					</div>
 				</form>
 	    </div>
 	  )

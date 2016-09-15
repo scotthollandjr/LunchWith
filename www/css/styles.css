@@ -369,6 +369,10 @@ html, body {
 
 /*** UPDATE PANEL ****************************************/
 
+#update-form {
+  width: 500px;
+}
+
 #updatePanel {
   height: 0%;
   overflow: scroll;
@@ -384,8 +388,8 @@ html, body {
 }
 
 #update-map {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 400px;
 }
 
 /*** MESSAGES ****************************************/
