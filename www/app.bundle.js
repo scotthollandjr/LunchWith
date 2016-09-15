@@ -29523,13 +29523,6 @@
 	
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
-					var locationQueryString = "?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
-					$.get("/queryUsers" + locationQueryString, function (result) {
-						console.log("Location searched!", result);
-						this.setState({
-							users: result.users
-						});
-					}.bind(_this));
 					map.setCenter({
 						lat: position.coords.latitude,
 						lng: position.coords.longitude
