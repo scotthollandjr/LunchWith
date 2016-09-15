@@ -27843,12 +27843,12 @@
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
 			var longy = location.latLng.lng();
-			console.log("old: " + this.state.latitude + ", " + this.state.longitude);
+			console.log("old: " + this.state.userLatitude + ", " + this.state.userLongitude);
 			this.setState({
 				userLongitude: longy,
 				userLatitude: latty
 			});
-			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
+			console.log("new: " + this.state.userLatitude + ", " + this.state.userLongitude);
 		},
 	
 		render: function render() {
@@ -29430,8 +29430,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var userInfo = {
-		lat2: 45.519530,
-		lng2: -122.678061,
+		latitude: 45.519530,
+		longitude: -122.678061,
 		firstName: "Scout",
 		lastName: "Rodriguez",
 		title: "Junior Developer",
@@ -29514,15 +29514,7 @@
 			};
 		},
 	
-		componentDidMount: function componentDidMount() {
-			$.get("/queryUsers", function (result) {
-				console.log(result);
-	
-				this.setState({
-					users: result.users
-				});
-			}.bind(this));
-		},
+		componentDidMount: function componentDidMount() {},
 	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
@@ -29531,6 +29523,13 @@
 	
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
+					var locationQueryString = "?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
+					$.get("/queryUsers" + locationQueryString, function (result) {
+						console.log("Location searched!", result);
+						this.setState({
+							users: result.users
+						});
+					}.bind(_this));
 					map.setCenter({
 						lat: position.coords.latitude,
 						lng: position.coords.longitude

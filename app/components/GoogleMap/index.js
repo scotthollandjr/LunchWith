@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 const userInfo = {
-	lat2: 45.519530,
-	lng2: -122.678061,
+	latitude: 45.519530,
+	longitude: -122.678061,
 	firstName: "Scout",
 	lastName: "Rodriguez",
 	title: "Junior Developer",
@@ -86,19 +86,20 @@ var GoogleMap = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$.get("/queryUsers", function(result) {
-			console.log(result);
 
-			this.setState({
-				users: result.users
-			});
-		}.bind(this));
 	},
 
   onMapCreated(map) {
 		const {Gmaps} = this.refs;
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
+				var locationQueryString = "?latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude;
+				$.get("/queryUsers"+locationQueryString, function(result) {
+					console.log("Location searched!", result);
+					this.setState({
+						users: result.users
+					});
+				}.bind(this));
 				map.setCenter({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude

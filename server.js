@@ -44,11 +44,17 @@ let findOrCreateUser = (req, res, next) => {
 };
 
 let queryUsers = (req, res, next) => {
-  var params = req.query;
-  var sql = "SELECT * FROM users";
+  var latitude = req.query.latitude;
+  var longitude = req.query.longitude;
+  var sql = "SELECT * FROM users WHERE earth_box(ll_to_earth($1, $2), 10000) @> ll_to_earth(users.latitude,users.longitude) AND id !=" + req.user.id + ";";
 
-  return res.json({"users" : users})
+  db.query(sql, [latitude, longitude])
+  .then(function (usersInRadius) {
+    console.log("users in radius object: ", usersInRadius)
+    return res.json({"users" : usersInRadius})
+  })
 };
+
 
 let getLoggedInUserDetails = (req, res, next) => {
   var loggedInUser = req.user;
@@ -191,7 +197,7 @@ app.use('/messages', express.static(__dirname + '/www'));
 app.use('/checkReceivedMessages', checkReceivedMessages);
 app.use('/checkSentMessages', checkSentMessages);
 app.use('/newUserCreation', newUser);
-app.use('/searchUsers', queryUsers);
+app.use('/queryUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
 app.use('/updateUserLocationDetails', updateUserLocationDetails);
