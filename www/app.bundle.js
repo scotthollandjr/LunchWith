@@ -29657,6 +29657,7 @@
 						document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 						document.getElementById("panel-title").textContent = superUser.title;
 						document.getElementById("panel-summary").textContent = superUser.summary;
+						document.getElementById("full-image").src = superUser.imageUrl;
 					});
 				}
 			});
