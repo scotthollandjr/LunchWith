@@ -88,26 +88,10 @@ var GoogleMap = React.createClass({
 	},
 
 	componentDidMount: function() {
-		const {Gmaps} = this.refs;
 
-		var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
-		$.get("/queryUsers"+locationQueryString, function(result) {
-			console.log("Location searched!", result);
-			this.setState({
-				users: result.users
-			});
-			var pref = {
-				position: this.state.myLatLng,
-				map: this.state.map
-			};
-			this.marker = new google.maps.Marker(pref);
-		}.bind(this));
 	},
 
   onMapCreated(map) {
-		this.setState({
-			map: map
-		});
 		const {Gmaps} = this.refs;
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
@@ -148,6 +132,7 @@ var GoogleMap = React.createClass({
 				skills: users[user].skills,
 				onClick: this.onClick
 			});
+
 
 			var infowindow = new google.maps.InfoWindow({
 				content: userCircle.firstName
@@ -249,6 +234,22 @@ var GoogleMap = React.createClass({
 		  }
 		]
       });
+
+			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
+			$.get("/queryUsers"+locationQueryString, function(result) {
+				console.log("Location searched!", result.users);
+				var users = result.users
+				for (var i = 0; i < users.length; i++) {
+					console.log("Looping");
+					var user = users[i];
+					var userLatLng = {lat: user.latitude, lng: user.longitude}
+					var pref = {
+						position: userLatLng,
+						map: map
+					};
+					this.marker = new google.maps.Marker(pref);
+				}
+			});
   },
 
 	onCloseClick() {
