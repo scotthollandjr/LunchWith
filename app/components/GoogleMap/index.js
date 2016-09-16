@@ -240,7 +240,6 @@ var GoogleMap = React.createClass({
 				console.log("Location searched!", result.users);
 				var users = result.users
 				for (var i = 0; i < users.length; i++) {
-					console.log("Looping");
 					var user = users[i];
 					var userLatLng = {lat: user.latitude, lng: user.longitude}
 					var pref = {
@@ -248,6 +247,22 @@ var GoogleMap = React.createClass({
 						map: map
 					};
 					this.marker = new google.maps.Marker(pref);
+					this.marker.addListener('click', function() {
+						superUser = {
+							firstName: user.firstname,
+							lastName: user.lastname,
+							title: user.title,
+							company: user.company,
+							imageUrl: user.pictureurl,
+							summary: user.summary,
+							skills: user.skills || ["no", "skills", "listed"]
+						};
+							document.getElementById("halfPanel").style.height = "35%";
+							document.getElementById("footer").style.display = "none";
+							document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
+							document.getElementById("panel-title").textContent = superUser.title;
+							document.getElementById("panel-summary").textContent = superUser.summary;
+					})
 				}
 			});
   },
