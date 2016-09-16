@@ -1,3 +1,9 @@
+/*** OMG WHY MUST I BE TOUCHING CSS?!?!?!*/
+
+.textAreaDiv {
+  white-space: pre-wrap;
+}
+
 /*** GLOBAL COLOR ****************************************/
 
 :root {

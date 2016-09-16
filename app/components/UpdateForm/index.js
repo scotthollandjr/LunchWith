@@ -53,12 +53,13 @@ var UpdateForm = React.createClass({
 					hideMyLocation: false
 				});
 			}
+			var bio = userInfo.bio.replace(/<br \/>/g, "\n");
       this.setState({
 				firstName: userInfo.firstname,
 				lastName: userInfo.lastname,
         company: userInfo.company,
 				title: userInfo.title,
-				bio: userInfo.bio,
+				bio: bio,
 				userLatitude: userInfo.latitude,
 				userLongitude: userInfo.longitude
       });
@@ -86,7 +87,10 @@ var UpdateForm = React.createClass({
 
 	submitUserUpdate: function(event) {
 		event.preventDefault();
-		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + this.state.bio;
+		var bio = this.state.bio;
+		bio = bio.replace(/(?:\r\n|\r|\n)/g, "<br />")
+		console.log(bio);
+		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		}
@@ -127,7 +131,7 @@ var UpdateForm = React.createClass({
 
 	render: function() {
 		return (
-	  	<div>
+	  	<div className="textAreaDiv">
 			  <form onSubmit={this.updateInfo}>
 					<p className="control">
 						<input className="input" placeholder="First Name" value={this.state.firstName} onChange={this.handleFirstNameChange}/>
