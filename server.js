@@ -24,9 +24,9 @@ let newUser = (req, res, next) => {
   var title = req.title;
   var pictureUrl = req.pictureUrl;
 
-  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "')";
+  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ($1, $2, $3, $4, $5, $6)";
 
-  db.query(sql, null)
+  db.query(sql, [firstName, lastName, emailAddress, company, title, pictureUrl])
     .then(user => res.json("new user created!"))
     .catch(next);
 };
@@ -78,26 +78,34 @@ let checkSentMessages = (req, res, next) => {
 }
 
 let updateUserDetails = (req, res) => {
-  var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';";
-  db.query(sql);
+  var firstName = req.query.firstname;
+  var lastName = req.query.lastname;
+  var company = req.query.company;
+  var title = req.query.title;
+  var bio = req.query.bio;
+  var sql = "UPDATE users SET firstname=$1, lastname=$2, company=$3, title=$4 ,bio=$5 WHERE emailaddress='" + req.user.emailaddress + "';";
+  db.query(sql, [firstName, lastName, company, title, bio]);
   return res;
 }
 
 let updateUserLocationDetails = (req, res) => {
+  var latitude;
+  var longitude;
   var sql;
   if (req.query.latitude === 'NULL') {
     sql = "UPDATE users SET latitude=NULL,longitude=NULL WHERE emailaddress='" + req.user.emailaddress + "';";
   } else {
-    sql = "UPDATE users SET latitude='" + req.query.latitude + "',longitude='" + req.query.longitude +"' WHERE emailaddress='" + req.user.emailaddress + "';";
+    sql = "UPDATE users SET latitude=$1,longitude=$2 WHERE emailaddress='" + req.user.emailaddress + "';";
   }
-  db.query(sql);
+  db.query(sql, [latitude, longitude]);
   return res;
 }
 
 let updateUserSkills = (req, res) => {
-  var sql = "UPDATE users SET skills='" + req.query.skills + "' WHERE emailaddress='" + req.user.emailaddress + ";";
+  var skills = req.query.skills;
+  var sql = "UPDATE users SET skills=$1 WHERE emailaddress='" + req.user.emailaddress + ";";
   console.log(sql);
-  db.query(sql);
+  db.query(sql, [skills]);
   return "Updated!"
 }
 
