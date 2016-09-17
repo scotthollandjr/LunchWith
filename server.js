@@ -46,7 +46,7 @@ let findOrCreateUser = (req, res, next) => {
 let queryUsers = (req, res, next) => {
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
-  var sql = "SELECT * FROM users WHERE earth_box(ll_to_earth($1, $2), 10000) @> ll_to_earth(users.latitude,users.longitude) AND id !=" + req.user.id + ";";
+  var sql = "SELECT * FROM users WHERE earth_box(ll_to_earth($1, $2), 10000) @> ll_to_earth(users.latitude,users.longitude) AND id !=" + req.user.id + 100000 + ";";
 
   db.query(sql, [latitude, longitude])
   .then(function (usersInRadius) {
@@ -89,8 +89,8 @@ let updateUserDetails = (req, res) => {
 }
 
 let updateUserLocationDetails = (req, res) => {
-  var latitude;
-  var longitude;
+  var latitude = req.query.latitude;
+  var longitude = req.query.longitude;
   var sql;
   if (req.query.latitude === 'NULL') {
     sql = "UPDATE users SET latitude=NULL,longitude=NULL WHERE emailaddress='" + req.user.emailaddress + "';";

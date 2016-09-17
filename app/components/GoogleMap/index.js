@@ -238,25 +238,39 @@ var GoogleMap = React.createClass({
 
 			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
 			$.get("/queryUsers"+locationQueryString, function(result) {
-				console.log("Location searched!", result.users);
+				// console.log("Location searched!", result.users);
 				var users = result.users
 				for (var i = 0; i < users.length; i++) {
 					var user = users[i];
 					var userLatLng = {lat: user.latitude, lng: user.longitude}
-					var pref = {
+					var skills;
+					 if (user.skills) {
+						 skills = user.skills.split(",");
+					 } else {
+						 skills = ["no", "skills", "provided"];
+					 }
+					var userMarker = new google.maps.Marker({
 						position: userLatLng,
-						map: map
-					};
-					this.marker = new google.maps.Marker(pref);
-					this.marker.addListener('click', function() {
+						map: map,
+						firstName: user.firstname,
+						lastName: user.lastname,
+						title: user.title,
+						company: user.company,
+						imageUrl: user.pictureurl,
+						summary: user.summary,
+						skills: skills,
+						onClick: this.onClick
+					});
+					console.log(user);
+					userMarker.addListener('click', function() {
 						superUser = {
-							firstName: user.firstname,
-							lastName: user.lastname,
-							title: user.title,
-							company: user.company,
-							imageUrl: user.pictureurl,
-							summary: user.summary,
-							skills: user.skills || ["no", "skills", "listed"]
+							firstName: this.firstName,
+							lastName: this.lastName,
+							title: this.title,
+							company: this.company,
+							imageUrl: this.imageUrl,
+							summary: this.summary,
+							skills: this.skills || ["no", "skills", "listed"]
 						};
 							document.getElementById("halfPanel").style.height = "35%";
 							document.getElementById("footer").style.display = "none";
