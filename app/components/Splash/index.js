@@ -1,30 +1,13 @@
 import React from 'react';
 import ParallaxComponent from 'react-parallax-component';
+import PageHeader from '../PageHeader';
+import PageFooter from '../PageFooter';
 
 class Splash extends React.Component {
     render() {
         return (
           <div>
-            <nav className="nav" id="splash-nav">
-              <div className="nav-right">
-                <a className="nav-item clickable" href="#">
-                  <span className="icon">
-                    <i className="fa fa-github"></i>
-                  </span>
-                </a>
-                <a className="nav-item clickable" href="#">
-                  <span className="icon">
-                    <i className="fa fa-twitter"></i>
-                  </span>
-                </a>
-                <p className="nav-item">
-                  Already have an account?
-                  <a href="/auth/linkedin" className="nav-item  clickable">
-                    Log-in
-                  </a>
-                </p>
-              </div>
-            </nav>
+            <PageHeader />
             <div id="splashDiv1" className="splashDiv">
               <img src="/images/lunchlogo.png"></img>
               <div className="splash-title white">
@@ -91,20 +74,7 @@ class Splash extends React.Component {
                 <img src="/images/lunchlogo.png"></img>
               </div>
             </div>
-            <footer className="footer" id="splash-footer">
-              <div className="content">
-                <div className="footer-left">
-                  <p className="footer-item">
-                    © LunchWith, an <a href="#" className="clickable">EyeCue Lab</a> Product, Copyright 2016
-                  </p>
-                </div>
-                <div className="footer-right">
-                  <p className="footer-item">
-                    <span><a href="/" className="clickable">Privacy Policy</a> | <a href="/" className="clickable">Contact Us</a> | <a href="/" className="clickable">About</a></span>
-                  </p>
-                </div>
-              </div>
-            </footer>
+            <PageFooter />
           </div>
         );
     }
