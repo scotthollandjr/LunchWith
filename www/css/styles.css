@@ -171,6 +171,10 @@ html, body {
     margin: 20px;
 }
 
+.nav-logo {
+  height: 50px;
+}
+
 /*** LOGIN PAGE ****************************************/
 
 #linked-button, #linked-button:hover {

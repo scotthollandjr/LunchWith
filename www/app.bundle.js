@@ -27642,7 +27642,7 @@
 	                      _react2.default.createElement(
 	                        'span',
 	                        { className: 'icon is-large' },
-	                        _react2.default.createElement('i', { className: 'fa fa-home' })
+	                        _react2.default.createElement('i', { className: 'fa fa-search' })
 	                      )
 	                    )
 	                  ),
@@ -29391,18 +29391,9 @@
 	            "div",
 	            { className: "nav-left", id: "logo" },
 	            _react2.default.createElement(
-	              "span",
-	              { className: "icon is-medium" },
-	              _react2.default.createElement("i", { className: "fa fa-bars white" })
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "nav-right" },
-	            _react2.default.createElement(
-	              "span",
-	              { className: "icon is-medium" },
-	              _react2.default.createElement("i", { className: "fa fa-search white" })
+	              "a",
+	              { href: "/activity" },
+	              _react2.default.createElement("img", { className: "nav-logo", src: "/images/lunchlogo.png", alt: "lunchwith logo" })
 	            )
 	          )
 	        )

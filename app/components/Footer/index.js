@@ -42,7 +42,7 @@ class Footer extends React.Component {
                       <li>
                         <a href="/activity" className="footer-tab">
                           <span className="icon is-large">
-                            <i className="fa fa-home"></i>
+                            <i className="fa fa-search"></i>
                           </span>
                         </a>
                       </li>
