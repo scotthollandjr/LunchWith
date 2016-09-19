@@ -8,7 +8,7 @@ var Header = React.createClass({
             <div className="container" id="navItems">
               <div className="nav-left" id="logo">
                 <a href="/activity">
-                  <img className="nav-logo" src="/images/lunchlogo.png" alt="lunchwith logo" />
+                  <img id="nav-logo" src="/images/lunchlogo.png" alt="lunchwith logo" />
                 </a>
               </div>
             </div>

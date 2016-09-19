@@ -161,19 +161,31 @@ html, body {
 #navBar {
   background: linear-gradient(to bottom, var(--main-nav-grey) 40%, rgba(0,0,0,0));
   width: 100%;
-  height: 20%;
+  height: 15%;
   position: absolute;
   z-index: 3;
   transition: 1s ease;
+  pointer-events: none;
 }
 
 #navItems {
-    margin: 20px;
+  margin: 20px;
 }
 
-.nav-logo {
+#nav-logo {
   height: 50px;
+  pointer-events: all;
 }
+
+#nav-search {
+  pointer-events: all;
+  display: ;
+}
+
+.search-bar {
+  margin: 10px;
+}
+
 
 /*** LOGIN PAGE ****************************************/
 

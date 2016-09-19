@@ -4,30 +4,44 @@ import Messages from '../Messages';
 
 class Footer extends React.Component {
     showMesssages() {
-      var other = document.getElementById("updatePanel");
+      var other = document.getElementById("searchPanel");
+      var other2 = document.getElementById("updatePanel");
       other.style.height = "0%";
+      other2.style.height = "0%";
 
       var panel = document.getElementById("messagePanel");
       if (panel.style.height == "100%") {
         panel.style.height = "0%";
-        document.getElementById("navBar").style.height = "20%";
       } else {
         panel.style.height = "100%";
-        document.getElementById("navBar").style.height = "0%";
       }
     }
 
     showAccount() {
-      var other = document.getElementById("messagePanel");
+      var other = document.getElementById("searchPanel");
+      var other2 = document.getElementById("messagePanel");
       other.style.height = "0%";
+      other2.style.height = "0%";
 
       var panel = document.getElementById("updatePanel");
       if (panel.style.height == "100%") {
         panel.style.height = "0%";
-        document.getElementById("navBar").style.height = "20%";
       } else {
         panel.style.height = "100%";
-        document.getElementById("navBar").style.height = "0%";
+      }
+    }
+
+    showSearch() {
+      var other = document.getElementById("updatePanel");
+      var other2 = document.getElementById("messagePanel");
+      other.style.height = "0%";
+      other2.style.height = "0%";
+
+      var panel = document.getElementById("searchPanel");
+      if (panel.style.height == "11%") {
+        panel.style.height = "0%";
+      } else {
+        panel.style.height = "11%";
       }
     }
 
@@ -40,7 +54,7 @@ class Footer extends React.Component {
                   <div className="container">
                     <ul>
                       <li>
-                        <a href="/activity" className="footer-tab">
+                        <a onClick={this.showSearch} className="footer-tab">
                           <span className="icon is-large">
                             <i className="fa fa-search"></i>
                           </span>
@@ -75,6 +89,12 @@ class Footer extends React.Component {
                 <h1 className="title is-3 white">Messages:</h1>
                 <Messages />
               </div>
+            </div>
+            <div id="searchPanel" className="overlay2">
+              <p className="control has-addons search-bar">
+                <input className="input is-expanded is-large" placeholder="Name, Skill, or Company" />
+                <button className="button is-blue is-large">SEARCH</button>
+              </p>
             </div>
           </div>
         );

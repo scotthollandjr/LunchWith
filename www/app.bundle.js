@@ -27585,31 +27585,46 @@
 	  _createClass(Footer, [{
 	    key: 'showMesssages',
 	    value: function showMesssages() {
-	      var other = document.getElementById("updatePanel");
+	      var other = document.getElementById("searchPanel");
+	      var other2 = document.getElementById("updatePanel");
 	      other.style.height = "0%";
+	      other2.style.height = "0%";
 	
 	      var panel = document.getElementById("messagePanel");
 	      if (panel.style.height == "100%") {
 	        panel.style.height = "0%";
-	        document.getElementById("navBar").style.height = "20%";
 	      } else {
 	        panel.style.height = "100%";
-	        document.getElementById("navBar").style.height = "0%";
 	      }
 	    }
 	  }, {
 	    key: 'showAccount',
 	    value: function showAccount() {
-	      var other = document.getElementById("messagePanel");
+	      var other = document.getElementById("searchPanel");
+	      var other2 = document.getElementById("messagePanel");
 	      other.style.height = "0%";
+	      other2.style.height = "0%";
 	
 	      var panel = document.getElementById("updatePanel");
 	      if (panel.style.height == "100%") {
 	        panel.style.height = "0%";
-	        document.getElementById("navBar").style.height = "20%";
 	      } else {
 	        panel.style.height = "100%";
-	        document.getElementById("navBar").style.height = "0%";
+	      }
+	    }
+	  }, {
+	    key: 'showSearch',
+	    value: function showSearch() {
+	      var other = document.getElementById("updatePanel");
+	      var other2 = document.getElementById("messagePanel");
+	      other.style.height = "0%";
+	      other2.style.height = "0%";
+	
+	      var panel = document.getElementById("searchPanel");
+	      if (panel.style.height == "11%") {
+	        panel.style.height = "0%";
+	      } else {
+	        panel.style.height = "11%";
 	      }
 	    }
 	  }, {
@@ -27638,7 +27653,7 @@
 	                    null,
 	                    _react2.default.createElement(
 	                      'a',
-	                      { href: '/activity', className: 'footer-tab' },
+	                      { onClick: this.showSearch, className: 'footer-tab' },
 	                      _react2.default.createElement(
 	                        'span',
 	                        { className: 'icon is-large' },
@@ -27698,6 +27713,20 @@
 	              'Messages:'
 	            ),
 	            _react2.default.createElement(_Messages2.default, null)
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'searchPanel', className: 'overlay2' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'control has-addons search-bar' },
+	            _react2.default.createElement('input', { className: 'input is-expanded is-large', placeholder: 'Name, Skill, or Company' }),
+	            _react2.default.createElement(
+	              'button',
+	              { className: 'button is-blue is-large' },
+	              'SEARCH'
+	            )
 	          )
 	        )
 	      );
@@ -29393,7 +29422,7 @@
 	            _react2.default.createElement(
 	              "a",
 	              { href: "/activity" },
-	              _react2.default.createElement("img", { className: "nav-logo", src: "/images/lunchlogo.png", alt: "lunchwith logo" })
+	              _react2.default.createElement("img", { id: "nav-logo", src: "/images/lunchlogo.png", alt: "lunchwith logo" })
 	            )
 	          )
 	        )
