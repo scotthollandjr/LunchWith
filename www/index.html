@@ -5,13 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link href="assets/styles/salesforce-lightning-design-system.min.css" rel="stylesheet" type="text/css">
     <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
     <link href="/css/bulma.css" rel="stylesheet" type="text/css">
-    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
     <script src="https://unpkg.com/classnames/index.js"></script>
@@ -19,95 +18,13 @@
     <script src="https://unpkg.com/react-select/dist/react-select.js"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/react-select/dist/react-select.css">
-
-    <script type="text/javascript" src="//platform.linkedin.com/in.js">
-      api_key:   78b3ua1u1ptbbj
-      onLoad:    onLinkedInLoad
-      authorize: false
-      lang:      en_US
-    </script>
-    <script type="text/javascript">
-        // Setup an event listener to make an API call once auth is complete
-        function onLinkedInLoad() {
-          // window.location = "https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78b3ua1u1ptbbj&redirect_uri=http://localhost:3000/&state=987654321&scope=r_basicprofile"
-            IN.Event.on(IN, "auth", getProfileData);
-        }
-        // Handle the successful return from the API call
-        function onSuccess(data) {
-            // Pre-populate your form fields here once you know the call
-            // came back successfully
-            console.log(data);
-            var id = data.id;
-            var firstName = data.firstName;
-            var lastName = data.lastName;
-            var emailAddress = data.emailAddress;
-            var company = data.positions.values[0].company.name;
-            var title = data.positions.values[0].title;
-            var pictureUrl = data.pictureUrl;
-
-            var newUser = {id: id, firstName: firstName, lastName: lastName, emailAddress: emailAddress, company: company, title: title, pictureUrl: pictureUrl};
-
-            sendData(newUser);
-
-            // var options = {
-            //     url: 'www.google.com',
-            //     method: 'POST',
-            //     form: {
-            //         id: JSON.stringify(data.id),
-            //         firstName: JSON.stringify(data.firstName),
-            //         lastName: JSON.stringify(data.lastName),
-            //         emailAddress: JSON.stringify(data.emailAddress),
-            //         company: JSON.stringify(data.company),
-            //         title: JSON.stringify(data.title),
-            //         pictureUrl: JSON.stringify(data.pictureUrl)
-            //     }
-            // }
-        }
-        // Handle an error response from the API call
-        function onError(error) {
-            console.log(error);
-        }
-        // Use the API call wrapper to request the member's basic profile data
-        function getProfileData() {
-            IN.API.Raw("/people/~:(id,firstName,lastName,emailAddress,summary,current-share,positions,picture-url)").result(onSuccess).error(onError);
-        }
-
-        function sendData(data) {
-          var XHR = new XMLHttpRequest();
-          var urlEncodedData = '?firstName=' + data.firstName +
-                                '&lastName=' + data.lastName +
-                                '&emailAddress=' + data.emailAddress +
-                                '&company=' + data.company +
-                                '&title=' + data.title +
-                                '&pictureUrl=' + data.pictureUrl;
-
-          // We define what will happen if the data is successfully sent
-          XHR.addEventListener('load', function(event) {
-            alert('Data sent and response loaded.');
-          });
-
-          // We define what will happen in case of error
-          XHR.addEventListener('error', function(event) {
-            alert('Error');
-          });
-
-          // We setup our request
-          XHR.open('POST', '/newUserCreation' + urlEncodedData);
-
-          // We add the required HTTP header to handle a form data POST request
-          XHR.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-          // And finally, We send our data.
-          XHR.send();
-        }
-    </script>
 </head>
 
 <body>
 
 <div id="content" class="site_content"></div>
 
-<script src="app.bundle.js"></script>
+<script src="/app.bundle.js"></script>
 
 </body>
 

@@ -10,12 +10,13 @@ OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var session = require('express-session');
 var passportLinkedIn = require('./app/auth/linkedinauth');
 require('dotenv').config();
+var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 
 
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let newUser = (req, res, next) => {
-  console.log(req);
   var firstName = req.firstName;
   var lastName = req.lastName;
   var emailAddress = req.emailAddress;
@@ -23,9 +24,9 @@ let newUser = (req, res, next) => {
   var title = req.title;
   var pictureUrl = req.pictureUrl;
 
-  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ('" + firstName + "','" + lastName + "','" + emailAddress + "','" + company + "','" + title + "','" + pictureUrl + "')";
+  var sql = "INSERT INTO users (firstName, lastName, emailAddress, company, title, pictureUrl) VALUES ($1, $2, $3, $4, $5, $6)";
 
-  db.query(sql, null)
+  db.query(sql, [firstName, lastName, emailAddress, company, title, pictureUrl])
     .then(user => res.json("new user created!"))
     .catch(next);
 };
@@ -43,11 +44,17 @@ let findOrCreateUser = (req, res, next) => {
 };
 
 let queryUsers = (req, res, next) => {
-  var params = req.query;
-  var sql = "SELECT * FROM users";
+  var latitude = req.query.latitude;
+  var longitude = req.query.longitude;
+  var sql = "SELECT * FROM users WHERE earth_box(ll_to_earth($1, $2), 10000) @> ll_to_earth(users.latitude,users.longitude) AND id !=" + req.user.id + 100000 + ";";
 
-  return res.json({"users" : users})
+  db.query(sql, [latitude, longitude])
+  .then(function (usersInRadius) {
+    console.log("users in radius object: ", usersInRadius)
+    return res.json({"users" : usersInRadius})
+  })
 };
+
 
 let getLoggedInUserDetails = (req, res, next) => {
   var loggedInUser = req.user;
@@ -56,7 +63,6 @@ let getLoggedInUserDetails = (req, res, next) => {
 
 let checkReceivedMessages = (req, res, next) => {
   var sql = "SELECT * FROM messages WHERE recipient_id = " + req.user.id;
-  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -65,7 +71,6 @@ let checkReceivedMessages = (req, res, next) => {
 
 let checkSentMessages = (req, res, next) => {
   var sql = "SELECT * FROM messages WHERE sender_id = " + req.user.id;
-  console.log(req.user.id);
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -73,15 +78,34 @@ let checkSentMessages = (req, res, next) => {
 }
 
 let updateUserDetails = (req, res) => {
-  var sql = "UPDATE users SET firstname='" + req.query.firstname + "',lastname='" + req.query.lastname + "',company='" + req.query.company + "',title='" + req.query.title + "',bio='" + req.query.bio+ "' WHERE emailaddress='" + req.user.emailaddress + "';"
-  db.query(sql);
+  var firstName = req.query.firstname;
+  var lastName = req.query.lastname;
+  var company = req.query.company;
+  var title = req.query.title;
+  var bio = req.query.bio;
+  var sql = "UPDATE users SET firstname=$1, lastname=$2, company=$3, title=$4 ,bio=$5 WHERE emailaddress='" + req.user.emailaddress + "';";
+  db.query(sql, [firstName, lastName, company, title, bio]);
+  return res;
+}
+
+let updateUserLocationDetails = (req, res) => {
+  var latitude = req.query.latitude;
+  var longitude = req.query.longitude;
+  var sql;
+  if (req.query.latitude === 'NULL') {
+    sql = "UPDATE users SET latitude=NULL,longitude=NULL WHERE emailaddress='" + req.user.emailaddress + "';";
+  } else {
+    sql = "UPDATE users SET latitude=$1,longitude=$2 WHERE emailaddress='" + req.user.emailaddress + "';";
+  }
+  db.query(sql, [latitude, longitude]);
   return res;
 }
 
 let updateUserSkills = (req, res) => {
-  var sql = "UPDATE users SET skills='" + req.query.skills + "';";
+  var skills = req.query.skills;
+  var sql = "UPDATE users SET skills=$1 WHERE emailaddress='" + req.user.emailaddress + ";";
   console.log(sql);
-  db.query(sql);
+  db.query(sql, [skills]);
   return "Updated!"
 }
 
@@ -89,11 +113,11 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(compression());
 
-app.use(session({
-secret: 'keyboard cat',
-resave: true,
-saveUninitialized: true
-}));
+// app.use(session({
+// secret: 'keyboard cat',
+// resave: true,
+// saveUninitialized: true
+// }));
 
 if (process.env.NODE_ENV != 'development') {
   console.log(process.env.NODE_ENV)
@@ -117,10 +141,10 @@ app.use('/privacy', express.static(__dirname + '/www'));
 app.use('/about', express.static(__dirname + '/www'));
 app.use('/login', express.static(__dirname + '/www'));
 app.use('/newUserWelcome', express.static(__dirname + '/www'));
-app.use('/messages', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
+    console.log('---------request', req.url)
     // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
@@ -134,9 +158,18 @@ app.all('*', function (req, res, next) {
     }
 });
 
-
+let cookieSecret = 'dfkghjkdhgjkdg';
+app.use(cookieParser(cookieSecret));
+app.use(cookieSession({
+  key    : 'fggfddfgdgfdfgg',
+  secret : cookieSecret,
+  cookie : {
+    maxAge: 3600
+  }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.get('/auth/linkedin',
   passport.authenticate('linkedin'),
@@ -155,14 +188,33 @@ app.use('/auth/linkedin/callback',
   }
 );
 
+app.use('*', function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    // req.user is available for use here
+    return next(); }
+  // denied. redirect to login
+  res.redirect('/auth/linkedin')
+});
+
+// function stopDeserializingConstantly(req, res, next) {
+//
+//   if (!req.user){
+//     app.use(passport.session());
+//   }
+//   next();
+// }
+
+app.use('/activity', express.static(__dirname + '/www'));
+app.use('/account', express.static(__dirname + '/www'));
+app.use('/messages', express.static(__dirname + '/www'));
 app.use('/checkReceivedMessages', checkReceivedMessages);
 app.use('/checkSentMessages', checkSentMessages);
 app.use('/newUserCreation', newUser);
-app.use('/searchUsers', queryUsers);
+app.use('/queryUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
+app.use('/updateUserLocationDetails', updateUserLocationDetails);
 app.use('/updateUserSkills', updateUserSkills);
-
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

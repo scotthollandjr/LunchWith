@@ -89,14 +89,11 @@ var Messaging = React.createClass ({
 
     componentDidMount: function() {
   		$.get("/checkReceivedMessages", function (result) {
-        console.log(result);
-
         this.setState({
           receivedMessages: result.messages
         });
   		}.bind(this));
       $.get("/checkSentMessages", function (result) {
-        console.log(result);
 
         this.setState({
           sentMessages: result.messages

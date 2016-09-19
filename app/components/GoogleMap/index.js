@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
 const userInfo = {
-	lat2: 45.519530,
-	lng2: -122.678061,
+	latitude: 45.519530,
+	longitude: -122.678061,
 	firstName: "Scout",
 	lastName: "Rodriguez",
 	title: "Junior Developer",
@@ -82,17 +82,13 @@ var GoogleMap = React.createClass({
 	getInitialState:function() {
 		return {
 			users: [],
+			myLatLng: {lat: userInfo.latitude, lng: userInfo.longitude},
+			map: "mappity"
 		};
 	},
 
 	componentDidMount: function() {
-		$.get("/queryUsers", function(result) {
-			console.log(result);
 
-			this.setState({
-				users: result.users
-			});
-		}.bind(this));
 	},
 
   onMapCreated(map) {
@@ -137,6 +133,7 @@ var GoogleMap = React.createClass({
 				onClick: this.onClick
 			});
 
+
 			var infowindow = new google.maps.InfoWindow({
 				content: userCircle.firstName
 			});
@@ -156,6 +153,7 @@ var GoogleMap = React.createClass({
 					document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 					document.getElementById("panel-title").textContent = superUser.title;
 					document.getElementById("panel-summary").textContent = superUser.summary;
+					document.getElementById("full-image").src = superUser.imageUrl;
 			});
 		}
 
@@ -237,6 +235,52 @@ var GoogleMap = React.createClass({
 		  }
 		]
       });
+
+			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
+			$.get("/queryUsers"+locationQueryString, function(result) {
+				// console.log("Location searched!", result.users);
+				var users = result.users
+				for (var i = 0; i < users.length; i++) {
+					var user = users[i];
+					var userLatLng = {lat: user.latitude, lng: user.longitude}
+					var skills;
+					 if (user.skills) {
+						 skills = user.skills.split(",");
+					 } else {
+						 skills = ["no", "skills", "provided"];
+					 }
+					var userMarker = new google.maps.Marker({
+						position: userLatLng,
+						map: map,
+						firstName: user.firstname,
+						lastName: user.lastname,
+						title: user.title,
+						company: user.company,
+						imageUrl: user.pictureurl,
+						summary: user.summary,
+						skills: skills,
+						onClick: this.onClick
+					});
+					console.log(user);
+					userMarker.addListener('click', function() {
+						superUser = {
+							firstName: this.firstName,
+							lastName: this.lastName,
+							title: this.title,
+							company: this.company,
+							imageUrl: this.imageUrl,
+							summary: this.summary,
+							skills: this.skills || ["no", "skills", "listed"]
+						};
+							document.getElementById("halfPanel").style.height = "35%";
+							document.getElementById("footer").style.display = "none";
+							document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
+							document.getElementById("panel-title").textContent = superUser.title;
+							document.getElementById("panel-summary").textContent = superUser.summary;
+							document.getElementById("full-image").src = superUser.imageUrl;
+					})
+				}
+			});
   },
 
 	onCloseClick() {
