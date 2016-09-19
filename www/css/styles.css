@@ -131,6 +131,9 @@ html, body {
 
 #splash-footer {
   background: var(--main-dark-grey);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
 .footer-left {
