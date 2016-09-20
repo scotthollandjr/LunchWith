@@ -30,6 +30,7 @@
     "express-session": "^1.11.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "google-maps-react": "^1.0.18",
+    "jade": "^1.11.0",
     "node-linkedin": "^0.5.4",
     "passport": "^0.3.0",
     "passport-linkedin": "^1.0.0",

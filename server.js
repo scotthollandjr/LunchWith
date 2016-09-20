@@ -5,6 +5,21 @@ let express = require('express'),
     db = require('./server/pghelper'),
     app = express();
 
+
+var mailer = require('express-mailer');
+
+mailer.extend(app, {
+  from: 'wolfsonk@gmail.com',
+  host: 'smtp.gmail.com',
+  secureConnection: true,
+  port: 465,
+  transportMethod: 'SMTP',
+  auth: {
+    user: 'wolfsonk@gmail.com',
+    pass: 'password here'
+  }
+})
+
 var passport = require('passport'),
 OAuth2Strategy = require('passport-oauth').OAuth2Strategy;
 var session = require('express-session');
@@ -30,6 +45,20 @@ let newUser = (req, res, next) => {
     .then(user => res.json("new user created!"))
     .catch(next);
 };
+
+let sendReminderEmail = (req, res) => {
+  app.mailer.send('email', {
+    to: 'scotthollandjr@gmail.com',
+    subject: 'lunchWith'
+  }, function (err) {
+    if (err) {
+      console.log(err);
+      res.send("there was an error with the email");
+      return;
+    }
+    res.send('Email Sent')
+  });
+}
 
 let findOrCreateUser = (req, res, next) => {
   var email = req.query.email;
@@ -191,14 +220,6 @@ app.use('*', function ensureAuthenticated(req, res, next) {
   res.redirect('/auth/linkedin')
 });
 
-// function stopDeserializingConstantly(req, res, next) {
-//
-//   if (!req.user){
-//     app.use(passport.session());
-//   }
-//   next();
-// }
-
 app.use('/activity', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
 app.use('/messages', express.static(__dirname + '/www'));
@@ -210,6 +231,10 @@ app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
 app.use('/updateUserDetails', updateUserDetails);
 app.use('/updateUserLocationDetails', updateUserLocationDetails);
 app.use('/updateUserSkills', updateUserSkills);
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use('/sendScottAnEmail', sendReminderEmail);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
