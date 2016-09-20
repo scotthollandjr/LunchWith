@@ -170,7 +170,6 @@ var GoogleMap = React.createClass({
 						skills: skills,
 						onClick: this.onClick
 					});
-					console.log(user);
 					userCircle.addListener('click', function() {
 						superUser = {
 							firstName: this.firstName,
