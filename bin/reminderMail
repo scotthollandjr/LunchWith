@@ -22,9 +22,9 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if (result.rows.length > 0) {
       for (var i = 0; i < result.rows.length; i++) {
         var recipientId = result.rows[i].recipient_id;
-        client.query("SELECT emailaddress FROM users WHERE id = " + recipientId + ";", function(err, result) {
-          console.log(result);
-          var to_email = new helper.Email(result.rows[0].emailaddress);
+        client.query("SELECT emailaddress FROM users WHERE id = " + recipientId + ";", function(err, secondResult) {
+          console.log(secondResult);
+          var to_email = new helper.Email(secondResult.rows[0].emailaddress);
           var mail = new helper.Mail(from_email, subject, to_email, content);
           var request = sendgrid.emptyRequest({
             method: 'POST',
