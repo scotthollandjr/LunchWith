@@ -162,7 +162,7 @@ var GoogleMap = React.createClass({
 						strokeOpacity: .25,
 						strokeWeight: 10,
 						firstName: user.firstname,
-						lastName: user.lastname
+						lastName: user.lastname,
 						title: user.title,
 						company: user.company,
 						imageUrl: user.pictureurl,
