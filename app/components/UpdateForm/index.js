@@ -21,7 +21,6 @@ var SkillsList = React.createClass({
 				    <span className="panel-icon is-right">
 				      	<i className="fa fa-trash"></i>
 				    </span>
-
 				 </p>
 			);
 		}
@@ -213,6 +212,11 @@ var UpdateForm = React.createClass({
 		this._inputElement.value = "";
 
 		e.preventDefault();
+	},
+
+
+	deleteSkill: function(skill) {
+		console.log(skill);
 	},
 
 	submitUserUpdate: function(event) {

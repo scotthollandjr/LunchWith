@@ -27980,6 +27980,10 @@
 			e.preventDefault();
 		},
 	
+		deleteSkill: function deleteSkill(skill) {
+			console.log(skill);
+		},
+	
 		submitUserUpdate: function submitUserUpdate(event) {
 			event.preventDefault();
 			var bio = this.state.bio;
