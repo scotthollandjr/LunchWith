@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var pg = require('pg');
-var sendgrid  = require('sendgrid').(process.env.SENDGRID_API);
+var sendgrid  = require('sendgrid')(process.env.SENDGRID_API);
 var helper = require('sendgrid').mail;
 var from_email = new helper.Email('Kyle@example.com');
 var to_email = new helper.Email('wolfsonk@gmail.com');
