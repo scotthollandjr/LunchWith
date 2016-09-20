@@ -1,5 +1,4 @@
 import React from 'react';
-import SkillsForm from '../SkillsForm';
 import UpdateForm from '../UpdateForm';
 import FieldForm from '../FieldForm';
 var props = {};
