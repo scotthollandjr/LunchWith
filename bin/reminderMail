@@ -9,7 +9,7 @@ var subject = 'Hello World from the SendGrid Node.js Library!';
 var content = new helper.Content('text/plain', 'Hello, Email!');
 var mail = new helper.Mail(from_email, subject, to_email, content);
 
-var request = sg.emptyRequest({
+var request = sendgrid.emptyRequest({
   method: 'POST',
   path: '/v3/mail/send',
   body: mail.toJSON(),
@@ -28,7 +28,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if(handleError(err, client, done)) return;
 
     if (result.rows.length > 0) {
-      sg.API(request, function(error, response) {
+      sendgrid.API(request, function(error, response) {
         console.log(response.statusCode);
         console.log(response.body);
         console.log(response.headers);
