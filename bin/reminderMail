@@ -2,8 +2,7 @@
 
 var pg = require('pg');
 var sendgrid  = require('sendgrid')(
-  process.env.SENDGRID_USERNAME,
-  process.env.SENDGRID_PASSWORD
+  process.env.SENDGRID_API
 );
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
