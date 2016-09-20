@@ -9,7 +9,7 @@ var subject = 'You have new messages waiting for you on lunchWith!';
 var content = new helper.Content('text/plain', 'Log in at https://lunchWith.herokuapp.com to view your messages!');
 
 
-db.query("SELECT recipient_id FROM messages WHERE new = true AND (messagetime, messagetime) OVERLAPS (current_timestamp, - interval '1 day') GROUP BY recipient_id;")
+db.query("SELECT recipient_id FROM messages WHERE new = true AND sendnotification = true GROUP BY recipient_id;")
 .then(function(usersToEmail){
   console.log("users to email: ", usersToEmail);
   console.log(usersToEmail.length);
@@ -38,3 +38,4 @@ db.query("SELECT recipient_id FROM messages WHERE new = true AND (messagetime, m
     }
   }
 });
+db.query("UPDATE messages SET sendnotification = false;")
