@@ -1,9 +1,20 @@
 #!/usr/bin/env node
 
 var pg = require('pg');
-var sendgrid  = require('sendgrid').SendGrid(
-  process.env.SENDGRID_API
-);
+var sendgrid  = require('sendgrid').(process.env.SENDGRID_API);
+var helper = require('sendgrid').mail;
+var from_email = new helper.Email('Kyle@example.com');
+var to_email = new helper.Email('wolfsonk@gmail.com');
+var subject = 'Hello World from the SendGrid Node.js Library!';
+var content = new helper.Content('text/plain', 'Hello, Email!');
+var mail = new helper.Mail(from_email, subject, to_email, content);
+
+var request = sg.emptyRequest({
+  method: 'POST',
+  path: '/v3/mail/send',
+  body: mail.toJSON(),
+});
+
 
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   var handleError = function(err) {
@@ -17,11 +28,10 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if(handleError(err, client, done)) return;
 
     if (result.rows.length > 0) {
-      sendgrid.send({
-          to: 'wolfsonk@gmail.com',
-          from: 'lunchwith@email.com',
-          subject: 'You have unread messages on lunchWith!',
-          text: 'You have items to do'
+      sg.API(request, function(error, response) {
+        console.log(response.statusCode);
+        console.log(response.body);
+        console.log(response.headers);
         }, function(err, json) {
           if (err) {
             console.error(err);
