@@ -20,7 +20,7 @@ db.query("SELECT recipient_id FROM messages WHERE new = true AND (messagetime, m
         db.query(sql)
         .then(function(resultWithEmailAddress){
           console.log("this is the result of the nested query: ", resultWithEmailAddress);
-          var to_email = new helper.Email(secondResult.rows[0].emailaddress);
+          var to_email = new helper.Email(resultWithEmailAddress[0].emailaddress);
           var mail = new helper.Mail(from_email, subject, to_email, content);
           var request = sendgrid.emptyRequest({
             method: 'POST',
