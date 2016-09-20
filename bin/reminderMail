@@ -12,6 +12,7 @@ var content = new helper.Content('text/plain', 'Log in at https://lunchWith.hero
 db.query("SELECT recipient_id FROM messages WHERE new = true AND (messagetime, messagetime) OVERLAPS (current_timestamp, - interval '1 day') GROUP BY recipient_id;")
 .then(function(usersToEmail){
   console.log("users to email: ", usersToEmail);
+  console.log(usersToEmail.length);
     if (usersToEmail.length > 0) {
       for (var i = 0; i < result.length; i++) {
         var recipientId = usersToEmail[i].recipient_id;
