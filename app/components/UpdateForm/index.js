@@ -172,10 +172,7 @@ var UpdateForm = React.createClass({
 							</p>
 						</div>
 						<p className="panel-block control has-addons">
-							<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
-							<button type="submit" className="button is-medium is-orange">
-								Add
-							</button>
+							<SkillsForm />
 						</p>
 						<div className="panel-block control">
 							<div id="update-map">
@@ -196,18 +193,12 @@ var UpdateForm = React.createClass({
 							</div>
 						</div>
 						<div className="panel-block control">
-							<button className="button is-medium is-orange" onClick={this.submitUserUpdate}>
-								<p>Update</p>
-							</button>
+							<p>We value your privacy and encourage you to choose a location in an area you are comfortable meeting other users. If you prefer to hide your profile entirely, just keep in mind that you will not appear to other users looking to meet-up. Hide your profile: <input type="checkbox" checked={this.state.hideMyLocation} onChange={this.handleCheckChange}/>
+							</p>
 						</div>
-						<button className="button is-medium is-orange" onClick={this.submitUserUpdate}>
+						<button className="button is-medium is-blue" onClick={this.submitUserUpdate}>
 							<p>Update</p>
 						</button>
-						<button className="button is-medium is-blue" onClick={this.submitUserLocationUpdate}>
-							<p>Update Location</p>
-						</button>
-						<label>Hide my location: </label>
-						<input type="checkbox" checked={this.state.hideMyLocation} onChange={this.handleCheckChange}/>
 					</form>
 		    </div>
 			</div>

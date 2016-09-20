@@ -27910,8 +27910,6 @@
 		},
 	
 		render: function render() {
-			var _this = this;
-	
 			return _react2.default.createElement(
 				'div',
 				{ id: 'update-form' },
@@ -27958,14 +27956,7 @@
 						_react2.default.createElement(
 							'p',
 							{ className: 'panel-block control has-addons' },
-							_react2.default.createElement('input', { ref: function ref(a) {
-									return _this._inputElement = a;
-								}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
-							_react2.default.createElement(
-								'button',
-								{ type: 'submit', className: 'button is-medium is-orange' },
-								'Add'
-							)
+							_react2.default.createElement(_SkillsForm2.default, null)
 						),
 						_react2.default.createElement(
 							'div',
@@ -27992,39 +27983,21 @@
 							'div',
 							{ className: 'panel-block control' },
 							_react2.default.createElement(
-								'button',
-								{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
-								_react2.default.createElement(
-									'p',
-									null,
-									'Update'
-								)
+								'p',
+								null,
+								'We value your privacy and encourage you to choose a location in an area you are comfortable meeting other users. If you prefer to hide your profile entirely, just keep in mind that you will not appear to other users looking to meet-up. Hide your profile: ',
+								_react2.default.createElement('input', { type: 'checkbox', checked: this.state.hideMyLocation, onChange: this.handleCheckChange })
 							)
 						),
 						_react2.default.createElement(
 							'button',
-							{ className: 'button is-medium is-orange', onClick: this.submitUserUpdate },
+							{ className: 'button is-medium is-blue', onClick: this.submitUserUpdate },
 							_react2.default.createElement(
 								'p',
 								null,
 								'Update'
 							)
-						),
-						_react2.default.createElement(
-							'button',
-							{ className: 'button is-medium is-blue', onClick: this.submitUserLocationUpdate },
-							_react2.default.createElement(
-								'p',
-								null,
-								'Update Location'
-							)
-						),
-						_react2.default.createElement(
-							'label',
-							null,
-							'Hide my location: '
-						),
-						_react2.default.createElement('input', { type: 'checkbox', checked: this.state.hideMyLocation, onChange: this.handleCheckChange })
+						)
 					)
 				)
 			);
@@ -28117,7 +28090,7 @@
 		},
 	
 		componentDidMount: function componentDidMount() {
-			$.get("/getLoggedInUserDetails", function (result) {
+			$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
 				var userInfo = result.user;
 				var skillSplit = [];
 				if (userInfo.skills) {
@@ -28159,7 +28132,8 @@
 			event.preventDefault();
 			var skillArray = this.state.skills;
 			var skillParam = formatSkills(skillArray);
-			var updateUrl = "/updateUserSkills?skills=" + skillParam;
+			var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
+			console.log(updateUrl);
 	
 			if (this.state.skills.length <= 2) {
 				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
@@ -28173,46 +28147,24 @@
 	
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ id: 'skillsform-div' },
 				_react2.default.createElement(
-					'nav',
-					{ className: 'panel', id: 'skillsPanel' },
+					'form',
+					{ onSubmit: this.addSkill },
 					_react2.default.createElement(
 						'p',
-						{ className: 'panel-heading' },
-						'Show us your skills'
-					),
-					_react2.default.createElement(
-						'form',
-						{ onSubmit: this.addSkill },
+						{ className: 'panel-block control has-addons' },
+						_react2.default.createElement('input', { ref: function ref(a) {
+								return _this._inputElement = a;
+							}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
 						_react2.default.createElement(
-							'p',
-							{ className: 'panel-block control has-addons' },
-							_react2.default.createElement('input', { ref: function ref(a) {
-									return _this._inputElement = a;
-								}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
-							_react2.default.createElement(
-								'button',
-								{ type: 'submit', className: 'button is-medium is-orange' },
-								'Add'
-							)
-						)
-					),
-					_react2.default.createElement(SkillsList, { entries: this.state.skills }),
-					_react2.default.createElement(
-						'div',
-						{ className: 'panel-block' },
-						_react2.default.createElement(
-							'a',
-							{ to: '/main', onClick: this.submitUserUpdate, className: 'button is-blue is-fullwidth' },
-							_react2.default.createElement(
-								'p',
-								null,
-								'Submit'
-							)
+							'button',
+							{ type: 'submit', className: 'button is-medium is-orange' },
+							'Add'
 						)
 					)
-				)
+				),
+				_react2.default.createElement(SkillsList, { entries: this.state.skills })
 			);
 		}
 	});

@@ -57,7 +57,7 @@ var SkillsForm = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$.get("/getLoggedInUserDetails", function (result) {
+		$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
 			var userInfo = result.user;
 			var skillSplit = [];
 			if (userInfo.skills) {
@@ -101,7 +101,8 @@ var SkillsForm = React.createClass({
 		event.preventDefault();
 		var skillArray = this.state.skills;
 		var skillParam = formatSkills(skillArray);
-		var updateUrl = "/updateUserSkills?skills=" + skillParam;
+		var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
+		console.log(updateUrl);
 
 		if (this.state.skills.length <= 2) {
 			alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
@@ -113,12 +114,8 @@ var SkillsForm = React.createClass({
 
   	render: function() {
     	return (
-	    	<div>
-				<nav className="panel" id="skillsPanel">
-				  	<p className="panel-heading">
-				    	Show us your skills
-				  	</p>
-				  	<form onSubmit={this.addSkill}>
+	    	<div id="skillsform-div">
+				  <form onSubmit={this.addSkill}>
 						<p className="panel-block control has-addons">
 							<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
 							<button type="submit" className="button is-medium is-orange">
@@ -129,14 +126,7 @@ var SkillsForm = React.createClass({
 
 					<SkillsList entries={this.state.skills} />
 
-				  	<div className="panel-block">
-				    	<a to="/main" onClick={this.submitUserUpdate} className="button is-blue is-fullwidth">
-				      		<p>Submit</p>
-				    	</a>
-				  	</div>
-
-				</nav>
-	    </div>
+		    </div>
 	    )
 	}
 });
