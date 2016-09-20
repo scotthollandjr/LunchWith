@@ -22,7 +22,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if (result.rows.length > 0) {
       for (var i = 0; i < result.rows.length; i++) {
         console.log(result);
-        var recipientId = result[i].rows.recipient_id;
+        var recipientId = result.rows[i].recipient_id;
         client.query("SELECT emailaddress FROM users WHERE id = " + recipientId + ";", function(err, result) {
           var to_email = new helper.Email('wolfsonk@gmail.com');
           var mail = new helper.Mail(from_email, subject, to_email, content);
