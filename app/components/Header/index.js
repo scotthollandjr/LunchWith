@@ -7,17 +7,12 @@ var Header = React.createClass({
           <nav className="nav" id="navBar">
             <div className="container" id="navItems">
               <div className="nav-left" id="logo">
-                <span className="icon is-medium">
-                  <i className="fa fa-bars white"></i>
-                </span>
-              </div>
-              <div className="nav-right">
-                <span className="icon is-medium">
-                  <i className="fa fa-search white"></i>
-                </span>
+                <a href="/activity">
+                  <img id="nav-logo" src="/images/lunchlogo.png" alt="lunchwith logo" />
+                </a>
               </div>
             </div>
-          </nav>          
+          </nav>
         </div>
     )
   }

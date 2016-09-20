@@ -14,59 +14,6 @@ const userInfo = {
 	skills: ["Java", "Android", "Googling"]
 };
 
-var users = {
-	user1: {
-		coords: {lat: 45.527129, lng: -122.678061},
-		firstName: "Scout",
-		lastName: "Rodriguez",
-		title: "Junior Developer",
-		company: "Tacocat Industries",
-		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
-		summary: "I am starting a start-up and looking to find out about the local tech scene!",
-		skills: ["Java", "Android", "Googling"]
-	},
-	user2: {
-		coords: {lat: 45.519530, lng: -122.678061},
-		firstName: "Wolfie",
-		lastName: "Kyleson",
-		title: "Intern Extraordinaire",
-		company: "EyeCue Lab",
-		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
-		summary: "Looking to find out more about company culture in this area.",
-		skills: ["postgres", "Ruby on Rails", "React"]
-	},
-	user3: {
-		coords: {lat: 45.526636, lng: -122.685553},
-		firstName: "Appa",
-		lastName: "Sunflower",
-		title: "Software Engineer",
-		company: "Nike",
-		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
-		summary: "I'm trying to get into mobile development, and looking for pointers.",
-		skills: ["JavaScript", "Node.js", "mongoDB"]
-	},
-	user4: {
-		coords: {lat: 45.527439, lng: -122.677932},
-		firstName: "Brunch",
-		lastName: "Ann",
-		title: "Web Designer",
-		company: "Cozy",
-		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
-		summary: "Let's be honest, I'm looking for free lunch.",
-		skills: ["CSS", "HTML", "JavaScript"]
-	},
-	user5: {
-		coords: {lat: 45.532971, lng: -122.681966},
-		firstName: "Peaches",
-		lastName: "McGee",
-		title: "UX Designer",
-		company: "Cat Stevens, Inc.",
-		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
-		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
-		skills: ["Adobe", "Design", "CSS"]
-	},
-}
-
 var superUser = {
 	firstName: "",
 	lastName: "",
@@ -110,50 +57,6 @@ var GoogleMap = React.createClass({
 					strokeWeight: 10,
 					onClick: this.onClick
 				});
-			});
-		}
-
-		for (var user in users) {
-			var userCircle = new google.maps.Circle({
-				map: map,
-				center: users[user].coords,
-				radius: 20,
-				fillColor: '#ff8528',
-				fillOpacity: .75,
-				strokeColor: '#ff8528',
-				strokeOpacity: .25,
-				strokeWeight: 10,
-				firstName: users[user].firstName,
-				lastName: users[user].lastName,
-				title: users[user].title,
-				company: users[user].company,
-				imageUrl: users[user].imageUrl,
-				summary: users[user].summary,
-				skills: users[user].skills,
-				onClick: this.onClick
-			});
-
-
-			var infowindow = new google.maps.InfoWindow({
-				content: userCircle.firstName
-			});
-
-			userCircle.addListener('click', function() {
-				superUser = {
-					firstName: this.firstName,
-					lastName: this.lastName,
-					title: this.title,
-					company: this.company,
-					imageUrl: this.imageUrl,
-					summary: this.summary,
-					skills: this.skills
-				};
-					document.getElementById("halfPanel").style.height = "35%";
-					document.getElementById("footer").style.display = "none";
-					document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
-					document.getElementById("panel-title").textContent = superUser.title;
-					document.getElementById("panel-summary").textContent = superUser.summary;
-					document.getElementById("full-image").src = superUser.imageUrl;
 			});
 		}
 
@@ -249,11 +152,17 @@ var GoogleMap = React.createClass({
 					 } else {
 						 skills = ["no", "skills", "provided"];
 					 }
-					var userMarker = new google.maps.Marker({
-						position: userLatLng,
+					var userCircle = new google.maps.Circle({
 						map: map,
+						center: userLatLng,
+						radius: 20,
+						fillColor: '#ff8528',
+						fillOpacity: .75,
+						strokeColor: '#ff8528',
+						strokeOpacity: .25,
+						strokeWeight: 10,
 						firstName: user.firstname,
-						lastName: user.lastname,
+						lastName: user.lastname
 						title: user.title,
 						company: user.company,
 						imageUrl: user.pictureurl,

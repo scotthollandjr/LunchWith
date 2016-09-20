@@ -15,6 +15,7 @@
   --main-light-grey: #333333;
   --main-dark-grey: #2c2c2c;
   --main-nav-grey: rgba(44,44,44,.9);
+  --main-blue-light: #669fd7;
   --main-blue: #286099;
   --main-blue-dark: #1f4d7a;
 }
@@ -87,47 +88,104 @@ html, body {
 
 /*** SPLASH SCREEN ****************************************/
 
-#splashDiv {
+#splash-nav {
+  background: var(--main-dark-grey);
+  margin-bottom: 25px;
+}
+
+#splash-nav .nav-item, .footer-item {
+  color: var(--main-light);
+  text-decoration: none;
+}
+
+#splash-nav .clickable:hover, #splash-footer .clickable:hover  {
+  color: var(--main-blue-light);
+}
+
+.splashDiv {
+  font-family: 'Open Sans', sans-serif;
+  width: 100vw;
+  height: 100vh;
+  display: inline-block;
+}
+
+.splash-title {
+  font-size: 2.5em;
+  margin-bottom: 25px;
+  padding: 25px;
+}
+
+.splash-body {
+  font-size: 1.25em;
+  padding: 25px;
+}
+
+.splash-button {
+  padding: 50px;
+  width: 375px;
+}
+
+#splashDiv1 {
   text-align: center;
 }
 
-#splashDiv h1 {
-  opacity: .95;
-  color: white;
-  padding: 25px;
-  margin-top: 10%;
+.splash-left {
+  float: left;
+  width: 50%;
+  height: 100%;
 }
 
-#splashDiv img {
-  opacity: .95;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 50px;
-  margin-bottom: 150px;
+#splash-footer {
+  background: var(--main-dark-grey);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
 }
 
-#splashDiv button {
-  margin-left: auto;
-  margin-right: auto;
-  font-weight: bold;
-  width: 200px;
+.footer-left {
+  float: left;
 }
+
+.footer-right {
+  float: right;
+}
+
+.footer-item a, .footer-item span {
+  color: var(--main-light);
+  text-decoration: none;
+}
+
 
 /*** NAV ****************************************/
 
 #navBar {
   background: linear-gradient(to bottom, var(--main-nav-grey) 40%, rgba(0,0,0,0));
   width: 100%;
-  height: 20%;
+  height: 15%;
   position: absolute;
   z-index: 3;
   transition: 1s ease;
+  pointer-events: none;
 }
 
 #navItems {
-    margin: 20px;
+  margin: 20px;
 }
+
+#nav-logo {
+  height: 50px;
+  pointer-events: all;
+}
+
+#nav-search {
+  pointer-events: all;
+  display: ;
+}
+
+.search-bar {
+  margin: 10px;
+}
+
 
 /*** LOGIN PAGE ****************************************/
 
@@ -336,6 +394,12 @@ html, body {
 
 /*** UPDATE PANEL ****************************************/
 
+#update-form {
+  width: 500px;
+  margin: auto;
+  margin-top: 25px;
+}
+
 #updatePanel {
   height: 0%;
   overflow: scroll;
@@ -343,7 +407,7 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-    width: 0px; /* hide scrollbar but still allow scrolling */
+  width: 0px; /* hide scrollbar but still allow scrolling */
 }
 
 .update-content {
@@ -351,8 +415,8 @@ html, body {
 }
 
 #update-map {
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 400px;
 }
 
 /*** MESSAGES ****************************************/
