@@ -3,11 +3,10 @@
 var pg = require('pg');
 var sendgrid  = require('sendgrid')(process.env.SENDGRID_API);
 var helper = require('sendgrid').mail;
-var from_email = new helper.Email('Kyle@example.com');
-var to_email = new helper.Email('wolfsonk@gmail.com');
-var subject = 'Hello World from the SendGrid Node.js Library!';
-var content = new helper.Content('text/plain', 'Hello, Email!');
-var mail = new helper.Mail(from_email, subject, to_email, content);
+var from_email = new helper.Email('notifications@lunchWith.com');
+var subject = 'You have new messages waiting for you on lunchWith!';
+var content = new helper.Content('text/plain', 'Log in at https://lunchWith.herokuapp.com to view your messages!');
+
 
 var request = sendgrid.emptyRequest({
   method: 'POST',
@@ -24,14 +23,17 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     return true;
   };
 
-  client.query('SELECT * FROM messages', function(err, result) {
+  client.query("SELECT recipient_id FROM messages WHERE new = true AND (messagetime, messagetime) OVERLAPS (current_timestamp, - interval '1 day') GROUP BY recipient_id;", function(err, result) {
     if(handleError(err, client, done)) return;
 
     if (result.rows.length > 0) {
+      for (var i = 0; i < result.rows.length; i++) {
+        console.log(result);
+        // var to_email = new helper.Email('wolfsonk@gmail.com');
+        // var mail = new helper.Mail(from_email, subject, to_email, content);
+      }
+
       sendgrid.API(request, function(error, response) {
-        console.log(response.statusCode);
-        console.log(response.body);
-        console.log(response.headers);
         }, function(err, json) {
           if (err) {
             console.error(err);
