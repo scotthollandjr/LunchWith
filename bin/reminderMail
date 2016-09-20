@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+
+var db = require('../server/pghelper');
+var pg = require('pg');
+var sendgrid  = require('sendgrid')(process.env.SENDGRID_API);
+var helper = require('sendgrid').mail;
+var from_email = new helper.Email('notifications@lunchWith.com');
+var subject = 'You have new messages waiting for you on lunchWith!';
+var content = new helper.Content('text/plain', 'Log in at https://lunchWith.herokuapp.com to view your messages!');
+
+
+db.query("SELECT recipient_id FROM messages WHERE new = true AND sendnotification = true GROUP BY recipient_id;")
+.then(function(usersToEmail){
+  console.log("users to email: ", usersToEmail);
+  console.log(usersToEmail.length);
+    if (usersToEmail.length > 0) {
+      for (var i = 0; i < usersToEmail.length; i++) {
+        var recipientId = usersToEmail[i].recipient_id;
+        var sql = "SELECT emailaddress FROM users WHERE id = " + recipientId + " AND sendnotifications = true;"
+        console.log("sql: ", sql)
+        db.query(sql)
+        .then(function(resultWithEmailAddress){
+          console.log("this is the result of the nested query: ", resultWithEmailAddress);
+          var to_email = new helper.Email(resultWithEmailAddress[0].emailaddress);
+          var mail = new helper.Mail(from_email, subject, to_email, content);
+          var request = sendgrid.emptyRequest({
+            method: 'POST',
+            path: '/v3/mail/send',
+            body: mail.toJSON(),
+          });
+          sendgrid.API(request, function(error, response) {
+            }, function(err, json) {
+              if (err) {
+                console.error(err);
+              }
+          });
+        })
+    }
+  }
+});
+db.query("UPDATE messages SET sendnotification = false;")

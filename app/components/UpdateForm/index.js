@@ -64,7 +64,7 @@ var SkillsForm = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$.get("http://localhost:3000/getLoggedInUserDetails", function (result) {
+		$.get("/getLoggedInUserDetails", function (result) {
 			var userInfo = result.user;
 			var skillSplit = [];
 			if (userInfo.skills) {
@@ -111,7 +111,7 @@ var SkillsForm = React.createClass({
 		event.preventDefault();
 		var skillArray = this.state.skills;
 		var skillParam = formatSkills(skillArray);
-		var updateUrl = "http://localhost:3000/updateUserSkills?skills=" + skillParam;
+		var updateUrl = "/updateUserSkills?skills=" + skillParam;
 		console.log(updateUrl);
 
 		if (this.state.skills.length <= 2) {

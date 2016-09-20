@@ -37,7 +37,6 @@ let findOrCreateUser = (req, res, next) => {
 
   db.query(sql, [email])
   .then(function (user) {
-    console.log("Not being called", user);
     return res.json({"user" : user})
   })
   .catch(next);
@@ -50,7 +49,6 @@ let queryUsers = (req, res, next) => {
 
   db.query(sql, [latitude, longitude])
   .then(function (usersInRadius) {
-    console.log("users in radius object: ", usersInRadius)
     return res.json({"users" : usersInRadius})
   })
 };
@@ -104,7 +102,6 @@ let updateUserLocationDetails = (req, res) => {
 let updateUserSkills = (req, res) => {
   var skills = req.query.skills;
   var sql = "UPDATE users SET skills=$1 WHERE emailaddress='" + req.user.emailaddress + ";";
-  console.log(sql);
   db.query(sql, [skills]);
   return "Updated!"
 }
@@ -138,7 +135,6 @@ app.use('/newUserWelcome', express.static(__dirname + '/www'));
 
 // Adding CORS support
 app.all('*', function (req, res, next) {
-    console.log('---------request', req.url)
     // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");

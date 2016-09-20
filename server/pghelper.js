@@ -1,9 +1,9 @@
 "use strict";
 
-require('dotenv').config();
+// require('dotenv').config();
 
 let pg = require('pg'),
-    config = require('./config'),
+    // config = require('./config'),
     databaseURL = process.env.DATABASE_URL || "postgres://pricdnjbkgcqgv:-IsFp-pWkCWPppo45CSn2IA42z@ec2-23-23-76-90.compute-1.amazonaws.com:5432/d9urkbhh7o3gm8";
 
 exports.query = function (sql, values, singleItem, dontLog) {
