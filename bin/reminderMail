@@ -14,7 +14,7 @@ db.query("SELECT recipient_id FROM messages WHERE new = true AND (messagetime, m
   console.log("users to email: ", usersToEmail);
   console.log(usersToEmail.length);
     if (usersToEmail.length > 0) {
-      for (var i = 0; i < result.length; i++) {
+      for (var i = 0; i < usersToEmail.length; i++) {
         var recipientId = usersToEmail[i].recipient_id;
         var sql = "SELECT emailaddress FROM users WHERE id = " + recipientId + ";"
         console.log("sql: ", sql)
