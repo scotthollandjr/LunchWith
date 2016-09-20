@@ -162,7 +162,7 @@ var GoogleMap = React.createClass({
 						strokeOpacity: .25,
 						strokeWeight: 10,
 						firstName: user.firstname,
-						lastName: user.lastname
+						lastName: user.lastname,
 						title: user.title,
 						company: user.company,
 						imageUrl: user.pictureurl,
@@ -171,7 +171,7 @@ var GoogleMap = React.createClass({
 						onClick: this.onClick
 					});
 					console.log(user);
-					userMarker.addListener('click', function() {
+					userCircle.addListener('click', function() {
 						superUser = {
 							firstName: this.firstName,
 							lastName: this.lastName,

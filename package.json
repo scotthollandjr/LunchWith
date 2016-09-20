@@ -27,6 +27,7 @@
     "cookie-session": "^2.0.0-alpha.1",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
+    "express-mailer": "^0.3.1",
     "express-session": "^1.11.3",
     "extract-text-webpack-plugin": "^1.0.1",
     "google-maps-react": "^1.0.18",
@@ -42,8 +43,10 @@
     "react-addons-update": "^15.3.1",
     "react-dom": "^15.2.0",
     "react-gmaps": "^1.5.0",
+    "react-parallax-component": "^1.0.6",
     "react-router": "^2.7.0",
     "react-select": "^1.0.0-rc.1",
+    "sendgrid": "^4.3.0",
     "superagent": "^2.2.0"
   },
   "devDependencies": {
