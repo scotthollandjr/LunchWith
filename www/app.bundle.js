@@ -29774,7 +29774,7 @@
 						onClick: this.onClick
 					});
 					console.log(user);
-					userMarker.addListener('click', function () {
+					userCircle.addListener('click', function () {
 						superUser = {
 							firstName: this.firstName,
 							lastName: this.lastName,
