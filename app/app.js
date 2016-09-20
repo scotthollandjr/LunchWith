@@ -12,7 +12,6 @@ import Privacy from './components/Privacy';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Splash from './components/Splash';
-import SkillsForm from './components/SkillsForm';
 import Messages from './components/Messages';
 import * as userService from './services/user-service';
 var props;

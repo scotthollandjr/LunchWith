@@ -190,41 +190,39 @@ html, body {
 /*** LOGIN PAGE ****************************************/
 
 #linked-button, #linked-button:hover {
-    border-radius: 0;
-    border: none;
-    padding: 10px;
-    font-weight: bold;
+  border-radius: 0;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
 }
 
 #linked-button span.icon {
-    /* figure out transparent margin separating icon from span
-    border-right: 1px solid var(--main-light);*/
+  /* figure out transparent margin separating icon from span
+  border-right: 1px solid var(--main-light);*/
 }
 
 /*** SKILLSFORM ****************************************/
 
-#skillsForm {
-    width: 100%;
-    max-width: 550px;
+#skillsform-div {
+  width: 100%;
 }
 
-#skillsPanel {
-    margin: 10px;
-    margin-top: 100px;
+#skillsForm {
+  width: 100%;
 }
 
 #skillsForm p input {
-    background: var(--main-dark-grey);
-    color: var(--main-light);
+  background: var(--main-dark-grey);
+  color: var(--main-light);
 }
 
 .starIcon:active {
-    color: var(--main-orange);
+  color: var(--main-orange);
 }
 
 #skillsPanel p.panel-heading {
-    background: var(--main-dark-grey);
-    color: var(--main-light);
+  background: var(--main-dark-grey);
+  color: var(--main-light);
 }
 
 .panel {
