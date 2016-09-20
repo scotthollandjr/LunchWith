@@ -12,6 +12,12 @@ var SkillsList = React.createClass({
 		var skillEntries = this.props.entries;
 
 		function createSkill(skill) {
+
+			function clickThing(e) {
+				console.log(e.target);
+				debugger;
+			}
+
 			return (
 				<p key={skill.key} className="panel-block" href="#">
 				    {skill.text}
@@ -19,7 +25,7 @@ var SkillsList = React.createClass({
 				      	<i className="fa fa-star"></i>
 				    </span>
 				    <span className="panel-icon is-right">
-				      	<i className="fa fa-trash"></i>
+				      	<i onClick={clickThing} data-id={skill.key} className="fa fa-trash"></i>
 				    </span>
 				 </p>
 			);

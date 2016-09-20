@@ -27769,6 +27769,12 @@
 			var skillEntries = this.props.entries;
 	
 			function createSkill(skill) {
+	
+				function clickThing(e) {
+					console.log(e.target);
+					debugger;
+				}
+	
 				return _react2.default.createElement(
 					'p',
 					{ key: skill.key, className: 'panel-block', href: '#' },
@@ -27781,7 +27787,7 @@
 					_react2.default.createElement(
 						'span',
 						{ className: 'panel-icon is-right' },
-						_react2.default.createElement('i', { className: 'fa fa-trash' })
+						_react2.default.createElement('i', { onClick: clickThing, 'data-id': skill.key, className: 'fa fa-trash' })
 					)
 				);
 			}
