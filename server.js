@@ -113,12 +113,6 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(compression());
 
-// app.use(session({
-// secret: 'keyboard cat',
-// resave: true,
-// saveUninitialized: true
-// }));
-
 if (process.env.NODE_ENV != 'development') {
   console.log(process.env.NODE_ENV)
   app.get('*',function(req,res,next){
@@ -195,14 +189,6 @@ app.use('*', function ensureAuthenticated(req, res, next) {
   // denied. redirect to login
   res.redirect('/auth/linkedin')
 });
-
-// function stopDeserializingConstantly(req, res, next) {
-//
-//   if (!req.user){
-//     app.use(passport.session());
-//   }
-//   next();
-// }
 
 app.use('/activity', express.static(__dirname + '/www'));
 app.use('/account', express.static(__dirname + '/www'));
