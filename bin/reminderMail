@@ -8,13 +8,6 @@ var subject = 'You have new messages waiting for you on lunchWith!';
 var content = new helper.Content('text/plain', 'Log in at https://lunchWith.herokuapp.com to view your messages!');
 
 
-var request = sendgrid.emptyRequest({
-  method: 'POST',
-  path: '/v3/mail/send',
-  body: mail.toJSON(),
-});
-
-
 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
   var handleError = function(err) {
     if(!err) return false;
@@ -31,6 +24,11 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         console.log(result);
         // var to_email = new helper.Email('wolfsonk@gmail.com');
         // var mail = new helper.Mail(from_email, subject, to_email, content);
+        var request = sendgrid.emptyRequest({
+          method: 'POST',
+          path: '/v3/mail/send',
+          body: mail.toJSON(),
+        });
       }
 
       sendgrid.API(request, function(error, response) {
