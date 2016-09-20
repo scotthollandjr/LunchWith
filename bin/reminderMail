@@ -24,22 +24,22 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
         console.log(result);
         // var to_email = new helper.Email('wolfsonk@gmail.com');
         // var mail = new helper.Mail(from_email, subject, to_email, content);
-        var request = sendgrid.emptyRequest({
-          method: 'POST',
-          path: '/v3/mail/send',
-          body: mail.toJSON(),
-        });
+        // var request = sendgrid.emptyRequest({
+        //   method: 'POST',
+        //   path: '/v3/mail/send',
+        //   body: mail.toJSON(),
+        // });
       }
 
-      sendgrid.API(request, function(error, response) {
-        }, function(err, json) {
-          if (err) {
-            console.error(err);
-          }
-
-          done();
-          pg.end();
-      });
+      // sendgrid.API(request, function(error, response) {
+      //   }, function(err, json) {
+      //     if (err) {
+      //       console.error(err);
+      //     }
+      //
+      //     done();
+      //     pg.end();
+      // });
     }
   });
 });
