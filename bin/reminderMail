@@ -22,24 +22,26 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     if (result.rows.length > 0) {
       for (var i = 0; i < result.rows.length; i++) {
         console.log(result);
-        // var to_email = new helper.Email('wolfsonk@gmail.com');
-        // var mail = new helper.Mail(from_email, subject, to_email, content);
-        // var request = sendgrid.emptyRequest({
-        //   method: 'POST',
-        //   path: '/v3/mail/send',
-        //   body: mail.toJSON(),
-        // });
+        var recipientId = result[i].recipient_id;
+        client.query("SELECT emailaddress FROM users WHERE id = " + recipientId + ";", function(err, result) {
+          var to_email = new helper.Email('wolfsonk@gmail.com');
+          var mail = new helper.Mail(from_email, subject, to_email, content);
+          var request = sendgrid.emptyRequest({
+            method: 'POST',
+            path: '/v3/mail/send',
+            body: mail.toJSON(),
+          });
+          sendgrid.API(request, function(error, response) {
+            }, function(err, json) {
+              if (err) {
+                console.error(err);
+              }
+          });
+        })
       }
 
-      // sendgrid.API(request, function(error, response) {
-      //   }, function(err, json) {
-      //     if (err) {
-      //       console.error(err);
-      //     }
-      //
-      //     done();
-      //     pg.end();
-      // });
     }
+    done();
+    pg.end();
   });
 });
