@@ -14,14 +14,14 @@ pg.connect(process.env.DATABASE_URL, function(err, client, done) {
     return true;
   };
 
-  client.query('SELECT * FROM todos', function(err, result) {
+  client.query('SELECT * FROM messages', function(err, result) {
     if(handleError(err, client, done)) return;
 
     if (result.rows.length > 0) {
       sendgrid.send({
-          to: 'my@email.com',
-          from: 'app@email.com',
-          subject: 'There are some items to do',
+          to: 'wolfsonk@gmail.com',
+          from: 'lunchwith@email.com',
+          subject: 'You have unread messages on lunchWith!',
           text: 'You have items to do'
         }, function(err, json) {
           if (err) {
