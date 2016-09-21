@@ -21,7 +21,8 @@ var superUser = {
 	company: "",
 	imageUrl: "",
 	summary: "",
-	skills: []
+	skills: [],
+	databaseId: 0
 }
 
 var GoogleMap = React.createClass({
@@ -168,6 +169,7 @@ var GoogleMap = React.createClass({
 						imageUrl: user.pictureurl,
 						summary: user.summary,
 						skills: skills,
+						databaseId: user.id,
 						onClick: this.onClick
 					});
 					userCircle.addListener('click', function() {
@@ -178,7 +180,8 @@ var GoogleMap = React.createClass({
 							company: this.company,
 							imageUrl: this.imageUrl,
 							summary: this.summary,
-							skills: this.skills || ["no", "skills", "listed"]
+							skills: this.skills || ["no", "skills", "listed"],
+							databaseId: this.databaseId
 						};
 							document.getElementById("halfPanel").style.height = "35%";
 							document.getElementById("footer").style.display = "none";
@@ -186,6 +189,8 @@ var GoogleMap = React.createClass({
 							document.getElementById("panel-title").textContent = superUser.title;
 							document.getElementById("panel-summary").textContent = superUser.summary;
 							document.getElementById("full-image").src = superUser.imageUrl;
+							window.messageRecipient = superUser.databaseId;
+							console.log(superUser.databaseId)
 					})
 				}
 			});

@@ -251,6 +251,10 @@ var UpdateForm = React.createClass({
 
 	onMapCreated(map) {
 		smap = map;
+		var centerMarker = new google.maps.Marker();
+		this.setState({
+			centerMarker: centerMarker
+		})
 
 		const {Gmaps} = this.refs;
 
@@ -269,7 +273,9 @@ var UpdateForm = React.createClass({
 		});
 		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 
-		var centerMarker = new google.maps.Marker({
+		this.state.centerMarker.setMap(null);
+
+		this.state.centerMarker = new google.maps.Marker({
 			map: smap,
 			position: {lat: this.state.userLatitude, lng: this.state.userLongitude}
 		});

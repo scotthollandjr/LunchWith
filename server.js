@@ -75,6 +75,19 @@ let checkSentMessages = (req, res, next) => {
   })
 }
 
+let sendMessage = (req, res) => {
+  var sql = "INSERT INTO messages (sender_id, recipient_id, message, subject) VALUES ($1, $2, $3, $4);"
+  var sender_id = req.query.sender_id;
+  var recipient_id = req.query.recipient_id;
+  var message = req.query.message;
+  var subject = req.query.subject;
+
+  db.query(sql, [sender_id, recipient_id, message, subject])
+  .then(function(result){
+    return res.json({"messageSent": true});
+  })
+}
+
 let updateUserDetails = (req, res) => {
   var firstName = req.query.firstname;
   var lastName = req.query.lastname;
@@ -191,6 +204,7 @@ app.use('/account', express.static(__dirname + '/www'));
 app.use('/messages', express.static(__dirname + '/www'));
 app.use('/checkReceivedMessages', checkReceivedMessages);
 app.use('/checkSentMessages', checkSentMessages);
+app.use('/sendMessage', sendMessage);
 app.use('/newUserCreation', newUser);
 app.use('/queryUsers', queryUsers);
 app.use('/getLoggedInUserDetails', getLoggedInUserDetails);
