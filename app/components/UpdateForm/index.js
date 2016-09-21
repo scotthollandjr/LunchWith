@@ -269,16 +269,11 @@ var UpdateForm = React.createClass({
 		});
 		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 
-		var centerCircle = new google.maps.Circle({
+		var centerMarker = new google.maps.Marker({
 			map: smap,
-			center: {lat: latty, lng: longy},
-			radius: 25,
-			fillColor: '#09c7ed',
-			fillOpacity: .75,
-			strokeColor: '#09c7ed',
-			strokeOpacity: .25,
-			strokeWeight: 10,
+			position: {lat: this.state.userLatitude, lng: this.state.userLongitude}
 		});
+
 		console.log("new: " + this.state.userLatitude + ", " + this.state.userLongitude);
 	},
 
