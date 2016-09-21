@@ -90,7 +90,6 @@ html, body {
 
 #splash-nav {
   background: var(--main-dark-grey);
-  margin-bottom: 25px;
 }
 
 #splash-nav .nav-item, .footer-item {
@@ -107,6 +106,7 @@ html, body {
   width: 100vw;
   height: 100vh;
   display: inline-block;
+  margin: 0 auto;
 }
 
 .splash-title {
@@ -155,6 +155,41 @@ html, body {
   text-decoration: none;
 }
 
+#splash-container #splash-footer {
+  position: relative;
+}
+
+#splash-container {
+  background: #ececec;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+#splashDiv1 {
+  padding-top: 5%;
+  background: url(/images/banner.png);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#splashDiv2 {
+  padding-top: 5%;
+  padding-left: 5%;
+  background: #f4f4f4;
+}
+
+#splashDiv3 {
+  padding-top: 5%;
+  background: #ececec;
+}
+
+#splashDiv4 {
+  padding-top: 5%;
+  padding-left: 5%;
+  background: url(/images/lowerbanner.png);
+}
 
 /*** NAV ****************************************/
 

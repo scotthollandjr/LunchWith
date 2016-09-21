@@ -32672,7 +32672,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { id: 'splash-container' },
 	        _react2.default.createElement(_PageHeader2.default, null),
 	        _react2.default.createElement(
 	          'div',
@@ -32715,7 +32715,7 @@
 	            { className: 'splash-left' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'splash-title white' },
+	              { className: 'splash-title' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -32729,7 +32729,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'splash-body white' },
+	              { className: 'splash-body' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -32745,7 +32745,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement('img', { src: '/images/lunchlogo.png' })
+	            _react2.default.createElement('img', { src: '/images/phone.png' })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -32754,14 +32754,14 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'splash-left' },
-	            _react2.default.createElement('img', { src: '/images/lunchlogo.png' })
+	            _react2.default.createElement('img', { src: '/images/network.png' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
 	            null,
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'splash-title white' },
+	              { className: 'splash-title' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -32775,7 +32775,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'splash-body white' },
+	              { className: 'splash-body' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -32803,7 +32803,7 @@
 	            { className: 'splash-left' },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'splash-title white' },
+	              { className: 'splash-title' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -32822,7 +32822,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'splash-body white' },
+	              { className: 'splash-body' },
 	              _react2.default.createElement(
 	                'p',
 	                null,
@@ -32843,7 +32843,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            _react2.default.createElement('img', { src: '/images/lunchlogo.png' })
+	            _react2.default.createElement('img', { src: '/images/nospies.png' })
 	          )
 	        ),
 	        _react2.default.createElement(_PageFooter2.default, null)
