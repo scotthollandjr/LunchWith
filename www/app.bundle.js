@@ -27820,6 +27820,7 @@
 		return skillString;
 	}
 	
+	var skillArray;
 	var SkillsForm = _react2.default.createClass({
 		displayName: 'SkillsForm',
 	
@@ -27850,7 +27851,7 @@
 		},
 	
 		addSkill: function addSkill(e) {
-			var skillArray = this.state.skills;
+			skillArray = this.state.skills;
 			console.log(skillArray);
 	
 			if (this._inputElement.value) {
@@ -27870,20 +27871,6 @@
 			this._inputElement.value = "";
 	
 			e.preventDefault();
-		},
-	
-		submitUserUpdate: function submitUserUpdate(event) {
-			event.preventDefault();
-			var skillArray = this.state.skills;
-			var skillParam = formatSkills(skillArray);
-			var updateUrl = "/updateUserSkills?skills=" + skillParam;
-			console.log(updateUrl);
-	
-			if (this.state.skills.length <= 2) {
-				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
-			} else {
-				$.get(updateUrl, function (result) {});
-			}
 		},
 	
 		render: function render() {
@@ -27974,7 +27961,7 @@
 		},
 	
 		addSkill: function addSkill(e) {
-			var skillArray = this.state.skills;
+			skillArray = this.state.skills;
 	
 			skillArray.push({
 				text: this._inputElement.value,
@@ -27992,6 +27979,26 @@
 	
 		deleteSkill: function deleteSkill(skill) {
 			console.log(skill);
+		},
+	
+		submitAllTheUpdates: function submitAllTheUpdates(event) {
+			debugger;
+			this.submitUserUpdate(event);
+			this.submitUserLocationUpdate(event);
+			this.submitSkillsUpdate(event);
+		},
+	
+		submitSkillsUpdate: function submitSkillsUpdate(event) {
+			event.preventDefault();
+			var skillParam = formatSkills(skillArray);
+			var updateUrl = "/updateUserSkills?skills=" + skillParam;
+			console.log(updateUrl);
+	
+			if (this.state.skills.length <= 2) {
+				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
+			} else {
+				$.get(updateUrl, function (result) {});
+			}
 		},
 	
 		submitUserUpdate: function submitUserUpdate(event) {
@@ -28133,7 +28140,7 @@
 						),
 						_react2.default.createElement(
 							'button',
-							{ className: 'button is-medium is-blue', onClick: this.submitUserUpdate },
+							{ className: 'button is-medium is-blue', onClick: this.submitAllTheUpdates },
 							_react2.default.createElement(
 								'p',
 								null,
