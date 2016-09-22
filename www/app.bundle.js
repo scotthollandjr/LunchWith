@@ -28041,14 +28041,12 @@
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
 			var longy = location.latLng.lng();
-			console.log("old: " + this.state.userLatitude + ", " + this.state.userLongitude);
 			this.setState({
 				userLongitude: longy,
 				userLatitude: latty,
 				longitude: longy,
 				latitude: latty
 			});
-			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 	
 			this.state.centerMarker.setMap(null);
 	
@@ -29544,6 +29542,7 @@
 		onClick: function onClick() {
 			document.getElementById("halfPanel").style.height = "0%";
 			document.getElementById("fullPanel").style.height = "0%";
+			document.getElementById("messageForm").style.height = "0%";
 			document.getElementById("footer").style.display = "";
 		},
 		fullProfile: function fullProfile() {
@@ -29556,7 +29555,7 @@
 		},
 		composeMessage: function composeMessage() {
 			document.getElementById("fullPanel").style.height = "0%";
-			document.getElementById("composeMessage").style.height = "100%";
+			document.getElementById("messageForm").style.height = "100%";
 		},
 		render: function render() {
 			return _react2.default.createElement(
