@@ -500,7 +500,7 @@ html, body {
 
 #messageForm {
   top: 20;
-  height: 100%;
+  height: 0%;
   overflow: scroll;
   overflow-x: hidden;
 }

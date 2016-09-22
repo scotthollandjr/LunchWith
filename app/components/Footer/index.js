@@ -38,10 +38,10 @@ class Footer extends React.Component {
       other2.style.height = "0%";
 
       var panel = document.getElementById("searchPanel");
-      if (panel.style.height == "11%") {
+      if (panel.style.height == "20%") {
         panel.style.height = "0%";
       } else {
-        panel.style.height = "11%";
+        panel.style.height = "20%";
       }
     }
 
