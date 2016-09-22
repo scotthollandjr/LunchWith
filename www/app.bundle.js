@@ -27758,7 +27758,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// import * as userService from '../../services/user-service';
 	var Router = __webpack_require__(172);
 	
 	
@@ -27827,6 +27826,8 @@
 		},
 	
 		componentDidMount: function componentDidMount() {
+			this.userLatitude = "45.526943";
+			this.userLongitude = "-122.684112";
 			$.get("/getLoggedInUserDetails", function (result) {
 				var userInfo = result.user;
 				var skillSplit = [];
@@ -27847,7 +27848,6 @@
 	
 		addSkill: function addSkill(e) {
 			var skillArray = this.state.skills;
-			console.log(skillArray);
 	
 			if (this._inputElement.value) {
 				skillArray.push({
@@ -27918,8 +27918,6 @@
 				bio: "bio",
 				latitude: "45.526943",
 				longitude: "-122.684112",
-				userLatitude: "45.526943",
-				userLongitude: "-122.684112",
 				hideMyLocation: false
 			};
 		},
@@ -28006,7 +28004,7 @@
 			if (this.state.hideMyLocation) {
 				updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
 			} else {
-				updateUrl = "/updateUserLocationDetails?latitude=" + this.state.userLatitude + "&longitude=" + this.state.userLongitude;
+				updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
 			}
 			console.log(updateUrl);
 			$.get(updateUrl, function (result) {});
@@ -28048,11 +28046,9 @@
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
 			var longy = location.latLng.lng();
-			console.log("old: " + this.state.userLatitude + ", " + this.state.userLongitude);
-			this.setState({
-				userLongitude: longy,
-				userLatitude: latty
-			});
+			console.log("old: " + this.userLatitude + ", " + this.userLongitude);
+			this.userLatitude = latty;
+			this.userLongitude = longy;
 			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 	
 			this.state.centerMarker.setMap(null);
@@ -28061,7 +28057,7 @@
 				map: smap,
 				position: { lat: latty, lng: longy }
 			});
-			console.log("new: " + this.state.userLatitude + ", " + this.state.userLongitude);
+			console.log("new: " + this.userLatitude + ", " + this.userLongitude);
 		},
 	
 		render: function render() {
@@ -29435,7 +29431,6 @@
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
 						window.messageRecipient = superUser.databaseId;
-						console.log(superUser.databaseId);
 					});
 					displayedUsers.push(userCircle);
 				}

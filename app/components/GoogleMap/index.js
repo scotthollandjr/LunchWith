@@ -204,7 +204,6 @@ var GoogleMap = React.createClass({
 							document.getElementById("panel-summary").textContent = superUser.summary;
 							document.getElementById("full-image").src = superUser.imageUrl;
 							window.messageRecipient = superUser.databaseId;
-							console.log(superUser.databaseId)
 					})
 					displayedUsers.push(userCircle);
 				}
