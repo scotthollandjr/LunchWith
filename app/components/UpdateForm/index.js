@@ -263,12 +263,12 @@ var UpdateForm = React.createClass({
 		map.addListener('click', function() {
 			//update center
 			//toss a query in thur
-			alert("click");
+			// alert("click");
 		})
 		map.addListener('dragend', function() {
 			//update center
 			//toss a query in thur
-			alert("dragend");
+			// alert("dragend");
 
 		})
 	},
@@ -348,6 +348,9 @@ var UpdateForm = React.createClass({
 						</div>
 						<button className="button is-medium is-blue" onClick={this.submitUserUpdate}>
 							<p>Update</p>
+						</button>
+						<button className="button is-medium is-blue" onClick={this.submitUserLocationUpdate}>
+							<p>Update Location</p>
 						</button>
 					</form>
 		    </div>

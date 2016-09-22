@@ -28029,12 +28029,13 @@
 			map.addListener('click', function () {
 				//update center
 				//toss a query in thur
-				alert("click");
+				// alert("click");
 			});
 			map.addListener('dragend', function () {
 				//update center
 				//toss a query in thur
-				alert("dragend");
+				// alert("dragend");
+	
 			});
 		},
 	
@@ -28150,6 +28151,15 @@
 								'p',
 								null,
 								'Update'
+							)
+						),
+						_react2.default.createElement(
+							'button',
+							{ className: 'button is-medium is-blue', onClick: this.submitUserLocationUpdate },
+							_react2.default.createElement(
+								'p',
+								null,
+								'Update Location'
 							)
 						)
 					)
