@@ -28023,17 +28023,20 @@
 				lng: this.state.centerLng
 			};
 			map.addListener('click', function () {
-				updateCenter();
+				//update center
+				//toss a query in thur
+				alert("click");
 			});
 			map.addListener('dragend', function () {
-				updateCenter();
+				//update center
+				//toss a query in thur
+				alert("dragend");
 			});
 		},
 	
 	
 		updateCenter: function updateCenter() {
-			//update center
-			//toss a query in thur
+	
 			alert('update center');
 		},
 	
