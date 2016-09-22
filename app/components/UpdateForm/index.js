@@ -1,5 +1,4 @@
 import React from 'react';
-// import * as userService from '../../services/user-service';
 var Router = require('react-router');
 import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
@@ -62,6 +61,8 @@ var SkillsForm = React.createClass({
 	},
 
 	componentDidMount: function() {
+		this.userLatitude = "45.526943";
+		this.userLongitude = "-122.684112";
 		$.get("/getLoggedInUserDetails", function (result) {
 			var userInfo = result.user;
 			var skillSplit = [];
@@ -82,7 +83,6 @@ var SkillsForm = React.createClass({
 
 	addSkill: function(e) {
 		var skillArray = this.state.skills;
-		console.log(skillArray);
 
 		if (this._inputElement.value) {
 			skillArray.push(
@@ -148,8 +148,6 @@ var UpdateForm = React.createClass({
 			bio: "bio",
 			latitude: "45.526943",
 			longitude: "-122.684112",
-			userLatitude: "45.526943",
-			userLongitude: "-122.684112",
 			hideMyLocation: false
 		};
 	},
@@ -240,7 +238,7 @@ var UpdateForm = React.createClass({
 		if (this.state.hideMyLocation){
 			updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
 		} else {
-			updateUrl = "/updateUserLocationDetails?latitude=" + this.state.userLatitude + "&longitude=" + this.state.userLongitude;
+			updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
 		}
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
@@ -263,10 +261,16 @@ var UpdateForm = React.createClass({
 		map.addListener('click', function() {
 			//update center
 			//toss a query in thur
+
+			// alert("click");
+
 		})
 		map.addListener('dragend', function() {
 			//update center
 			//toss a query in thur
+			// alert("dragend");
+
+
 		})
 	},
 
@@ -278,12 +282,12 @@ var UpdateForm = React.createClass({
 	onClick: function(location) {
 		var latty = location.latLng.lat();
 		var longy = location.latLng.lng();
-		this.setState({
-			userLongitude: longy,
-			userLatitude: latty,
-			longitude: longy,
-			latitude: latty
-		});
+		
+		console.log("old: " + this.userLatitude + ", " + this.userLongitude);
+		this.userLatitude = latty;
+		this.userLongitude = longy;
+
+		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 
 		this.state.centerMarker.setMap(null);
 
@@ -291,7 +295,7 @@ var UpdateForm = React.createClass({
 			map: smap,
 			position: {lat: latty, lng: longy}
 		});
-		console.log("new: " + this.state.userLatitude + ", " + this.state.userLongitude);
+		console.log("new: " + this.userLatitude + ", " + this.userLongitude);
 	},
 
 
@@ -345,6 +349,9 @@ var UpdateForm = React.createClass({
 						</div>
 						<button className="button is-medium is-blue" onClick={this.submitUserUpdate}>
 							<p>Update</p>
+						</button>
+						<button className="button is-medium is-blue" onClick={this.submitUserLocationUpdate}>
+							<p>Update Location</p>
 						</button>
 					</form>
 		    </div>

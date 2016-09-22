@@ -27754,7 +27754,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// import * as userService from '../../services/user-service';
 	var Router = __webpack_require__(172);
 	
 	
@@ -27823,6 +27822,8 @@
 		},
 	
 		componentDidMount: function componentDidMount() {
+			this.userLatitude = "45.526943";
+			this.userLongitude = "-122.684112";
 			$.get("/getLoggedInUserDetails", function (result) {
 				var userInfo = result.user;
 				var skillSplit = [];
@@ -27843,7 +27844,6 @@
 	
 		addSkill: function addSkill(e) {
 			var skillArray = this.state.skills;
-			console.log(skillArray);
 	
 			if (this._inputElement.value) {
 				skillArray.push({
@@ -27914,8 +27914,6 @@
 				bio: "bio",
 				latitude: "45.526943",
 				longitude: "-122.684112",
-				userLatitude: "45.526943",
-				userLongitude: "-122.684112",
 				hideMyLocation: false
 			};
 		},
@@ -28002,7 +28000,7 @@
 			if (this.state.hideMyLocation) {
 				updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
 			} else {
-				updateUrl = "/updateUserLocationDetails?latitude=" + this.state.userLatitude + "&longitude=" + this.state.userLongitude;
+				updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
 			}
 			console.log(updateUrl);
 			$.get(updateUrl, function (result) {});
@@ -28025,10 +28023,16 @@
 			map.addListener('click', function () {
 				//update center
 				//toss a query in thur
+	
+				// alert("click");
+	
 			});
 			map.addListener('dragend', function () {
 				//update center
 				//toss a query in thur
+				// alert("dragend");
+	
+	
 			});
 		},
 	
@@ -28041,12 +28045,12 @@
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
 			var longy = location.latLng.lng();
-			this.setState({
-				userLongitude: longy,
-				userLatitude: latty,
-				longitude: longy,
-				latitude: latty
-			});
+	
+			console.log("old: " + this.userLatitude + ", " + this.userLongitude);
+			this.userLatitude = latty;
+			this.userLongitude = longy;
+	
+			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 	
 			this.state.centerMarker.setMap(null);
 	
@@ -28054,7 +28058,7 @@
 				map: smap,
 				position: { lat: latty, lng: longy }
 			});
-			console.log("new: " + this.state.userLatitude + ", " + this.state.userLongitude);
+			console.log("new: " + this.userLatitude + ", " + this.userLongitude);
 		},
 	
 		render: function render() {
@@ -28144,6 +28148,15 @@
 								'p',
 								null,
 								'Update'
+							)
+						),
+						_react2.default.createElement(
+							'button',
+							{ className: 'button is-medium is-blue', onClick: this.submitUserLocationUpdate },
+							_react2.default.createElement(
+								'p',
+								null,
+								'Update Location'
 							)
 						)
 					)
@@ -29408,11 +29421,16 @@
 	
 		componentDidMount: function componentDidMount() {},
 	
+		sendMessage: function sendMessage() {
+			console.log(this.messageRecipient);
+		},
+	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
 			var Gmaps = this.refs.Gmaps;
 	
+			var displayedUsers = [];
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					map.setCenter({
@@ -29495,7 +29513,7 @@
 						skills = ["no", "skills", "provided"];
 					}
 					var userCircle = new google.maps.Circle({
-						map: map,
+						// map: map,
 						center: userLatLng,
 						radius: 20,
 						fillColor: '#ff8528',
@@ -29530,9 +29548,13 @@
 						document.getElementById("panel-title").textContent = superUser.title;
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
-						window.messageRecipient = superUser.databaseId;
-						console.log(superUser.databaseId);
+						this.messageRecipient = superUser.databaseId;
+						console.log(this);
 					});
+					displayedUsers.push(userCircle);
+				}
+				for (var i = 0; i < displayedUsers.length; i++) {
+					displayedUsers[i].setMap(map);
 				}
 			});
 		},

@@ -52,8 +52,13 @@ var GoogleMap = React.createClass({
 
 	},
 
+	sendMessage: function() {
+		console.log(this.messageRecipient)
+	},
+
   onMapCreated(map) {
 		const {Gmaps} = this.refs;
+		var displayedUsers = [];
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				map.setCenter({
@@ -167,7 +172,7 @@ var GoogleMap = React.createClass({
 						 skills = ["no", "skills", "provided"];
 					 }
 					var userCircle = new google.maps.Circle({
-						map: map,
+						// map: map,
 						center: userLatLng,
 						radius: 20,
 						fillColor: '#ff8528',
@@ -202,9 +207,13 @@ var GoogleMap = React.createClass({
 							document.getElementById("panel-title").textContent = superUser.title;
 							document.getElementById("panel-summary").textContent = superUser.summary;
 							document.getElementById("full-image").src = superUser.imageUrl;
-							window.messageRecipient = superUser.databaseId;
-							console.log(superUser.databaseId)
+							this.messageRecipient = superUser.databaseId;
+							console.log(this);
 					})
+					displayedUsers.push(userCircle);
+				}
+				for (var i = 0; i < displayedUsers.length; i++) {
+					displayedUsers[i].setMap(map);
 				}
 			});
   },
