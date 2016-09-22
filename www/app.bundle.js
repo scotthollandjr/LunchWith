@@ -29556,6 +29556,7 @@
 		},
 		composeMessage: function composeMessage() {
 			document.getElementById("fullPanel").style.height = "0%";
+			document.getElementById("composeMessage").style.height = "100%";
 		},
 		render: function render() {
 			return _react2.default.createElement(

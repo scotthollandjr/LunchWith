@@ -230,7 +230,7 @@ var GoogleMap = React.createClass({
 
 	composeMessage() {
 		document.getElementById("fullPanel").style.height = "0%";
-		document.getElementById("fullPanel").style.height = "100%";
+		document.getElementById("composeMessage").style.height = "100%";
 	},
 
   render() {
