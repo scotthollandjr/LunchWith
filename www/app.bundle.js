@@ -27812,6 +27812,7 @@
 			skillString += skillsAsArray[i].text + ",";
 		}
 		skillString = skillString.slice(0, -1);
+		console.log("skill string inside format skill", skillString);
 		return skillString;
 	}
 	
@@ -27866,20 +27867,6 @@
 			this._inputElement.value = "";
 	
 			e.preventDefault();
-		},
-	
-		submitUserUpdate: function submitUserUpdate(event) {
-			event.preventDefault();
-			var skillArray = this.state.skills;
-			var skillParam = formatSkills(skillArray);
-			var updateUrl = "/updateUserSkills?skills=" + skillParam;
-			console.log(updateUrl);
-	
-			if (this.state.skills.length <= 2) {
-				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
-			} else {
-				$.get(updateUrl, function (result) {});
-			}
 		},
 	
 		render: function render() {
@@ -27995,7 +27982,19 @@
 			console.log(bio);
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
-			$.get(updateUrl, function (result) {});
+			$.get(updateUrl, function (result) {}
+	
+			// submitSkills: function(event) {
+			// 	event.preventDefault();
+			// 	var skillArray = this.state.skills;
+			// 	console.log("skill array", skillArray);
+			// 	var skillParam = formatSkills(skillArray);
+			// 	var updateUrl = "/updateUserSkills?skills=" + skillParam;
+			// 	console.log(updateUrl);
+			// 	$.get(updateUrl, function (result) {
+			// 	}
+			// }
+			);
 		},
 	
 		submitUserLocationUpdate: function submitUserLocationUpdate(event) {
@@ -28049,6 +28048,7 @@
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
 			var longy = location.latLng.lng();
+	
 			console.log("old: " + this.userLatitude + ", " + this.userLongitude);
 			this.userLatitude = latty;
 			this.userLongitude = longy;
