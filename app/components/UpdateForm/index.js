@@ -49,6 +49,7 @@ function formatSkills(skillsAsArray){
 		skillString += skillsAsArray[i].text + ",";
 	}
 	skillString = skillString.slice(0, -1);
+	console.log(skillString);
 	return skillString;
 }
 
@@ -219,16 +220,10 @@ var UpdateForm = React.createClass({
 		submitUserUpdateJr: function(event) {
 			event.preventDefault();
 			var skillArray = this.state.skills;
+			console.log(skillArray);
 			var skillParam = formatSkills(skillArray);
 			var updateUrl = "/updateUserSkills?skills=" + skillParam;
 			console.log(updateUrl);
-
-			if (this.state.skills.length <= 2) {
-				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
-			} else {
-					$.get(updateUrl, function (result) {
-				}
-			)}
 		}
 	)},
 
