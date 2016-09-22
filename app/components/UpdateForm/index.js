@@ -284,7 +284,9 @@ var UpdateForm = React.createClass({
 		console.log("old: " + this.state.userLatitude + ", " + this.state.userLongitude);
 		this.setState({
 			userLongitude: longy,
-			userLatitude: latty
+			userLatitude: latty,
+			longitude: longy,
+			latitude: latty
 		});
 		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 
