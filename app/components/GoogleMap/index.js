@@ -14,6 +14,19 @@ const userInfo = {
 	skills: ["Java", "Android", "Googling"]
 };
 
+var users = {
+	user1: {
+		coords: {lat: 45.527129, lng: -122.678061},
+		firstName: "Scout",
+		lastName: "Rodriguez",
+		title: "Junior Developer",
+		company: "Tacocat Industries",
+		imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
+		summary: "I am starting a start-up and looking to find out about the local tech scene!",
+		skills: ["Java", "Android", "Googling"]
+	}
+};
+
 var superUser = {
 	firstName: "",
 	lastName: "",
@@ -210,6 +223,11 @@ var GoogleMap = React.createClass({
 		document.getElementById("full-summary").textContent = superUser.summary;
 	},
 
+	composeMessage() {
+		document.getElementById("fullPanel").style.height = "0%";
+
+	},
+
   render() {
     return (
 			<div id="map">
@@ -245,7 +263,62 @@ var GoogleMap = React.createClass({
 						<p id="full-title" className="title panel-text"></p>
 						<p id="full-skills" className="title panel-text"></p>
 						<p id="full-summary" className="panel-text"></p>
-						<button id="connect-button" className="button is-blue">CONNECT</button>
+						<button id="connect-button" onClick={this.composeMessage} className="button is-blue">CONNECT</button>
+					</div>
+					<div className="footer-arrow">
+						<span className="icon is-large panel-footer">
+							<i onClick={this.onClick} className="fa fa-angle-down" />
+						</span>
+					</div>
+				</div>
+				<div id="messageForm" className="overlay2">
+					<div className="overlay-content">
+						<p className="control">
+							<textarea className="textarea">Hello! I would like to meet up.</textarea>
+						</p>
+						<p>Im available to meet up on:</p>
+						<p className="control">
+							<label className="radio">
+								<input type="radio" name="meetDay"></input>
+								Monday
+							</label>
+							<label className="radio">
+								<input type="radio" name="meetDay"></input>
+								Tuesday
+							</label>
+							<label className="radio">
+						    <input type="radio" name="meetDay"></input>
+						    Wednesday
+						  </label>
+						  <label className="radio">
+						    <input type="radio" name="meetDay"></input>
+						    Thursday
+						  </label>
+							<label className="radio">
+						    <input type="radio" name="meetDay"></input>
+						    Friday
+						  </label>
+						</p>
+						<p>at:</p>
+						<p className="control">
+							<label className="radio">
+								<input type="radio" name="meetTime"></input>
+								11:00 AM
+							</label>
+							<label className="radio">
+								<input type="radio" name="meetTime"></input>
+								11:30 AM
+							</label>
+							<label className="radio">
+								<input type="radio" name="meetTime"></input>
+								12:00 PM
+							</label>
+							<label className="radio">
+								<input type="radio" name="meetTime"></input>
+								12:30 PM
+							</label>
+						</p>
+						<button id="connect-button" onClick={this.sendMessage} className="button is-blue">SEND</button>
 					</div>
 					<div className="footer-arrow">
 						<span className="icon is-large panel-footer">

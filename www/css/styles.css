@@ -496,6 +496,22 @@ html, body {
   color: var(--main-dark-grey);
 }
 
+/*** MESSAGE PANEL ****************************************/
+
+#messageForm {
+  height: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+#messageForm input {
+  padding: 15px;
+}
+
+#messageForm label:hover {
+  color: var(--main-blue-light);
+}
+
 /*** FOOTER ****************************************/
 
 .footerx {

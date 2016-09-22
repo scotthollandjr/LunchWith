@@ -29350,6 +29350,19 @@
 		skills: ["Java", "Android", "Googling"]
 	};
 	
+	var users = {
+		user1: {
+			coords: { lat: 45.527129, lng: -122.678061 },
+			firstName: "Scout",
+			lastName: "Rodriguez",
+			title: "Junior Developer",
+			company: "Tacocat Industries",
+			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
+			summary: "I am starting a start-up and looking to find out about the local tech scene!",
+			skills: ["Java", "Android", "Googling"]
+		}
+	};
+	
 	var superUser = {
 		firstName: "",
 		lastName: "",
@@ -29514,6 +29527,9 @@
 			document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];
 			document.getElementById("full-summary").textContent = superUser.summary;
 		},
+		composeMessage: function composeMessage() {
+			document.getElementById("fullPanel").style.height = "0%";
+		},
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
@@ -29563,8 +29579,111 @@
 						_react2.default.createElement('p', { id: 'full-summary', className: 'panel-text' }),
 						_react2.default.createElement(
 							'button',
-							{ id: 'connect-button', className: 'button is-blue' },
+							{ id: 'connect-button', onClick: this.composeMessage, className: 'button is-blue' },
 							'CONNECT'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'footer-arrow' },
+						_react2.default.createElement(
+							'span',
+							{ className: 'icon is-large panel-footer' },
+							_react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-angle-down' })
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ id: 'messageForm', className: 'overlay2' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'overlay-content' },
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement(
+								'textarea',
+								{ className: 'textarea' },
+								'Hello! I would like to meet up.'
+							)
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'Im available to meet up on:'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'Monday'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'Tuesday'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'Wednesday'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'Thursday'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'Friday'
+							)
+						),
+						_react2.default.createElement(
+							'p',
+							null,
+							'at:'
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'11:00 AM'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'11:30 AM'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'12:00 PM'
+							),
+							_react2.default.createElement(
+								'label',
+								{ className: 'radio' },
+								_react2.default.createElement('input', { type: 'radio', name: 'question' }),
+								'12:30 PM'
+							)
+						),
+						_react2.default.createElement(
+							'button',
+							{ id: 'connect-button', onClick: this.sendMessage, className: 'button is-blue' },
+							'SEND'
 						)
 					),
 					_react2.default.createElement(
