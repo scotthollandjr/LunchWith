@@ -13,19 +13,17 @@ var SkillsList = React.createClass({
 
 		function createSkill(skill) {
 
-			function clickThing(e) {
-				console.log(e.target);
-				debugger;
+			function clickThing(text) {
+				return function(e) {
+					console.log("inside clickthing:function ", text);
+				}
 			}
 
 			return (
 				<p key={skill.key} className="panel-block" href="#">
 				    {skill.text}
-				    <span className="panel-icon starIcon">
-				      	<i className="fa fa-star"></i>
-				    </span>
 				    <span className="panel-icon is-right">
-				      	<i onClick={clickThing} data-id={skill.key} className="fa fa-trash"></i>
+				      	<i onClick={clickThing(skill.text)} className="fa fa-trash"></i>
 				    </span>
 				 </p>
 			);
@@ -42,7 +40,7 @@ var SkillsList = React.createClass({
 });
 
 function logElements(skillObject){
-			console.log(skillObject.text);
+	console.log(skillObject.text);
 }
 
 function formatSkills(skillsAsArray){
@@ -152,7 +150,7 @@ var UpdateForm = React.createClass({
 			longitude: "-122.684112",
 			userLatitude: "45.526943",
 			userLongitude: "-122.684112",
-			hideMyLocation: true
+			hideMyLocation: false
 		};
 	},
 
@@ -260,7 +258,24 @@ var UpdateForm = React.createClass({
 
 		const coords = {
 			lat: this.state.centerLat,
-			lng: this.state.centerLng};
+			lng: this.state.centerLng
+		};
+		map.addListener('click', function() {
+			//update center
+			//toss a query in thur
+			alert("click");
+		})
+		map.addListener('dragend', function() {
+			//update center
+			//toss a query in thur
+			alert("dragend");
+
+		})
+	},
+
+	updateCenter: function() {
+
+		alert('update center');
 	},
 
 	onClick: function(location) {
@@ -277,9 +292,8 @@ var UpdateForm = React.createClass({
 
 		this.state.centerMarker = new google.maps.Marker({
 			map: smap,
-			position: {lat: this.state.userLatitude, lng: this.state.userLongitude}
+			position: {lat: latty, lng: longy}
 		});
-
 		console.log("new: " + this.state.userLatitude + ", " + this.state.userLongitude);
 	},
 
