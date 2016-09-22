@@ -447,6 +447,7 @@ html, body {
 }
 
 #update-map {
+  padding: 5%;
   width: 100%;
   height: 400px;
 }
