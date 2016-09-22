@@ -29008,7 +29008,7 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'flex_container' },
-	      _react2.default.createElement(MessageRow, { messages: this.state.sentMessages })
+	      _react2.default.createElement(MessageRow, { messages: this.state.receivedMessages })
 	    );
 	  }
 	});
