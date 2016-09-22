@@ -28027,12 +28027,15 @@
 			map.addListener('click', function () {
 				//update center
 				//toss a query in thur
+	
 				// alert("click");
+	
 			});
 			map.addListener('dragend', function () {
 				//update center
 				//toss a query in thur
 				// alert("dragend");
+	
 	
 			});
 		},
@@ -29308,6 +29311,10 @@
 	
 		componentDidMount: function componentDidMount() {},
 	
+		sendMessage: function sendMessage() {
+			console.log(this.messageRecipient);
+		},
+	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
@@ -29431,7 +29438,8 @@
 						document.getElementById("panel-title").textContent = superUser.title;
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
-						window.messageRecipient = superUser.databaseId;
+						this.messageRecipient = superUser.databaseId;
+						console.log(this);
 					});
 					displayedUsers.push(userCircle);
 				}
@@ -29446,6 +29454,7 @@
 		onClick: function onClick() {
 			document.getElementById("halfPanel").style.height = "0%";
 			document.getElementById("fullPanel").style.height = "0%";
+			document.getElementById("messageForm").style.height = "0%";
 			document.getElementById("footer").style.display = "";
 		},
 		fullProfile: function fullProfile() {
