@@ -105,21 +105,6 @@ var SkillsForm = React.createClass({
 		e.preventDefault();
 	},
 
-	submitUserUpdate: function(event) {
-		event.preventDefault();
-		var skillArray = this.state.skills;
-		var skillParam = formatSkills(skillArray);
-		var updateUrl = "/updateUserSkills?skills=" + skillParam;
-		console.log(updateUrl);
-
-		if (this.state.skills.length <= 2) {
-			alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
-		} else {
-				$.get(updateUrl, function (result) {
-			}
-		)}
-	},
-
 	render: function() {
   	return (
     	<div id="skillsform-div">
@@ -230,6 +215,21 @@ var UpdateForm = React.createClass({
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		}
+
+		submitUserUpdateJr: function(event) {
+			event.preventDefault();
+			var skillArray = this.state.skills;
+			var skillParam = formatSkills(skillArray);
+			var updateUrl = "/updateUserSkills?skills=" + skillParam;
+			console.log(updateUrl);
+
+			if (this.state.skills.length <= 2) {
+				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!")
+			} else {
+					$.get(updateUrl, function (result) {
+				}
+			)}
+		}
 	)},
 
 	submitUserLocationUpdate: function(event) {
@@ -282,7 +282,7 @@ var UpdateForm = React.createClass({
 	onClick: function(location) {
 		var latty = location.latLng.lat();
 		var longy = location.latLng.lng();
-		
+
 		console.log("old: " + this.userLatitude + ", " + this.userLongitude);
 		this.userLatitude = latty;
 		this.userLongitude = longy;
