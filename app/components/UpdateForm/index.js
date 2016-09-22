@@ -282,6 +282,7 @@ var UpdateForm = React.createClass({
 		console.log("old: " + this.userLatitude + ", " + this.userLongitude);
 		this.userLatitude = latty;
 		this.userLongitude = longy;
+
 		console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 
 		this.state.centerMarker.setMap(null);

@@ -52,6 +52,10 @@ var GoogleMap = React.createClass({
 
 	},
 
+	sendMessage: function() {
+		console.log(this.messageRecipient)
+	},
+
   onMapCreated(map) {
 		const {Gmaps} = this.refs;
 		var displayedUsers = [];
@@ -203,7 +207,7 @@ var GoogleMap = React.createClass({
 							document.getElementById("panel-title").textContent = superUser.title;
 							document.getElementById("panel-summary").textContent = superUser.summary;
 							document.getElementById("full-image").src = superUser.imageUrl;
-							window.messageRecipient = superUser.databaseId;
+							this.messageRecipient = superUser.databaseId;
 					})
 					displayedUsers.push(userCircle);
 				}
@@ -234,7 +238,7 @@ var GoogleMap = React.createClass({
 
 	composeMessage() {
 		document.getElementById("fullPanel").style.height = "0%";
-		document.getElementById("composeMessage").style.height = "100%";
+		document.getElementById("messageForm").style.height = "100%";
 	},
 
   render() {

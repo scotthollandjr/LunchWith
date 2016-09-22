@@ -88,6 +88,8 @@ html, body {
 
 /*** SPLASH SCREEN ****************************************/
 
+/*** there is a lot of splash screen stuff in the MEDIA QUERIES section down south ***/
+
 #splash-nav {
   background: var(--main-dark-grey);
 }
@@ -106,7 +108,7 @@ html, body {
   width: 100vw;
   height: 100vh;
   display: inline-block;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .splash-title {
@@ -131,6 +133,12 @@ html, body {
 
 .splash-left {
   float: left;
+  width: 50%;
+  height: 100%;
+}
+
+.splash-right {
+  float: right;
   width: 50%;
   height: 100%;
 }
@@ -189,6 +197,10 @@ html, body {
   padding-top: 5%;
   padding-left: 5%;
   background: url(/images/lowerbanner.png);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 /*** NAV ****************************************/
@@ -535,4 +547,36 @@ html, body {
 .footer-tab:hover {
   color: var(--main-dark-grey);
   background: var(--main-grey);
+}
+
+/*** MEDIA QUERIES **************************/
+
+@media screen and (max-width: 999px) {
+  .splash-image {
+    display: none;
+  }
+
+  .splash-content {
+    width: 100%;
+    align-content: center;
+    padding: 0 5%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .splash-title {
+    font-size: 1.5em;
+  }
+
+  .splash-body {
+    font-size: 1.0em;
+  }
+
+  #splash-nav .nav-icon {
+    display: none;
+  }
+
+  #splash-footer {
+    height: 5%;
+  }
 }

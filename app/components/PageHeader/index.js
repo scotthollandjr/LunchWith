@@ -7,12 +7,12 @@ class PageHeader extends React.Component {
           <div>
             <nav className="nav" id="splash-nav">
               <div className="nav-right">
-                <a className="nav-item clickable" href="https://github.com/scotthollandjr/LunchWith">
+                <a className="nav-item clickable nav-icon" href="https://github.com/scotthollandjr/LunchWith">
                   <span className="icon">
                     <i className="fa fa-github"></i>
                   </span>
                 </a>
-                <a className="nav-item clickable" href="https://twitter.com/eyecuelab">
+                <a className="nav-item clickable nav-icon" href="https://twitter.com/eyecuelab">
                   <span className="icon">
                     <i className="fa fa-twitter"></i>
                   </span>

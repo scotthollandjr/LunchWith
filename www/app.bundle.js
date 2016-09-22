@@ -28049,6 +28049,7 @@
 			console.log("old: " + this.userLatitude + ", " + this.userLongitude);
 			this.userLatitude = latty;
 			this.userLongitude = longy;
+	
 			console.log("new: " + this.state.latitude + ", " + this.state.longitude);
 	
 			this.state.centerMarker.setMap(null);
@@ -29457,7 +29458,7 @@
 		},
 		composeMessage: function composeMessage() {
 			document.getElementById("fullPanel").style.height = "0%";
-			document.getElementById("composeMessage").style.height = "100%";
+			document.getElementById("messageForm").style.height = "100%";
 		},
 		render: function render() {
 			return _react2.default.createElement(
@@ -32191,7 +32192,7 @@
 	            { className: "nav-right" },
 	            _react2.default.createElement(
 	              "a",
-	              { className: "nav-item clickable", href: "https://github.com/scotthollandjr/LunchWith" },
+	              { className: "nav-item clickable nav-icon", href: "https://github.com/scotthollandjr/LunchWith" },
 	              _react2.default.createElement(
 	                "span",
 	                { className: "icon" },
@@ -32200,7 +32201,7 @@
 	            ),
 	            _react2.default.createElement(
 	              "a",
-	              { className: "nav-item clickable", href: "https://twitter.com/eyecuelab" },
+	              { className: "nav-item clickable nav-icon", href: "https://twitter.com/eyecuelab" },
 	              _react2.default.createElement(
 	                "span",
 	                { className: "icon" },
@@ -32548,7 +32549,7 @@
 	          { id: 'splashDiv2', className: 'splashDiv' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'splash-left' },
+	            { className: 'splash-left splash-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'splash-title' },
@@ -32580,7 +32581,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'splash-image splash-right' },
 	            _react2.default.createElement('img', { src: '/images/phone.png' })
 	          )
 	        ),
@@ -32589,12 +32590,12 @@
 	          { id: 'splashDiv3', className: 'splashDiv' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'splash-left' },
+	            { className: 'splash-left splash-image' },
 	            _react2.default.createElement('img', { src: '/images/network.png' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'splash-right splash-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'splash-title' },
@@ -32636,7 +32637,7 @@
 	          { id: 'splashDiv4', className: 'splashDiv' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'splash-left' },
+	            { className: 'splash-left splash-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'splash-title' },
@@ -32678,7 +32679,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'splash-image splash-right' },
 	            _react2.default.createElement('img', { src: '/images/nospies.png' })
 	          )
 	        ),
