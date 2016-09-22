@@ -25,11 +25,13 @@ var Message = React.createClass({
   render: function() {
     return (
       <div className="message">
-        <h2 className="messageSubject">
-          {this.props.subject}
-        </h2>
-        <p>
-        {this.props.message}
+        <img src={this.props.imageUrl} className="messagePhoto"></img>
+        <p className="messageSubject">
+          <span className="messageName">{this.props.name}</span>
+          <span className="messageTime">{this.props.time}</span>
+        </p>
+        <p className="messageBody">
+          {this.props.message}
         </p>
       </div>
     );

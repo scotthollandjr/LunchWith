@@ -216,17 +216,6 @@ var UpdateForm = React.createClass({
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		}
-
-		submitSkills: function(event) {
-			event.preventDefault();
-			var skillArray = this.state.skills;
-			console.log("skill array", skillArray);
-			var skillParam = formatSkills(skillArray);
-			var updateUrl = "/updateUserSkills?skills=" + skillParam;
-			console.log(updateUrl);
-			$.get(updateUrl, function (result) {
-			}
-		}
 	)},
 
 	submitUserLocationUpdate: function(event) {

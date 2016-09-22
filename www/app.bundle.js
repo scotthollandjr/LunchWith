@@ -27808,6 +27808,7 @@
 			skillString += skillsAsArray[i].text + ",";
 		}
 		skillString = skillString.slice(0, -1);
+		console.log("skill string inside format skill", skillString);
 		return skillString;
 	}
 	
@@ -27862,20 +27863,6 @@
 			this._inputElement.value = "";
 	
 			e.preventDefault();
-		},
-	
-		submitUserUpdate: function submitUserUpdate(event) {
-			event.preventDefault();
-			var skillArray = this.state.skills;
-			var skillParam = formatSkills(skillArray);
-			var updateUrl = "/updateUserSkills?skills=" + skillParam;
-			console.log(updateUrl);
-	
-			if (this.state.skills.length <= 2) {
-				alert("Whoops, it looks like you haven't entered at least 3 of your top skills!");
-			} else {
-				$.get(updateUrl, function (result) {});
-			}
 		},
 	
 		render: function render() {
@@ -29074,14 +29061,24 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'message' },
+	      _react2.default.createElement('img', { src: this.props.imageUrl, className: 'messagePhoto' }),
 	      _react2.default.createElement(
-	        'h2',
+	        'p',
 	        { className: 'messageSubject' },
-	        this.props.subject
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'messageName' },
+	          this.props.name
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'messageTime' },
+	          this.props.time
+	        )
 	      ),
 	      _react2.default.createElement(
 	        'p',
-	        null,
+	        { className: 'messageBody' },
 	        this.props.message
 	      )
 	    );
