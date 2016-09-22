@@ -274,7 +274,7 @@ var GoogleMap = React.createClass({
 				<div id="messageForm" className="overlay2">
 					<div className="overlay-content">
 						<p className="control">
-							<textarea className="textarea">Hello! I would like to meet up.</textarea>
+							<textarea className="textarea" defaultValue="Hello! I would like to meet up."></textarea>
 						</p>
 						<p>Im available to meet up on:</p>
 						<p className="control">

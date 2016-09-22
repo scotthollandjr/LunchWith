@@ -499,6 +499,7 @@ html, body {
 /*** MESSAGE PANEL ****************************************/
 
 #messageForm {
+  top: 20;
   height: 100%;
   overflow: scroll;
   overflow-x: hidden;
