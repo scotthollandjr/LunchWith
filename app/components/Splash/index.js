@@ -1,5 +1,4 @@
 import React from 'react';
-import ParallaxComponent from 'react-parallax-component';
 import PageHeader from '../PageHeader';
 import PageFooter from '../PageFooter';
 
@@ -22,7 +21,7 @@ class Splash extends React.Component {
               </a>
             </div>
             <div id="splashDiv2" className="splashDiv">
-              <div className="splash-left">
+              <div className="splash-left splash-content">
                 <div className="splash-title">
                   <p>Want to learn from your local experts?</p>
                   <p>No problem. Buy them a meal.</p>
@@ -34,15 +33,15 @@ class Splash extends React.Component {
                   <img className="splash-button" src="/images/linkedbutton.png"></img>
                 </a>
               </div>
-              <div>
+              <div className="splash-image splash-right">
                 <img src="/images/phone.png"></img>
               </div>
             </div>
             <div id="splashDiv3" className="splashDiv">
-              <div className="splash-left">
+              <div className="splash-left splash-image">
                 <img src="/images/network.png"></img>
               </div>
-              <div>
+              <div className="splash-right splash-content">
                 <div className="splash-title">
                   <p>Grow your professional network.</p>
                   <p>Meet your future colleagues.</p>
@@ -56,7 +55,7 @@ class Splash extends React.Component {
               </div>
             </div>
             <div id="splashDiv4" className="splashDiv">
-              <div className="splash-left">
+              <div className="splash-left splash-content">
                 <div className="splash-title">
                   <p>No solicitations, recruiters,</p>
                   <p>vendors or business spies</p>
@@ -70,7 +69,7 @@ class Splash extends React.Component {
                   <img className="splash-button" src="/images/linkedbutton.png"></img>
                 </a>
               </div>
-              <div>
+              <div className="splash-image splash-right">
                 <img src="/images/nospies.png"></img>
               </div>
             </div>

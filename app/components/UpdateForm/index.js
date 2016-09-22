@@ -258,7 +258,17 @@ var UpdateForm = React.createClass({
 
 		const coords = {
 			lat: this.state.centerLat,
-			lng: this.state.centerLng};
+			lng: this.state.centerLng
+
+		};
+
+		map.addListener('click', function() {
+
+		})
+
+		map.addListener('dragend', function() {
+
+		})
 	},
 
 	onClick: function(location) {

@@ -28020,7 +28020,13 @@
 	
 			var coords = {
 				lat: this.state.centerLat,
-				lng: this.state.centerLng };
+				lng: this.state.centerLng
+	
+			};
+	
+			map.addListener('click', function () {});
+	
+			map.addListener('dragend', function () {});
 		},
 	
 	
@@ -29540,6 +29546,7 @@
 		},
 		composeMessage: function composeMessage() {
 			document.getElementById("fullPanel").style.height = "0%";
+			document.getElementById("composeMessage").style.height = "100%";
 		},
 		render: function render() {
 			return _react2.default.createElement(
@@ -32477,7 +32484,7 @@
 	            { className: "nav-right" },
 	            _react2.default.createElement(
 	              "a",
-	              { className: "nav-item clickable", href: "https://github.com/scotthollandjr/LunchWith" },
+	              { className: "nav-item clickable nav-icon", href: "https://github.com/scotthollandjr/LunchWith" },
 	              _react2.default.createElement(
 	                "span",
 	                { className: "icon" },
@@ -32486,7 +32493,7 @@
 	            ),
 	            _react2.default.createElement(
 	              "a",
-	              { className: "nav-item clickable", href: "https://twitter.com/eyecuelab" },
+	              { className: "nav-item clickable nav-icon", href: "https://twitter.com/eyecuelab" },
 	              _react2.default.createElement(
 	                "span",
 	                { className: "icon" },
@@ -32764,10 +32771,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactParallaxComponent = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"react-parallax-component\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _reactParallaxComponent2 = _interopRequireDefault(_reactParallaxComponent);
-	
 	var _PageHeader = __webpack_require__(279);
 	
 	var _PageHeader2 = _interopRequireDefault(_PageHeader);
@@ -32838,7 +32841,7 @@
 	          { id: 'splashDiv2', className: 'splashDiv' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'splash-left' },
+	            { className: 'splash-left splash-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'splash-title' },
@@ -32870,7 +32873,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'splash-image splash-right' },
 	            _react2.default.createElement('img', { src: '/images/phone.png' })
 	          )
 	        ),
@@ -32879,12 +32882,12 @@
 	          { id: 'splashDiv3', className: 'splashDiv' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'splash-left' },
+	            { className: 'splash-left splash-image' },
 	            _react2.default.createElement('img', { src: '/images/network.png' })
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'splash-right splash-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'splash-title' },
@@ -32926,7 +32929,7 @@
 	          { id: 'splashDiv4', className: 'splashDiv' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'splash-left' },
+	            { className: 'splash-left splash-content' },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'splash-title' },
@@ -32968,7 +32971,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'splash-image splash-right' },
 	            _react2.default.createElement('img', { src: '/images/nospies.png' })
 	          )
 	        ),
