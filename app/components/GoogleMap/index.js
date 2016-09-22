@@ -216,6 +216,7 @@ var GoogleMap = React.createClass({
 	onClick() {
 		document.getElementById("halfPanel").style.height = "0%";
 		document.getElementById("fullPanel").style.height = "0%";
+		document.getElementById("messageForm").style.height = "0%";
 		document.getElementById("footer").style.display = "";
 	},
 
@@ -230,7 +231,7 @@ var GoogleMap = React.createClass({
 
 	composeMessage() {
 		document.getElementById("fullPanel").style.height = "0%";
-		document.getElementById("composeMessage").style.height = "100%";
+		document.getElementById("messageForm").style.height = "100%";
 	},
 
   render() {
