@@ -29282,6 +29282,7 @@
 	
 			var Gmaps = this.refs.Gmaps;
 	
+			var displayedUsers = [];
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					map.setCenter({
@@ -29364,7 +29365,7 @@
 						skills = ["no", "skills", "provided"];
 					}
 					var userCircle = new google.maps.Circle({
-						map: map,
+						// map: map,
 						center: userLatLng,
 						radius: 20,
 						fillColor: '#ff8528',
@@ -29402,6 +29403,10 @@
 						window.messageRecipient = superUser.databaseId;
 						console.log(superUser.databaseId);
 					});
+					displayedUsers.push(userCircle);
+				}
+				for (var i = 0; i < displayedUsers.length; i++) {
+					displayedUsers[i].setMap(map);
 				}
 			});
 		},
