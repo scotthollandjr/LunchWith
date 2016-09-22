@@ -27916,7 +27916,7 @@
 				longitude: "-122.684112",
 				userLatitude: "45.526943",
 				userLongitude: "-122.684112",
-				hideMyLocation: true
+				hideMyLocation: false
 			};
 		},
 	
@@ -28021,14 +28021,24 @@
 			var coords = {
 				lat: this.state.centerLat,
 				lng: this.state.centerLng
-	
 			};
-	
-			map.addListener('click', function () {});
-	
-			map.addListener('dragend', function () {});
+			map.addListener('click', function () {
+				//update center
+				//toss a query in thur
+				alert("click");
+			});
+			map.addListener('dragend', function () {
+				//update center
+				//toss a query in thur
+				alert("dragend");
+			});
 		},
 	
+	
+		updateCenter: function updateCenter() {
+	
+			alert('update center');
+		},
 	
 		onClick: function onClick(location) {
 			var latty = location.latLng.lat();
