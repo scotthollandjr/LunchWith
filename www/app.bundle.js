@@ -29309,15 +29309,22 @@
 			};
 		},
 	
-		componentDidMount: function componentDidMount() {},
-	
 		sendMessage: function sendMessage() {
-			console.log(this.messageRecipient);
+			var recipient = this.messageRecipient;
+			var message = document.getElementById("messageTextArea").value;
+			var day = $("input[name=meetDay]:checked").val();
+			var time = $("input[name=meetTime]:checked").val();
+			var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+			console.log(updateUrl);
+			$.get(updateUrl, function (result) {});
 		},
+	
+		componentDidMount: function componentDidMount() {},
 	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
+			var topLevelThis = this;
 			var Gmaps = this.refs.Gmaps;
 	
 			var displayedUsers = [];
@@ -29438,8 +29445,7 @@
 						document.getElementById("panel-title").textContent = superUser.title;
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
-						this.messageRecipient = superUser.databaseId;
-						console.log(this);
+						topLevelThis.messageRecipient = superUser.databaseId;
 					});
 					displayedUsers.push(userCircle);
 				}
@@ -29541,7 +29547,7 @@
 						_react2.default.createElement(
 							'p',
 							{ className: 'control' },
-							_react2.default.createElement('textarea', { className: 'textarea', defaultValue: 'Hello! I would like to meet up.' })
+							_react2.default.createElement('textarea', { id: 'messageTextArea', className: 'textarea', defaultValue: 'Hello! I would like to meet up.' })
 						),
 						_react2.default.createElement(
 							'p',
@@ -29550,35 +29556,35 @@
 						),
 						_react2.default.createElement(
 							'p',
-							{ className: 'control' },
+							{ className: 'control', id: 'dayRadioButton' },
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Monday' }),
 								'Monday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Tuesday' }),
 								'Tuesday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Wednesday' }),
 								'Wednesday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Thursday' }),
 								'Thursday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Friday' }),
 								'Friday'
 							)
 						),
@@ -29589,29 +29595,29 @@
 						),
 						_react2.default.createElement(
 							'p',
-							{ className: 'control' },
+							{ className: 'control', id: 'timeRadioButton' },
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '11:00' }),
 								'11:00 AM'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '11:30' }),
 								'11:30 AM'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '12:00' }),
 								'12:00 PM'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '12:30' }),
 								'12:30 PM'
 							)
 						),

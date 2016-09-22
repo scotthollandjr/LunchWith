@@ -77,7 +77,7 @@ let checkSentMessages = (req, res, next) => {
 
 let sendMessage = (req, res) => {
   var sql = "INSERT INTO messages (sender_id, recipient_id, message, subject) VALUES ($1, $2, $3, $4);"
-  var sender_id = req.query.sender_id;
+  var sender_id = req.user.id;
   var recipient_id = req.query.recipient_id;
   var message = req.query.message;
   var subject = req.query.subject;
