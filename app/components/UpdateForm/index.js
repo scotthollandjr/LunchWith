@@ -49,7 +49,7 @@ function formatSkills(skillsAsArray){
 		skillString += skillsAsArray[i].text + ",";
 	}
 	skillString = skillString.slice(0, -1);
-	console.log(skillString);
+	console.log("skill string inside format skill", skillString);
 	return skillString;
 }
 
@@ -220,7 +220,7 @@ var UpdateForm = React.createClass({
 		submitUserUpdateJr: function(event) {
 			event.preventDefault();
 			var skillArray = this.state.skills;
-			console.log(skillArray);
+			console.log("skill array", skillArray);
 			var skillParam = formatSkills(skillArray);
 			var updateUrl = "/updateUserSkills?skills=" + skillParam;
 			console.log(updateUrl);
