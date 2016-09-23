@@ -29285,7 +29285,7 @@
 		title: "Junior Developer",
 		company: "Tacocat Industries",
 		imageUrl: "https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png",
-		summary: "I am new to town, and looking to meet potential business partners for my ..ventures.",
+		bio: "I am new to town, and looking to meet potential business partners for my ..ventures.",
 		skills: ["Java", "Android", "Googling"]
 	};
 	
@@ -29297,7 +29297,7 @@
 			title: "Junior Developer",
 			company: "Tacocat Industries",
 			imageUrl: "https://cdn1.lockerdome.com/uploads/7451336eb852ba74c9dd7af45b6aa0cd9ef199d72d6698212f8993f300c8c8c1_large",
-			summary: "I am starting a start-up and looking to find out about the local tech scene!",
+			bio: "I am starting a start-up and looking to find out about the local tech scene!",
 			skills: ["Java", "Android", "Googling"]
 		}
 	};
@@ -29308,7 +29308,7 @@
 		title: "",
 		company: "",
 		imageUrl: "",
-		summary: "",
+		bio: "",
 		skills: [],
 		databaseId: 0
 	};
@@ -29370,9 +29370,9 @@
 					var userLatLng = { lat: user.latitude, lng: user.longitude };
 					var skills;
 					if (user.skills) {
-						skills = user.skills.split(",");
+						skills = user.skills.split(", ");
 					} else {
-						skills = ["no", "skills", "provided"];
+						skills = ["No skills provided."];
 					}
 					var userCircle = new google.maps.Circle({
 						// map: map,
@@ -29388,7 +29388,7 @@
 						title: user.title,
 						company: user.company,
 						imageUrl: user.pictureurl,
-						summary: user.summary,
+						bio: user.bio,
 						skills: skills,
 						databaseId: user.id,
 						onClick: this.onClick
@@ -29400,15 +29400,15 @@
 							title: this.title,
 							company: this.company,
 							imageUrl: this.imageUrl,
-							summary: this.summary,
-							skills: this.skills || ["no", "skills", "listed"],
+							bio: this.bio,
+							skills: this.skills || ["No skills provided."],
 							databaseId: this.databaseId
 						};
 						document.getElementById("halfPanel").style.height = "35%";
 						document.getElementById("footer").style.display = "none";
 						document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 						document.getElementById("panel-title").textContent = superUser.title;
-						document.getElementById("panel-summary").textContent = superUser.summary;
+						document.getElementById("panel-summary").textContent = superUser.bio;
 						document.getElementById("full-image").src = superUser.imageUrl;
 						GoogleMap.messageRecipient = superUser.databaseId;
 						console.log(GoogleMap.messageRecipient);
@@ -29514,8 +29514,8 @@
 			document.getElementById("halfPanel").style.height = "0%";
 			document.getElementById("full-name").textContent = superUser.firstName + ' ' + superUser.lastName;
 			document.getElementById("full-title").textContent = superUser.title + ' at ' + superUser.company;
-			document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills[0] + ', ' + superUser.skills[1] + ' & ' + superUser.skills[2];
-			document.getElementById("full-summary").textContent = superUser.summary;
+			document.getElementById("full-skills").textContent = 'Skills: ' + superUser.skills;
+			document.getElementById("full-summary").textContent = superUser.bio;
 		},
 		composeMessage: function composeMessage() {
 			document.getElementById("fullPanel").style.height = "0%";

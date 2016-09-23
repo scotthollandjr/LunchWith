@@ -97,9 +97,9 @@ var GoogleMap = React.createClass({
 				var userLatLng = {lat: user.latitude, lng: user.longitude}
 				var skills;
 				 if (user.skills) {
-					 skills = user.skills.split(",");
+					 skills = user.skills.split(", ");
 				 } else {
-					 skills = ["no", "skills", "provided"];
+					 skills = ["No skills provided."];
 				 }
 				var userCircle = new google.maps.Circle({
 					// map: map,
