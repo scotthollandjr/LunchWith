@@ -66,8 +66,10 @@ var GoogleMap = React.createClass({
 	},
 
 	queryAndAddMapMarkers: function(map) {
-		var outerThis = this;
-		var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
+		var centerLat = GoogleMap.map.getCenter().lat();
+		var centerLng = GoogleMap.map.getCenter().lng();
+		console.log(centerLat, centerLng);
+		var locationQueryString = "?latitude=" + centerLat + "&longitude=" + centerLng;
 		$.get("/queryUsers"+locationQueryString, function(result) {
 			for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
 				GoogleMap.displayedUsers[i].setMap(null);
@@ -120,20 +122,19 @@ var GoogleMap = React.createClass({
 						document.getElementById("panel-title").textContent = superUser.title;
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
-						topLevelThis.messageRecipient = superUser.databaseId;
+						GoogleMap.messageRecipient = superUser.databaseId;
 				})
 				GoogleMap.displayedUsers.push(userCircle);
 			}
 			for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
 				GoogleMap.displayedUsers[i].setMap(map);
-				console.log(GoogleMap.displayedUsers);
 			}
 		});
 	},
 
   onMapCreated(map) {
-		GoogleMap.prototype.queryAndAddMapMarkers(map);
-		map.addListener('dragend', function(map) {
+		GoogleMap.map = map;
+		map.addListener('idle', function(map) {
 			GoogleMap.prototype.queryAndAddMapMarkers(this);
 		});
 		var topLevelThis = this;
@@ -144,6 +145,7 @@ var GoogleMap = React.createClass({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				});
+				GoogleMap.prototype.queryAndAddMapMarkers(map);
 				var centerCircle = new google.maps.Circle({
 					map: map,
 					center: {lat: position.coords.latitude, lng: position.coords.longitude},
