@@ -7,7 +7,7 @@ var MessageRow = React.createClass ({
   render: function() {
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
-          <Message subject={singleMessage.subject} key={singleMessage.messagetime}
+          <Message subject={singleMessage.subject} key={singleMessage.id} id={singleMessage.id}
             message={singleMessage.message} messagetime={singleMessage.messagetime} firstName={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl}>
           </Message>
         );
@@ -28,14 +28,16 @@ var Message = React.createClass({
   },
 
   openMessage(id) {
-    var theid = id;
-    document.getElementById(theid).style.display = "";
+    return function(e) {
+      console.log("id", id);
+      document.getElementById(id).style.display = "block";
+    }
   },
 
   render: function() {
     return (
       <div>
-        <div className="message" onClick={this.openMessage(this.props.messagetime)}>
+        <div className="message" onClick={this.openMessage(this.props.id)}>
           <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
             <span className="messageName">{this.props.firstname}</span>
@@ -47,7 +49,7 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
-          <div id={this.props.messagetime} className="message-hidden">
+          <div id={this.props.id} className="message-hidden">
             <p>TESTING</p>
             <p>pictureurl: {this.props.pictureurl}</p>
             <p>firstname: {this.props.firstname}</p>
