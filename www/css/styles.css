@@ -535,6 +535,10 @@ html, body {
   height: 100%;
 }
 
+.message-hidden {
+  display: none;
+}
+
 /*** FOOTER ****************************************/
 
 .footerx {

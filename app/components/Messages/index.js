@@ -27,10 +27,14 @@ var Message = React.createClass({
     document.getElementById("messageOverlay").style.height = "0%";
   },
 
+  openMessage: function(id) {
+    document.getElementById(id).style.display = "";
+  },
+
   render: function() {
     return (
       <div>
-        <div className="message">
+        <div className="message" onClick={this.openMessage(this.props.key)}>
           <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
             <span className="messageName">{this.props.firstname}</span>
@@ -42,15 +46,18 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
-          <p>TESTING</p>
-          <p>pictureurl: {this.props.pictureurl}</p>
-          <p>firstname: {this.props.firstname}</p>
-          <p>messagetime: {this.props.messagetime}</p>
-          <p>title: {this.props.title}</p>
-          <p>company: {this.props.company}</p>
-          <p>skills: {this.props.skills}</p>
-          <p>subject: {this.props.subject}</p>
-          <p>message: {this.props.message}</p>
+          <div id={this.props.key} className="message-hidden">
+            <p>TESTING</p>
+            <p>pictureurl: {this.props.pictureurl}</p>
+            <p>firstname: {this.props.firstname}</p>
+            <p>messagetime: {this.props.messagetime}</p>
+            <p>title: {this.props.title}</p>
+            <p>company: {this.props.company}</p>
+            <p>skills: {this.props.skills}</p>
+            <p>subject: {this.props.subject}</p>
+            <p>message: {this.props.message}</p>
+            <button className="button is-blue">REPLY</button>
+          </div>
         </div>
       </div>
     );
