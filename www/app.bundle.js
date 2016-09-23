@@ -28946,7 +28946,7 @@
 	
 	  render: function render() {
 	    var messageNodes = this.props.messages.map(function (singleMessage) {
-	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id,
+	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.messagetime,
 	        message: singleMessage.message });
 	    });
 	    return _react2.default.createElement(
@@ -28991,6 +28991,7 @@
 	
 	  componentDidMount: function componentDidMount() {
 	    $.get("/checkReceivedMessages", function (result) {
+	      console.log(result);
 	      this.setState({
 	        receivedMessages: result.messages
 	      });
@@ -29302,6 +29303,7 @@
 	
 	
 		getInitialState: function getInitialState() {
+			GoogleMap.displayedUsers = [];
 			return {
 				users: [],
 				myLatLng: { lat: userInfo.latitude, lng: userInfo.longitude },
@@ -29319,15 +29321,84 @@
 			$.get(updateUrl, function (result) {});
 		},
 	
-		componentDidMount: function componentDidMount() {},
+		componentWillMount: function componentWillMount() {},
+	
+		queryAndAddMapMarkers: function queryAndAddMapMarkers(map) {
+			for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
+				GoogleMap.displayedUsers[i].setMap(null);
+			}
+			GoogleMap.displayedUsers = [];
+			var outerThis = this;
+			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
+			$.get("/queryUsers" + locationQueryString, function (result) {
+				// console.log("Location searched!", result.users);
+				var users = result.users;
+				for (var i = 0; i < users.length; i++) {
+					var user = users[i];
+					var userLatLng = { lat: user.latitude, lng: user.longitude };
+					var skills;
+					if (user.skills) {
+						skills = user.skills.split(",");
+					} else {
+						skills = ["no", "skills", "provided"];
+					}
+					var userCircle = new google.maps.Circle({
+						// map: map,
+						center: userLatLng,
+						radius: 20,
+						fillColor: '#ff8528',
+						fillOpacity: .75,
+						strokeColor: '#ff8528',
+						strokeOpacity: .25,
+						strokeWeight: 10,
+						firstName: user.firstname,
+						lastName: user.lastname,
+						title: user.title,
+						company: user.company,
+						imageUrl: user.pictureurl,
+						summary: user.summary,
+						skills: skills,
+						databaseId: user.id,
+						onClick: this.onClick
+					});
+					userCircle.addListener('click', function () {
+						superUser = {
+							firstName: this.firstName,
+							lastName: this.lastName,
+							title: this.title,
+							company: this.company,
+							imageUrl: this.imageUrl,
+							summary: this.summary,
+							skills: this.skills || ["no", "skills", "listed"],
+							databaseId: this.databaseId
+						};
+						document.getElementById("halfPanel").style.height = "35%";
+						document.getElementById("footer").style.display = "none";
+						document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
+						document.getElementById("panel-title").textContent = superUser.title;
+						document.getElementById("panel-summary").textContent = superUser.summary;
+						document.getElementById("full-image").src = superUser.imageUrl;
+						topLevelThis.messageRecipient = superUser.databaseId;
+					});
+					GoogleMap.displayedUsers.push(userCircle);
+				}
+				for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
+					GoogleMap.displayedUsers[i].setMap(map);
+					console.log(GoogleMap.displayedUsers);
+				}
+			});
+		},
 	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
+			GoogleMap.prototype.queryAndAddMapMarkers(map);
+			map.addListener('dragend', function (map) {
+				GoogleMap.prototype.queryAndAddMapMarkers(this);
+			});
 			var topLevelThis = this;
 			var Gmaps = this.refs.Gmaps;
 	
-			var displayedUsers = [];
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(function (position) {
 					map.setCenter({
@@ -29394,64 +29465,6 @@
 					"featureType": "transit.station.airport",
 					"stylers": [{ "color": "#4b4b4b" }]
 				}, {}]
-			});
-	
-			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
-			$.get("/queryUsers" + locationQueryString, function (result) {
-				// console.log("Location searched!", result.users);
-				var users = result.users;
-				for (var i = 0; i < users.length; i++) {
-					var user = users[i];
-					var userLatLng = { lat: user.latitude, lng: user.longitude };
-					var skills;
-					if (user.skills) {
-						skills = user.skills.split(",");
-					} else {
-						skills = ["no", "skills", "provided"];
-					}
-					var userCircle = new google.maps.Circle({
-						// map: map,
-						center: userLatLng,
-						radius: 20,
-						fillColor: '#ff8528',
-						fillOpacity: .75,
-						strokeColor: '#ff8528',
-						strokeOpacity: .25,
-						strokeWeight: 10,
-						firstName: user.firstname,
-						lastName: user.lastname,
-						title: user.title,
-						company: user.company,
-						imageUrl: user.pictureurl,
-						summary: user.summary,
-						skills: skills,
-						databaseId: user.id,
-						onClick: this.onClick
-					});
-					userCircle.addListener('click', function () {
-						superUser = {
-							firstName: this.firstName,
-							lastName: this.lastName,
-							title: this.title,
-							company: this.company,
-							imageUrl: this.imageUrl,
-							summary: this.summary,
-							skills: this.skills || ["no", "skills", "listed"],
-							databaseId: this.databaseId
-						};
-						document.getElementById("halfPanel").style.height = "35%";
-						document.getElementById("footer").style.display = "none";
-						document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
-						document.getElementById("panel-title").textContent = superUser.title;
-						document.getElementById("panel-summary").textContent = superUser.summary;
-						document.getElementById("full-image").src = superUser.imageUrl;
-						topLevelThis.messageRecipient = superUser.databaseId;
-					});
-					displayedUsers.push(userCircle);
-				}
-				for (var i = 0; i < displayedUsers.length; i++) {
-					displayedUsers[i].setMap(map);
-				}
 			});
 		},
 		onCloseClick: function onCloseClick() {
