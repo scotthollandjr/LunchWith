@@ -29079,7 +29079,7 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'message', onClick: this.openMessage(this.props.key) },
+	        { className: 'message', onClick: this.openMessage(this.props.messagetime) },
 	        _react2.default.createElement('img', { src: this.props.pictureurl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
 	          'p',

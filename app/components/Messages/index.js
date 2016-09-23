@@ -34,7 +34,7 @@ var Message = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="message" onClick={this.openMessage(this.props.key)}>
+        <div className="message" onClick={this.openMessage(this.props.messagetime)}>
           <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
             <span className="messageName">{this.props.firstname}</span>
