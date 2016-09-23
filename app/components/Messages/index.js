@@ -24,7 +24,7 @@ var MessageRow = React.createClass ({
 var Message = React.createClass({
 
   onClick() {
-    document.getElementById("messageOverlay").style.height = "0%";
+
   },
 
   openMessage: function(id) {
@@ -46,7 +46,7 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
-          <div id={this.props.key} className="message-hidden">
+          <div id={this.props.messagetime} className="message-hidden">
             <p>TESTING</p>
             <p>pictureurl: {this.props.pictureurl}</p>
             <p>firstname: {this.props.firstname}</p>

@@ -29064,9 +29064,7 @@
 	
 	var Message = _react2.default.createClass({
 	  displayName: 'Message',
-	  onClick: function onClick() {
-	    document.getElementById("messageOverlay").style.height = "0%";
-	  },
+	  onClick: function onClick() {},
 	
 	
 	  openMessage: function openMessage(id) {
@@ -29124,7 +29122,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: this.props.key, className: 'message-hidden' },
+	          { id: this.props.messagetime, className: 'message-hidden' },
 	          _react2.default.createElement(
 	            'p',
 	            null,
