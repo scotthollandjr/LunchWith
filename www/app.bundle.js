@@ -29186,15 +29186,15 @@
 	            'button',
 	            { className: 'button is-blue' },
 	            'REPLY'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'footer-arrow' },
+	          ),
 	          _react2.default.createElement(
-	            'span',
-	            { className: 'icon is-large panel-footer' },
-	            _react2.default.createElement('i', { onClick: this.closeMessage(this.props.id), className: 'fa fa-angle-down' })
+	            'div',
+	            { className: 'footer-arrow' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'icon is-large panel-footer' },
+	              _react2.default.createElement('i', { onClick: this.closeMessage(this.props.id), className: 'fa fa-angle-down' })
+	            )
 	          )
 	        )
 	      )
