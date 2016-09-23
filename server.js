@@ -80,7 +80,7 @@ let sendMessage = (req, res) => {
   var sender_id = req.user.id;
   var recipient_id = req.query.recipient_id;
   var message = req.query.message;
-  var subject = req.query.subject;
+  var subject = req.user.firstname + " " + req.query.subject;
 
   db.query(sql, [sender_id, recipient_id, message, subject])
   .then(function(result){

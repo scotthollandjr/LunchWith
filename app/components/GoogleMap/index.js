@@ -57,7 +57,18 @@ var GoogleMap = React.createClass({
 		console.log(message);
 		var day = $("input[name=meetDay]:checked").val();
 		var time = $("input[name=meetTime]:checked").val();
-		var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+		var subject;
+		if (day) {
+			subject = "wants to meet you on " + day;
+			if (time) {
+				subject += " at " + time;
+			}
+		} else {
+			subject = "sent you a message"
+		}
+		subject += "!";
+		console.log(subject);
+		var updateUrl = "/sendMessage?message=" + message + "&recipient_id=" + recipient + "&subject=" + subject;
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		});
@@ -70,7 +81,6 @@ var GoogleMap = React.createClass({
 	queryAndAddMapMarkers: function(map) {
 		var centerLat = GoogleMap.map.getCenter().lat();
 		var centerLng = GoogleMap.map.getCenter().lng();
-		console.log(centerLat, centerLng);
 		var locationQueryString = "?latitude=" + centerLat + "&longitude=" + centerLng;
 		$.get("/queryUsers"+locationQueryString, function(result) {
 			for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
