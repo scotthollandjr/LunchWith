@@ -29065,11 +29065,11 @@
 	var Message = _react2.default.createClass({
 	  displayName: 'Message',
 	  onClick: function onClick() {},
-	
-	
 	  openMessage: function openMessage(id) {
-	    document.getElementById(id).style.display = "";
+	    var theid = id;
+	    document.getElementById(theid).style.display = "";
 	  },
+	
 	
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -29077,7 +29077,7 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'message', onClick: this.openMessage("jim") },
+	        { className: 'message', onClick: this.openMessage(this.props.messagetime) },
 	        _react2.default.createElement('img', { src: this.props.pictureurl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
 	          'p',
@@ -29122,7 +29122,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: 'jim', className: 'message-hidden' },
+	          { id: this.props.messagetime, className: 'message-hidden' },
 	          _react2.default.createElement(
 	            'p',
 	            null,

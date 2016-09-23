@@ -27,14 +27,15 @@ var Message = React.createClass({
 
   },
 
-  openMessage: function(id) {
-    document.getElementById(id).style.display = "";
+  openMessage(id) {
+    var theid = id;
+    document.getElementById(theid).style.display = "";
   },
 
   render: function() {
     return (
       <div>
-        <div className="message" onClick={this.openMessage("jim")}>
+        <div className="message" onClick={this.openMessage(this.props.messagetime)}>
           <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
             <span className="messageName">{this.props.firstname}</span>
@@ -46,7 +47,7 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
-          <div id="jim" className="message-hidden">
+          <div id={this.props.messagetime} className="message-hidden">
             <p>TESTING</p>
             <p>pictureurl: {this.props.pictureurl}</p>
             <p>firstname: {this.props.firstname}</p>
