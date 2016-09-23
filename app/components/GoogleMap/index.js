@@ -40,7 +40,9 @@ var superUser = {
 
 var GoogleMap = React.createClass({
 
+
 	getInitialState:function() {
+		GoogleMap.displayedUsers = [];
 		return {
 			users: [],
 			myLatLng: {lat: userInfo.latitude, lng: userInfo.longitude},
@@ -59,21 +61,91 @@ var GoogleMap = React.createClass({
 		});
 	},
 
-	componentDidMount: function() {
+	componentWillMount: function() {
 
 	},
 
+	queryAndAddMapMarkers: function(map) {
+		var centerLat = GoogleMap.map.getCenter().lat();
+		var centerLng = GoogleMap.map.getCenter().lng();
+		console.log(centerLat, centerLng);
+		var locationQueryString = "?latitude=" + centerLat + "&longitude=" + centerLng;
+		$.get("/queryUsers"+locationQueryString, function(result) {
+			for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
+				GoogleMap.displayedUsers[i].setMap(null);
+			}
+			GoogleMap.displayedUsers = [];
+			// console.log("Location searched!", result.users);
+			var users = result.users
+			for (var i = 0; i < users.length; i++) {
+				var user = users[i];
+				var userLatLng = {lat: user.latitude, lng: user.longitude}
+				var skills;
+				 if (user.skills) {
+					 skills = user.skills.split(",");
+				 } else {
+					 skills = ["no", "skills", "provided"];
+				 }
+				var userCircle = new google.maps.Circle({
+					// map: map,
+					center: userLatLng,
+					radius: 20,
+					fillColor: '#ff8528',
+					fillOpacity: .75,
+					strokeColor: '#ff8528',
+					strokeOpacity: .25,
+					strokeWeight: 10,
+					firstName: user.firstname,
+					lastName: user.lastname,
+					title: user.title,
+					company: user.company,
+					imageUrl: user.pictureurl,
+					summary: user.summary,
+					skills: skills,
+					databaseId: user.id,
+					onClick: this.onClick
+				});
+				userCircle.addListener('click', function() {
+					superUser = {
+						firstName: this.firstName,
+						lastName: this.lastName,
+						title: this.title,
+						company: this.company,
+						imageUrl: this.imageUrl,
+						summary: this.summary,
+						skills: this.skills || ["no", "skills", "listed"],
+						databaseId: this.databaseId
+					};
+						document.getElementById("halfPanel").style.height = "35%";
+						document.getElementById("footer").style.display = "none";
+						document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
+						document.getElementById("panel-title").textContent = superUser.title;
+						document.getElementById("panel-summary").textContent = superUser.summary;
+						document.getElementById("full-image").src = superUser.imageUrl;
+						GoogleMap.messageRecipient = superUser.databaseId;
+				})
+				GoogleMap.displayedUsers.push(userCircle);
+			}
+			for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
+				GoogleMap.displayedUsers[i].setMap(map);
+			}
+		});
+	},
 
   onMapCreated(map) {
+		GoogleMap.map = map;
+		map.addListener('idle', function(map) {
+			GoogleMap.prototype.queryAndAddMapMarkers(this);
+		});
 		var topLevelThis = this;
 		const {Gmaps} = this.refs;
-		var displayedUsers = [];
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				map.setCenter({
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				});
+				GoogleMap.prototype.queryAndAddMapMarkers(map);
 				var centerCircle = new google.maps.Circle({
 					map: map,
 					center: {lat: position.coords.latitude, lng: position.coords.longitude},
@@ -166,64 +238,6 @@ var GoogleMap = React.createClass({
 		  }
 		]
       });
-
-			var locationQueryString = "?latitude=" + userInfo.latitude + "&longitude=" + userInfo.longitude;
-			$.get("/queryUsers"+locationQueryString, function(result) {
-				// console.log("Location searched!", result.users);
-				var users = result.users
-				for (var i = 0; i < users.length; i++) {
-					var user = users[i];
-					var userLatLng = {lat: user.latitude, lng: user.longitude}
-					var skills;
-					 if (user.skills) {
-						 skills = user.skills.split(",");
-					 } else {
-						 skills = ["no", "skills", "provided"];
-					 }
-					var userCircle = new google.maps.Circle({
-						// map: map,
-						center: userLatLng,
-						radius: 20,
-						fillColor: '#ff8528',
-						fillOpacity: .75,
-						strokeColor: '#ff8528',
-						strokeOpacity: .25,
-						strokeWeight: 10,
-						firstName: user.firstname,
-						lastName: user.lastname,
-						title: user.title,
-						company: user.company,
-						imageUrl: user.pictureurl,
-						summary: user.summary,
-						skills: skills,
-						databaseId: user.id,
-						onClick: this.onClick
-					});
-					userCircle.addListener('click', function() {
-						superUser = {
-							firstName: this.firstName,
-							lastName: this.lastName,
-							title: this.title,
-							company: this.company,
-							imageUrl: this.imageUrl,
-							summary: this.summary,
-							skills: this.skills || ["no", "skills", "listed"],
-							databaseId: this.databaseId
-						};
-							document.getElementById("halfPanel").style.height = "35%";
-							document.getElementById("footer").style.display = "none";
-							document.getElementById("panel-name").textContent = superUser.firstName + ' ' + superUser.lastName;
-							document.getElementById("panel-title").textContent = superUser.title;
-							document.getElementById("panel-summary").textContent = superUser.summary;
-							document.getElementById("full-image").src = superUser.imageUrl;
-							topLevelThis.messageRecipient = superUser.databaseId;
-					})
-					displayedUsers.push(userCircle);
-				}
-				for (var i = 0; i < displayedUsers.length; i++) {
-					displayedUsers[i].setMap(map);
-				}
-			});
   },
 
 	onCloseClick() {

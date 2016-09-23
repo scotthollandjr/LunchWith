@@ -8,7 +8,7 @@ var MessageRow = React.createClass ({
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
           <Message subject={singleMessage.subject} key={singleMessage.id}
-            message={singleMessage.message} time={singleMessage.time} firstName={singleMessage.firstName} company={singleMessage.company} title={singleMessage.title} >
+            message={singleMessage.message} time={singleMessage.messageTime} firstName={singleMessage.firstName} company={singleMessage.company} title={singleMessage.title} >
           </Message>
         );
       });
@@ -60,6 +60,7 @@ var Messaging = React.createClass ({
 
     componentDidMount: function() {
   		$.get("/checkReceivedMessages", function (result) {
+        console.log(result);
         this.setState({
           receivedMessages: result.messages
         });
