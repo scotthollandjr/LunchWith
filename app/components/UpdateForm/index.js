@@ -247,21 +247,16 @@ var UpdateForm = React.createClass({
 		map.addListener('click', function() {
 			//update center
 			//toss a query in thur
-
 			// alert("click");
-
 		})
 		map.addListener('dragend', function() {
 			//update center
 			//toss a query in thur
 			// alert("dragend");
-
-
 		})
 	},
 
 	updateCenter: function() {
-
 		alert('update center');
 	},
 

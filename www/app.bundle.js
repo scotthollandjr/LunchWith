@@ -29049,37 +29049,213 @@
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'messageList' },
-	      messageNodes
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'message' },
+	        _react2.default.createElement('img', { src: userMessage.imageUrl, className: 'messagePhoto' }),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSubject' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageName' },
+	            userMessage.firstName
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageTime' },
+	            userMessage.time
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageTitle' },
+	          userMessage.title,
+	          ' at ',
+	          userMessage.company
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSkills' },
+	          'Expert in: ',
+	          userMessage.skills
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageBody' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            userMessage.subject
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            userMessage.message
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'message' },
+	        _react2.default.createElement('img', { src: userMessage2.imageUrl, className: 'messagePhoto' }),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSubject' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageName' },
+	            userMessage2.firstName
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageTime' },
+	            userMessage2.time
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageTitle' },
+	          userMessage2.title,
+	          ' at ',
+	          userMessage2.company
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSkills' },
+	          'Expert in: ',
+	          userMessage2.skills
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageBody' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            userMessage2.subject
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            userMessage2.message
+	          )
+	        )
+	      )
 	    );
 	  }
 	});
 	
+	var userMessage = {
+	  imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
+	  firstName: "Scout",
+	  time: "10/7/2016",
+	  message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
+	  skills: ["Java", "JavaScript", "Nachos"],
+	  title: "Chief Taco Officer",
+	  company: "TACOCAT LABS"
+	};
+	
+	var userMessage2 = {
+	  imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
+	  firstName: "Taco",
+	  time: "11/8/2015",
+	  message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
+	  skills: ["UX", "Node", "SQL"],
+	  title: "Financial Advisor",
+	  company: "Publix"
+	};
+	
 	var Message = _react2.default.createClass({
 	  displayName: 'Message',
+	  onClick: function onClick() {
+	    document.getElementById("messageOverlay").style.height = "0%";
+	  },
+	
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'message' },
-	      _react2.default.createElement('img', { src: this.props.imageUrl, className: 'messagePhoto' }),
+	      null,
 	      _react2.default.createElement(
-	        'p',
-	        { className: 'messageSubject' },
+	        'div',
+	        { className: 'message' },
+	        _react2.default.createElement('img', { src: userMessage.imageUrl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'messageName' },
-	          this.props.name
+	          'p',
+	          { className: 'messageSubject' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageName' },
+	            userMessage.firstName
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageTime' },
+	            userMessage.time
+	          )
 	        ),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'messageTime' },
-	          this.props.time
+	          'p',
+	          { className: 'messageBody' },
+	          userMessage.subject
 	        )
 	      ),
 	      _react2.default.createElement(
-	        'p',
-	        { className: 'messageBody' },
-	        this.props.message
+	        'div',
+	        { className: 'messageOverlay' },
+	        _react2.default.createElement('img', { src: userMessage.imageUrl, className: 'messagePhoto' }),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSubject' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageName' },
+	            userMessage.firstName
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageTime' },
+	            userMessage.time
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageBody' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageName' },
+	            userMessage.subject
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            userMessage.message
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSkills' },
+	          userMessage.skills
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageTitle' },
+	          userMessage.title
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageCompany' },
+	          userMessage.company
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'footer-arrow' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'icon is-large panel-footer' },
+	          _react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-angle-down' })
+	        )
 	      )
 	    );
 	  }
