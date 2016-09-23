@@ -64,8 +64,7 @@ var Message = React.createClass({
           </p>
           <p className="messageTitle">{this.props.title} at {this.props.company}</p>
           <p className="messageSkills">Expert in: {this.props.skills}</p>
-          <p className="messageBody">
-            <span>{this.props.subject}</span>
+          <p className="messageBody">{this.props.subject}</span>
           </p>
           <div id={this.props.id} className="message-hidden">
             <p>{this.props.message}</p>
