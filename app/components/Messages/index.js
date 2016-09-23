@@ -8,7 +8,7 @@ var MessageRow = React.createClass ({
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
           <Message subject={singleMessage.subject} key={singleMessage.id}
-            message={singleMessage.message}>
+            message={singleMessage.message} time={singleMessage.time} firstName={singleMessage.firstName}>
           </Message>
         );
       });
@@ -20,27 +20,6 @@ var MessageRow = React.createClass ({
     );
   }
 });
-
-var messages = {
-  message1: {
-    imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
-    firstName: "Scout",
-    time: "10/7/2016",
-    message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
-    skills: ["Java", "JavaScript", "Nachos"],
-    title: "Chief Taco Officer",
-    company: "TACOCAT LABS"
-  },
-  message2: {
-    imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
-    firstName: "Taco",
-    time: "11/8/2015",
-    message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
-    skills: ["UX", "Node", "SQL"],
-    title: "Financial Advisor",
-    company: "Publix"
-  }
-}
 
 var Message = React.createClass({
 
