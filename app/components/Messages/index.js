@@ -50,6 +50,7 @@ var Message = React.createClass({
       console.log(updateUrl);
       $.get(updateUrl, function (result) {
       });
+      document.getElementById(id).style.display = "none";
     }
   },
 

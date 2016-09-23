@@ -29103,6 +29103,7 @@
 	      var updateUrl = "/sendMessage?message=" + message + "&recipient_id=" + recipient + "&subject=replied to your message!";
 	      console.log(updateUrl);
 	      $.get(updateUrl, function (result) {});
+	      document.getElementById(id).style.display = "none";
 	    };
 	  },
 	
