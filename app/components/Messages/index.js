@@ -12,25 +12,58 @@ var MessageRow = React.createClass ({
           </Message>
         );
       });
+
       return (
         <div className="messageList">
           {messageNodes}
         </div>
-
     );
   }
 });
 
+var messages = {
+  message1: {
+    imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
+    firstName: "Scout",
+    time: "10/7/2016",
+    message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
+    skills: ["Java", "JavaScript", "Nachos"],
+    title: "Chief Taco Officer",
+    company: "TACOCAT LABS"
+  },
+  message2: {
+    imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
+    firstName: "Taco",
+    time: "11/8/2015",
+    message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
+    skills: ["UX", "Node", "SQL"],
+    title: "Financial Advisor",
+    company: "Publix"
+  }
+}
+
 var Message = React.createClass({
+
+  onClick() {
+    document.getElementById("messageOverlay").style.height = "0%";
+  },
+
   render: function() {
     return (
-      <div className="message">
-        <h2 className="messageSubject">
-          {this.props.subject}
-        </h2>
-        <p>
-        {this.props.message}
-        </p>
+      <div>
+        <div className="message">
+          <img src={this.props.imageUrl} className="messagePhoto"></img>
+          <p className="messageSubject">
+            <span className="messageName">{this.props.firstName}</span>
+            <span className="messageTime">{this.props.time}</span>
+          </p>
+          <p className="messageTitle">{this.props.title} at {this.props.company}</p>
+          <p className="messageSkills">Expert in: {this.props.skills}</p>
+          <p className="messageBody">
+            <span>{this.props.subject}</span>
+            <span>{this.props.message}</span>
+          </p>
+        </div>
       </div>
     );
   }

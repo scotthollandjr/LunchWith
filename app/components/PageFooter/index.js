@@ -14,7 +14,7 @@ class PageFooter extends React.Component {
                 </div>
                 <div className="footer-right">
                   <p className="footer-item">
-                    <span><a href="/privacy" className="clickable">Privacy Policy</a> | <a href="/contact" className="clickable">Contact Us</a> | <a href="/about" className="clickable">About</a></span>
+                    <span><a href="/privacy" className="clickable">Privacy Policy</a> | <a href="/contact" className="clickable">Contact Us</a></span>
                   </p>
                 </div>
               </div>

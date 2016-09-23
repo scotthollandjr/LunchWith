@@ -28026,22 +28026,17 @@
 			map.addListener('click', function () {
 				//update center
 				//toss a query in thur
-	
 				// alert("click");
-	
 			});
 			map.addListener('dragend', function () {
 				//update center
 				//toss a query in thur
 				// alert("dragend");
-	
-	
 			});
 		},
 	
 	
 		updateCenter: function updateCenter() {
-	
 			alert('update center');
 		},
 	
@@ -28949,6 +28944,7 @@
 	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.messagetime,
 	        message: singleMessage.message });
 	    });
+	
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'messageList' },
@@ -28957,22 +28953,83 @@
 	  }
 	});
 	
+	var messages = {
+	  message1: {
+	    imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
+	    firstName: "Scout",
+	    time: "10/7/2016",
+	    message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
+	    skills: ["Java", "JavaScript", "Nachos"],
+	    title: "Chief Taco Officer",
+	    company: "TACOCAT LABS"
+	  },
+	  message2: {
+	    imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
+	    firstName: "Taco",
+	    time: "11/8/2015",
+	    message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
+	    skills: ["UX", "Node", "SQL"],
+	    title: "Financial Advisor",
+	    company: "Publix"
+	  }
+	};
+	
 	var Message = _react2.default.createClass({
 	  displayName: 'Message',
+	  onClick: function onClick() {
+	    document.getElementById("messageOverlay").style.height = "0%";
+	  },
+	
 	
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      { className: 'message' },
+	      null,
 	      _react2.default.createElement(
-	        'h2',
-	        { className: 'messageSubject' },
-	        this.props.subject
-	      ),
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        this.props.message
+	        'div',
+	        { className: 'message' },
+	        _react2.default.createElement('img', { src: this.props.imageUrl, className: 'messagePhoto' }),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSubject' },
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageName' },
+	            this.props.firstName
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'messageTime' },
+	            this.props.time
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageTitle' },
+	          this.props.title,
+	          ' at ',
+	          this.props.company
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageSkills' },
+	          'Expert in: ',
+	          this.props.skills
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { className: 'messageBody' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            this.props.subject
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            this.props.message
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -32340,12 +32397,6 @@
 	                    "a",
 	                    { href: "/contact", className: "clickable" },
 	                    "Contact Us"
-	                  ),
-	                  " | ",
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "/about", className: "clickable" },
-	                    "About"
 	                  )
 	                )
 	              )
@@ -32412,9 +32463,61 @@
 	        null,
 	        _react2.default.createElement(_PageHeader2.default, null),
 	        _react2.default.createElement(
-	          'h1',
-	          { className: 'title is-1 white' },
-	          'Contact'
+	          'div',
+	          { id: 'contact-div', className: 'tile is-6' },
+	          _react2.default.createElement(
+	            'article',
+	            { className: 'tile is-child notification' },
+	            _react2.default.createElement(
+	              'nav',
+	              { className: 'panel' },
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'panel-heading' },
+	                'Contact us:'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: 'mailto:info@lunchwith.co' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-envelope' })
+	                ),
+	                'info@lunchwith.co'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: '#' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-twitter' })
+	                ),
+	                '@LunchWith'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: '#' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-facebook' })
+	                ),
+	                '@LunchWith'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: 'https://github.com/eyecuelab' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-github' })
+	                ),
+	                '@EyeCueLab'
+	              )
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(_PageFooter2.default, null)
 	      );
@@ -32477,9 +32580,18 @@
 	        null,
 	        _react2.default.createElement(_PageHeader2.default, null),
 	        _react2.default.createElement(
-	          'h1',
-	          { className: 'title is-1 white' },
-	          'Privacy'
+	          'article',
+	          { className: 'message' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'message-header' },
+	            'Privacy Policy'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'message-body' },
+	            'Lorem ipsum dolor sit amet privacy, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.'
+	          )
 	        ),
 	        _react2.default.createElement(_PageFooter2.default, null)
 	      );
