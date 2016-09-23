@@ -28954,8 +28954,8 @@
 	
 	  render: function render() {
 	    var messageNodes = this.props.messages.map(function (singleMessage) {
-	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id, id: singleMessage.id,
-	        message: singleMessage.message, messagetime: singleMessage.messagetime, firstname: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl, other_user_id: singleMessage.other_user_id });
+	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id,
+	        id: singleMessage.id, message: singleMessage.message, messagetime: singleMessage.messagetime, firstname: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl, other_user_id: singleMessage.other_user_id });
 	    });
 	
 	    return _react2.default.createElement(
@@ -28989,6 +28989,7 @@
 	      var updateUrl = "/sendMessage?message=" + message + "&recipient_id=" + recipient + "&subject=replied to your message!";
 	      console.log(updateUrl);
 	      $.get(updateUrl, function (result) {});
+	      document.getElementById(id).style.display = "none";
 	    };
 	  },
 	
@@ -29031,11 +29032,7 @@
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'messageBody' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            this.props.subject
-	          )
+	          this.props.subject
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -29057,11 +29054,6 @@
 	              'button',
 	              { onClick: this.sendReply(this.props.other_user_id), className: 'button is-blue' },
 	              'REPLY'
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              { onClick: this.closeMessage(this.props.id), className: 'button is-danger' },
-	              'CLOSE'
 	            )
 	          )
 	        )
@@ -29230,6 +29222,7 @@
 			var message = document.getElementById("messageTextArea").value;
 			message = message.replace(/(?:\r\n|\r|\n)/g, "<br />");
 			console.log(message);
+			var location = document.getElementById("locationInput").value;
 			var day = $("input[name=meetDay]:checked").val();
 			var time = $("input[name=meetTime]:checked").val();
 			var subject;
@@ -29237,6 +29230,8 @@
 				subject = "wants to meet you on " + day;
 				if (time) {
 					subject += " at " + time;
+				}if (location) {
+					subject += " at " + location;
 				}
 			} else {
 				subject = "sent you a message";
@@ -29490,6 +29485,11 @@
 							'p',
 							{ className: 'control' },
 							_react2.default.createElement('textarea', { id: 'messageTextArea', className: 'textarea', defaultValue: 'Hello! I would like to meet up.' })
+						),
+						_react2.default.createElement(
+							'p',
+							{ className: 'control' },
+							_react2.default.createElement('input', { id: 'locationInput', type: 'text', className: 'input', placeholder: 'Suggested meet-up location' })
 						),
 						_react2.default.createElement(
 							'p',
