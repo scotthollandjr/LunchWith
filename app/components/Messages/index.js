@@ -42,6 +42,15 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
+          <p>TESTING</p>
+          <p>pictureurl: {this.props.pictureurl}</p>
+          <p>firstname: {this.props.firstname}</p>
+          <p>messagetime: {this.props.messagetime}</p>
+          <p>title: {this.props.title}</p>
+          <p>company: {this.props.company}</p>
+          <p>skills: {this.props.skills}</p>
+          <p>subject: {this.props.subject}</p>
+          <p>message: {this.props.message}</p>
         </div>
       </div>
     );
