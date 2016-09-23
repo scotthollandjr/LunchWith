@@ -77,7 +77,7 @@ var Messaging = React.createClass ({
       return (
         <div className="flex_container">
 
-          <MessageRow messages={this.state.sentMessages} />
+          <MessageRow messages={this.state.receivedMessages} />
 
         </div>
       );
