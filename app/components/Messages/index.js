@@ -7,8 +7,8 @@ var MessageRow = React.createClass ({
   render: function() {
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
-          <Message subject={singleMessage.subject} key={singleMessage.id}
-            message={singleMessage.message} time={singleMessage.messageTime} firstName={singleMessage.firstName} company={singleMessage.company} title={singleMessage.title} >
+          <Message subject={singleMessage.subject} key={singleMessage.messagetime}
+            message={singleMessage.message} messagetime={singleMessage.messagetime} firstName={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl}>
           </Message>
         );
       });
@@ -31,10 +31,10 @@ var Message = React.createClass({
     return (
       <div>
         <div className="message">
-          <img src={this.props.imageUrl} className="messagePhoto"></img>
+          <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
-            <span className="messageName">{this.props.firstName}</span>
-            <span className="messageTime">{this.props.time}</span>
+            <span className="messageName">{this.props.firstname}</span>
+            <span className="messageTime">{this.props.messagetime}</span>
           </p>
           <p className="messageTitle">{this.props.title} at {this.props.company}</p>
           <p className="messageSkills">Expert in: {this.props.skills}</p>

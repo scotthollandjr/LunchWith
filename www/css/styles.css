@@ -471,6 +471,7 @@ html, body {
 }
 
 .message {
+  width: 100%;
   padding: 2%;
   background-color: var(--main-light);
   display: inline-block;
