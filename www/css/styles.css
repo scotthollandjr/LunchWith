@@ -537,6 +537,11 @@ html, body {
 
 .message-hidden {
   display: none;
+  color: var(--main-dark-grey);
+}
+
+.message-hidden .icon {
+  color: var(--main-blue-dark);
 }
 
 /*** FOOTER ****************************************/
