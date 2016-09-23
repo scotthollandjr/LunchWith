@@ -27982,8 +27982,8 @@
 			console.log(bio);
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
+			document.getElementById("updatePanel").style.height = "0%";
 			$.get(updateUrl, function (result) {}
-	
 			// submitSkills: function(event) {
 			// 	event.preventDefault();
 			// 	var skillArray = this.state.skills;
@@ -28942,7 +28942,7 @@
 	  render: function render() {
 	    var messageNodes = this.props.messages.map(function (singleMessage) {
 	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.messagetime,
-	        message: singleMessage.message });
+	        message: singleMessage.message, messagetime: singleMessage.messagetime, firstName: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl });
 	    });
 	
 	    return _react2.default.createElement(
@@ -28952,27 +28952,6 @@
 	    );
 	  }
 	});
-	
-	var messages = {
-	  message1: {
-	    imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
-	    firstName: "Scout",
-	    time: "10/7/2016",
-	    message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
-	    skills: ["Java", "JavaScript", "Nachos"],
-	    title: "Chief Taco Officer",
-	    company: "TACOCAT LABS"
-	  },
-	  message2: {
-	    imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
-	    firstName: "Taco",
-	    time: "11/8/2015",
-	    message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
-	    skills: ["UX", "Node", "SQL"],
-	    title: "Financial Advisor",
-	    company: "Publix"
-	  }
-	};
 	
 	var Message = _react2.default.createClass({
 	  displayName: 'Message',
@@ -28988,19 +28967,19 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'message' },
-	        _react2.default.createElement('img', { src: this.props.imageUrl, className: 'messagePhoto' }),
+	        _react2.default.createElement('img', { src: this.props.pictureurl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'messageSubject' },
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'messageName' },
-	            this.props.firstName
+	            this.props.firstname
 	          ),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'messageTime' },
-	            this.props.time
+	            this.props.messagetime
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -29029,6 +29008,59 @@
 	            null,
 	            this.props.message
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'TESTING'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'pictureurl: ',
+	          this.props.pictureurl
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'firstname: ',
+	          this.props.firstname
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'messagetime: ',
+	          this.props.messagetime
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'title: ',
+	          this.props.title
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'company: ',
+	          this.props.company
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'skills: ',
+	          this.props.skills
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'subject: ',
+	          this.props.subject
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'message: ',
+	          this.props.message
 	        )
 	      )
 	    );
