@@ -115,7 +115,7 @@ let updateUserLocationDetails = (req, res) => {
 
 let updateUserSkills = (req, res) => {
   var skills = req.query.skills;
-  var sql = "UPDATE users SET skills=$1 WHERE emailaddress='" + req.user.emailaddress + ";";
+  var sql = "UPDATE users SET skills=$1 WHERE emailaddress='" + req.user.emailaddress + "';";
   db.query(sql, [skills]);
   return "Updated!"
 }

@@ -27885,6 +27885,12 @@
 			this._inputElement.value = "";
 	
 			e.preventDefault();
+	
+			console.log("skill array", skillArray);
+			var skillParam = formatSkills(skillArray);
+			var updateUrl = "/updateUserSkills?skills=" + skillParam;
+			console.log(updateUrl);
+			$.get(updateUrl, function (result) {});
 		},
 	
 		render: function render() {
@@ -28001,18 +28007,7 @@
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
 			document.getElementById("updatePanel").style.height = "0%";
-			$.get(updateUrl, function (result) {}
-			// submitSkills: function(event) {
-			// 	event.preventDefault();
-			// 	var skillArray = this.state.skills;
-			// 	console.log("skill array", skillArray);
-			// 	var skillParam = formatSkills(skillArray);
-			// 	var updateUrl = "/updateUserSkills?skills=" + skillParam;
-			// 	console.log(updateUrl);
-			// 	$.get(updateUrl, function (result) {
-			// 	}
-			// }
-			);
+			$.get(updateUrl, function (result) {});
 		},
 	
 		submitUserLocationUpdate: function submitUserLocationUpdate(event) {
