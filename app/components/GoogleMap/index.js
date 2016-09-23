@@ -330,7 +330,7 @@ var GoogleMap = React.createClass({
 							<textarea id="messageTextArea" className="textarea" defaultValue="Hello! I would like to meet up."></textarea>
 						</p>
 						<p className="control">
-							<input id="locationInput" className="input" placeholder="Suggested meet-up location"></input>
+							<input id="locationInput" type="text" className="input" placeholder="Suggested meet-up location"></input>
 						</p>
 						<p>Im available to meet up on:</p>
 						<p className="control" id="dayRadioButton">
