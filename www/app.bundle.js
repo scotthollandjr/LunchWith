@@ -28941,7 +28941,7 @@
 	
 	  render: function render() {
 	    var messageNodes = this.props.messages.map(function (singleMessage) {
-	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.messagetime,
+	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id, id: singleMessage.id,
 	        message: singleMessage.message, messagetime: singleMessage.messagetime, firstName: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl });
 	    });
 	
@@ -28955,8 +28955,16 @@
 	
 	var Message = _react2.default.createClass({
 	  displayName: 'Message',
-	  onClick: function onClick() {
-	    document.getElementById("messageOverlay").style.height = "0%";
+	  onClick: function onClick() {},
+	  openMessage: function openMessage(id) {
+	    return function (e) {
+	      document.getElementById(id).style.display = "block";
+	    };
+	  },
+	  closeMessage: function closeMessage(id) {
+	    return function (e) {
+	      document.getElementById(id).style.display = "none";
+	    };
 	  },
 	
 	
@@ -28966,7 +28974,7 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'message' },
+	        { className: 'message', onClick: this.openMessage(this.props.id) },
 	        _react2.default.createElement('img', { src: this.props.pictureurl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
 	          'p',
@@ -29010,57 +29018,75 @@
 	          )
 	        ),
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'TESTING'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'pictureurl: ',
-	          this.props.pictureurl
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'firstname: ',
-	          this.props.firstname
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'messagetime: ',
-	          this.props.messagetime
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'title: ',
-	          this.props.title
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'company: ',
-	          this.props.company
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'skills: ',
-	          this.props.skills
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'subject: ',
-	          this.props.subject
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'message: ',
-	          this.props.message
+	          'div',
+	          { id: this.props.id, className: 'message-hidden' },
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'TESTING'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'pictureurl: ',
+	            this.props.pictureurl
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'firstname: ',
+	            this.props.firstname
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'messagetime: ',
+	            this.props.messagetime
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'title: ',
+	            this.props.title
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'company: ',
+	            this.props.company
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'skills: ',
+	            this.props.skills
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'subject: ',
+	            this.props.subject
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'message: ',
+	            this.props.message
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'button is-blue' },
+	            'REPLY'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'footer-arrow' },
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'icon is-large panel-footer' },
+	              _react2.default.createElement('i', { onClick: this.closeMessage(this.props.id), className: 'fa fa-angle-down' })
+	            )
+	          )
 	        )
 	      )
 	    );

@@ -7,7 +7,7 @@ var MessageRow = React.createClass ({
   render: function() {
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
-          <Message subject={singleMessage.subject} key={singleMessage.messagetime}
+          <Message subject={singleMessage.subject} key={singleMessage.id} id={singleMessage.id}
             message={singleMessage.message} messagetime={singleMessage.messagetime} firstName={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl}>
           </Message>
         );
@@ -24,13 +24,25 @@ var MessageRow = React.createClass ({
 var Message = React.createClass({
 
   onClick() {
-    document.getElementById("messageOverlay").style.height = "0%";
+
+  },
+
+  openMessage(id) {
+    return function(e) {
+      document.getElementById(id).style.display = "block";
+    }
+  },
+
+  closeMessage(id) {
+    return function(e) {
+      document.getElementById(id).style.display = "none";
+    }
   },
 
   render: function() {
     return (
       <div>
-        <div className="message">
+        <div className="message" onClick={this.openMessage(this.props.id)}>
           <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
             <span className="messageName">{this.props.firstname}</span>
@@ -42,15 +54,23 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
-          <p>TESTING</p>
-          <p>pictureurl: {this.props.pictureurl}</p>
-          <p>firstname: {this.props.firstname}</p>
-          <p>messagetime: {this.props.messagetime}</p>
-          <p>title: {this.props.title}</p>
-          <p>company: {this.props.company}</p>
-          <p>skills: {this.props.skills}</p>
-          <p>subject: {this.props.subject}</p>
-          <p>message: {this.props.message}</p>
+          <div id={this.props.id} className="message-hidden">
+            <p>TESTING</p>
+            <p>pictureurl: {this.props.pictureurl}</p>
+            <p>firstname: {this.props.firstname}</p>
+            <p>messagetime: {this.props.messagetime}</p>
+            <p>title: {this.props.title}</p>
+            <p>company: {this.props.company}</p>
+            <p>skills: {this.props.skills}</p>
+            <p>subject: {this.props.subject}</p>
+            <p>message: {this.props.message}</p>
+            <button className="button is-blue">REPLY</button>
+            <div className="footer-arrow">
+              <span className="icon is-large panel-footer">
+                <i onClick={this.closeMessage(this.props.id)} className="fa fa-angle-down" />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     );
