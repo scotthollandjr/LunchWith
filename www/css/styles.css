@@ -571,6 +571,12 @@ html, body {
   }
 }
 
+@media screen and (max-width: 768px) {
+  #splash-nav .nav-icon {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .splash-title {
     font-size: 1.5em;
@@ -578,10 +584,6 @@ html, body {
 
   .splash-body {
     font-size: 1.0em;
-  }
-
-  #splash-nav .nav-icon {
-    display: none;
   }
 
   #splash-footer {

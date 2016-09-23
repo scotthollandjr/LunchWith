@@ -32767,9 +32767,61 @@
 	        null,
 	        _react2.default.createElement(_PageHeader2.default, null),
 	        _react2.default.createElement(
-	          'h1',
-	          { className: 'title is-1 white' },
-	          'Contact'
+	          'div',
+	          { id: 'contact-div', className: 'tile is-6' },
+	          _react2.default.createElement(
+	            'article',
+	            { className: 'tile is-child notification' },
+	            _react2.default.createElement(
+	              'nav',
+	              { className: 'panel' },
+	              _react2.default.createElement(
+	                'p',
+	                { className: 'panel-heading' },
+	                'Contact us:'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: 'mailto:info@lunchwith.co' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-envelope' })
+	                ),
+	                'info@lunchwith.co'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: '#' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-twitter' })
+	                ),
+	                '@LunchWith'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: '#' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-facebook' })
+	                ),
+	                '@LunchWith'
+	              ),
+	              _react2.default.createElement(
+	                'a',
+	                { className: 'panel-block', href: 'https://github.com/eyecuelab' },
+	                _react2.default.createElement(
+	                  'span',
+	                  { className: 'icon contact-icon' },
+	                  _react2.default.createElement('i', { className: 'fa fa-github' })
+	                ),
+	                '@EyeCueLab'
+	              )
+	            )
+	          )
 	        ),
 	        _react2.default.createElement(_PageFooter2.default, null)
 	      );
