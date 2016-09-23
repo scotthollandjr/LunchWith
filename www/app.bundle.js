@@ -27978,7 +27978,19 @@
 			console.log(bio);
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
-			$.get(updateUrl, function (result) {});
+			$.get(updateUrl, function (result) {}
+	
+			// submitSkills: function(event) {
+			// 	event.preventDefault();
+			// 	var skillArray = this.state.skills;
+			// 	console.log("skill array", skillArray);
+			// 	var skillParam = formatSkills(skillArray);
+			// 	var updateUrl = "/updateUserSkills?skills=" + skillParam;
+			// 	console.log(updateUrl);
+			// 	$.get(updateUrl, function (result) {
+			// 	}
+			// }
+			);
 		},
 	
 		submitUserLocationUpdate: function submitUserLocationUpdate(event) {
@@ -28010,22 +28022,17 @@
 			map.addListener('click', function () {
 				//update center
 				//toss a query in thur
-	
 				// alert("click");
-	
 			});
 			map.addListener('dragend', function () {
 				//update center
 				//toss a query in thur
 				// alert("dragend");
-	
-	
 			});
 		},
 	
 	
 		updateCenter: function updateCenter() {
-	
 			alert('update center');
 		},
 	
@@ -29046,123 +29053,34 @@
 	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id,
 	        message: singleMessage.message });
 	    });
+	
 	    return _react2.default.createElement(
 	      'div',
 	      { className: 'messageList' },
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'message' },
-	        _react2.default.createElement('img', { src: userMessage.imageUrl, className: 'messagePhoto' }),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageSubject' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageName' },
-	            userMessage.firstName
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageTime' },
-	            userMessage.time
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageTitle' },
-	          userMessage.title,
-	          ' at ',
-	          userMessage.company
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageSkills' },
-	          'Expert in: ',
-	          userMessage.skills
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageBody' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            userMessage.subject
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            userMessage.message
-	          )
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'message' },
-	        _react2.default.createElement('img', { src: userMessage2.imageUrl, className: 'messagePhoto' }),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageSubject' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageName' },
-	            userMessage2.firstName
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageTime' },
-	            userMessage2.time
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageTitle' },
-	          userMessage2.title,
-	          ' at ',
-	          userMessage2.company
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageSkills' },
-	          'Expert in: ',
-	          userMessage2.skills
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageBody' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            userMessage2.subject
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            userMessage2.message
-	          )
-	        )
-	      )
+	      messageNodes
 	    );
 	  }
 	});
 	
-	var userMessage = {
-	  imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
-	  firstName: "Scout",
-	  time: "10/7/2016",
-	  message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
-	  skills: ["Java", "JavaScript", "Nachos"],
-	  title: "Chief Taco Officer",
-	  company: "TACOCAT LABS"
-	};
-	
-	var userMessage2 = {
-	  imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
-	  firstName: "Taco",
-	  time: "11/8/2015",
-	  message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
-	  skills: ["UX", "Node", "SQL"],
-	  title: "Financial Advisor",
-	  company: "Publix"
+	var messages = {
+	  message1: {
+	    imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
+	    firstName: "Scout",
+	    time: "10/7/2016",
+	    message: "Hey I would like to meet up! How does Friday at 12:00 PM work for you?",
+	    skills: ["Java", "JavaScript", "Nachos"],
+	    title: "Chief Taco Officer",
+	    company: "TACOCAT LABS"
+	  },
+	  message2: {
+	    imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
+	    firstName: "Taco",
+	    time: "11/8/2015",
+	    message: "Hey I would like to meet up! How does Monday at 11:00 AM work for you?",
+	    skills: ["UX", "Node", "SQL"],
+	    title: "Financial Advisor",
+	    company: "Publix"
+	  }
 	};
 	
 	var Message = _react2.default.createClass({
@@ -29179,82 +29097,47 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'message' },
-	        _react2.default.createElement('img', { src: userMessage.imageUrl, className: 'messagePhoto' }),
+	        _react2.default.createElement('img', { src: this.props.imageUrl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'messageSubject' },
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'messageName' },
-	            userMessage.firstName
+	            this.props.firstName
 	          ),
 	          _react2.default.createElement(
 	            'span',
 	            { className: 'messageTime' },
-	            userMessage.time
+	            this.props.time
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageBody' },
-	          userMessage.subject
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'messageOverlay' },
-	        _react2.default.createElement('img', { src: userMessage.imageUrl, className: 'messagePhoto' }),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageSubject' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageName' },
-	            userMessage.firstName
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageTime' },
-	            userMessage.time
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageBody' },
-	          _react2.default.createElement(
-	            'span',
-	            { className: 'messageName' },
-	            userMessage.subject
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            userMessage.message
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          { className: 'messageSkills' },
-	          userMessage.skills
 	        ),
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'messageTitle' },
-	          userMessage.title
+	          this.props.title,
+	          ' at ',
+	          this.props.company
 	        ),
 	        _react2.default.createElement(
 	          'p',
-	          { className: 'messageCompany' },
-	          userMessage.company
-	        )
-	      ),
-	      _react2.default.createElement(
-	        'div',
-	        { className: 'footer-arrow' },
+	          { className: 'messageSkills' },
+	          'Expert in: ',
+	          this.props.skills
+	        ),
 	        _react2.default.createElement(
-	          'span',
-	          { className: 'icon is-large panel-footer' },
-	          _react2.default.createElement('i', { onClick: this.onClick, className: 'fa fa-angle-down' })
+	          'p',
+	          { className: 'messageBody' },
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            this.props.subject
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            this.props.message
+	          )
 	        )
 	      )
 	    );
@@ -29592,15 +29475,22 @@
 			};
 		},
 	
-		componentDidMount: function componentDidMount() {},
-	
 		sendMessage: function sendMessage() {
-			console.log(this.messageRecipient);
+			var recipient = this.messageRecipient;
+			var message = document.getElementById("messageTextArea").value;
+			var day = $("input[name=meetDay]:checked").val();
+			var time = $("input[name=meetTime]:checked").val();
+			var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+			console.log(updateUrl);
+			$.get(updateUrl, function (result) {});
 		},
+	
+		componentDidMount: function componentDidMount() {},
 	
 		onMapCreated: function onMapCreated(map) {
 			var _this = this;
 	
+			var topLevelThis = this;
 			var Gmaps = this.refs.Gmaps;
 	
 			var displayedUsers = [];
@@ -29721,8 +29611,7 @@
 						document.getElementById("panel-title").textContent = superUser.title;
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
-						this.messageRecipient = superUser.databaseId;
-						console.log(this);
+						topLevelThis.messageRecipient = superUser.databaseId;
 					});
 					displayedUsers.push(userCircle);
 				}
@@ -29824,7 +29713,7 @@
 						_react2.default.createElement(
 							'p',
 							{ className: 'control' },
-							_react2.default.createElement('textarea', { className: 'textarea', defaultValue: 'Hello! I would like to meet up.' })
+							_react2.default.createElement('textarea', { id: 'messageTextArea', className: 'textarea', defaultValue: 'Hello! I would like to meet up.' })
 						),
 						_react2.default.createElement(
 							'p',
@@ -29833,35 +29722,35 @@
 						),
 						_react2.default.createElement(
 							'p',
-							{ className: 'control' },
+							{ className: 'control', id: 'dayRadioButton' },
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Monday' }),
 								'Monday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Tuesday' }),
 								'Tuesday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Wednesday' }),
 								'Wednesday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Thursday' }),
 								'Thursday'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetDay' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetDay', value: 'Friday' }),
 								'Friday'
 							)
 						),
@@ -29872,29 +29761,29 @@
 						),
 						_react2.default.createElement(
 							'p',
-							{ className: 'control' },
+							{ className: 'control', id: 'timeRadioButton' },
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '11:00' }),
 								'11:00 AM'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '11:30' }),
 								'11:30 AM'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '12:00' }),
 								'12:00 PM'
 							),
 							_react2.default.createElement(
 								'label',
 								{ className: 'radio' },
-								_react2.default.createElement('input', { type: 'radio', name: 'meetTime' }),
+								_react2.default.createElement('input', { type: 'radio', name: 'meetTime', value: '12:30' }),
 								'12:30 PM'
 							)
 						),

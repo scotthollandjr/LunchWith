@@ -48,15 +48,24 @@ var GoogleMap = React.createClass({
 		};
 	},
 
+	sendMessage: function() {
+		var recipient = this.messageRecipient;
+		var message = document.getElementById("messageTextArea").value;
+		var day = $("input[name=meetDay]:checked").val();
+		var time = $("input[name=meetTime]:checked").val();
+		var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+		console.log(updateUrl);
+		$.get(updateUrl, function (result) {
+		});
+	},
+
 	componentDidMount: function() {
 
 	},
 
-	sendMessage: function() {
-		console.log(this.messageRecipient)
-	},
 
   onMapCreated(map) {
+		var topLevelThis = this;
 		const {Gmaps} = this.refs;
 		var displayedUsers = [];
 		if (navigator.geolocation) {
@@ -207,8 +216,7 @@ var GoogleMap = React.createClass({
 							document.getElementById("panel-title").textContent = superUser.title;
 							document.getElementById("panel-summary").textContent = superUser.summary;
 							document.getElementById("full-image").src = superUser.imageUrl;
-							this.messageRecipient = superUser.databaseId;
-							console.log(this);
+							topLevelThis.messageRecipient = superUser.databaseId;
 					})
 					displayedUsers.push(userCircle);
 				}
@@ -289,47 +297,47 @@ var GoogleMap = React.createClass({
 				<div id="messageForm" className="overlay2">
 					<div className="overlay-content">
 						<p className="control">
-							<textarea className="textarea" defaultValue="Hello! I would like to meet up."></textarea>
+							<textarea id="messageTextArea" className="textarea" defaultValue="Hello! I would like to meet up."></textarea>
 						</p>
 						<p>Im available to meet up on:</p>
-						<p className="control">
+						<p className="control" id="dayRadioButton">
 							<label className="radio">
-								<input type="radio" name="meetDay"></input>
+								<input type="radio" name="meetDay" value="Monday"></input>
 								Monday
 							</label>
 							<label className="radio">
-								<input type="radio" name="meetDay"></input>
+								<input type="radio" name="meetDay" value="Tuesday"></input>
 								Tuesday
 							</label>
 							<label className="radio">
-						    <input type="radio" name="meetDay"></input>
+						    <input type="radio" name="meetDay" value="Wednesday"></input>
 						    Wednesday
 						  </label>
 						  <label className="radio">
-						    <input type="radio" name="meetDay"></input>
+						    <input type="radio" name="meetDay" value="Thursday"></input>
 						    Thursday
 						  </label>
 							<label className="radio">
-						    <input type="radio" name="meetDay"></input>
+						    <input type="radio" name="meetDay" value="Friday"></input>
 						    Friday
 						  </label>
 						</p>
 						<p>at:</p>
-						<p className="control">
+						<p className="control" id="timeRadioButton">
 							<label className="radio">
-								<input type="radio" name="meetTime"></input>
+								<input type="radio" name="meetTime" value="11:00"></input>
 								11:00 AM
 							</label>
 							<label className="radio">
-								<input type="radio" name="meetTime"></input>
+								<input type="radio" name="meetTime" value="11:30"></input>
 								11:30 AM
 							</label>
 							<label className="radio">
-								<input type="radio" name="meetTime"></input>
+								<input type="radio" name="meetTime" value="12:00"></input>
 								12:00 PM
 							</label>
 							<label className="radio">
-								<input type="radio" name="meetTime"></input>
+								<input type="radio" name="meetTime" value="12:30"></input>
 								12:30 PM
 							</label>
 						</p>

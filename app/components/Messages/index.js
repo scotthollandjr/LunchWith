@@ -22,7 +22,7 @@ var MessageRow = React.createClass ({
 });
 
 var messages = {
-  message1 {
+  message1: {
     imageUrl: "https://pbs.twimg.com/profile_images/660946436801101824/niM7azZS.jpg",
     firstName: "Scout",
     time: "10/7/2016",
@@ -31,7 +31,7 @@ var messages = {
     title: "Chief Taco Officer",
     company: "TACOCAT LABS"
   },
-  message2 {
+  message2: {
     imageUrl: "http://dp.topcovers4fb.com/wp-content/uploads/2015/12/Alvin-And-The-Chipmunks-Display-Picture.jpg",
     firstName: "Taco",
     time: "11/8/2015",
