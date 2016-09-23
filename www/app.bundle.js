@@ -29077,7 +29077,7 @@
 	      null,
 	      _react2.default.createElement(
 	        'div',
-	        { className: 'message', onClick: this.openMessage(this.props.messagetime) },
+	        { className: 'message', onClick: this.openMessage(this.props.firstname) },
 	        _react2.default.createElement('img', { src: this.props.pictureurl, className: 'messagePhoto' }),
 	        _react2.default.createElement(
 	          'p',
@@ -29122,7 +29122,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { id: this.props.messagetime, className: 'message-hidden' },
+	          { id: this.props.firstname, className: 'message-hidden' },
 	          _react2.default.createElement(
 	            'p',
 	            null,
