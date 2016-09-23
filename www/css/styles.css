@@ -536,7 +536,7 @@ html, body {
 }
 
 .message-hidden {
-  display: block;
+  display: none;
   color: var(--main-dark-grey);
 }
 

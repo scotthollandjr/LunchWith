@@ -29173,12 +29173,12 @@
 	            ),
 	            _react2.default.createElement(
 	              'button',
-	              { onClick: this.sendReply(this.props.firstname), className: 'button is-blue' },
+	              { onClick: this.sendReply(this.props.sender_id), className: 'button is-blue' },
 	              'REPLY'
 	            ),
 	            _react2.default.createElement(
 	              'button',
-	              { onClick: this.closeMessage(this.props.sender_id), className: 'button is-danger' },
+	              { onClick: this.closeMessage(this.props.id), className: 'button is-danger' },
 	              'CLOSE'
 	            )
 	          )
