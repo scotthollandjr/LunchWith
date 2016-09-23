@@ -29068,8 +29068,8 @@
 	
 	  render: function render() {
 	    var messageNodes = this.props.messages.map(function (singleMessage) {
-	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id, id: singleMessage.id,
-	        message: singleMessage.message, messagetime: singleMessage.messagetime, firstname: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl, other_user_id: singleMessage.other_user_id });
+	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id,
+	        id: singleMessage.id, message: singleMessage.message, messagetime: singleMessage.messagetime, firstname: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl, other_user_id: singleMessage.other_user_id });
 	    });
 	
 	    return _react2.default.createElement(
@@ -29145,11 +29145,7 @@
 	        _react2.default.createElement(
 	          'p',
 	          { className: 'messageBody' },
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            this.props.subject
-	          )
+	          this.props.subject
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -29171,11 +29167,6 @@
 	              'button',
 	              { onClick: this.sendReply(this.props.other_user_id), className: 'button is-blue' },
 	              'REPLY'
-	            ),
-	            _react2.default.createElement(
-	              'button',
-	              { onClick: this.closeMessage(this.props.id), className: 'button is-danger' },
-	              'CLOSE'
 	            )
 	          )
 	        )
@@ -29611,7 +29602,7 @@
 						_react2.default.createElement(
 							'p',
 							{ className: 'control' },
-							_react2.default.createElement('input', { id: 'locationInput', className: 'input', placeholder: 'Suggested meet-up location' })
+							_react2.default.createElement('input', { id: 'locationInput', type: 'text', className: 'input', placeholder: 'Suggested meet-up location' })
 						),
 						_react2.default.createElement(
 							'p',

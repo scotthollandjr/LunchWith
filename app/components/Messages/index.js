@@ -7,8 +7,8 @@ var MessageRow = React.createClass ({
   render: function() {
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
-          <Message subject={singleMessage.subject} key={singleMessage.id} id={singleMessage.id}
-            message={singleMessage.message} messagetime={singleMessage.messagetime} firstname={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl} other_user_id={singleMessage.other_user_id}>
+          <Message subject={singleMessage.subject} key={singleMessage.id}
+            id={singleMessage.id} message={singleMessage.message} messagetime={singleMessage.messagetime} firstname={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl} other_user_id={singleMessage.other_user_id}>
           </Message>
         );
       });
@@ -64,8 +64,7 @@ var Message = React.createClass({
           </p>
           <p className="messageTitle">{this.props.title} at {this.props.company}</p>
           <p className="messageSkills">Expert in: {this.props.skills}</p>
-          <p className="messageBody">{this.props.subject}</span>
-          </p>
+          <p className="messageBody">{this.props.subject}</p>
           <div id={this.props.id} className="message-hidden">
             <p>{this.props.message}</p>
             <div className="responseForm">
@@ -73,7 +72,6 @@ var Message = React.createClass({
                 <textarea id="replyTextArea" className="textarea" defaultValue="That sounds great. See you then!"></textarea>
               </p>
               <button onClick={this.sendReply(this.props.other_user_id)} className="button is-blue">REPLY</button>
-              <button onClick={this.closeMessage(this.props.id)} className="button is-danger">CLOSE</button>
             </div>
           </div>
         </div>
