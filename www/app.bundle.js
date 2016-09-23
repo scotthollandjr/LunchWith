@@ -29051,7 +29051,7 @@
 	  render: function render() {
 	    var messageNodes = this.props.messages.map(function (singleMessage) {
 	      return _react2.default.createElement(Message, { subject: singleMessage.subject, key: singleMessage.id, id: singleMessage.id,
-	        message: singleMessage.message, messagetime: singleMessage.messagetime, firstName: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl });
+	        message: singleMessage.message, messagetime: singleMessage.messagetime, firstname: singleMessage.firstname, company: singleMessage.company, title: singleMessage.title, skills: singleMessage.skill, pictureurl: singleMessage.pictureurl, sender_id: singleMessage.sender_id });
 	    });
 	
 	    return _react2.default.createElement(
@@ -29076,6 +29076,20 @@
 	    };
 	  },
 	
+	
+	  sendReply: function sendReply(id) {
+	    return function (e) {
+	      var recipient = GoogleMap.messageRecipient;
+	      var message = document.getElementById("messageTextArea").value;
+	      message = message.replace(/(?:\r\n|\r|\n)/g, "<br />");
+	      console.log(message);
+	      var day = $("input[name=meetDay]:checked").val();
+	      var time = $("input[name=meetTime]:checked").val();
+	      var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+	      console.log(updateUrl);
+	      $.get(updateUrl, function (result) {});
+	    };
+	  },
 	
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -29119,11 +29133,6 @@
 	            'span',
 	            null,
 	            this.props.subject
-	          ),
-	          _react2.default.createElement(
-	            'span',
-	            null,
-	            this.props.message
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -29132,60 +29141,21 @@
 	          _react2.default.createElement(
 	            'p',
 	            null,
-	            'TESTING'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'pictureurl: ',
-	            this.props.pictureurl
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'firstname: ',
-	            this.props.firstname
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'messagetime: ',
-	            this.props.messagetime
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'title: ',
-	            this.props.title
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'company: ',
-	            this.props.company
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'skills: ',
-	            this.props.skills
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'subject: ',
-	            this.props.subject
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'message: ',
 	            this.props.message
 	          ),
 	          _react2.default.createElement(
-	            'button',
-	            { className: 'button is-blue' },
-	            'REPLY'
+	            'div',
+	            { className: 'responseForm' },
+	            _react2.default.createElement(
+	              'p',
+	              { className: 'control' },
+	              _react2.default.createElement('textarea', { id: 'messageTextArea', className: 'textarea', defaultValue: 'That sounds great. See you then!' })
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { onClick: this.sendReply(this.props.firstname), className: 'button is-blue' },
+	              'REPLY'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
@@ -29193,7 +29163,7 @@
 	            _react2.default.createElement(
 	              'span',
 	              { className: 'icon is-large panel-footer' },
-	              _react2.default.createElement('i', { onClick: this.closeMessage(this.props.id), className: 'fa fa-angle-down' })
+	              _react2.default.createElement('i', { onClick: this.closeMessage(this.props.sender_id), className: 'fa fa-angle-down' })
 	            )
 	          )
 	        )
