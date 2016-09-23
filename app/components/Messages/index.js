@@ -65,11 +65,11 @@ var Message = React.createClass({
             <p>subject: {this.props.subject}</p>
             <p>message: {this.props.message}</p>
             <button className="button is-blue">REPLY</button>
-          </div>
-          <div className="footer-arrow">
-            <span className="icon is-large panel-footer">
-              <i onClick={this.closeMessage(this.props.id)} className="fa fa-angle-down" />
-            </span>
+            <div className="footer-arrow">
+              <span className="icon is-large panel-footer">
+                <i onClick={this.closeMessage(this.props.id)} className="fa fa-angle-down" />
+              </span>
+            </div>
           </div>
         </div>
       </div>
