@@ -58,11 +58,9 @@ class Footer extends React.Component {
         ){
           //successful search, leave marker
         } else {
-          GoogleMap.displayedUsers[i].setMap(null);
+          searchedUser.setMap(null);
         }
       }
-      console.log(searchTerm);
-      console.log(GoogleMap.displayedUsers[0].firstName);
     }
 
     render() {

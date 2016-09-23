@@ -8,7 +8,7 @@ var MessageRow = React.createClass ({
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
           <Message subject={singleMessage.subject} key={singleMessage.id} id={singleMessage.id}
-            message={singleMessage.message} messagetime={singleMessage.messagetime} firstname={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl} sender_id={singleMessage.sender_id}>
+            message={singleMessage.message} messagetime={singleMessage.messagetime} firstname={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl} other_user_id={singleMessage.other_user_id}>
           </Message>
         );
       });
@@ -39,15 +39,14 @@ var Message = React.createClass({
     }
   },
 
-  sendReply: function(id) {
+  sendReply(id) {
     return function(e) {
-      var recipient = GoogleMap.messageRecipient;
-      var message = document.getElementById("messageTextArea").value;
+      console.log(id);
+      var recipient = id;
+      var message = document.getElementById("replyTextArea").value;
       message = message.replace(/(?:\r\n|\r|\n)/g, "<br />");
       console.log(message);
-      var day = $("input[name=meetDay]:checked").val();
-      var time = $("input[name=meetTime]:checked").val();
-      var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+      var updateUrl = "/sendMessage?message=" + message + "&recipient_id=" + recipient + "&subject=replied to your message!";
       console.log(updateUrl);
       $.get(updateUrl, function (result) {
       });
@@ -72,9 +71,9 @@ var Message = React.createClass({
             <p>{this.props.message}</p>
             <div className="responseForm">
               <p className="control">
-                <textarea id="messageTextArea" className="textarea" defaultValue="That sounds great. See you then!"></textarea>
+                <textarea id="replyTextArea" className="textarea" defaultValue="That sounds great. See you then!"></textarea>
               </p>
-              <button onClick={this.sendReply(this.props.sender_id)} className="button is-blue">REPLY</button>
+              <button onClick={this.sendReply(this.props.other_user_id)} className="button is-blue">REPLY</button>
               <button onClick={this.closeMessage(this.props.id)} className="button is-danger">CLOSE</button>
             </div>
           </div>
