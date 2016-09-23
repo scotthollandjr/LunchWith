@@ -34,7 +34,7 @@ var Message = React.createClass({
   render: function() {
     return (
       <div>
-        <div className="message" onClick={this.openMessage(this.props.firstname)}>
+        <div className="message" onClick={this.openMessage("jim")}>
           <img src={this.props.pictureurl} className="messagePhoto"></img>
           <p className="messageSubject">
             <span className="messageName">{this.props.firstname}</span>
@@ -46,7 +46,7 @@ var Message = React.createClass({
             <span>{this.props.subject}</span>
             <span>{this.props.message}</span>
           </p>
-          <div id={this.props.firstname} className="message-hidden">
+          <div id="jim" className="message-hidden">
             <p>TESTING</p>
             <p>pictureurl: {this.props.pictureurl}</p>
             <p>firstname: {this.props.firstname}</p>
