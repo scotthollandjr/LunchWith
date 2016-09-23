@@ -60,7 +60,8 @@ let getLoggedInUserDetails = (req, res, next) => {
 };
 
 let checkReceivedMessages = (req, res, next) => {
-  var sql = "SELECT messages.message, messages.messagetime, messages.id, users.firstname, users.skills, users.title, users.company, users.pictureurl from messages inner join users on messages.sender_id=users.id where recipient_id = " + req.user.id + ";";
+
+  var sql = "SELECT messages.message, messages.messagetime, messages.id, users.id AS other_user_id, users.firstname, users.skills, users.title, users.company, users.pictureurl from messages inner join users on messages.sender_id=users.id where recipient_id = " + req.user.id + ";";
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -68,7 +69,7 @@ let checkReceivedMessages = (req, res, next) => {
 }
 
 let checkSentMessages = (req, res, next) => {
-    var sql = "SELECT messages.message, messages.messagetime, messages.id, users.firstname, users.skills, users.title, users.company, users.pictureurl from messages inner join users on messages.sender_id=users.id where sender_id = " + req.user.id + ";";
+    var sql = "SELECT messages.message, messages.messagetime, messages.id, users.id AS other_user_id, users.firstname, users.skills, users.title, users.company, users.pictureurl from messages inner join users on messages.sender_id=users.id where sender_id = " + req.user.id + ";";
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
@@ -80,7 +81,7 @@ let sendMessage = (req, res) => {
   var sender_id = req.user.id;
   var recipient_id = req.query.recipient_id;
   var message = req.query.message;
-  var subject = req.query.subject;
+  var subject = req.user.firstname + " " + req.query.subject;
 
   db.query(sql, [sender_id, recipient_id, message, subject])
   .then(function(result){

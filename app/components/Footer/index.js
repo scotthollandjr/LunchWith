@@ -1,6 +1,7 @@
 import React from 'react';
 import UpdateForm from '../UpdateForm';
 import Messages from '../Messages';
+import GoogleMap from '../GoogleMap';
 
 class Footer extends React.Component {
     showMesssages() {
@@ -42,6 +43,23 @@ class Footer extends React.Component {
         panel.style.height = "0%";
       } else {
         panel.style.height = "20%";
+      }
+    }
+
+    searchFunction() {
+      var searchTerm = document.getElementById("searchInput").value;
+      searchTerm = searchTerm.toLowerCase();
+      for (var i = 0; i < GoogleMap.displayedUsers.length; i++) {
+        var searchedUser = GoogleMap.displayedUsers[i]
+        if (searchedUser.firstName.toLowerCase().includes(searchTerm) ||
+          searchedUser.lastName.toLowerCase().includes(searchTerm) ||
+          searchedUser.company.toLowerCase().includes(searchTerm) ||
+          searchedUser.skills.join().toLowerCase().includes(searchTerm)
+        ){
+          //successful search, leave marker
+        } else {
+          searchedUser.setMap(null);
+        }
       }
     }
 
@@ -92,8 +110,8 @@ class Footer extends React.Component {
             </div>
             <div id="searchPanel" className="overlay2">
               <p className="control has-addons search-bar">
-                <input className="input is-expanded is-large" placeholder="Name, Skill, or Company" />
-                <button className="button is-blue is-large">SEARCH</button>
+                <input id="searchInput" className="input is-expanded is-large" placeholder="Name, Skill, or Company" />
+                <button className="button is-blue is-large" onClick={this.searchFunction}>SEARCH</button>
               </p>
             </div>
           </div>
