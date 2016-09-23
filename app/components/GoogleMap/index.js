@@ -51,8 +51,10 @@ var GoogleMap = React.createClass({
 	},
 
 	sendMessage: function() {
-		var recipient = this.messageRecipient;
+		var recipient = GoogleMap.messageRecipient;
 		var message = document.getElementById("messageTextArea").value;
+		message = message.replace(/(?:\r\n|\r|\n)/g, "<br />");
+		console.log(message);
 		var day = $("input[name=meetDay]:checked").val();
 		var time = $("input[name=meetTime]:checked").val();
 		var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
@@ -123,6 +125,7 @@ var GoogleMap = React.createClass({
 						document.getElementById("panel-summary").textContent = superUser.summary;
 						document.getElementById("full-image").src = superUser.imageUrl;
 						GoogleMap.messageRecipient = superUser.databaseId;
+						console.log(GoogleMap.messageRecipient);
 				})
 				GoogleMap.displayedUsers.push(userCircle);
 			}

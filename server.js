@@ -68,7 +68,7 @@ let checkReceivedMessages = (req, res, next) => {
 }
 
 let checkSentMessages = (req, res, next) => {
-  var sql = "SELECT * FROM messages WHERE sender_id = " + req.user.id;
+    var sql = "SELECT messages.message, messages.messagetime, users.firstname, users.skills, users.title, users.company, users.pictureurl from messages inner join users on messages.sender_id=users.id where sender_id = " + req.user.id + ";";
   db.query(sql)
   .then(function (messages){
     return res.json({"messages": messages});
