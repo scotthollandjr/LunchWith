@@ -27978,8 +27978,8 @@
 			console.log(bio);
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
+			document.getElementById("updatePanel").style.height = "0%";
 			$.get(updateUrl, function (result) {}
-	
 			// submitSkills: function(event) {
 			// 	event.preventDefault();
 			// 	var skillArray = this.state.skills;
@@ -32695,12 +32695,6 @@
 	                    "a",
 	                    { href: "/contact", className: "clickable" },
 	                    "Contact Us"
-	                  ),
-	                  " | ",
-	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "/about", className: "clickable" },
-	                    "About"
 	                  )
 	                )
 	              )
@@ -32884,9 +32878,18 @@
 	        null,
 	        _react2.default.createElement(_PageHeader2.default, null),
 	        _react2.default.createElement(
-	          'h1',
-	          { className: 'title is-1 white' },
-	          'Privacy'
+	          'article',
+	          { className: 'message' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'message-header' },
+	            'Privacy Policy'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'message-body' },
+	            'Lorem ipsum dolor sit amet privacy, consectetur adipiscing elit. Pellentesque risus mi, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum felis venenatis efficitur. Aenean ac eleifend lacus, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.'
+	          )
 	        ),
 	        _react2.default.createElement(_PageFooter2.default, null)
 	      );

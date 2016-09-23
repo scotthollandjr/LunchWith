@@ -214,9 +214,9 @@ var UpdateForm = React.createClass({
 		console.log(bio);
 		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 		console.log(updateUrl);
+		document.getElementById("updatePanel").style.height = "0%";
 		$.get(updateUrl, function (result) {
 		}
-
 		// submitSkills: function(event) {
 		// 	event.preventDefault();
 		// 	var skillArray = this.state.skills;
