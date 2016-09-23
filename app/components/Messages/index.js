@@ -8,7 +8,7 @@ var MessageRow = React.createClass ({
       var messageNodes = this.props.messages.map(function(singleMessage) {
         return (
           <Message subject={singleMessage.subject} key={singleMessage.id} id={singleMessage.id}
-            message={singleMessage.message} messagetime={singleMessage.messagetime} firstName={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl}>
+            message={singleMessage.message} messagetime={singleMessage.messagetime} firstname={singleMessage.firstname} company={singleMessage.company} title={singleMessage.title} skills={singleMessage.skill} pictureurl={singleMessage.pictureurl} sender_id={singleMessage.sender_id}>
           </Message>
         );
       });
@@ -39,6 +39,21 @@ var Message = React.createClass({
     }
   },
 
+  sendReply: function(id) {
+    return function(e) {
+      var recipient = GoogleMap.messageRecipient;
+      var message = document.getElementById("messageTextArea").value;
+      message = message.replace(/(?:\r\n|\r|\n)/g, "<br />");
+      console.log(message);
+      var day = $("input[name=meetDay]:checked").val();
+      var time = $("input[name=meetTime]:checked").val();
+      var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+      console.log(updateUrl);
+      $.get(updateUrl, function (result) {
+      });
+    }
+  },
+
   render: function() {
     return (
       <div>
@@ -52,22 +67,18 @@ var Message = React.createClass({
           <p className="messageSkills">Expert in: {this.props.skills}</p>
           <p className="messageBody">
             <span>{this.props.subject}</span>
-            <span>{this.props.message}</span>
           </p>
           <div id={this.props.id} className="message-hidden">
-            <p>TESTING</p>
-            <p>pictureurl: {this.props.pictureurl}</p>
-            <p>firstname: {this.props.firstname}</p>
-            <p>messagetime: {this.props.messagetime}</p>
-            <p>title: {this.props.title}</p>
-            <p>company: {this.props.company}</p>
-            <p>skills: {this.props.skills}</p>
-            <p>subject: {this.props.subject}</p>
-            <p>message: {this.props.message}</p>
-            <button className="button is-blue">REPLY</button>
+            <p>{this.props.message}</p>
+            <div className="responseForm">
+              <p className="control">
+                <textarea id="messageTextArea" className="textarea" defaultValue="That sounds great. See you then!"></textarea>
+              </p>
+              <button onClick={this.sendReply(this.props.firstname)} className="button is-blue">REPLY</button>
+            </div>
             <div className="footer-arrow">
               <span className="icon is-large panel-footer">
-                <i onClick={this.closeMessage(this.props.id)} className="fa fa-angle-down" />
+                <i onClick={this.closeMessage(this.props.sender_id)} className="fa fa-angle-down" />
               </span>
             </div>
           </div>
