@@ -508,6 +508,10 @@ html, body {
   color: var(--main-dark-grey);
 }
 
+.messageTitle, .messageSkills {
+  color: var(--main-blue-dark);
+}
+
 /*** MESSAGE PANEL ****************************************/
 
 #messageForm {
@@ -523,6 +527,10 @@ html, body {
 
 #messageForm label:hover {
   color: var(--main-blue-light);
+}
+
+#classOverlay {
+  height: 100%;
 }
 
 /*** FOOTER ****************************************/
