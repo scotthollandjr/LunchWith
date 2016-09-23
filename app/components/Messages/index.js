@@ -75,11 +75,7 @@ var Message = React.createClass({
                 <textarea id="messageTextArea" className="textarea" defaultValue="That sounds great. See you then!"></textarea>
               </p>
               <button onClick={this.sendReply(this.props.firstname)} className="button is-blue">REPLY</button>
-            </div>
-            <div className="footer-arrow">
-              <span className="icon is-large panel-footer">
-                <i onClick={this.closeMessage(this.props.sender_id)} className="fa fa-angle-down" />
-              </span>
+              <button onClick={this.closeMessage(this.props.sender_id)} className="button is-danger">CLOSE</button>
             </div>
           </div>
         </div>

@@ -29155,15 +29155,11 @@
 	              'button',
 	              { onClick: this.sendReply(this.props.firstname), className: 'button is-blue' },
 	              'REPLY'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'footer-arrow' },
+	            ),
 	            _react2.default.createElement(
-	              'span',
-	              { className: 'icon is-large panel-footer' },
-	              _react2.default.createElement('i', { onClick: this.closeMessage(this.props.sender_id), className: 'fa fa-angle-down' })
+	              'button',
+	              { onClick: this.closeMessage(this.props.sender_id), className: 'button is-danger' },
+	              'CLOSE'
 	            )
 	          )
 	        )
