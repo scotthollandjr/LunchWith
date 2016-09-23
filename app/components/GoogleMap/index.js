@@ -55,9 +55,10 @@ var GoogleMap = React.createClass({
 		var message = document.getElementById("messageTextArea").value;
 		message = message.replace(/(?:\r\n|\r|\n)/g, "<br />");
 		console.log(message);
+		var location = document.getElementById("locationInput").value;
 		var day = $("input[name=meetDay]:checked").val();
 		var time = $("input[name=meetTime]:checked").val();
-		var updateUrl = "/sendMessage?message=" + message + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
+		var updateUrl = "/sendMessage?message=" + message + "&location=" + location + "&day=" + day + "&time=" + time + "&recipient_id=" + recipient + "&subject=Someone wants to meet you!";
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		});
@@ -315,6 +316,9 @@ var GoogleMap = React.createClass({
 					<div className="overlay-content">
 						<p className="control">
 							<textarea id="messageTextArea" className="textarea" defaultValue="Hello! I would like to meet up."></textarea>
+						</p>
+						<p className="control">
+							<input id="locationInput" className="input" placeholder="Suggested meet-up location"></input>
 						</p>
 						<p>Im available to meet up on:</p>
 						<p className="control" id="dayRadioButton">
