@@ -142,7 +142,7 @@ var UpdateForm = React.createClass({
 			latitude: "45.526943",
 			longitude: "-122.684112",
 			hideMyLocation: false,
-			sendNotification: true
+			sendNotifications: true
 		};
 	},
 
@@ -171,7 +171,7 @@ var UpdateForm = React.createClass({
 	},
 
 	handleNotificationCheckChange: function(e) {
-		this.setState({sendNotification: e.target.checked});
+		this.setState({sendNotifications: e.target.checked});
 	},
 
 	componentDidMount: function() {
@@ -190,7 +190,8 @@ var UpdateForm = React.createClass({
 				title: userInfo.title,
 				bio: bio,
 				userLatitude: userInfo.latitude,
-				userLongitude: userInfo.longitude
+				userLongitude: userInfo.longitude,
+				sendNotifications: userInfo.sendnotifications
       });
     }.bind(this));
   },
@@ -224,7 +225,7 @@ var UpdateForm = React.createClass({
 		var bio = this.state.bio;
 		bio = bio.replace(/(?:\r\n|\r|\n)/g, "<br />")
 		console.log(bio);
-		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio + "&sendnotification=" + sendNotification;
+		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio + "&sendnotifications=" + this.state.sendNotifications;
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		})
@@ -349,7 +350,7 @@ var UpdateForm = React.createClass({
 						</div>
 						<div className="panel-block control">
 							<p>We value your privacy and encourage you to choose a location in an area you are comfortable meeting other users. If you prefer to hide your profile entirely, just keep in mind that you will not appear to other users looking to meet-up. Hide your profile: <input type="checkbox" checked={this.state.hideMyLocation} onChange={this.handleCheckChange}/></p>
-							<p>Send me emails when I have unchecked messages: <input type="checkbox" checked={this.state.sendNotification} onChange={this.handleNotificationCheckChange}/></p>
+							<p>Send me emails when I have unchecked messages: <input type="checkbox" checked={this.state.sendNotifications} onChange={this.handleNotificationCheckChange}/></p>
 						</div>
 						<button className="button is-medium is-blue" onClick={this.submitUserUpdate}>
 							<p>Update</p>
