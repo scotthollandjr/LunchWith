@@ -75,6 +75,10 @@ var GoogleMap = React.createClass({
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		});
+		document.getElementById("messageTextArea").value = "";
+		document.getElementById("locationInput").value = "";
+
+		document.getElementById("messageForm").style.height = "0%";
 	},
 
 	componentWillMount: function() {
