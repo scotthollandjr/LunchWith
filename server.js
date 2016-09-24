@@ -95,8 +95,9 @@ let updateUserDetails = (req, res) => {
   var company = req.query.company;
   var title = req.query.title;
   var bio = req.query.bio;
-  var sql = "UPDATE users SET firstname=$1, lastname=$2, company=$3, title=$4 ,bio=$5 WHERE emailaddress='" + req.user.emailaddress + "';";
-  db.query(sql, [firstName, lastName, company, title, bio]);
+  var sendnotifications = req.query.sendnotifications;
+  var sql = "UPDATE users SET firstname=$1, lastname=$2, company=$3, title=$4, bio=$5, sendnotifications=$6 WHERE emailaddress='" + req.user.emailaddress + "';";
+  db.query(sql, [firstName, lastName, company, title, bio, sendnotifications]);
   return res;
 }
 
