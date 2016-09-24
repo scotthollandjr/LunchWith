@@ -27900,7 +27900,7 @@
 					{ className: 'panel-block control has-addons' },
 					_react2.default.createElement('input', { ref: function ref(a) {
 							return _this._inputElement = a;
-						}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Ex. JavaScript' }),
+						}, className: 'input is-expanded is-medium is-orange', type: 'text', placeholder: 'Enter one skill at a time (Ex. JavaScript)' }),
 					_react2.default.createElement(
 						'button',
 						{ type: 'submit', onClick: this.addSkill, className: 'button is-medium is-orange' },
@@ -28002,8 +28002,8 @@
 			console.log(bio);
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
-			document.getElementById("updatePanel").style.height = "0%";
 			$.get(updateUrl, function (result) {});
+			document.getElementById("updatePanel").style.height = "0%";
 		},
 	
 		submitUserLocationUpdate: function submitUserLocationUpdate(event) {
@@ -28016,6 +28016,7 @@
 			}
 			console.log(updateUrl);
 			$.get(updateUrl, function (result) {});
+			document.getElementById("updatePanel").style.height = "0%";
 		},
 	
 		onMapCreated: function onMapCreated(map) {
