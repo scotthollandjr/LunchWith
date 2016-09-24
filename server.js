@@ -187,7 +187,7 @@ app.use('/auth/linkedin/callback',
     if (req.user[0]){
       res.redirect('/activity');
     } else {
-      res.redirect('/account');
+      res.redirect('/activity');
     }
   }
 );

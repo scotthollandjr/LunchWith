@@ -117,7 +117,7 @@ var SkillsForm = React.createClass({
   	return (
     	<div id="skillsform-div">
 				<p className="panel-block control has-addons">
-					<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Ex. JavaScript" />
+					<input ref={(a) => this._inputElement = a} className="input is-expanded is-medium is-orange" type="text" placeholder="Enter one skill at a time (Ex. JavaScript)" />
 					<button type="submit" onClick={this.addSkill} className="button is-medium is-orange">
 						Add
 					</button>
@@ -221,10 +221,10 @@ var UpdateForm = React.createClass({
 		console.log(bio);
 		var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 		console.log(updateUrl);
-		document.getElementById("updatePanel").style.height = "0%";
 		$.get(updateUrl, function (result) {
-		}
-	)},
+		})
+		document.getElementById("updatePanel").style.height = "0%";
+	},
 
 	submitUserLocationUpdate: function(event) {
 		event.preventDefault();
@@ -236,8 +236,9 @@ var UpdateForm = React.createClass({
 		}
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
-		}
-	)},
+		})
+		document.getElementById("updatePanel").style.height = "0%";
+	},
 
 	onMapCreated(map) {
 		smap = map;
