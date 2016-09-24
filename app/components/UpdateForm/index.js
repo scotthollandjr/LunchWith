@@ -223,22 +223,31 @@ var UpdateForm = React.createClass({
 		console.log(updateUrl);
 		$.get(updateUrl, function (result) {
 		})
-		document.getElementById("updatePanel").style.height = "0%";
-	},
-
-	submitUserLocationUpdate: function(event) {
-		event.preventDefault();
-		var updateUrl;
+		var updateUrl2;
 		if (this.state.hideMyLocation){
-			updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
+			updateUrl2 = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
 		} else {
-			updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
+			updateUrl2 = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
 		}
-		console.log(updateUrl);
-		$.get(updateUrl, function (result) {
+		console.log(updateUrl2);
+		$.get(updateUrl2, function (result) {
 		})
 		document.getElementById("updatePanel").style.height = "0%";
 	},
+
+	// submitUserLocationUpdate: function(event) {
+	// 	event.preventDefault();
+	// 	var updateUrl;
+	// 	if (this.state.hideMyLocation){
+	// 		updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
+	// 	} else {
+	// 		updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
+	// 	}
+	// 	console.log(updateUrl);
+	// 	$.get(updateUrl, function (result) {
+	// 	})
+	// 	document.getElementById("updatePanel").style.height = "0%";
+	// },
 
 	onMapCreated(map) {
 		smap = map;

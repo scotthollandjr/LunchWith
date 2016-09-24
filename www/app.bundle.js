@@ -28003,21 +28003,30 @@
 			var updateUrl = "/updateUserDetails?firstname=" + this.state.firstName + "&lastname=" + this.state.lastName + "&company=" + this.state.company + "&title=" + this.state.title + "&bio=" + bio;
 			console.log(updateUrl);
 			$.get(updateUrl, function (result) {});
+			var updateUrl2;
+			if (this.state.hideMyLocation) {
+				updateUrl2 = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
+			} else {
+				updateUrl2 = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
+			}
+			console.log(updateUrl2);
+			$.get(updateUrl2, function (result) {});
 			document.getElementById("updatePanel").style.height = "0%";
 		},
 	
-		submitUserLocationUpdate: function submitUserLocationUpdate(event) {
-			event.preventDefault();
-			var updateUrl;
-			if (this.state.hideMyLocation) {
-				updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
-			} else {
-				updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
-			}
-			console.log(updateUrl);
-			$.get(updateUrl, function (result) {});
-			document.getElementById("updatePanel").style.height = "0%";
-		},
+		// submitUserLocationUpdate: function(event) {
+		// 	event.preventDefault();
+		// 	var updateUrl;
+		// 	if (this.state.hideMyLocation){
+		// 		updateUrl = "/updateUserLocationDetails?latitude=NULL&longitude=NULL";
+		// 	} else {
+		// 		updateUrl = "/updateUserLocationDetails?latitude=" + this.userLatitude + "&longitude=" + this.userLongitude;
+		// 	}
+		// 	console.log(updateUrl);
+		// 	$.get(updateUrl, function (result) {
+		// 	})
+		// 	document.getElementById("updatePanel").style.height = "0%";
+		// },
 	
 		onMapCreated: function onMapCreated(map) {
 			smap = map;
